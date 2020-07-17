@@ -1,0 +1,9 @@
+,Name,Day_Av,Duration,Type_Workout,Time_z,No_Ppl
+0,Charles,"[1, 2, 5]",hour,"[1, 3, 4, 4]",Eastern,2
+1,Vincent,"[5, 6, 7]",hour,[3],Western,2
+2,Diana,"[5, 6, 7]",hour,[1],Mountain,2
+3,Ben,"[1, 3, 5]",hour and a half,"[1, 3]",Western,3
+4,Vinay,"[2, 3, 5]",two hours,"[2, 4]",Eastern,4
+5,Eugene,"[1, 2, 3, 4, 5]",5 hours,[1],Western,2
+6,Princeton_Dude,"[1, 4]",hour,"[1, 2, 3, 4]",Eastern,3
+7,Mike Hawk,"[1, 5, 7]",half an hour,[2],Central,4
