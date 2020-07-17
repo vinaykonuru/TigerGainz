@@ -4,7 +4,7 @@ import pandas as pd
 
 #Functions
 
-def Df_creator(input1, input2, input3, input4, input5, input6): #Process information and stores strings as numbers
+def Df_creator(input1, input2, input3, input4, input5, input6): #This is the function that creates the user dataframe. It stores some long string values as integers.
     day_lister = input2 #renamed varibable just so its easer to keep track of
 
     workout_lister = input4 #renamed variable just so its easier to keep track of
@@ -66,7 +66,7 @@ input6 = 3          #all these inputs are temporary variables. Ideally, the GUI 
 Dfuser = Df_creator(input1, input2, input3, input4, input5, input6)
 
 
-# Script that takes inputs as variables and appends value to dataframe.
+# Code that would ideally execute the matching algorithm or, if their is no one in the Dfrq, append the user into Dfrq
 
 columns = ["Name", "Day_Av", "Duration", "Type_Workout", "Time_z", "No_Ppl"]
 
