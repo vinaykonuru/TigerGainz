@@ -5,9 +5,9 @@ import pandas as pd
 #Functions
 
 def Df_creator(input1, input2, input3, input4, input5, input6): #Process information and stores strings as numbers
-    day_lister = input2 #will ensure the days is always in a list datatype
+    day_lister = input2 #renamed varibable just so its easer to keep track of
 
-    workout_lister = input4 #will ensure the workouts are in a list datatype
+    workout_lister = input4 #renamed variable just so its easier to keep track of
 
 
     for i in range(0,len(day_lister)): #this loop basically turns the days of the week into a numerical value
