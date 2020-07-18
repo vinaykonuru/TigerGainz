@@ -27,7 +27,7 @@ def Df_creator(input1, input2, input3, input4, input5, input6): #Process informa
         else:
             day_lister[i] = 7
     day_lister.sort() #Ensures that list will be in order
-    d =str(day_lister)
+    d = str(day_lister)
 
 
 
@@ -43,18 +43,12 @@ def Df_creator(input1, input2, input3, input4, input5, input6): #Process informa
         else:
             workout_lister[j] = 4
     workout_lister.sort() #Ensures that list will be in order
-    w =str(workout_lister)
+    w = str(workout_lister)
 
 
 
     #This is the basic framework of user database (row)
-    user_frame = pd.DataFrame({"Name" : [input1], "Day_Av": d, "Duration": input3, "Type_Workout": w, "Time_z": [input5], "No_Ppl": [input6]})
-    '''
-    user_frame["Day_Av"] = user_frame["Day_Av"].astype(object) #columns that will eventually stoe lists must have a different datatype --> "objects"
-    user_frame['Type_Workout'] = user_frame["Type_Workout"].astype(object)
-    user_frame.at[0, "Day_Av"] = day_lister #replacing placeholder values with sorted lists created above
-    user_frame.at[0, "Type_Workout"] = workout_lister
-    '''
+    user_frame = pd.DataFrame({"Name" : [input1], "Day_Av": d, "Duration": [input3], "Type_Workout": w, "Time_z": [input5], "No_Ppl": [input6]})
 
     return user_frame #this is the object we get from the function
 
@@ -77,6 +71,7 @@ def dict_creator(key, value): #makes dictionary from two lists containing the li
 
 
 
+
 #Test of function that creates user dataframe
 
 input1 = "Charlie"
@@ -95,7 +90,7 @@ days = [["Tuesday", "Monday", "Friday"], ["Friday", "Saturday", "Sunday"], ["Fri
         ["Monday", 'Wednesday', "Friday"], ["Tuesday", "Wednesday", "Friday"], ["Monday", "Tuesday", "Wednesday", 'Thursday',"Friday"],
         ["Monday", "Thursday"], ["Sunday", "Friday", 'Monday']]
 duration = ["hour", "hour", "hour", "hour and a half", "two hours", "5 hours", "hour", "half an hour"]
-type1 = [["Cardio", "Abs", "Lower Body", "Upperbody"], ["Cardio"], ["Abs"], ["Abs", "Cardio"], ["Lower Body", "Upper Body"],
+type1 = [["Cardio", "Abs", "Lower Body", "Upper Body"], ["Cardio"], ["Abs"], ["Abs", "Cardio"], ["Lower Body", "Upper Body"],
         ["Abs"], ["Abs", "Upper Body", "Lower Body", "Cardio"], ["Upper Body"]]
 time = ["Eastern", "Western", "Mountain", "Western", "Eastern", "Western", "Eastern", "Central"]
 no_ppl = [2, 2, 2, 3, 4, 2, 3, 4]
@@ -111,30 +106,40 @@ for i in range(0, len(names)):
 Dfrq.to_csv("mock_dataframe")
 
 
+
+
+#list of all the names in Dfrq -- This will be very useful later on
+
+names = Dfrq.iloc[:, 0].tolist()
+
+#Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
+#We can store these names in a temp file: lists.
+
+user_name = Dfuser.pop("Name")
+Dfrq_names = Dfrq.pop("Name")
+
+#creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
+#We can use these values later to reference names.
+
+parameter_list = []
+
+for x in range(0, len(Dfrq)):
+    entry = []
+    for i in range(0, len(Dfrq.columns)):
+        list_of_vals = Dfrq.iloc[:,i].tolist()
+        v = list_of_vals[x]
+        entry.append(v)
+    parameter_list.append(entry)
+
+reference = dict_creator(names, parameter_list)
+
+
 # Script that takes inputs as variables and appends value to dataframe.
 
-
-length_checker = list(Dfrq["Name"])
-
-if len(length_checker) < 1: #if there is no one in the Dfrq, then we add the Dfuser into Dfrq
+if len(Dfrq) < 1: #if there is no one in the Dfrq, then we add the Dfuser into Dfrq
     Dfrq = Dfrq.append(Dfuser, ignore_index=True)
 
 else:
-
-    #we are going to make a dictionary where the key is the name of user and the value is the other info
-
-    user_dict = Dfuser.to_dict()
-
-    #Same thing but for the request dataframe
-
-    request_dict = Dfrq.to_dict()
-
-    #Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
-    #We can store these names in a temp file: lists.
-
-    user_name = Dfuser.pop("Name")
-    Dfrq_names = Dfrq.pop("Name")
-
 
     #Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
@@ -154,25 +159,81 @@ else:
     name_dict = dict_creator(list_col, left_on)
     matched_results = matched_results.rename(columns=name_dict)
 
-    
+
+    #After matching, this loop extracts the top three matches and gets all the parameters
+    validator = []
+
+    for x in range(0, len(matched_results)): #loop ensures we have the top three entries
+        if len(validator) < 3:
+            entry = []
+            for i in range(1, len(matched_results.columns)):
+                list_of_vals = matched_results.iloc[:, i].tolist()
+                v = list_of_vals[x]
+                entry.append(v)
+            validator.append(entry)
+
+    list_names = []
+
+    for parameters in validator:
+        names_associated = getKeysByValue(reference,parameters)
+        list_names.append(names_associated)
+
+    matched_results.insert(0, "Names", list_names) #line of code adds the name into the matched_results df
+
+    matched_results["Day_Av"] = matched_results["Day_Av"].astype(object)  # columns that will eventually stoe lists must have a different datatype --> "objects"
+    matched_results['Type_Workout'] = matched_results["Type_Workout"].astype(object)
 
 
 
 
 
+    #unstringing days and type of workouts
+
+    updated_day = []
+    updated_work_type = []
+
+    for day in matched_results.loc[:, "Day_Av"]:
+        day = day.strip('][').split(', ')
+
+        for i in range(0, len(day)):
+            if day[i] == "1":
+                day[i] = "Monday"
+            elif day[i] == "2":
+                day[i] = "Tuesday"
+            elif day[i] == "3":
+                day[i] = "Wednesday"
+            elif day[i] == "4":
+                day[i] = "Thursday"
+            elif day[i] == "5":
+                day[i] = "Friday"
+            elif day[i] == "6":
+                day[i] = "Saturday"
+            else:
+                day[i] = "Sunday"
+
+        updated_day.append(day)
 
 
+    for work in matched_results.loc[:, "Type_Workout"]:
+        work = work.strip('][').split(', ')
 
+        for j in range(0, len(work)):
+            if work[j] == "1":
+                work[j] = "Abs"
+            elif work[j] == "2":
+                work[j] = "Upper Body"
+            elif work[j] == "3":
+                work[j] = "Cardio"
+            else:
+                work[j] = "Lower Body"
 
+        updated_work_type.append(work)
 
+    for index in range(0, len(matched_results)):
+        matched_results.at[index, "Day_Av"] = updated_day[index]  # replacing placeholder values with sorted lists created above
+        matched_results.at[index, "Type_Workout"] = updated_work_type[index]
 
-
-
-
-
-#print(Dfuser)
-#print(Dfrq)
-
+    print(matched_results)
 
 
 
