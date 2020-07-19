@@ -1,5 +1,6 @@
 import pandas as pd
 import fuzzymatcher as fm
+import csv
 
 
 
@@ -83,63 +84,56 @@ input6 = 3          #all these inputs are temporary variables. Ideally, the GUI 
 
 Dfuser = Df_creator(input1, input2, input3, input4, input5, input6)
 
-#To makesure that the rest of the code executes, I created a mock request dataframe
 
-names = ["Charles", "Vincent", "Diana", "Ben", "Vinay", "Eugene", "Princeton_Dude", "Mike Hawk"]
-days = [["Tuesday", "Monday", "Friday"], ["Friday", "Saturday", "Sunday"], ["Friday", "Saturday","Sunday"],
-        ["Monday", 'Wednesday', "Friday"], ["Tuesday", "Wednesday", "Friday"], ["Monday", "Tuesday", "Wednesday", 'Thursday',"Friday"],
-        ["Monday", "Thursday"], ["Sunday", "Friday", 'Monday']]
-duration = ["hour", "hour", "hour", "hour and a half", "two hours", "5 hours", "hour", "half an hour"]
-type1 = [["Cardio", "Abs", "Lower Body", "Upper Body"], ["Cardio"], ["Abs"], ["Abs", "Cardio"], ["Lower Body", "Upper Body"],
-        ["Abs"], ["Abs", "Upper Body", "Lower Body", "Cardio"], ["Upper Body"]]
-time = ["Eastern", "Western", "Mountain", "Western", "Eastern", "Western", "Eastern", "Central"]
-no_ppl = [2, 2, 2, 3, 4, 2, 3, 4]
+#reading in csv file
 
-columns = ["Name", "Day_Av", "Duration", "Type_Workout", "Time_z", "No_Ppl"]
-
-Dfrq = pd.DataFrame(columns=columns) #this is the dataframe of people still waiting for a match.
-
-for i in range(0, len(names)):
-    output = Df_creator(names[i], days[i], duration[i], type1[i], time[i], no_ppl[i])
-    Dfrq = Dfrq.append(output, ignore_index=True)
-
-Dfrq.to_csv("mock_dataframe")
+Dfrq = pd.read_csv("mock_dataframe")
+Dfrq = Dfrq.drop(columns="Unnamed: 0")
 
 
-
-
-#list of all the names in Dfrq -- This will be very useful later on
-
-names = Dfrq.iloc[:, 0].tolist()
-
-#Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
-#We can store these names in a temp file: lists.
-
-user_name = Dfuser.pop("Name")
-Dfrq_names = Dfrq.pop("Name")
-
-#creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
-#We can use these values later to reference names.
-
-parameter_list = []
-
-for x in range(0, len(Dfrq)):
-    entry = []
-    for i in range(0, len(Dfrq.columns)):
-        list_of_vals = Dfrq.iloc[:,i].tolist()
-        v = list_of_vals[x]
-        entry.append(v)
-    parameter_list.append(entry)
-
-reference = dict_creator(names, parameter_list)
 
 
 # Script that takes inputs as variables and appends value to dataframe.
 
 if len(Dfrq) < 1: #if there is no one in the Dfrq, then we add the Dfuser into Dfrq
-    Dfrq = Dfrq.append(Dfuser, ignore_index=True)
+    with open("mock_dataframe", "a") as newFile:
+        newFileWriter = csv.writer(newFile)
+        newFileWriter.writerow(["0", Dfuser.iloc[0]])
+    with open ("mock_dataframe", "r") as userFile:
+        userFileReader = csv.reader(userFile)
+        for row in userFileReader:
+            print(row)
 
 else:
+
+    # list of all the names in Dfrq -- This will be very useful later on
+
+    names = Dfrq.iloc[:, 0].tolist()
+
+
+    # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
+    # We can store these names in a temp file: lists.
+
+    user_name = Dfuser.pop("Name")
+    Dfrq_names = Dfrq.pop("Name")
+
+    # creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
+    # We can use these values later to reference names.
+
+    parameter_list = []
+
+    for x in range(0, len(Dfrq)):
+        entry = []
+        for i in range(0, len(Dfrq.columns)):
+            list_of_vals = Dfrq.iloc[:, i].tolist()
+            v = list_of_vals[x]
+            entry.append(v)
+        parameter_list.append(entry)
+
+    reference = dict_creator(names, parameter_list)
+
+
+
 
     #Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
@@ -153,87 +147,104 @@ else:
 
     matched_results = matched_results.drop(columns=["__id_left", "__id_right", "Day_Av_left", "Duration_left",
                                                  'Type_Workout_left', "Time_z_left", "No_Ppl_left"])
+
     list_col = matched_results.columns.tolist()
     list_col = list_col[1:]
 
     name_dict = dict_creator(list_col, left_on)
     matched_results = matched_results.rename(columns=name_dict)
 
+    #this loop gets rid of values that do not meet a certain threshold
+    for x in range(0, len(matched_results)):
+        if matched_results.iloc[x]["best_match_score"] < .1: #the threshold for the best match score can be changed later after we test
+            matched_results = matched_results.drop(matched_results.index[x])
+    
+    #If no one meets the threshold, then we append the user data back into the dataframe
 
-    #After matching, this loop extracts the top three matches and gets all the parameters
-    validator = []
+    if len(matched_results) == 0:
+        print("return to database")
+        print("this is where we write the code to append the user data back to the database (line 166)")
 
-    for x in range(0, len(matched_results)): #loop ensures we have the top three entries
-        if len(validator) < 3:
-            entry = []
-            for i in range(1, len(matched_results.columns)):
-                list_of_vals = matched_results.iloc[:, i].tolist()
-                v = list_of_vals[x]
-                entry.append(v)
-            validator.append(entry)
-
-    list_names = []
-
-    for parameters in validator:
-        names_associated = getKeysByValue(reference,parameters)
-        list_names.append(names_associated)
-
-    matched_results.insert(0, "Names", list_names) #line of code adds the name into the matched_results df
-
-    matched_results["Day_Av"] = matched_results["Day_Av"].astype(object)  # columns that will eventually stoe lists must have a different datatype --> "objects"
-    matched_results['Type_Workout'] = matched_results["Type_Workout"].astype(object)
+    else: #this is assuming we have valid matches in the dataframe
+        #After matching, this loop extracts the top three matches and gets all the parameters
+        validator = []
 
 
+        for x in range(0, len(matched_results)): #loop ensures we have the top three entries
+            if len(validator) < 3:
+                entry = []
+                for i in range(1, len(matched_results.columns)):
+                    list_of_vals = matched_results.iloc[:, i].tolist()
+                    v = list_of_vals[x]
+                    entry.append(v)
+                validator.append(entry)
+
+        list_names = []
+
+        for parameters in validator:
+            names_associated = getKeysByValue(reference,parameters)
+            list_names.append(names_associated)
+
+    
+
+        matched_results.insert(0, "Names", list_names) #line of code adds the name into the matched_results df
+
+        matched_results["Day_Av"] = matched_results["Day_Av"].astype(object)  # columns that will eventually stoe lists must have a different datatype --> "objects"
+        matched_results['Type_Workout'] = matched_results["Type_Workout"].astype(object)
 
 
 
-    #unstringing days and type of workouts
-
-    updated_day = []
-    updated_work_type = []
-
-    for day in matched_results.loc[:, "Day_Av"]:
-        day = day.strip('][').split(', ')
-
-        for i in range(0, len(day)):
-            if day[i] == "1":
-                day[i] = "Monday"
-            elif day[i] == "2":
-                day[i] = "Tuesday"
-            elif day[i] == "3":
-                day[i] = "Wednesday"
-            elif day[i] == "4":
-                day[i] = "Thursday"
-            elif day[i] == "5":
-                day[i] = "Friday"
-            elif day[i] == "6":
-                day[i] = "Saturday"
-            else:
-                day[i] = "Sunday"
-
-        updated_day.append(day)
 
 
-    for work in matched_results.loc[:, "Type_Workout"]:
-        work = work.strip('][').split(', ')
+        #unstringing days and type of workouts
 
-        for j in range(0, len(work)):
-            if work[j] == "1":
-                work[j] = "Abs"
-            elif work[j] == "2":
-                work[j] = "Upper Body"
-            elif work[j] == "3":
-                work[j] = "Cardio"
-            else:
-                work[j] = "Lower Body"
+        updated_day = []
+        updated_work_type = []
 
-        updated_work_type.append(work)
+        for day in matched_results.loc[:, "Day_Av"]:
+            day = day.strip('][').split(', ')
 
-    for index in range(0, len(matched_results)):
-        matched_results.at[index, "Day_Av"] = updated_day[index]  # replacing placeholder values with sorted lists created above
-        matched_results.at[index, "Type_Workout"] = updated_work_type[index]
+            for i in range(0, len(day)):
+                if day[i] == "1":
+                    day[i] = "Monday"
+                elif day[i] == "2":
+                    day[i] = "Tuesday"
+                elif day[i] == "3":
+                    day[i] = "Wednesday"
+                elif day[i] == "4":
+                    day[i] = "Thursday"
+                elif day[i] == "5":
+                    day[i] = "Friday"
+                elif day[i] == "6":
+                    day[i] = "Saturday"
+                else:
+                    day[i] = "Sunday"
 
-    print(matched_results)
+            updated_day.append(day)
+
+
+        for work in matched_results.loc[:, "Type_Workout"]:
+            work = work.strip('][').split(', ')
+
+            for j in range(0, len(work)):
+                if work[j] == "1":
+                    work[j] = "Abs"
+                elif work[j] == "2":
+                    work[j] = "Upper Body"
+                elif work[j] == "3":
+                    work[j] = "Cardio"
+                else:
+                    work[j] = "Lower Body"
+    
+            updated_work_type.append(work)
+    
+        for index in range(0, len(matched_results)):
+            matched_results.at[index, "Day_Av"] = updated_day[index]  # replacing placeholder values with sorted lists created above
+            matched_results.at[index, "Type_Workout"] = updated_work_type[index]
+
+    
+
+        #matched results is the final dataframe thata includes the person that user matches with
 
 
 
