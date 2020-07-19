@@ -82,28 +82,20 @@ input4 = ["Abs","Upper Body", "Lower Body"]
 input5 = "Eastern"
 input6 = 3          #all these inputs are temporary variables. Ideally, the GUI will stores these values as variables
 
-Dfuser = Df_creator(input1, input2, input3, input4, input5, input6)
+Dfuser = Df_creator(input1, input2, input3, input4, input5, input6) #takes all user data and creates a dataframe of one row for that user.
 
 
-#reading in csv file and converting it into a dataframe. The code doesn't need to reade in a csv file specifically, but as long as the final product after line
-#92 is a dataframe, the algo will work.
+#reading in csv file and converting it into a dataframe. The code doesn't need to read in a csv file specifically, but as long as the final product after line
+#91 is a dataframe, the algo will work.
 
 Dfrq = pd.read_csv("mock_dataframe")
-Dfrq = Dfrq.drop(columns="Unnamed: 0")
-
-
-
 
 # Script that takes inputs as variables and appends value to dataframe.
 
-if len(Dfrq) < 1: #if there is no one in the Dfrq, then we add the Dfuser into Dfrq
+if len(Dfrq) < 1: #if there is no one in the Dfrq, then we add the Dfuser back into database. The code under this if statement only works for csv.
     with open("mock_dataframe", "a") as newFile:
         newFileWriter = csv.writer(newFile)
-        newFileWriter.writerow(["0", Dfuser.iloc[0]])
-    with open ("mock_dataframe", "r") as userFile:
-        userFileReader = csv.reader(userFile)
-        for row in userFileReader:
-            print(row)
+        newFileWriter.writerow([Dfuser.iloc[0]])
 
 else:
 
@@ -139,9 +131,9 @@ else:
     #Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
     left_on = right_on = ["Day_Av", "Duration", "Type_Workout", "Time_z", "No_Ppl"]
-
     matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="Day_Av", right_id_col="Day_Av")
-
+    
+    #for easier viewing
     pd.set_option("display.max_rows", None, "display.max_columns", None) #line of code that allows me to see the full dataframe
 
     #dropping irrelevant columns and displaying relevant info of the matched person
@@ -151,9 +143,10 @@ else:
 
     list_col = matched_results.columns.tolist()
     list_col = list_col[1:]
-
-    name_dict = dict_creator(list_col, left_on)
-    matched_results = matched_results.rename(columns=name_dict)
+    
+    #code that renames matched_results with better colummn labels
+    label_dict = dict_creator(list_col, left_on)
+    matched_results = matched_results.rename(columns=label_dict)
 
     #this loop gets rid of values that do not meet a certain threshold
     for x in range(0, len(matched_results)):
@@ -164,7 +157,7 @@ else:
 
     if len(matched_results) == 0:
         print("return to database")
-        print("this is where we write the code to append the user data back to the database (line 166)")
+        print("this is where we write the code to append the user data back to the database (line 160)")
 
     else: #this is assuming we have valid matches in the dataframe
         #After matching, this loop extracts the top three matches and gets all the parameters
@@ -245,7 +238,7 @@ else:
 
     
 
-        #matched results is the final dataframe thata includes the person that user matches with
+        #matched results is the final dataframe that includes the person the user matches with
 
 
 
