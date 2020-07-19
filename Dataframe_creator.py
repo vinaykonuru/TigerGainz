@@ -71,7 +71,7 @@ def dict_creator(key, value): #makes dictionary from two lists containing the li
     return dictionary
 
 
-
+##SCRIPT
 
 #Test of function that creates user dataframe
 
@@ -85,7 +85,8 @@ input6 = 3          #all these inputs are temporary variables. Ideally, the GUI 
 Dfuser = Df_creator(input1, input2, input3, input4, input5, input6)
 
 
-#reading in csv file
+#reading in csv file and converting it into a dataframe. The code doesn't need to reade in a csv file specifically, but as long as the final product after line
+#92 is a dataframe, the algo will work.
 
 Dfrq = pd.read_csv("mock_dataframe")
 Dfrq = Dfrq.drop(columns="Unnamed: 0")
