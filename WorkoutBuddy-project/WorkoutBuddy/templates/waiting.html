@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if matched_person_name %}
+<div class="container text-center">
+  {{matched_person_name}} found as a match.
+</div>
+{% else %}
 <div class="container text-center">
   We're Searching for a Workout Buddy based on your provided information. We will email you when it is ready.
 </div>
-
+{% endif %}
 {% endblock %}
