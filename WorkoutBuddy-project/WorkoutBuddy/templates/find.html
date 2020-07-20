@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+  <h1>Find a Buddy Info Form</h1>
+</div>
+<div class="container">
+  <form action="{% url 'home' %}" method='POST'>
+    {% csrf_token %}
+    Workout Days:
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Monday">Monday</label>
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Tuesday">Tuesday</label>
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Wednesday">Wednesday</label>
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Thursday">Thursday</label>
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Friday">Friday</label>
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Saturday">Saturday</label>
+    <label class="checkbox-inline"><input type="checkbox" name="day" value="Sunday">Sunday</label>
+    <br>
+    <br>
+    Duration:
+    <select name="duration">
+    <option value="30 Minutes">30 Minutes</option>
+    <option value="1 Hour">1 Hour</option>
+    <option value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
+    <option value="2 Hours">2 Hours</option>
+    <option value="2+ Hours">2+ Hours</option>
+
+    </select>
+    Type of Workout:
+    <select name="workout_type">
+    <option value="Lifting">Lifting</option>
+    <option value="Running">Running</option>
+    <option value="Biking">Biking</option>
+    <option value="Swimming">Swimming</option>
+    </select>
+    <br>
+    <br>
+    Timezone:
+    <select name="time_zone">
+    <option value="EST">EST</option>
+    <option value="CST">CST</option>
+    <option value="PST">PST</option>
+    <option value="GMT">GMT</option>
+    </select>
+    <br>
+    <br>
+    Group Size:
+    <input type="text" name="group_size"/>
+    <br>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Find">
+    <br>
+    <br>
+  </form>
+</div>
+{% endblock %}

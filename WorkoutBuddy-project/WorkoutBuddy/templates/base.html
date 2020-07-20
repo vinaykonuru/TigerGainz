@@ -1,6 +1,7 @@
 
 <!doctype html>
 <html lang="en">
+{% load static %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,20 +47,44 @@
     <link href="pricing.css" rel="stylesheet">
   </head>
   <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <h5 class="my-0 mr-md-auto font-weight-normal">Princeton WorkoutBuddy</h5>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="#">About</a>
-    <a class="p-2 text-dark" href="#">Log In</a>
+    <header>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'logo.png' %}" class="d-inline-block align-top" height=30>
+      WorkoutBuddy
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+
+        {% if user.is_authenticated %}
+        <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" onClick="">Log Out</a>
+        <form id="logout" action="{% url 'logout' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden"/>
+        </form>
+       {% else %}
+       <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+       <a class="nav-item nav-link" href="{% url 'login' %}">Log In</a>
+      {% endif %}
+     </div>
+   </div>
+  </div>
   </nav>
-  <a class="btn btn-outline-primary" href="#">Sign up</a>
 </div>
+</header>
+
 </body>
 {% block content %}
 {% endblock %}
 
-<footer class="text-muted">
-  <div class="container text-center">
+<footer class="footer fixed-bottom">
+  <div class="container text-center" >
   ©AwesomeSauce {% now "Y" %}
   </div>
 </footer>
