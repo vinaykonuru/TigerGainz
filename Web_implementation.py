@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from api_buddy import BuddyRequest
 from buddyrequest.models import BuddyRequest
 import pandas
 import pandas as pd
@@ -10,7 +9,7 @@ import csv
 
 #FUNCTIONS
 
-def Df_creator(input1, input2, input3, input4, input5, input6):  # Process information and stores strings as numbers
+def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # Process information and stores strings as numbers
     day_lister = input2  # will ensure the days is always in a list datatype
 
     workout_lister = input4  # will ensure the workouts are in a list datatype
@@ -49,7 +48,7 @@ def Df_creator(input1, input2, input3, input4, input5, input6):  # Process infor
 
     # This is the basic framework of user database (row)
     user_frame = pd.DataFrame(
-        {"Name": [input1], "Day_Av": d, "Duration": [input3], "Type_Workout": w, "Time_z": [input5],
+        {"NetID": inputNetID, "Name": [input1], "Day_Av": d, "Duration": [input3], "Type_Workout": w, "Time_z": [input5],
          "No_Ppl": [input6]})
 
     return user_frame  # this is the object we get from the function
@@ -95,7 +94,7 @@ def waiting(request):
         group_size=request.POST['group_size']
 
         #list of data
-        user_data_list=[name,days,duration,workout_type,time_zone,group_size]
+        user_data_list=[netID,days,duration,workout_type,time_zone,group_size]
 
         user_data_list_df=pandas.DataFrame(user_data_list)
         #list of requests in dataframe
@@ -105,14 +104,15 @@ def waiting(request):
 
         #COMPARISION BETWEEN USER DATA AND REQUESTS ENTERED HERE
 
-        input1 = user_data_list[0]
-        input2 = user_data_list[1]
-        input3 = user_data_list[2]
-        input4 = user_data_list[3]
-        input5 = user_data_list[4]
-        input6 = user_data_list[5] # all these inputs are temporary variables. Ideally, the GUI will stores these values as variables
+        inputnetID = user_data_list[0]
+        input1 = user_data_list[1]
+        input2 = user_data_list[2]
+        input3 = user_data_list[3]
+        input4 = user_data_list[4]
+        input5 = user_data_list[5]
+        input6 = user_data_list[6] # all these inputs are temporary variables. Ideally, the GUI will stores these values as variables
 
-        Dfuser = Df_creator(input1, input2, input3, input4, input5,
+        Dfuser = Df_creator(inputnetID,input1, input2, input3, input4, input5,
                             input6)  # takes all user data and creates a dataframe of one row for that user.
 
         # reading in csv file and converting it into a dataframe. The code doesn't need to read in a csv file specifically, but as long as the final product after line
@@ -132,13 +132,16 @@ def waiting(request):
 
             # list of all the names in Dfrq -- This will be very useful later on
 
-            names = Dfrq.iloc[:, 0].tolist()
+            names = Dfrq.iloc[:, 1].tolist()
+            netID = Dfrq.iloc[:, "Vinay, list whatever index the netID is stored as"].tolist()
 
             # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
             # We can store these names in a temp file: lists.
 
             user_name = Dfuser.pop("Name")
+            user_netID = Dfuser.pop("NetID")
             Dfrq_names = Dfrq.pop("Name")
+
 
             # creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
             # We can use these values later to reference names.
@@ -154,6 +157,13 @@ def waiting(request):
                 parameter_list.append(entry)
 
             reference = dict_creator(names, parameter_list)
+
+            # creating dictionary, "reference_NETID", that contains the netID as keys and other parameters as values.
+            #Note that this dictionary does not include the names of the user or request df.
+
+            reference_NETID = dict_creator(netID, parameter_list)
+
+
 
             # Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
@@ -207,12 +217,19 @@ def waiting(request):
                         validator.append(entry)
 
                 list_names = []
+                list_netID = []
 
                 for parameters in validator:
                     names_associated = getKeysByValue(reference, parameters)
                     list_names.append(names_associated)
 
+                    netID_associated = getKeysByValue(reference_NETID, parameters)
+                    list_netID.append(netID_associated)
+
+
+
                 matched_results.insert(0, "Names", list_names)  # line of code adds the name into the matched_results df
+                matched_results.inster(1, "NetID", list_netID)  # line of code adds the name into the matched results df
 
                 matched_results["Day_Av"] = matched_results["Day_Av"].astype(
                     object)  # columns that will eventually stoe lists must have a different datatype --> "objects"
