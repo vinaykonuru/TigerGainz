@@ -44,20 +44,19 @@ def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # P
     w = str(workout_lister)
 
     # This is the basic framework of user database (row)
+    #id 0 temporary for comparision with dataframe that has id
     user_frame = pd.DataFrame(
-        {"netID": inputNetID, "name": [input1], "days": d, "duration": [input3], "workout_type": w, "time_zone": [input5],
+        {"id":0, "netID": inputNetID, "name": [input1], "days": d, "duration": [input3], "workout_type": w, "time_zone": [input5],
          "group_size": [input6]})
 
     return user_frame  # this is the object we get from the function
 
 
 def getKeysByValue(dictOfElements, valueToFind):  # function finds keys(names) from attributes (parameters)
-    listOfKeys = list()
     listOfItems = dictOfElements.items()
     for item in listOfItems:
-        if item[1] == valueToFind:
-            listOfKeys.append(item[0])
-    return listOfKeys
+        if item[0] == valueToFind:
+            return item[1]
 
 
 def dict_creator(key, value):  # makes dictionary from two lists containing the list of keys and list of values
@@ -88,11 +87,9 @@ def waiting(request):
         year=userdata['year']
         rescollege=userdata['residentialcollege']
         days=request.POST.getlist('day')
-        print(days)
         duration=request.POST['duration']
         workout_type=[]
         workout_type.append(request.POST['workout_type'])
-        print(workout_type)
         time_zone=request.POST['time_zone']
         group_size=request.POST['group_size']
 
@@ -102,6 +99,11 @@ def waiting(request):
         user_data_list_df=pandas.DataFrame(user_data_list)
         #list of requests in dataframe
         requestsList=list(BuddyRequest.objects.all().values())
+        id_name_dict={}
+        for row in requestsList:
+            netID_name=(row['netID'],row['name'])
+            id_name_dict[row['id']]=netID_name
+        # id_name_dict{row.id}
         #dataframe of requests
         requestsdf=pandas.DataFrame(requestsList)
 
@@ -149,7 +151,6 @@ def waiting(request):
             user_name = Dfuser.pop("name")
             user_netID = Dfuser.pop("netID")
             Dfrq=Dfrq.drop(columns=['rescollege','major','user_id','year'])
-            print(Dfrq)
             # creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
             # We can use these values later to reference names.
 
@@ -169,13 +170,11 @@ def waiting(request):
             #Note that this dictionary does not include the names of the user or request df.
 
             reference_NETID = dict_creator(netID_dict, parameter_list)
-            print(reference)
-            print(reference_NETID)
 
 
             # Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
-            left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size"]
+            left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size","id"]
             #MATCHING OCCURS HERE
             matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                                  right_id_col="days")
@@ -184,8 +183,7 @@ def waiting(request):
                           None)  # line of code that allows me to see the full dataframe
 
             # dropping irrelevant columns and displaying relevant info of the matched person
-
-            matched_results = matched_results.drop(columns=["__id_left", "__id_right", "days_right", "duration_right",
+            matched_results = matched_results.drop(columns=["__id_left", "__id_right","id_left", "days_right", "duration_right",
                                                             'workout_type_right', "time_zone_right", "group_size_right"])
             #COLUMNS OF ALL DATA
             list_col = matched_results.columns.tolist()
@@ -196,9 +194,11 @@ def waiting(request):
             matched_results = matched_results.rename(columns=label_dict)
 
             # this loop gets rid of values that do not meet a certain threshold
+            max=0.06989700043360188
+            threshold=max/4
             for x in range(0, len(matched_results)):
                 if matched_results.iloc[x][
-                    "best_match_score"] < 0:  # the threshold for the best match score can be changed later after we test
+                    "best_match_score"] < threshold:  # the threshold for the best match score can be changed later after we test
                     matched_results = matched_results.drop(matched_results.index[x])
 
             # If no one meets the threshold, then we append the user data back into the dataframe
@@ -225,15 +225,14 @@ def waiting(request):
 
                 list_names = []
                 list_netID = []
+                #for each matched row, find the correct netID and name by matching with id and add it to matched row
                 for parameters in validator:
-                    names_associated = getKeysByValue(reference, parameters)
-                    list_names.append(names_associated)
-
-                    netID_associated = getKeysByValue(reference_NETID, parameters)
-                    list_netID.append(netID_associated)
+                    names_id_associated = getKeysByValue(id_name_dict, parameters[5])
+                    list_names.append(names_id_associated[1])
+                    list_netID.append(names_id_associated[0])
                 matched_results.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
                 matched_results.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
-
+                print(matched_results)
                 matched_results["days"] = matched_results["days"].astype(
                     object)  # columns that will eventually store lists must have a different datatype --> "objects"
                 matched_results['workout_type'] = matched_results["workout_type"].astype(object)
@@ -285,8 +284,9 @@ def waiting(request):
                 matched_people=matched_results.values.tolist()
                 # change match scores to percentages
                 for entry in matched_people:
-                    entry[2]=entry[2]/0.06989700043360188*100
+                    entry[2]=entry[2]/max*100
                 print('WE REACHED THE END')
+                print(matched_people)
                 #matchedRequest=BuddyRequest.objects.filter(netID=matchedNetID).remove()
                 #todo: create selection screen on waiting.html, send person info back to another view, delete matched user from request database
                 return render(request,'waiting.html',{'matched_person':matched_people})
