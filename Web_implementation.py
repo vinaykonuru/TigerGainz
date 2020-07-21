@@ -123,7 +123,7 @@ def waiting(request):
         # Script that takes inputs as variables and appends value to dataframe.
 
         if len(Dfrq) < 1:  # if there is no one in the Dfrq, then we add the Dfuser back into database. The code under this if statement only works for csv.
-            req = BuddyRequest(name=name, major=major, year=year, rescollege=rescollege, days=days, duration=duration,
+            req = BuddyRequest(netID=netID, name=name, major=major, year=year, rescollege=rescollege, days=days, duration=duration,
                                workout_type=workout_type, time_zone=time_zone, group_size=group_size, user=request.user)
             req.save()
             return render(request, 'waiting.html')
@@ -133,7 +133,7 @@ def waiting(request):
             # list of all the names in Dfrq -- This will be very useful later on
 
             names = Dfrq.iloc[:, 1].tolist()
-            netID = Dfrq.iloc[:, "Vinay, list whatever index the netID is stored as"].tolist()
+            netID = Dfrq.iloc[:, 0].tolist()
 
             # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
             # We can store these names in a temp file: lists.
@@ -168,6 +168,7 @@ def waiting(request):
             # Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
             left_on = right_on = ["Day_Av", "Duration", "Type_Workout", "Time_z", "No_Ppl"]
+            #MATCHING OCCURS HERE
             matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="Day_Av",
                                                  right_id_col="Day_Av")
 
@@ -180,6 +181,7 @@ def waiting(request):
             matched_results = matched_results.drop(columns=["__id_left", "__id_right", "Day_Av_left", "Duration_left",
                                                             'Type_Workout_left', "Time_z_left", "No_Ppl_left"])
 
+            #COLUMNS OF ALL DATA
             list_col = matched_results.columns.tolist()
             list_col = list_col[1:]
 
@@ -206,8 +208,9 @@ def waiting(request):
             else:  # this is assuming we have valid matches in the dataframe
                 # After matching, this loop extracts the top three matches and gets all the parameters
                 validator = []
+                    # loop ensures we have the top 3 ENTRIES
 
-                for x in range(0, len(matched_results)):  # loop ensures we have the top three entries
+                for x in range(0, 3):
                     if len(validator) < 3:
                         entry = []
                         for i in range(1, len(matched_results.columns)):
@@ -227,12 +230,11 @@ def waiting(request):
                     list_netID.append(netID_associated)
 
 
-
-                matched_results.insert(0, "Names", list_names)  # line of code adds the name into the matched_results df
-                matched_results.inster(1, "NetID", list_netID)  # line of code adds the name into the matched results df
+                matched_results.insert(0, "NetID", list_netID)  # line of code adds the name into the matched results df
+                matched_results.insert(1, "Names", list_names)  # line of code adds the name into the matched_results df
 
                 matched_results["Day_Av"] = matched_results["Day_Av"].astype(
-                    object)  # columns that will eventually stoe lists must have a different datatype --> "objects"
+                    object)  # columns that will eventually store lists must have a different datatype --> "objects"
                 matched_results['Type_Workout'] = matched_results["Type_Workout"].astype(object)
 
                 # unstringing days and type of workouts
@@ -283,9 +285,11 @@ def waiting(request):
 
                 # matched results is the final dataframe that includes the person the user matches with
 
-                matchedName=name
-                matchedRequest=BuddyRequest.objects.filter(name=matchedName)
-                return render(request,'waiting.html',{'matched_person_name':matchedName})
+                matched_people=matched_results.values.tolist()
+                print('WE REACHED THE END')
+                #matchedRequest=BuddyRequest.objects.filter(netID=matchedNetID).remove()
+                #todo: create selection screen on waiting.html, send person info back to another view, delete matched user from request database
+                return render(request,'waiting.html',{'matched_person':matched_people})
 
 
 

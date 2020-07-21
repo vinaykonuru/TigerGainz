@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import json
 # Create your models here.
 class BuddyRequest(models.Model):
+    netID=models.CharField(max_length=50)
     name=models.CharField(max_length=50)
     major=models.CharField(max_length=50)
     year=models.CharField(max_length=50)
