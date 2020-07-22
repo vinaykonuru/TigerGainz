@@ -289,10 +289,20 @@ def waiting(request):
 
                 print('WE REACHED THE END')
                 print(matched_results)
-
+                person1=[]
+                person2=[]
+                person3=[]
+                try:
+                    person1=matched_people[0]
+                    print(len(person1))
+                    person2=matched_people[1]
+                    person3=matched_people[2]
+                except:
+                    print("Less than 3 matched people")
                 #matchedRequest=BuddyRequest.objects.filter(netID=matchedNetID).remove()
                 #todo: create selection screen on waiting.html, send person info back to another view, delete matched user from request database
-                return render(request,'waiting.html',{'person1':matched_people[0],'person2':matched_people[1],'person3':matched_people[2]})
+                #FOR SOME REASON, ONLY ONE MATCH IS FOUND EVER
+                return render(request,'waiting.html',{'person1':person1,'person2':person2,'person3':person3})
 
 
 
