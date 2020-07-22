@@ -1,13 +1,103 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if matched_person_name %}
-<div class="container text-center">
-  {{matched_person_name}} found as a match.
+{% if person1 %}
+<div class="container">
+{% for element in person1 %}
+  {% if forloop.counter0 == 0 %}
+  NetID={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 1 %}
+  Name={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 2 %}
+  Percentage Match={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 4 %}
+  Days Available={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 5 %}
+  Duraration={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 6 %}
+  Type of Workout={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 7 %}
+  Timezone={{element}}
+  {% endif %}
+  {% endfor %}
+
+{% for element in person2 %}
+  {% if forloop.counter0 == 0 %}
+  NetID={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 1 %}
+  Name={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 2 %}
+  Percentage Match={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 4 %}
+  Days Available={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 5 %}
+  Duraration={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 6 %}
+  Type of Workout={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 7 %}
+  Timezone={{element}}
+  {% endif %}
+  {% endfor %}
+
+{% for element in person3 %}
+  {% if forloop.counter0 == 0 %}
+  NetID={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 1 %}
+  Name={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 2 %}
+  Percentage Match={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 4 %}
+  Days Available={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 5 %}
+  Duraration={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 6 %}
+  Type of Workout={{element}}
+  {% endif %}
+
+  {% if forloop.counter0 == 7 %}
+  Timezone={{element}}
+  {% endif %}
+  {% endfor %}
+<br>
 </div>
 {% else %}
 <div class="container text-center">
   We're Searching for a Workout Buddy based on your provided information. We will email you when it is ready.
+
 </div>
 {% endif %}
 {% endblock %}

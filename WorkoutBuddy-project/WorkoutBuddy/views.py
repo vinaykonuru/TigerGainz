@@ -44,7 +44,7 @@ def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # P
     w = str(workout_lister)
 
     # This is the basic framework of user database (row)
-    #id 0 temporary for comparision with dataframe that has id
+    #id 0 temporary for comparision with dataframe that has id based on addition to database
     user_frame = pd.DataFrame(
         {"id":0, "netID": inputNetID, "name": [input1], "days": d, "duration": [input3], "workout_type": w, "time_zone": [input5],
          "group_size": [input6]})
@@ -174,7 +174,7 @@ def waiting(request):
 
             # Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
 
-            left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size","id"]
+            left_on = right_on = ["id","days", "duration", "workout_type", "time_zone", "group_size"]
             #MATCHING OCCURS HERE
             matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                                  right_id_col="days")
@@ -183,22 +183,20 @@ def waiting(request):
                           None)  # line of code that allows me to see the full dataframe
 
             # dropping irrelevant columns and displaying relevant info of the matched person
-            matched_results = matched_results.drop(columns=["__id_left", "__id_right","id_left", "days_right", "duration_right",
-                                                            'workout_type_right', "time_zone_right", "group_size_right"])
+            matched_results = matched_results.drop(columns=["__id_left", "__id_right","id_left", "days_left", "duration_left",
+                                                            'workout_type_left', "time_zone_left", "group_size_left"])
             #COLUMNS OF ALL DATA
             list_col = matched_results.columns.tolist()
             list_col = list_col[1:]
-
             # code that renames matched_results with better colummn labels\
             label_dict = dict_creator(list_col, left_on)
             matched_results = matched_results.rename(columns=label_dict)
-
             # this loop gets rid of values that do not meet a certain threshold
             max=0.06989700043360188
             threshold=max/4
             for x in range(0, len(matched_results)):
                 if matched_results.iloc[x][
-                    "best_match_score"] < threshold:  # the threshold for the best match score can be changed later after we test
+                    "best_match_score"] < -50:  # the threshold for the best match score can be changed later after we test
                     matched_results = matched_results.drop(matched_results.index[x])
 
             # If no one meets the threshold, then we append the user data back into the dataframe
@@ -232,64 +230,69 @@ def waiting(request):
                     list_netID.append(names_id_associated[0])
                 matched_results.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
                 matched_results.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
-                print(matched_results)
                 matched_results["days"] = matched_results["days"].astype(
                     object)  # columns that will eventually store lists must have a different datatype --> "objects"
                 matched_results['workout_type'] = matched_results["workout_type"].astype(object)
 
                 # unstringing days and type of workouts
 
-                updated_day = []
+                updated_days = []
                 updated_work_type = []
 
-                for day in matched_results.loc[:, "days"]:
-                    day = day.strip('][').split(', ')
-
-                    for i in range(0, len(day)):
-                        if day[i] == "1":
-                            day[i] = "Monday"
-                        elif day[i] == "2":
-                            day[i] = "Tuesday"
-                        elif day[i] == "3":
-                            day[i] = "Wednesday"
-                        elif day[i] == "4":
-                            day[i] = "Thursday"
-                        elif day[i] == "5":
-                            day[i] = "Friday"
-                        elif day[i] == "6":
-                            day[i] = "Saturday"
+                for days in matched_results.loc[:, "days"]:
+                    #days is in string format of list
+                    days=days.strip('[]').split(',')
+                    day_temp=[]
+                    for day in days:
+                        day=day.strip()
+                        if day == "1":
+                            day_temp.append('Monday')
+                        elif day == "2":
+                            day_temp.append('Tuesday')
+                        elif day == "3":
+                            day_temp.append('Wednesday')
+                        elif day == "4":
+                            day_temp.append('Thursday')
+                        elif day == "5":
+                            day_temp.append('Friday')
+                        elif day == "6":
+                            day_temp.append('Saturday')
                         else:
-                            day[i] = "Sunday"
+                            day_temp.append('Sunday')
+                    updated_days.append(day_temp)
 
-                    updated_day.append(day)
+
                 for work in matched_results.loc[:, "workout_type"]:
                     work = work.strip('][').split(', ')
-                    for j in range(0, len(work)):
-                        if work[j] == "1":
-                            work[j] = "Running"
-                        elif work[j] == "2":
-                            work[j] = "Lifting"
-                        elif work[j] == "3":
-                            work[j] = "Biking"
+                    work_temp=[]
+                    for type in work:
+                        type=type.strip()
+                        if type == "1":
+                            work_temp.append("Running")
+                        elif type == "2":
+                            work_temp.append("Lifting")
+                        elif type == "3":
+                            work_temp.append("Biking")
                         else:
-                            work[j] = "Swimming"
-
+                            work_temp.append("Swimming")
                     updated_work_type.append(work)
 
                 for index in range(0, len(matched_results)):
-                    matched_results.at[index, "days"] = updated_day[
-                        index]  # replacing placeholder values with sorted lists created above
                     matched_results.at[index, "workout_type"] = updated_work_type[index]
+                    matched_results.at[index, "days"] = updated_days[index]
+
                 # matched results is the final dataframe that includes the person the user matches with
                 matched_people=matched_results.values.tolist()
                 # change match scores to percentages
                 for entry in matched_people:
                     entry[2]=entry[2]/max*100
+
                 print('WE REACHED THE END')
-                print(matched_people)
+                print(matched_results)
+
                 #matchedRequest=BuddyRequest.objects.filter(netID=matchedNetID).remove()
                 #todo: create selection screen on waiting.html, send person info back to another view, delete matched user from request database
-                return render(request,'waiting.html',{'matched_person':matched_people})
+                return render(request,'waiting.html',{'person1':matched_people[0],'person2':matched_people[1],'person3':matched_people[2]})
 
 
 
