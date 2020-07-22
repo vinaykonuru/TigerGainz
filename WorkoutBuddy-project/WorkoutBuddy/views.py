@@ -65,6 +65,41 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
         dictionary[item] = value[key.index(item)]
     return dictionary
 
+def matcher(Dfrq, Dfuser):
+    #MATCHING OCCURS HERE
+    left_on = right_on = ["id", "days", "duration", "workout_type", "time_zone", "group_size"]
+
+    matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
+                                         right_id_col="days")
+
+    # dropping irrelevant columns and displaying relevant info of the matched person
+    matched_results = matched_results.drop(columns=["__id_left", "__id_right","id_left", "days_left", "duration_left",
+                                                    'workout_type_left', "time_zone_left", "group_size_left"])
+
+
+    #COLUMNS OF ALL DATA
+    list_col = matched_results.columns.tolist()
+    list_col = list_col[1:]
+    # code that renames matched_results with better colummn labels\
+    label_dict = dict_creator(list_col, left_on)
+
+
+    #our first matched result
+    matched_results1 = matched_results.rename(columns=label_dict)
+
+    rel_val = int(matched_results1.iloc[0,1])
+
+    list_id = Dfrq["id"].tolist()
+
+    for id in list_id:
+        if id == rel_val:
+            id_index = list_id.index(id)
+
+    Dfrq = Dfrq.drop(id_index)
+    Dfrq = Dfrq.reset_index(drop=True)
+
+    return matched_results1, Dfrq
+
 def home(request):
     return render(request,'home.html')
 
@@ -172,73 +207,59 @@ def waiting(request):
             reference_NETID = dict_creator(netID_dict, parameter_list)
 
 
-            # Line of code that actually matches the user with the people still in request dataframe. Outputs a new dataframe of matched people
+            #getting our 3 match results:
+            match_result, Dfrq = matcher(Dfrq, Dfuser)
+            match_result1, Dfrq = matcher(Dfrq, Dfuser)
+            match_result2, Dfrq = matcher(Dfrq, Dfuser)
 
-            left_on = right_on = ["id","days", "duration", "workout_type", "time_zone", "group_size"]
-            #MATCHING OCCURS HERE
-            matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
-                                                 right_id_col="days")
-            # for easier viewing
-            pd.set_option("display.max_rows", None, "display.max_columns",
-                          None)  # line of code that allows me to see the full dataframe
-
-            # dropping irrelevant columns and displaying relevant info of the matched person
-            matched_results = matched_results.drop(columns=["__id_left", "__id_right","id_left", "days_left", "duration_left",
-                                                            'workout_type_left', "time_zone_left", "group_size_left"])
-            #COLUMNS OF ALL DATA
-            list_col = matched_results.columns.tolist()
-            list_col = list_col[1:]
-            # code that renames matched_results with better colummn labels\
-            label_dict = dict_creator(list_col, left_on)
-            matched_results = matched_results.rename(columns=label_dict)
-            # this loop gets rid of values that do not meet a certain threshold
+            match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
+            
+            #determining threshold
             max=0.06989700043360188
             threshold=max/4
-            for x in range(0, len(matched_results)):
-                if matched_results.iloc[x][
+            for x in range(0, len(match_df)):
+                if match_df.iloc[x][
                     "best_match_score"] < -50:  # the threshold for the best match score can be changed later after we test
-                    matched_results = matched_results.drop(matched_results.index[x])
+                    matched_results = match_df.drop(match_df.index[x])
 
             # If no one meets the threshold, then we append the user data back into the dataframe
-            if len(matched_results) == 0:
-                req = BuddyRequest(netID=netID,name=name, major=major, year=year, rescollege=rescollege, days=days,
-                                   duration=duration,
-                                   workout_type=workout_type, time_zone=time_zone, group_size=group_size,
-                                   user=request.user)
-                req.save()
-                return render(request, 'waiting.html')
+            if len(match_df) == 0:
+                print("terrible matches")
+
             else:  # this is assuming we have valid matches in the dataframe
                 # After matching, this loop extracts the top three matches and gets all the parameters
-                validator = []
+                list_params = []
                     # loop ensures we have the top 3 ENTRIES
-                for x in range(0, len(matched_results)):
-                    if len(validator) < 3:
+                for x in range(0, len(match_df)):
                         entry = []
-                        for i in range(1, len(matched_results.columns)):
-                            list_of_vals = matched_results.iloc[:, i].tolist()
+                        for i in range(1, len(match_df.columns)):
+                            list_of_vals = match_df.iloc[:, i].tolist()
                             v = list_of_vals[x]
                             entry.append(v)
-                        validator.append(entry)
+                        list_params.append(entry)
+
 
                 list_names = []
                 list_netID = []
                 #for each matched row, find the correct netID and name by matching with id and add it to matched row
-                for parameters in validator:
+                for parameters in list_params:
                     names_id_associated = getKeysByValue(id_name_dict, parameters[5])
                     list_names.append(names_id_associated[1])
                     list_netID.append(names_id_associated[0])
-                matched_results.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
-                matched_results.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
-                matched_results["days"] = matched_results["days"].astype(
+
+                match_df.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
+                match_df.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
+                match_df["days"] = match_df["days"].astype(
                     object)  # columns that will eventually store lists must have a different datatype --> "objects"
-                matched_results['workout_type'] = matched_results["workout_type"].astype(object)
+                match_df['workout_type'] = match_df["workout_type"].astype(object)
+
 
                 # unstringing days and type of workouts
 
                 updated_days = []
                 updated_work_type = []
 
-                for days in matched_results.loc[:, "days"]:
+                for days in match_df.loc[:, "days"]:
                     #days is in string format of list
                     days=days.strip('[]').split(',')
                     day_temp=[]
@@ -261,7 +282,7 @@ def waiting(request):
                     updated_days.append(day_temp)
 
 
-                for work in matched_results.loc[:, "workout_type"]:
+                for work in match_df.loc[:, "workout_type"]:
                     work = work.strip('][').split(', ')
                     work_temp=[]
                     for type in work:
@@ -276,18 +297,18 @@ def waiting(request):
                             work_temp.append("Swimming")
                     updated_work_type.append(work)
 
-                for index in range(0, len(matched_results)):
-                    matched_results.at[index, "workout_type"] = updated_work_type[index]
-                    matched_results.at[index, "days"] = updated_days[index]
+                for index in range(0, len(match_df)):
+                    match_df.at[index, "workout_type"] = updated_work_type[index]
+                    match_df.at[index, "days"] = updated_days[index]
 
                 # matched results is the final dataframe that includes the person the user matches with
-                matched_people=matched_results.values.tolist()
+                matched_people=match_df.values.tolist()
                 # change match scores to percentages
                 for entry in matched_people:
                     entry[2]=entry[2]/max*100
 
                 print('WE REACHED THE END')
-                print(matched_results)
+                print(match_df)
                 person1=[]
                 person2=[]
                 person3=[]
@@ -298,6 +319,7 @@ def waiting(request):
                     person3=matched_people[2]
                 except:
                     print("Less than 3 matched people")
+
                 #matchedRequest=BuddyRequest.objects.filter(netID=matchedNetID).remove()
                 #todo: create selection screen on waiting.html, send person info back to another view, delete matched user from request database
                 #FOR SOME REASON, ONLY ONE MATCH IS FOUND EVER
