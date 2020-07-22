@@ -211,7 +211,6 @@ def waiting(request):
                 # After matching, this loop extracts the top three matches and gets all the parameters
                 validator = []
                     # loop ensures we have the top 3 ENTRIES
-
                 for x in range(0, len(matched_results)):
                     if len(validator) < 3:
                         entry = []
