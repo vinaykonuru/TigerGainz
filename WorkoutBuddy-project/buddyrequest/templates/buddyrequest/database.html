@@ -153,25 +153,11 @@
   </body>
 
   <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-light2 mr-md-5 col p-4 d-flex flex-column position-static">
-          <div class="my-3 p-3">
-              <h2 class="display-5">Joseph '23</h2>
-          </div>
-          <a href="#" class="btn btn-lg btn-secondary">View Profile</a>
-          <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
-          </div>
+    {% for entry in buddyrequests.all %}
+    {% if forloop.counter0|divisibleby:2 %}
       </div>
-      <div class="bg-light2 mr-md-3 col p-4 d-flex flex-column position-static">
-          <div class="my-3 py-3">
-              <h2 class="display-5">Lily '21</h2>
-          </div>
-          <a href="#" class="btn btn-lg btn-secondary">View Profile</a>
-          <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
-          </div>
-      </div>
-  </div>
-
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    {% endif %}
       <div class="bg-light2 mr-md-5 col p-4 d-flex flex-column position-static">
           <div class="my-3 p-3">
               <h2 class="display-5">Harry '24</h2>
@@ -180,15 +166,7 @@
           <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
           </div>
       </div>
-      <div class="bg-light2 mr-md-3 col p-4 d-flex flex-column position-static">
-          <div class="my-3 py-3">
-              <h2 class="display-5">Andrea '22</h2>
-          </div>
-          <a href="#" class="btn btn-lg btn-secondary">View Profile</a>
-          <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
-          </div>
-      </div>
+    {% endfor %}
   </div>
-
 </body>
 {% endblock %}

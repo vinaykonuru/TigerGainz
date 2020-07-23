@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 urlpatterns = [
-    path('', views.requests,name='database'),
-    path('profile',views.profile,name='profile')
+    path('', views.database,name='database'),
+    path('profile',views.profile,name='profile'),
+    path('matches',views.matches,name='matches')
 ]
