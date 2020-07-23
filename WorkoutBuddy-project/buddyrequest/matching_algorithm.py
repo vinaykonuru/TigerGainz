@@ -39,7 +39,7 @@ def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # P
     # This is the basic framework of user database (row)
     #id 0 temporary for comparision with dataframe that has id based on addition to database
     user_frame = pd.DataFrame(
-        {"id":0, "netID": inputNetID, "name": [input1], "days": d, "duration": [input3], "workout_type": w, "time_zone": [input5],
+        {"netID": inputNetID, "name": [input1], "days": d, "duration": [input3], "workout_type": w, "time_zone": [input5],
          "group_size": [input6]})
 
     return user_frame  # this is the object we get from the function
@@ -65,7 +65,6 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
 def matcher(Dfrq, Dfuser):
     # MATCHING OCCURS HERE
     left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size"]
-
     matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                          right_id_col="days")
 
@@ -81,14 +80,14 @@ def matcher(Dfrq, Dfuser):
     # COLUMNS OF ALL DATA
     list_col = matched_results.columns.tolist()
     list_col = list_col[1:]
+    print(list_col)
+    print(left_on)
     # code that renames matched_results with better colummn labels\
     label_dict = dict_creator(list_col, left_on)
 
 
-
     # our first matched result
     matched_results1 = matched_results.rename(columns=label_dict)
-
     list_Dfrq = Dfrq.values.tolist()
     rel_params = matched_results1.iloc[0,:].tolist()
     del rel_params[0]
@@ -156,7 +155,7 @@ def get_matches(user_data_list,requestsList):
 
     reference = dict_creator(people_ID, parameter_list)
     reference_name = dict_creator(people_ID, names)
-    reference_NETID = dict_creator(people_ID, net_id)
+    reference_NETID = dict_creator(people_ID, netID_dict)
 
 
     #getting our 3 match results:
@@ -182,9 +181,9 @@ def get_matches(user_data_list,requestsList):
 
     else:  # this is assuming we have valid matches in the dataframe
         # After matching, this loop extracts the top three matches and gets all the parameters
-        
+
         list_params = []
-        
+
             # loop ensures we have the top 3 ENTRIES
         for x in range(0, len(match_df)):
                 entry = []
@@ -196,6 +195,7 @@ def get_matches(user_data_list,requestsList):
 
 
         list_names = []
+        list_people_id=[]
         list_netID = []
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
