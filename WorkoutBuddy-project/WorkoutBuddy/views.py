@@ -92,7 +92,7 @@ def waiting(request):
         workout_type.append(request.POST['workout_type'])
         time_zone=request.POST['time_zone']
         group_size=request.POST['group_size']
-
+        profile_picture=request.POST['profile_picture']
         #list of data
         user_data_list=[netID,name,days,duration,workout_type,time_zone,group_size]
 
@@ -137,6 +137,7 @@ def waiting(request):
             req.time_zone=time_zone
             req.group_size=group_size
             req.user=request.user
+            req.profile_picture=profile_picture
             req.save()
             return render(request, 'waiting.html')
 

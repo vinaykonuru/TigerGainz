@@ -24,5 +24,6 @@ urlpatterns = [
     path('find',views.find,name='find'),
     path('waiting',views.waiting,name='waiting'),
     path('about',views.about,name='about'),
-    path('accounts/',include('accounts.urls'))
-]
+    path('accounts/',include('accounts.urls')),
+    path('database/',include('buddyrequest.urls'))
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

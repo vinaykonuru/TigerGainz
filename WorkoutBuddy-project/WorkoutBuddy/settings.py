@@ -56,7 +56,7 @@ ROOT_URLCONF = 'WorkoutBuddy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WorkoutBuddy/templates','accounts/templates'],
+        'DIRS': ['WorkoutBuddy/templates','accounts/templates','buddyrequest/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +130,7 @@ STATICFILES_DIRS=[
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
