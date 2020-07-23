@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/cover/">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>TigerGainz - HomeLogo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!--Font Used: Noto Sans from Google Fonts-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+
+    <link href="product.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .bg-light {
+            background-color: #ff8f00 !important;
+        }
+
+        .navbar-brand {
+            font-family: 'Noto Sans JP',
+                sans-serif;
+            color: #fff !important;
+        }
+
+        .cover-container {
+            font-family: 'Noto Sans JP',
+                sans-serif;
+            margin-top: 60px;
+        }
+
+        .cover-heading {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            border-color: #fff;
+        }
+
+        .lead {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+        }
+
+        .nav-link {
+            font-family: 'Noto Sans JP',
+                sans-serif;
+            color: #fff !important;
+        }
+
+        .display-5 {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+
+        .bg-logo {
+            background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735594203811151942/Logo.jpg');
+            background-attachment: local;
+            background-position: center;
+            background-size: unset;
+            background-size: 70%;
+            height: unset;
+            height: max-content;
+
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background-color: #000;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            text-shadow: none;
+            /* Prevent inheritance from `body` */
+            background-color: #ff8f00;
+            ;
+            border: .05rem solid #ff8f00;
+            ;
+        }
+
+        .lead2 {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .lead3 {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #ff8f00;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myModal").modal('show');
+    });
+</script>
+
+<body>
+
+    <!--Header -->
+    <nav class="navbar fixed-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">TigerGainz</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Matches
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Match 1</a>
+                        <a class="dropdown-item" href="#">Match 2</a>
+                        <a class="dropdown-item" href="#">Match 3</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">TigerGainz Database</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About & FAQ</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--Popup-->
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">COVID-19 Reminder</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Welcome to TigerGainz</p>
+                    <p>Princeton University’s Workout Buddy and Group Matchmaker</p>
+                    <p>
+                        Sign up now to find Your Princeton Workout Buddy or Group Today, On- Or Off-Campus! </p>
+                    <hr class="my-4">
+                    <p class="lead">COVID-19 REMINDER:</p>
+                    <p>For your safety and the safety of others, please follow all applicable COVID-19 regulations on-
+                        or
+                        off-campus while working out in-person or virtually! This includes social distancing at least 6
+                        feet, wearing masks, disinfecting equipment, etc. </p>
+                        <p>For a more comprehensive list of COVID-19
+                        regulations, please check all applicable sources such as the CDC and University Health Services.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md- text-center bg-logo">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-normal"><br /><br /><br /></h1>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+
+    <!--What is TigerGainz?-->
+
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    </body>
+
+    <div class="jumbotron">
+        <hr class="my-4">
+        <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
+        <p>TigerGainz is a workout buddy and group matchmaker for Princetonians that:
+            <hr class="my-4">
+        <p class="lead">1. Analyzes your workout preferences </p>
+        <p class="lead">2. Finds Princetonians with the most FITTING responses to yours </p>
+        <p class="lead">3. Gives you their contact information so you can reach out to them when you match </p>
+        </p>
+        <hr class="my-4">
+        <p>With an <i>instantaneous and more accurate algorithm</i> , TigerGainz removes the usual stress, uncertainty,
+            and
+            awkwardness that comes with finding workout buddies and groups. </p>
+
+        <p>By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians <i>stay
+                active</i> through <b>better
+                exercise experiences</b> that are not only <b>more consistent</b> (because buddies and groups keep each
+            other
+            accountable) but <b>more fun</b>, whether you are on- or off-campus.</p>
+        <a href="#" class="btn btn-lg btn-secondary">Get Started</a>
+        <hr class="my-4">
+        <h1 class="display-5"><strong>How Does it Work?</strong></h1>
+        <hr class="my-4">
+        <p class="lead2">Upon filling out the secure sign up form (see "Get Starated" button above), TigerGainz will use
+            an algorithm
+            that <b>aligns
+                preferences--including workout days, exercise type, time zone, and frequency--</b>to find the most
+            fitting
+            workout partners (or groups!) from our database of participating Princetonians.
+        </p>
+        <p>Once matches have been made, you’ll get to see the profiles, preferences, and, most importantly, contact
+            information of your best potential workout buddies or groups.
+        </p>
+        <p><strong>Then, it’s up to you to reach out to your new workout buddy or group!</strong>
+        </p>
+        <p>
+            If you are satisfied with your matches and are no longer interested in finding Princeton workout buddies or
+            groups, we will remove you from our database.
+        </p>
+        <p>Conversely, if you are unsatisfied with or have no matches, TigerGainz will place you in its database and
+            waiting list. Once a potential match is made, TigerGainz will notify you via email and give you the
+            profiles, preferences, and contact information of your prospective workout buddies and groups. You can then
+            decide whom to reach out to and whether or not you would like to remain in the TigerGainz database. </p>
+        <p class="lead3">If you wish to be removed from the database, please click the "Take me off the database
+            please!" button on the "database" page.</b>
+        </p>
+        <hr class="my-4">
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
