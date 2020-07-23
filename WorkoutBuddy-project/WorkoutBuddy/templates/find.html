@@ -5,7 +5,7 @@
   <h1>Find a Buddy Info Form</h1>
 </div>
 <div class="container">
-  <form action="{% url 'waiting' %}" method='POST'>
+  <form action="{% url 'matches' %}" method='POST'>
     {% csrf_token %}
     Workout Days:
     <label class="checkbox-inline"><input type="checkbox" name="day" value="Monday">Monday</label>

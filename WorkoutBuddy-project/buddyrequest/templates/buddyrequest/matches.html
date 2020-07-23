@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if matched_people %}
+<br><br><br>
+<div class="container">
+{% for person in matched_people %}
+  NetID={{person.0}}
 
+  Name={{person.1}}
+
+  Percentage Match={{person.2}}
+
+  Days Available={{person.4}}
+
+  Duraration={{person.5}}
+
+  Type of Workout={{person.6}}
+
+  Timezone={{person.7}}
+  <br>
+  {% endfor %}
+<br>
+</div>
+{% else %}
+<div class="container text-center">
+  We're Searching for a Workout Buddy based on your provided information. We will email you when it is ready.
+
+</div>
+{% endif %}
 {% endblock %}
