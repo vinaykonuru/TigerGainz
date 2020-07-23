@@ -181,6 +181,7 @@ def waiting(request):
 
             names = Dfrq.pop('name').tolist()
             netID_dict = Dfrq.pop('netID').tolist()
+            pictures= Dfrq.pop('profile_picture').tolist()
             # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
             # We can store these names in a temp file: lists.
 
@@ -214,7 +215,7 @@ def waiting(request):
             match_result2, Dfrq = matcher(Dfrq, Dfuser)
 
             match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
-            
+
             #determining threshold
             max=0.06989700043360188
             threshold=max/4
@@ -309,22 +310,21 @@ def waiting(request):
                     entry[2]=entry[2]/max*100
 
                 print('WE REACHED THE END')
-                print(match_df)
-                person1=[]
-                person2=[]
-                person3=[]
-                try:
-                    person1=matched_people[0]
-                    print(len(person1))
-                    person2=matched_people[1]
-                    person3=matched_people[2]
-                except:
-                    print("Less than 3 matched people")
+                print(matched_people)
+                # person1=[]
+                # person2=[]
+                # person3=[]
+                # try:
+                #     person1=matched_people[0]
+                #     person2=matched_people[1]
+                #     person3=matched_people[2]
+                # except:
+                #     print("Less than 3 matched people")
 
                 #matchedRequest=BuddyRequest.objects.filter(netID=matchedNetID).remove()
                 #todo: create selection screen on waiting.html, send person info back to another view, delete matched user from request database
                 #FOR SOME REASON, ONLY ONE MATCH IS FOUND EVER
-                return render(request,'waiting.html',{'person1':person1,'person2':person2,'person3':person3})
+                return render(request,'waiting.html',{'matched_people':matched_people})
 
 
 

@@ -20,7 +20,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 
-    <link href="cover.css" rel="stylesheet">
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -115,6 +115,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'home' %}">Matches</a>
+                </li>
+
+                <!--
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,7 +130,7 @@
                         <a class="dropdown-item" href="#">Match 2</a>
                         <a class="dropdown-item" href="#">Match 3</a>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'about' %}">About & FAQ</a>
                 </li>
@@ -149,7 +154,7 @@
 {% block content %}
 
 {% endblock %}
-<footer class="footer fixed-bottom">
+<footer class="footer">
   <div class="container text-center" >
   ©AwesomeSauce {% now "Y" %}
   </div>

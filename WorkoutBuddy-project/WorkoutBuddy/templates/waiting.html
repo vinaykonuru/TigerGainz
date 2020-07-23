@@ -1,96 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if person1 %}
+{% if matched_people %}
+<br><br><br>
 <div class="container">
-{% for element in person1 %}
-  {% if forloop.counter0 == 0 %}
-  NetID={{element}}
-  {% endif %}
+{% for person in matched_people %}
+  NetID={{person.0}}
 
-  {% if forloop.counter0 == 1 %}
-  Name={{element}}
-  {% endif %}
+  Name={{person.1}}
 
-  {% if forloop.counter0 == 2 %}
-  Percentage Match={{element}}
-  {% endif %}
+  Percentage Match={{person.2}}
 
-  {% if forloop.counter0 == 4 %}
-  Days Available={{element}}
-  {% endif %}
+  Days Available={{person.4}}
 
-  {% if forloop.counter0 == 5 %}
-  Duraration={{element}}
-  {% endif %}
+  Duraration={{person.5}}
 
-  {% if forloop.counter0 == 6 %}
-  Type of Workout={{element}}
-  {% endif %}
+  Type of Workout={{person.6}}
 
-  {% if forloop.counter0 == 7 %}
-  Timezone={{element}}
-  {% endif %}
-  {% endfor %}
-
-{% for element in person2 %}
-  {% if forloop.counter0 == 0 %}
-  NetID={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 1 %}
-  Name={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 2 %}
-  Percentage Match={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 4 %}
-  Days Available={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 5 %}
-  Duraration={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 6 %}
-  Type of Workout={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 7 %}
-  Timezone={{element}}
-  {% endif %}
-  {% endfor %}
-
-{% for element in person3 %}
-  {% if forloop.counter0 == 0 %}
-  NetID={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 1 %}
-  Name={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 2 %}
-  Percentage Match={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 4 %}
-  Days Available={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 5 %}
-  Duraration={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 6 %}
-  Type of Workout={{element}}
-  {% endif %}
-
-  {% if forloop.counter0 == 7 %}
-  Timezone={{element}}
-  {% endif %}
+  Timezone={{person.7}}
+  <br>
   {% endfor %}
 <br>
 </div>
