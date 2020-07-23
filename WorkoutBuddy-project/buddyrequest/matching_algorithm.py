@@ -45,11 +45,15 @@ def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # P
     return user_frame  # this is the object we get from the function
 
 
-def getKeysByValue(dictOfElements, valueToFind):  # function finds keys(names) from attributes (parameters)
-    listOfItems = dictOfElements.items()
-    for item in listOfItems:
-        if item[0] == valueToFind:
-            return item[1]
+def Keys_from_values(dict,value):
+    for item in dict.values():
+        if item == value:
+            value_list = list(dict.values())
+            indexer = value_list.index(value)
+            key_list = list(dict.keys())
+            ret_val = key_list[indexer]
+
+    return ret_val
 
 
 def dict_creator(key, value):  # makes dictionary from two lists containing the list of keys and list of values
@@ -59,39 +63,45 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
     return dictionary
 
 def matcher(Dfrq, Dfuser):
-    #MATCHING OCCURS HERE
-    left_on = right_on = ["id", "days", "duration", "workout_type", "time_zone", "group_size"]
+    # MATCHING OCCURS HERE
+    left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size"]
 
     matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                          right_id_col="days")
 
+
+
     # dropping irrelevant columns and displaying relevant info of the matched person
-    matched_results = matched_results.drop(columns=["__id_left", "__id_right","id_left", "days_left", "duration_left",
-                                                    'workout_type_left', "time_zone_left", "group_size_left"])
+    matched_results = matched_results.drop(
+        columns=["__id_left", "__id_right", "days_left", "duration_left",
+                 'workout_type_left', "time_zone_left", "group_size_left"])
 
 
-    #COLUMNS OF ALL DATA
+
+    # COLUMNS OF ALL DATA
     list_col = matched_results.columns.tolist()
     list_col = list_col[1:]
     # code that renames matched_results with better colummn labels\
     label_dict = dict_creator(list_col, left_on)
 
 
-    #our first matched result
+
+    # our first matched result
     matched_results1 = matched_results.rename(columns=label_dict)
 
-    rel_val = int(matched_results1.iloc[0,1])
+    list_Dfrq = Dfrq.values.tolist()
+    rel_params = matched_results1.iloc[0,:].tolist()
+    del rel_params[0]
 
-    list_id = Dfrq["id"].tolist()
 
-    for id in list_id:
-        if id == rel_val:
-            id_index = list_id.index(id)
+    for person in list_Dfrq:
+        if person == rel_params:
+            del list_Dfrq[list_Dfrq.index(person)]
+            break
 
-    Dfrq = Dfrq.drop(id_index)
-    Dfrq = Dfrq.reset_index(drop=True)
 
-    return matched_results1, Dfrq
+    Dfrq = pd.DataFrame(list_Dfrq, columns=left_on)
+    return  matched_results1, Dfrq
 
 def get_matches(user_data_list,requestsList):
     id_name_dict={}
@@ -123,6 +133,7 @@ def get_matches(user_data_list,requestsList):
 
     names = Dfrq.pop('name').tolist()
     netID_dict = Dfrq.pop('netID').tolist()
+    people_ID = Dfrq.pop("id").tolist()
     pictures= Dfrq.pop('profile_picture').tolist()
     # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
     # We can store these names in a temp file: lists.
@@ -143,18 +154,17 @@ def get_matches(user_data_list,requestsList):
             entry.append(v)
         parameter_list.append(entry)
 
-    reference = dict_creator(names, parameter_list)
-
-    # creating dictionary, "reference_NETID", that contains the netID as keys and other parameters as values.
-    #Note that this dictionary does not include the names of the user or request df.
-
-    reference_NETID = dict_creator(netID_dict, parameter_list)
+    reference = dict_creator(people_ID, parameter_list)
+    reference_name = dict_creator(people_ID, names)
+    reference_NETID = dict_creator(people_ID, net_id)
 
 
     #getting our 3 match results:
     match_result, Dfrq = matcher(Dfrq, Dfuser)
-    match_result1, Dfrq = matcher(Dfrq, Dfuser)
-    match_result2, Dfrq = matcher(Dfrq, Dfuser)
+    if len(Dfrq) >= 2:
+        match_result1, Dfrq = matcher(Dfrq, Dfuser)
+        if len(Dfrq) >= 1:
+            match_result2, Dfrq = matcher(Dfrq, Dfuser)
 
     match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
 
@@ -172,7 +182,9 @@ def get_matches(user_data_list,requestsList):
 
     else:  # this is assuming we have valid matches in the dataframe
         # After matching, this loop extracts the top three matches and gets all the parameters
+        
         list_params = []
+        
             # loop ensures we have the top 3 ENTRIES
         for x in range(0, len(match_df)):
                 entry = []
@@ -186,10 +198,18 @@ def get_matches(user_data_list,requestsList):
         list_names = []
         list_netID = []
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
-        for parameters in list_params:
-            names_id_associated = getKeysByValue(id_name_dict, parameters[5])
-            list_names.append(names_id_associated[1])
-            list_netID.append(names_id_associated[0])
+        #for each matched row, find the correct netID and name by matching with id and add it to matched row
+
+        for parameters in parameter_list:
+            id = Keys_from_values(reference, parameters)
+            list_people_id.append(id)
+
+        for id in list_people_id:
+            match_name = reference_name.get(id)
+            list_names.append(match_name)
+
+            match_netID = reference_NETID.get(id)
+            list_netID.append(match_netID)
 
         match_df.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
         match_df.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
