@@ -42,14 +42,15 @@ def matches(request):
         user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
         #list of requests in dataframe
         requestsList=list(BuddyRequest.objects.all().values())
-        if len(requestsList) < 1:
+        matched_people=get_matches(user_data_list, requestsList)
+        if len(requestsList) < 1 or matched_people==[]:
             req=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
             days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
             req.save()
             return render(request,'buddyrequest/matches.html')
-            
-        matched_people=get_matches(user_data_list, requestsList)
-        print('WE REACHED THE END')
-        print(matched_people)
 
-        return render(request,'buddyrequest/matches.html',{'matched_people':matched_people})
+        print('WE REACHED THE END')
+        matched=True
+        if len(matched_people) == 0:
+            matched=False
+        return render(request,'buddyrequest/matches.html',{'matched_people':matched_people,"matched":matched})

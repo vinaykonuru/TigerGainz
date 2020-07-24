@@ -88,18 +88,11 @@ def matcher(Dfrq, Dfuser):
     # our first matched result
     matched_results1 = matched_results.rename(columns=label_dict)
     list_Dfrq = Dfrq.values.tolist()
-    rel_params = matched_results1.iloc[0,:].tolist()
-    del rel_params[0]
-
-
-    for person in list_Dfrq:
-        if person == rel_params:
-            del list_Dfrq[list_Dfrq.index(person)]
-            break
-
+    del list_Dfrq[0] # remove first element
 
     Dfrq = pd.DataFrame(list_Dfrq, columns=left_on)
-    return  matched_results1, Dfrq
+    top_matched_row=matched_results1[0:1]
+    return  top_matched_row, Dfrq
 
 def get_matches(user_data_list,requestsList):
     #dataframe of requests
@@ -154,7 +147,7 @@ def get_matches(user_data_list,requestsList):
     match_result, Dfrq = matcher(Dfrq, Dfuser)
     if len(Dfrq) >= 1:
         match_result1, Dfrq = matcher(Dfrq, Dfuser)
-        if len(Dfrq) >= 2:
+        if len(Dfrq) >= 1:
             match_result2, Dfrq = matcher(Dfrq, Dfuser)
             match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
         else:
@@ -165,12 +158,15 @@ def get_matches(user_data_list,requestsList):
     #determining threshold
     max=0.06989700043360188
     threshold=max/4
-    for x in range(0, len(match_df)):
+    x=0
+    while x < len(match_df):
         if match_df.iloc[x][
-            "best_match_score"] < -50:  # the threshold for the best match score can be changed later after we test
-            matched_results = match_df.drop(match_df.index[x])
-
+            "best_match_score"] < 0:  # the threshold for the best match score can be changed later after we test
+            match_df = match_df.drop(match_df.index[x])
+        else:
+            x+=1
     # If no one meets the threshold, then we append the user data back into the dataframe
+    matched_people=[]
     if len(match_df) == 0:
         print("terrible matches")
 
@@ -199,7 +195,7 @@ def get_matches(user_data_list,requestsList):
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
 
-        for parameters in parameter_list:
+        for parameters in list_params:
             id = Keys_from_values(reference_parameters, parameters)
             list_people_id.append(id)
 
@@ -213,7 +209,6 @@ def get_matches(user_data_list,requestsList):
             list_profile_picture.append(excess_list[5])
             list_user_id.append(excess_list[6])
 
-
         match_df.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
         match_df.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
         match_df.insert(2, "major", list_major)  # line of code adds the name into the matched_results df
@@ -222,7 +217,6 @@ def get_matches(user_data_list,requestsList):
         match_df.insert(5, "profile_picture", list_profile_picture)  # line of code adds the name into the matched_results df
         match_df["days"] = match_df["days"].astype(object)  # columns that will eventually store lists must have a different datatype --> "objects"
         match_df['workout_type'] = match_df["workout_type"].astype(object)
-
 
         # unstringing days and type of workouts
 
@@ -273,7 +267,7 @@ def get_matches(user_data_list,requestsList):
         # matched results is the final dataframe that includes the person the user matches with
         matched_people=match_df.values.tolist()
         # change match scores to percentages
+
         for entry in matched_people:
-            print(entry[6])
             entry[6]=entry[6]/max*100
     return matched_people
