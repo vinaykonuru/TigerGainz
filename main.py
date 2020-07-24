@@ -28,12 +28,14 @@ def mail (name, netID):
     
     TigerGainz'''
 
-
     s.sendmail(tiger_gainz_email, sent_email, message)
     s.quit()
 
 #import data
 
-
+    #import names of both people that got matched
+    
 #mailing
-
+    
+    mail(user_name, netID)
+    mail(request_name, netID)
