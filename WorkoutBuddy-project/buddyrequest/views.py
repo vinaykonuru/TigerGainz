@@ -37,18 +37,17 @@ def matches(request):
         time_zone=request.POST['time_zone']
         group_size=request.POST['group_size']
         profile_picture=request.POST['profile_picture']
-
+        user=request.user
         #list of data
-        user_data_list=[netID,name,days,duration,workout_type,time_zone,group_size]
+        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
         #list of requests in dataframe
         requestsList=list(BuddyRequest.objects.all().values())
-
         if len(requestsList) < 1:
-            req=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,days=days,duration=duration,workout_type=workout_type,
-            time_zone=time_zone,group_size=group_size,profile_picture=profile_picture,user=request.user)
+            req=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
+            days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
             req.save()
             return render(request,'buddyrequest/matches.html')
-
+            
         matched_people=get_matches(user_data_list, requestsList)
         print('WE REACHED THE END')
         print(matched_people)

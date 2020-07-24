@@ -1,10 +1,11 @@
 import pandas
 import pandas as pd
 import fuzzymatcher as fm
+from buddyrequest.models import BuddyRequest
 
-def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # Process information and stores strings as numbers
-    day_lister = input2  # will ensure the days is always in a list datatype
-    workout_lister = input4  # will ensure the workouts are in a list datatype
+def Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone,inputGroupSize):  # Process information and stores strings as numbers
+    day_lister = inputDays  # will ensure the days is always in a list datatype
+    workout_lister = inputWorkoutType  # will ensure the workouts are in a list datatype
     for i in range(0, len(day_lister)):  # this loop basically turns the days of the week into a numerical value
         # Output should be a list of numbers that correspond with the day of the week
         if day_lister[i] == "Monday":
@@ -39,8 +40,7 @@ def Df_creator(inputNetID, input1, input2, input3, input4, input5, input6):  # P
     # This is the basic framework of user database (row)
     #id 0 temporary for comparision with dataframe that has id based on addition to database
     user_frame = pd.DataFrame(
-        {"netID": inputNetID, "name": [input1], "days": d, "duration": [input3], "workout_type": w, "time_zone": [input5],
-         "group_size": [input6]})
+        {"days": d, "duration": [inputDuration], "workout_type": w, "time_zone": [inputTimeZone], "group_size": [inputGroupSize]})
 
     return user_frame  # this is the object we get from the function
 
@@ -80,8 +80,7 @@ def matcher(Dfrq, Dfuser):
     # COLUMNS OF ALL DATA
     list_col = matched_results.columns.tolist()
     list_col = list_col[1:]
-    print(list_col)
-    print(left_on)
+
     # code that renames matched_results with better colummn labels\
     label_dict = dict_creator(list_col, left_on)
 
@@ -103,43 +102,37 @@ def matcher(Dfrq, Dfuser):
     return  matched_results1, Dfrq
 
 def get_matches(user_data_list,requestsList):
-    id_name_dict={}
-    for row in requestsList:
-        netID_name=(row['netID'],row['name'])
-        id_name_dict[row['id']]=netID_name
-    # id_name_dict{row.id}
     #dataframe of requests
-    requestsdf=pandas.DataFrame(requestsList)
+    Dfrq=pandas.DataFrame(requestsList)
 
     #COMPARISION BETWEEN USER DATA AND REQUESTS ENTERED HERE
-    inputnetID = user_data_list[0]
-    input1 = user_data_list[1]
-    input2 = user_data_list[2]
-    input3 = user_data_list[3]
-    input4 = user_data_list[4]
-    input5 = user_data_list[5]
-    input6 = user_data_list[6] # all these inputs are temporary variables. Ideally, the GUI will stores these values as variables
-    Dfuser = Df_creator(inputnetID,input1, input2, input3, input4, input5,
-                        input6)  # takes all user data and creates a dataframe of one row for that user.
+    inputDays = user_data_list[6]
+    inputDuration = user_data_list[7]
+    inputWorkoutType = user_data_list[8]
+    inputTimeZone = user_data_list[9]
+    inputGroupSize = user_data_list[10] # all these inputs are temporary variables. Ideally, the GUI will stores these values as variables
+    Dfuser = Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone,inputGroupSize)
+
+    #will return Dfuser_return but use Dfuser_comparision to compare to Dfrq
+                          # takes all user data and creates a dataframe of one row for that user.
     # reading in csv file and converting it into a dataframe. The code doesn't need to read in a csv file specifically, but as long as the final product after line
     # 91 is a dataframe, the algo will work.
-
-    Dfrq = requestsdf
-
     # Script that takes inputs as variables and appends value to dataframe.
 
     # list of all the names in Dfrq -- This will be very useful later on
+    people_ID_list = Dfrq.pop("id").tolist()
+    # names_rq = Dfrq.pop('name').tolist()
+    # netID_rq = Dfrq.pop('netID').tolist()
+    # pictures_rq= Dfrq.pop('profile_picture').tolist()
+    excess_values_list=[]
+    for entry in Dfrq.values.tolist():
+        excess_entries=[entry[0],entry[1],entry[2],entry[3],entry[4],entry[5],entry[11]]
+        excess_values_list.append(excess_entries)
+    Dfrq=Dfrq.drop(columns=['netID','name','rescollege','major','year','profile_picture','user_id'])
 
-    names = Dfrq.pop('name').tolist()
-    netID_dict = Dfrq.pop('netID').tolist()
-    people_ID = Dfrq.pop("id").tolist()
-    pictures= Dfrq.pop('profile_picture').tolist()
+
     # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
     # We can store these names in a temp file: lists.
-
-    user_name = Dfuser.pop("name")
-    user_netID = Dfuser.pop("netID")
-    Dfrq=Dfrq.drop(columns=['rescollege','major','user_id','year'])
     # creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
     # We can use these values later to reference names.
 
@@ -153,19 +146,21 @@ def get_matches(user_data_list,requestsList):
             entry.append(v)
         parameter_list.append(entry)
 
-    reference = dict_creator(people_ID, parameter_list)
-    reference_name = dict_creator(people_ID, names)
-    reference_NETID = dict_creator(people_ID, netID_dict)
+    reference_parameters = dict_creator(people_ID_list, parameter_list)
+    reference_excess = dict_creator(people_ID_list, excess_values_list)
 
 
     #getting our 3 match results:
     match_result, Dfrq = matcher(Dfrq, Dfuser)
-    if len(Dfrq) >= 2:
+    if len(Dfrq) >= 1:
         match_result1, Dfrq = matcher(Dfrq, Dfuser)
-        if len(Dfrq) >= 1:
+        if len(Dfrq) >= 2:
             match_result2, Dfrq = matcher(Dfrq, Dfuser)
-
-    match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
+            match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
+        else:
+            match_df = pd.concat([match_result, match_result1], ignore_index=True)
+    else:
+        match_df = pd.concat([match_result], ignore_index=True)
 
     #determining threshold
     max=0.06989700043360188
@@ -193,35 +188,45 @@ def get_matches(user_data_list,requestsList):
                     entry.append(v)
                 list_params.append(entry)
 
-
-        list_names = []
         list_people_id=[]
         list_netID = []
+        list_names = []
+        list_major=[]
+        list_year=[]
+        list_rescollege=[]
+        list_profile_picture=[]
+        list_user_id=[]
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
 
         for parameters in parameter_list:
-            id = Keys_from_values(reference, parameters)
+            id = Keys_from_values(reference_parameters, parameters)
             list_people_id.append(id)
 
         for id in list_people_id:
-            match_name = reference_name.get(id)
-            list_names.append(match_name)
+            excess_list = reference_excess[id]
+            list_netID.append(excess_list[0])
+            list_names.append(excess_list[1])
+            list_major.append(excess_list[2])
+            list_year.append(excess_list[3])
+            list_rescollege.append(excess_list[4])
+            list_profile_picture.append(excess_list[5])
+            list_user_id.append(excess_list[6])
 
-            match_netID = reference_NETID.get(id)
-            list_netID.append(match_netID)
 
         match_df.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
         match_df.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
-        match_df["days"] = match_df["days"].astype(
-            object)  # columns that will eventually store lists must have a different datatype --> "objects"
+        match_df.insert(2, "major", list_major)  # line of code adds the name into the matched_results df
+        match_df.insert(3, "year", list_year)  # line of code adds the name into the matched results df
+        match_df.insert(4, "rescollege", list_rescollege)  # line of code adds the name into the matched_results df
+        match_df.insert(5, "profile_picture", list_profile_picture)  # line of code adds the name into the matched_results df
+        match_df["days"] = match_df["days"].astype(object)  # columns that will eventually store lists must have a different datatype --> "objects"
         match_df['workout_type'] = match_df["workout_type"].astype(object)
 
 
         # unstringing days and type of workouts
 
         updated_days = []
-        updated_work_type = []
 
         for days in match_df.loc[:, "days"]:
             #days is in string format of list
@@ -245,6 +250,7 @@ def get_matches(user_data_list,requestsList):
                     day_temp.append('Sunday')
             updated_days.append(day_temp)
 
+        updated_work_type = []
 
         for work in match_df.loc[:, "workout_type"]:
             work = work.strip('][').split(', ')
@@ -264,11 +270,10 @@ def get_matches(user_data_list,requestsList):
         for index in range(0, len(match_df)):
             match_df.at[index, "workout_type"] = updated_work_type[index]
             match_df.at[index, "days"] = updated_days[index]
-
         # matched results is the final dataframe that includes the person the user matches with
         matched_people=match_df.values.tolist()
         # change match scores to percentages
         for entry in matched_people:
-            entry[2]=entry[2]/max*100
-
+            print(entry[6])
+            entry[6]=entry[6]/max*100
     return matched_people
