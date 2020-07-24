@@ -124,8 +124,8 @@
 {% if matched_people %}
 <br><br><br>
 <div class="container">
-{% for person in matched_people %}
 <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+{% for person in matched_people %}
     <div class="bg-light2 mr-md-5 col p-4 d-flex flex-column position-static">
         <div class="my-3 p-3">
             <h2 class="text-center display-5">{{person.1}}</h2>
@@ -133,11 +133,18 @@
         <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
         </div>
         <div class="container">
-          Days Available: {{person.7}}
+          Days Available: {{person.7}} <br>
           Score: {{person.6}}
+          <a href="javascript:{document.getElementById('partner{{person.6}}').submit()}">
+            <button class="button btn-primary btn-large btn-block">
+              Match
+            </button>
+          </a>
+          <form id="partner{{person.6}}" action="{% url 'partner' person.6 %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"/>
+          </form>
         </div>
-        <br>
-        <a href="#" class="btn btn-lg btn-secondary">Match</a>
     </div>
   {% endfor %}
 </div>

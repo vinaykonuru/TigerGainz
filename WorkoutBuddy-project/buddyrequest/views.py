@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from buddyrequest.models import BuddyRequest
+from partners.models import Partners
 import pandas
 import csv
 from .matching_algorithm import get_matches
@@ -16,9 +17,49 @@ def database(request):
 def profile(request):
     return render(request,'buddyrequest/profile.html')
 
+def partner(request,partner_id):
+    if request.method=="POST":
+        #partner object for current user
+        partner_user=Partner()
+        partner.netID=request.netID
+        partner.name=request.name
+        partner.major=request.major
+        partner.rescollege=request.rescollege
+        partner.profile_picture=request.profile_picture
+        partner.days=request.days
+        partner.duration=request.duration
+        partner.workout_type=request.workout_type
+        partner.time_zone=request.time_zone
+        partner.group_size=request.group_size
+        partner.user=request.user
+        partner.partner=Partner.get(pk=partner_id)
+
+
+        #partner object for matched user
+        partner_request=BuddyRequest.get(pk=partner_id)
+        partner_user=Partner()
+        partner.netID=partner_request.netID
+        partner.name=partner_request.name
+        partner.major=partner_request.major
+        partner.rescollege=partner_request.rescollege
+        partner.profile_picture=partner_request.profile_picture
+        partner.days=partner_request.days
+        partner.duration=partner_request.duration
+        partner.workout_type=partner_request.workout_type
+        partner.time_zone=partner_request.time_zone
+        partner.group_size=partner_request.group_size
+        partner.user=partner_request.user
+        partner.partner=request.user
+
 @login_required(login_url='/accounts/signup')
 def matches(request):
     if request.method=='POST':
+        #if the user already has a request in the database, go back to home page
+        requestsList=list(BuddyRequest.objects.all().values())
+        for entry in requestsList:
+            print(request.user)
+            if request.user.id==(entry['user_id']):
+                return redirect('home')
         #get data about USER
         userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
         netID=request.user.username
@@ -41,12 +82,12 @@ def matches(request):
         #list of data
         user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
         #list of requests in dataframe
-        requestsList=list(BuddyRequest.objects.all().values())
         matched_people=get_matches(user_data_list, requestsList)
+        req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
+        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
+        req_user.save()
+
         if len(requestsList) < 1 or matched_people==[]:
-            req=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
-            days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
-            req.save()
             return render(request,'buddyrequest/matches.html')
 
         print('WE REACHED THE END')

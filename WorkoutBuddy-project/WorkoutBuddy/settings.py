@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'partners.apps.PartnersConfig',
     'buddyrequest.apps.BuddyrequestConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',

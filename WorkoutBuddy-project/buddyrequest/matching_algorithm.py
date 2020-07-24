@@ -215,6 +215,7 @@ def get_matches(user_data_list,requestsList):
         match_df.insert(3, "year", list_year)  # line of code adds the name into the matched results df
         match_df.insert(4, "rescollege", list_rescollege)  # line of code adds the name into the matched_results df
         match_df.insert(5, "profile_picture", list_profile_picture)  # line of code adds the name into the matched_results df
+        match_df.insert(6, 'user_id',list_user_id)
         match_df["days"] = match_df["days"].astype(object)  # columns that will eventually store lists must have a different datatype --> "objects"
         match_df['workout_type'] = match_df["workout_type"].astype(object)
 
