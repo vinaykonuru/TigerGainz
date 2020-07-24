@@ -17,3 +17,5 @@ def find(request):
 @login_required(login_url='/accounts/signup')
 def about(request):
     return render(request,'about.html')
+def excercise_guide(request):
+    return render(request,'excercise_guide.html')

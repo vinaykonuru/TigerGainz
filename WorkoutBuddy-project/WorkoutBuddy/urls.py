@@ -24,6 +24,7 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('find',views.find,name='find'),
     path('about',views.about,name='about'),
+    path('excercise_guide',views.excercise_guide,name='excercise_guide'),    
     path('accounts/',include('accounts.urls')),
     path('database/',include('buddyrequest.urls')),
     path('partners/',include('partners.urls'))

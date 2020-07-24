@@ -89,17 +89,20 @@ def matches(request):
         user=request.user
         #list of data
         user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
+
         #list of requests in dataframe
+        #put this after search for matches so user doesn't match with themselves
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
         req_user.save()
-
         if len(requestsList) < 1:
             return render(request,'buddyrequest/matches.html')
         else:
             matched_people=get_matches(user_data_list, requestsList)
+
             if matched_people==[]:
                 return render(request,'buddyrequest/matches.html')
+
         print('WE REACHED THE END')
         matched=True
         if len(matched_people) == 0:
