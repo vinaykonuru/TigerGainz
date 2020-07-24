@@ -57,5 +57,5 @@ def mail (name, netID, user=False):
     
 #mailing
     
-    mail(user_name, netID)
+    mail(user_name, netID, user=True)
     mail(request_name, netID)
