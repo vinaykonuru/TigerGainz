@@ -17,40 +17,48 @@ def database(request):
 def profile(request):
     return render(request,'buddyrequest/profile.html')
 
-def partner(request,partner_id):
+def partner_match(request,partner_id):
+    print(partner_id)
     if request.method=="POST":
         #partner object for current user
-        partner_user=Partner()
-        partner.netID=request.netID
-        partner.name=request.name
-        partner.major=request.major
-        partner.rescollege=request.rescollege
-        partner.profile_picture=request.profile_picture
-        partner.days=request.days
-        partner.duration=request.duration
-        partner.workout_type=request.workout_type
-        partner.time_zone=request.time_zone
-        partner.group_size=request.group_size
-        partner.user=request.user
-        partner.partner=Partner.get(pk=partner_id)
+        user_request=BuddyRequest.objects.get(user=request.user)
+        matched_user=User.objects.get(pk=partner_id)
+        partner_request=BuddyRequest.objects.get(user=matched_user)
 
+        partner_user=Partners()
+        partner_user.netID=user_request.netID
+        partner_user.name=user_request.name
+        partner_user.major=user_request.major
+        partner_user.rescollege=user_request.rescollege
+        partner_user.profile_picture=user_request.profile_picture
+        partner_user.days=user_request.days
+        partner_user.duration=user_request.duration
+        partner_user.workout_type=user_request.workout_type
+        partner_user.time_zone=user_request.time_zone
+        partner_user.group_size=user_request.group_size
+        partner_user.user=request.user
+        partner_user.partner=partner_request.user
+        partner_user.save()
 
         #partner object for matched user
-        partner_request=BuddyRequest.get(pk=partner_id)
-        partner_user=Partner()
-        partner.netID=partner_request.netID
-        partner.name=partner_request.name
-        partner.major=partner_request.major
-        partner.rescollege=partner_request.rescollege
-        partner.profile_picture=partner_request.profile_picture
-        partner.days=partner_request.days
-        partner.duration=partner_request.duration
-        partner.workout_type=partner_request.workout_type
-        partner.time_zone=partner_request.time_zone
-        partner.group_size=partner_request.group_size
-        partner.user=partner_request.user
-        partner.partner=request.user
-
+        partner_match=Partners()
+        partner_match.netID=partner_request.netID
+        partner_match.name=partner_request.name
+        partner_match.major=partner_request.major
+        partner_match.rescollege=partner_request.rescollege
+        partner_match.profile_picture=partner_request.profile_picture
+        partner_match.days=partner_request.days
+        partner_match.duration=partner_request.duration
+        partner_match.workout_type=partner_request.workout_type
+        partner_match.time_zone=partner_request.time_zone
+        partner_match.group_size=partner_request.group_size
+        partner_match.user=partner_request.user
+        partner_match.partner=request.user
+        partner_match.save()
+        #delete partner and user requests from database
+        user_request.delete()
+        partner_request.delete()
+        return redirect('/partners')
 @login_required(login_url='/accounts/signup')
 def matches(request):
     if request.method=='POST':
@@ -82,14 +90,16 @@ def matches(request):
         #list of data
         user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
         #list of requests in dataframe
-        matched_people=get_matches(user_data_list, requestsList)
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
         req_user.save()
 
-        if len(requestsList) < 1 or matched_people==[]:
+        if len(requestsList) < 1:
             return render(request,'buddyrequest/matches.html')
-
+        else:
+            matched_people=get_matches(user_data_list, requestsList)
+            if matched_people==[]:
+                return render(request,'buddyrequest/matches.html')
         print('WE REACHED THE END')
         matched=True
         if len(matched_people) == 0:

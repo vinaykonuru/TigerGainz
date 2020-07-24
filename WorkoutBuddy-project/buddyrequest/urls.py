@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.database,name='database'),
     path('profile',views.profile,name='profile'),
     path('matches',views.matches,name='matches'),
-    path('partner',views.partner,name='partner')
+    path('<int:partner_id>',views.partner_match,name='partner_match')
 ]

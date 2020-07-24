@@ -113,6 +113,7 @@ def get_matches(user_data_list,requestsList):
     # Script that takes inputs as variables and appends value to dataframe.
 
     # list of all the names in Dfrq -- This will be very useful later on
+    print(Dfrq)
     people_ID_list = Dfrq.pop("id").tolist()
     # names_rq = Dfrq.pop('name').tolist()
     # netID_rq = Dfrq.pop('netID').tolist()
@@ -161,7 +162,7 @@ def get_matches(user_data_list,requestsList):
     x=0
     while x < len(match_df):
         if match_df.iloc[x][
-            "best_match_score"] < 0:  # the threshold for the best match score can be changed later after we test
+            "best_match_score"] < -50:  # the threshold for the best match score can be changed later after we test
             match_df = match_df.drop(match_df.index[x])
         else:
             x+=1
@@ -215,7 +216,7 @@ def get_matches(user_data_list,requestsList):
         match_df.insert(3, "year", list_year)  # line of code adds the name into the matched results df
         match_df.insert(4, "rescollege", list_rescollege)  # line of code adds the name into the matched_results df
         match_df.insert(5, "profile_picture", list_profile_picture)  # line of code adds the name into the matched_results df
-        match_df.insert(6, 'user_id',list_user_id)
+        match_df.insert(6, 'user_id', list_user_id)
         match_df["days"] = match_df["days"].astype(object)  # columns that will eventually store lists must have a different datatype --> "objects"
         match_df['workout_type'] = match_df["workout_type"].astype(object)
 
@@ -268,7 +269,6 @@ def get_matches(user_data_list,requestsList):
         # matched results is the final dataframe that includes the person the user matches with
         matched_people=match_df.values.tolist()
         # change match scores to percentages
-
         for entry in matched_people:
-            entry[6]=entry[6]/max*100
+            entry[7]=entry[7]/max*100
     return matched_people

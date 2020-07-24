@@ -140,7 +140,8 @@
               Match
             </button>
           </a>
-          <form id="partner{{person.6}}" action="{% url 'partner' person.6 %}" method="POST">
+          Id: {{ person.6 }}
+          <form id="partner{{person.6}}" action="{% url 'partner_match' person.6 %}" method="POST">
             {% csrf_token %}
             <input type="hidden"/>
           </form>

@@ -115,9 +115,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'home' %}">Matches</a>
-                </li>
 
                 <!--
                 <li class="nav-item active dropdown">
@@ -137,6 +134,11 @@
                 <li class="nav-item active">
                   {% if user.is_authenticated %}
                   {% load base_tags %}
+                  {% if user|check_partners %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'partner' %}">Partner</a>
+                  </li>
+                  {% endif %}
                   {% if user|check_requests %}
                   <a class="nav-link" href="{% url 'database' %}">Database</a>
                   {% endif %}
