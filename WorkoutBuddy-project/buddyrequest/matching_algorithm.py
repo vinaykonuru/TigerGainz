@@ -60,7 +60,8 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
 
 def matcher(Dfrq, Dfuser):
     # MATCHING OCCURS HERE
-    left_on = right_on = ["days", "duration", "workout_type", "time_zone"]
+    left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size"]
+
     matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                          right_id_col="days")
 
@@ -69,26 +70,34 @@ def matcher(Dfrq, Dfuser):
     # dropping irrelevant columns and displaying relevant info of the matched person
     matched_results = matched_results.drop(
         columns=["__id_left", "__id_right", "days_left", "duration_left",
-                 'workout_type_left', "time_zone_left"])
+                 'workout_type_left', "time_zone_left", "group_size_left"])
 
 
 
     # COLUMNS OF ALL DATA
     list_col = matched_results.columns.tolist()
     list_col = list_col[1:]
-
     # code that renames matched_results with better colummn labels\
     label_dict = dict_creator(list_col, left_on)
 
 
+
     # our first matched result
     matched_results1 = matched_results.rename(columns=label_dict)
+
     list_Dfrq = Dfrq.values.tolist()
-    del list_Dfrq[0] # remove first element
+    rel_params = matched_results1.iloc[0,:].tolist()
+    del rel_params[0]
+
+
+    for person in list_Dfrq:
+        if person == rel_params:
+            del list_Dfrq[list_Dfrq.index(person)]
+            break
+
 
     Dfrq = pd.DataFrame(list_Dfrq, columns=left_on)
-    top_matched_row=matched_results1[0:1]
-    return  top_matched_row, Dfrq
+    return  matched_results1, Dfrq
 
 def get_matches(user_data_list,requestsList):
     #dataframe of requests
