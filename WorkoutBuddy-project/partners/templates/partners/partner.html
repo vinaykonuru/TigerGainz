@@ -1,10 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-  <div class="center">
-    <br><br><br><br>
-      PARTNER INFORMATION
-      Name: {{ partner.name }}
+<div class="container text-center">
+  <div class="jumbotron">
+    <div class="center">
+      <br><br><br><br>
+      <hr class="my-4">
+      <h1 class="display-5"><strong>Partner Information</strong></h1>
+      <hr class="my-4">
+      <p class="lead2"><strong>Name:</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner.name }} </p>
+      <hr class="my-4">
+      <p class="lead3"><strong>Class:</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner class goes here }} </p>
+      <hr class="my-4">
+      <p class="lead2"><strong>Residential College:</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner res college goes here }} </p>
+      <hr class="my-4">
+      <p class="lead3"><strong>Timezone:</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner time zone goes here }} </p>
+      <hr class="my-4">
+      <p class="lead2"><strong>Availability:</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner availability goes here }} </p>
+      <hr class="my-4">
+      <p class="lead3"><strong>Workout Type</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner workout type goes here }} </p>
+      <hr class="my-4">
+      <p class="lead2"><strong>Duration:</strong></p> 
+      <hr class="my-4">
+      <p>{{ partner duration goes here }} </p>
+      <hr class="my-4">
+    </div>
   </div>
 </div>
 {% endblock %}

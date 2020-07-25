@@ -2,38 +2,48 @@
 
 {% block content %}
 
-<div class="container">
-<br />
-<br />
-{% if error %}
-{{error}}
-{% endif %}
-<br />
-<br />
+<style>
+  .signup-page-font {
+      font-family: 'Noto Sans JP',
+          sans-serif;
+      margin-top: 60px;
+  }
+</style>
 
-  <h1>Sign Up</h1>
+<div class="container signup-page-font text-center">
+  <div class="jumbotron">
+      <br />
+      <br />
+      {% if error %}
+      {{error}}
+      {% endif %}
+      <br />
+      <br />
+      <hr class="my-4">
+      <h1><strong>Sign Up</strong></h1>
+      <hr class="my-4">
+      <form method="post" action="{% url 'signup' %}">
+          {% csrf_token %}
 
-  <form method="post" action="{% url 'signup' %}">
-  {% csrf_token %}
+          <p class="lead2"><strong>NetID:</strong></p>
+          <hr class="my-4">
+          <input type="text" name="username" />
+          <hr class="my-4">
 
-  NetID:
-  <br />
-  <input type="text" name="username"/>
-  <br />
+          <p class="lead3"><strong>Password:</strong></p>
+          <hr class="my-4">
+          <input type="password" name="password1" />
+          <hr class="my-4">
 
-  Password:
-  <br />
-  <input type="password" name="password1"/>
-  <br />
+          <p class="lead2"><strong>Confirm Password:</strong></p>
+          <hr class="my-4">
+          <input type="password" name="password2" />
+          <hr class="my-4">
 
-  Confirm Password:
-  <br />
-  <input type="password" name="password2"/>
-  <br />
-  <br />
-
-  <input class="btn btn-primary" type="submit" value="Sign Up">
-  </form>
+          <input class="btn btn-secondary" type="submit" value="Sign Up">
+          <hr class="my-4">
+      </form>
+  </div>
 </div>
 
 
