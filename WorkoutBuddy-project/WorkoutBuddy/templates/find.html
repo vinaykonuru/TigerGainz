@@ -1,60 +1,229 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text-center">
-  <h1>Find a Buddy Info Form</h1>
-</div>
-<div class="container">
-  <form action="{% url 'matches' %}" method='POST'>
-    {% csrf_token %}
-    Workout Days:
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Monday">Monday</label>
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Tuesday">Tuesday</label>
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Wednesday">Wednesday</label>
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Thursday">Thursday</label>
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Friday">Friday</label>
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Saturday">Saturday</label>
-    <label class="checkbox-inline"><input type="checkbox" name="day" value="Sunday">Sunday</label>
-    <br>
-    <br>
-    Duration:
-    <select name="duration">
-    <option value="30 Minutes">30 Minutes</option>
-    <option value="1 Hour">1 Hour</option>
-    <option value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
-    <option value="2 Hours">2 Hours</option>
-    <option value="2+ Hours">2+ Hours</option>
 
-    </select>
-    Type of Workout:
-    <select name="workout_type">
-    <option value="Lifting">Lifting</option>
-    <option value="Running">Running</option>
-    <option value="Biking">Biking</option>
-    <option value="Swimming">Swimming</option>
-    </select>
-    <br>
-    <br>
-    Timezone:
-    <select name="time_zone">
-    <option value="EST">EST</option>
-    <option value="CST">CST</option>
-    <option value="PST">PST</option>
-    <option value="GMT">GMT</option>
-    </select>
-    <br>
-    <br>
-    Group Size:
-    <input type="text" name="group_size"/>
-    <br>
-    <br>
-    Profile Picture:
-    <input type="file" name="profile_picture" accept="image/*">
-    <br>
-    <br>
-    <input class="btn btn-primary" type="submit" value="Find">
-    <br>
-    <br>
-  </form>
+<style>
+  /* checkbox */
+
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+
+  [type="checkbox"]:not(:checked)+label,
+  [type="checkbox"]:checked+label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+  }
+
+  /* checkbox aspect */
+  [type="checkbox"]:not(:checked)+label:before,
+  [type="checkbox"]:checked+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+  }
+
+  /* checked mark aspect */
+  [type="checkbox"]:not(:checked)+label:after,
+  [type="checkbox"]:checked+label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: .15em;
+    left: .22em;
+    font-size: 1.3em;
+    line-height: 0.8;
+    color: #000;
+    transition: all .2s;
+  }
+
+  /* checked mark aspect changes */
+  [type="checkbox"]:not(:checked)+label:after {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  [type="checkbox"]:checked+label:after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* disabled checkbox */
+  [type="checkbox"]:disabled:not(:checked)+label:before,
+  [type="checkbox"]:disabled:checked+label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+  }
+
+  [type="checkbox"]:disabled:checked+label:after {
+    color: #999;
+  }
+
+  [type="checkbox"]:disabled+label {
+    color: #aaa;
+  }
+
+  /* accessibility */
+  [type="checkbox"]:checked:focus+label:before,
+  [type="checkbox"]:not(:checked):focus+label:before {
+    border: 2px dotted #000;
+  }
+
+  /* hover style just for information */
+  label:hover:before {
+    border: 2px solid #ff8f00 !important;
+  }
+
+  /* end of checkbox style */
+
+  /* select box */
+
+  .form-control {
+    height: unset;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#myModal").modal('show');
+  });
+</script>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md- text-center bg-logo">
+  <div class="col-md-5 p-lg-5 mx-auto my-5">
+    <h1 class="display-4 font-weight-normal"><br /><br /><br /></h1>
+  </div>
+  <div class="product-device shadow-sm d-none d-md-block"></div>
+  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 </div>
+
+<!--What is TigerGainz?-->
+
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+</body>
+
+<div class="jumbotron">
+
+  <hr class="my-4">
+  <h1 class="display-5"><strong>Find a Buddy Info Form</strong></h1>
+  <hr class="my-4">
+
+  <div class="text-center">
+  </div>
+
+  <div class="container">
+    <form action="{% url 'matches' %}" method='POST'>
+      {% csrf_token %}
+      <p class="lead2">Workout Days:</p>
+      <hr class="my-4">
+
+      <input type="checkbox" name="day" value="Monday" id="test1"><label for="test1"
+        class="checkbox-inline">Monday</label>
+      <input type="checkbox" name="day" value="Tuesday" id="test2"><label for="test2"
+        class="checkbox-inline">Tuesday</label>
+      <input type="checkbox" name="day" value="Wednesday" id="test3"><label for="test3"
+        class="checkbox-inline">Wednesday</label>
+      <input type="checkbox" name="day" value="Thursday" id="test4"><label for="test4"
+        class="checkbox-inline">Thursday</label>
+      <input type="checkbox" name="day" value="Friday" id="test5"><label for="test5"
+        class="checkbox-inline">Friday</label>
+      <input type="checkbox" name="day" value="Saturday" id="test6"><label for="test6"
+        class="checkbox-inline">Saturday</label>
+      <input type="checkbox" name="day" value="Sunday" id="test7"><label for="test7"
+        class="checkbox-inline">Sunday</label>
+
+      <hr class="my-4">
+      <p class="lead3">Duration:</p>
+      <hr class="my-4">
+
+      <div class="form-group">
+        <select name="duration" multiple class="form-control">
+          <option class="text-center" value="30 Minutes">30 Minutes</option>
+          <option class="text-center" value="1 Hour">1 Hour</option>
+          <option class="text-center" value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
+          <option class="text-center" value="2 Hours">2 Hours</option>
+          <option class="text-center" value="2+ Hours">2+ Hours</option>
+        </select>
+      </div>
+
+      <p>*Note: Please scroll for all options</p>
+
+      <hr class="my-4">
+      <p class="lead2">Type of Workout:</p>
+      <hr class="my-4">
+
+
+      <div class="form-group">
+        <select name="workout_type" multiple class="form-control">
+          <option class="text-center" value="Lifting">Lifting</option>
+          <option class="text-center" value="Running">Running</option>
+          <option class="text-center" value="Biking">Biking</option>
+          <option class="text-center" value="Swimming">Swimming</option>
+        </select>
+      </div>
+
+      <hr class="my-4">
+      <p class="lead3">Timezone:</p>
+      <hr class="my-4">
+
+      <div class="form-group">
+        <select name="time_zone" multiple class="form-control">
+          <option class="text-center" value="EST">EST</option>
+          <option class="text-center" value="CST">CST</option>
+          <option class="text-center" value="PST">PST</option>
+          <option class="text-center" value="GMT">GMT</option>
+        </select>
+      </div>
+
+      <hr class="my-4">
+      <p class="lead2">Profile Picture:</p>
+      <hr class="my-4">
+
+      <div class="custom-file">
+        <input type="file" name="profile_picture" accept="image/*" class="custom-file-input">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+        <br>
+        <br>
+        <hr class="my-4">
+        <input class="btn btn-lg btn-secondary" type="submit" value="Find my Match!">
+        <!--value changed from "Find" to "Find my Match!" --ask Vinay if this will mess anything up-->
+        <hr class="my-4">
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!--Script for custom select file-->
+
+<script>
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+  integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
 {% endblock %}
