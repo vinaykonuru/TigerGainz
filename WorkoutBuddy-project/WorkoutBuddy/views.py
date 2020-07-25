@@ -10,12 +10,13 @@ import csv
 def home(request):
     return render(request,'home.html')
 
+def about(request):
+    return render(request,'about.html')
+
 @login_required(login_url='/accounts/signup')
 def find(request):
     return render(request,'find.html')
 
-@login_required(login_url='/accounts/signup')
-def about(request):
-    return render(request,'about.html')
+
 def excercise_guide(request):
     return render(request,'excercise_guide.html')

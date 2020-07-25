@@ -14,6 +14,5 @@ class Partners(models.Model):
     duration=models.CharField(max_length=50)
     workout_type=models.CharField(max_length=50)
     time_zone=models.CharField(max_length=50)
-    group_size=models.IntegerField(default=2)
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="user")
     partner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="partner")

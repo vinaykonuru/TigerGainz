@@ -5,6 +5,7 @@ from buddyrequest.models import BuddyRequest
 from partners.models import Partners
 import pandas
 import csv
+from .email import mail
 from .matching_algorithm import get_matches
 # Create your views here.
 
@@ -35,7 +36,6 @@ def partner_match(request,partner_id):
         partner_user.duration=user_request.duration
         partner_user.workout_type=user_request.workout_type
         partner_user.time_zone=user_request.time_zone
-        partner_user.group_size=user_request.group_size
         partner_user.user=request.user
         partner_user.partner=partner_request.user
         partner_user.save()
@@ -51,23 +51,34 @@ def partner_match(request,partner_id):
         partner_match.duration=partner_request.duration
         partner_match.workout_type=partner_request.workout_type
         partner_match.time_zone=partner_request.time_zone
-        partner_match.group_size=partner_request.group_size
         partner_match.user=partner_request.user
         partner_match.partner=request.user
         partner_match.save()
         #delete partner and user requests from database
+
         user_request.delete()
         partner_request.delete()
+        print(partner_user.name)
+        print(partner_match.name)
+
+        #email both user and matched person about the match
+        mail(partner_user.name,partner_user.netID,user=True)
+        mail(partner_match.name,partner_match.netID,user=False)
         return redirect('/partners')
 @login_required(login_url='/accounts/signup')
 def matches(request):
     if request.method=='POST':
-        #if the user already has a request in the database, go back to home page
+        #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
+        partnerList=list(BuddyRequest.objects.all().values())
         for entry in requestsList:
             print(request.user)
             if request.user.id==(entry['user_id']):
                 return redirect('home')
+        for entry in partnerList:
+            if request.user.id==entry['user_id']:
+                return redirect('home')
+
         #get data about USER
         userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
         netID=request.user.username
@@ -84,16 +95,15 @@ def matches(request):
         workout_type=[]
         workout_type.append(request.POST['workout_type'])
         time_zone=request.POST['time_zone']
-        group_size=request.POST['group_size']
         profile_picture=request.POST['profile_picture']
         user=request.user
         #list of data
-        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
+        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone]
 
         #list of requests in dataframe
         #put this after search for matches so user doesn't match with themselves
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
-        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
+        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
         req_user.save()
         if len(requestsList) < 1:
             return render(request,'buddyrequest/matches.html')

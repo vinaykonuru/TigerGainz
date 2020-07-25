@@ -3,7 +3,7 @@ import pandas as pd
 import fuzzymatcher as fm
 from buddyrequest.models import BuddyRequest
 
-def Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone,inputGroupSize):  # Process information and stores strings as numbers
+def Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone):  # Process information and stores strings as numbers
     day_lister = inputDays  # will ensure the days is always in a list datatype
     workout_lister = inputWorkoutType  # will ensure the workouts are in a list datatype
     for i in range(0, len(day_lister)):  # this loop basically turns the days of the week into a numerical value
@@ -40,7 +40,7 @@ def Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone,inputGrou
     # This is the basic framework of user database (row)
     #id 0 temporary for comparision with dataframe that has id based on addition to database
     user_frame = pd.DataFrame(
-        {"days": d, "duration": [inputDuration], "workout_type": w, "time_zone": [inputTimeZone], "group_size": [inputGroupSize]})
+        {"days": d, "duration": [inputDuration], "workout_type": w, "time_zone": [inputTimeZone]})
 
     return user_frame  # this is the object we get from the function
 
@@ -64,7 +64,7 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
 
 def matcher(Dfrq, Dfuser):
     # MATCHING OCCURS HERE
-    left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size"]
+    left_on = right_on = ["days", "duration", "workout_type", "time_zone"]
     matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                          right_id_col="days")
 
@@ -73,7 +73,7 @@ def matcher(Dfrq, Dfuser):
     # dropping irrelevant columns and displaying relevant info of the matched person
     matched_results = matched_results.drop(
         columns=["__id_left", "__id_right", "days_left", "duration_left",
-                 'workout_type_left', "time_zone_left", "group_size_left"])
+                 'workout_type_left', "time_zone_left"])
 
 
 
@@ -103,8 +103,7 @@ def get_matches(user_data_list,requestsList):
     inputDuration = user_data_list[7]
     inputWorkoutType = user_data_list[8]
     inputTimeZone = user_data_list[9]
-    inputGroupSize = user_data_list[10] # all these inputs are temporary variables. Ideally, the GUI will stores these values as variables
-    Dfuser = Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone,inputGroupSize)
+    Dfuser = Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone)
 
     #will return Dfuser_return but use Dfuser_comparision to compare to Dfrq
                           # takes all user data and creates a dataframe of one row for that user.
@@ -120,7 +119,7 @@ def get_matches(user_data_list,requestsList):
     # pictures_rq= Dfrq.pop('profile_picture').tolist()
     excess_values_list=[]
     for entry in Dfrq.values.tolist():
-        excess_entries=[entry[0],entry[1],entry[2],entry[3],entry[4],entry[5],entry[11]]
+        excess_entries=[entry[0],entry[1],entry[2],entry[3],entry[4],entry[5],entry[10]]
         excess_values_list.append(excess_entries)
     Dfrq=Dfrq.drop(columns=['netID','name','rescollege','major','year','profile_picture','user_id'])
 
