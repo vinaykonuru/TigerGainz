@@ -3,46 +3,42 @@ import pandas as pd
 import fuzzymatcher as fm
 from buddyrequest.models import BuddyRequest
 
-def Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone):  # Process information and stores strings as numbers
-    day_lister = inputDays  # will ensure the days is always in a list datatype
-    workout_lister = inputWorkoutType  # will ensure the workouts are in a list datatype
-    for i in range(0, len(day_lister)):  # this loop basically turns the days of the week into a numerical value
-        # Output should be a list of numbers that correspond with the day of the week
-        if day_lister[i] == "Monday":
-            day_lister[i] = 1
-        elif day_lister[i] == "Tuesday":
-            day_lister[i] = 2
-        elif day_lister[i] == "Wednesday":
-            day_lister[i] = 3
-        elif day_lister[i] == "Thursday":
-            day_lister[i] = 4
-        elif day_lister[i] == "Friday":
-            day_lister[i] = 5
-        elif day_lister[i] == "Saturday":
-            day_lister[i] = 6
-        else:
-            day_lister[i] = 7
-    day_lister.sort()  # Ensures that list will be in order
-    d = str(day_lister)
-    for j in range(0, len(workout_lister)):  # Same logic as above
+def to_numbers(inputDays,inputWorkoutType):  # Process information and stores strings as numbers
 
-        if workout_lister[j] == "Running":
-            workout_lister[j] = 1
-        elif workout_lister[j] == "Lifting":
-            workout_lister[j] = 2
-        elif workout_lister[j] == "Biking":
-            workout_lister[j] = 3
+    for i in range(0, len(inputDays)):  # this loop basically turns the days of the week into a numerical value
+        # Output should be a list of numbers that correspond with the day of the week
+        if inputDays[i] == "Monday":
+            inputDays[i] = '1'
+        elif inputDays[i] == "Tuesday":
+            inputDays[i] = '2'
+        elif inputDays[i] == "Wednesday":
+            inputDays[i] = '3'
+        elif inputDays[i] == "Thursday":
+            inputDays[i] = '4'
+        elif inputDays[i] == "Friday":
+            inputDays[i] = '5'
+        elif inputDays[i] == "Saturday":
+            inputDays[i] = '6'
         else:
-            workout_lister[j] = 4 #Swimming
-    workout_lister.sort()  # Ensures that list will be in order
-    w = str(workout_lister)
+            inputDays[i] = '7'
+    # inputDays.sort()  # Ensures that list will be in order
+    d = str(inputDays)
+    for j in range(0, len(inputWorkoutType)):  # Same logic as above
+
+        if inputWorkoutType[j] == "Running":
+            inputWorkoutType[j] = '1'
+        elif inputWorkoutType[j] == "Lifting":
+            inputWorkoutType[j] = '2'
+        elif inputWorkoutType[j] == "Biking":
+            inputWorkoutType[j] = '3'
+        else:
+            inputWorkoutType[j] = '4' #Swimming
+    # inputWorkoutType.sort()  # Ensures that list will be in order
+    w = str(inputWorkoutType)
 
     # This is the basic framework of user database (row)
     #id 0 temporary for comparision with dataframe that has id based on addition to database
-    user_frame = pd.DataFrame(
-        {"days": d, "duration": [inputDuration], "workout_type": w, "time_zone": [inputTimeZone]})
-
-    return user_frame  # this is the object we get from the function
+    return d,w  # this is the object we get from the function
 
 
 def Keys_from_values(dict,value):
@@ -103,7 +99,7 @@ def get_matches(user_data_list,requestsList):
     inputDuration = user_data_list[7]
     inputWorkoutType = user_data_list[8]
     inputTimeZone = user_data_list[9]
-    Dfuser = Df_creator(inputDays, inputDuration,inputWorkoutType,inputTimeZone)
+    Dfuser = pd.DataFrame({'days':inputDays,'duration':[inputDuration],'workout_type':inputWorkoutType,'time_zone':[inputTimeZone]})
 
     #will return Dfuser_return but use Dfuser_comparision to compare to Dfrq
                           # takes all user data and creates a dataframe of one row for that user.
@@ -112,7 +108,6 @@ def get_matches(user_data_list,requestsList):
     # Script that takes inputs as variables and appends value to dataframe.
 
     # list of all the names in Dfrq -- This will be very useful later on
-    print(Dfrq)
     people_ID_list = Dfrq.pop("id").tolist()
     # names_rq = Dfrq.pop('name').tolist()
     # netID_rq = Dfrq.pop('netID').tolist()
@@ -149,12 +144,14 @@ def get_matches(user_data_list,requestsList):
         match_result1, Dfrq = matcher(Dfrq, Dfuser)
         if len(Dfrq) >= 1:
             match_result2, Dfrq = matcher(Dfrq, Dfuser)
+            print(match_result1)
+            print(match_result2)
             match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
         else:
             match_df = pd.concat([match_result, match_result1], ignore_index=True)
     else:
         match_df = pd.concat([match_result], ignore_index=True)
-
+    print(match_df)
     #determining threshold
     max=0.06989700043360188
     threshold=max/4
@@ -165,10 +162,10 @@ def get_matches(user_data_list,requestsList):
             match_df = match_df.drop(match_df.index[x])
         else:
             x+=1
+
     # If no one meets the threshold, then we append the user data back into the dataframe
     matched_people=[]
     if len(match_df) == 0:
-        print("terrible matches")
         return matched_people
     else:  # this is assuming we have valid matches in the dataframe
         # After matching, this loop extracts the top three matches and gets all the parameters
@@ -194,7 +191,6 @@ def get_matches(user_data_list,requestsList):
         list_user_id=[]
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
         #for each matched row, find the correct netID and name by matching with id and add it to matched row
-
         for parameters in list_params:
             id = Keys_from_values(reference_parameters, parameters)
             list_people_id.append(id)
@@ -229,22 +225,21 @@ def get_matches(user_data_list,requestsList):
             day_temp=[]
             for day in days:
                 day=day.strip()
-                if day == "1":
+                if day == "'1'":
                     day_temp.append('Monday')
-                elif day == "2":
+                elif day == "'2'":
                     day_temp.append('Tuesday')
-                elif day == "3":
+                elif day == "'3'":
                     day_temp.append('Wednesday')
-                elif day == "4":
+                elif day == "'4'":
                     day_temp.append('Thursday')
-                elif day == "5":
+                elif day == "'5'":
                     day_temp.append('Friday')
-                elif day == "6":
+                elif day == "'6'":
                     day_temp.append('Saturday')
                 else:
                     day_temp.append('Sunday')
             updated_days.append(day_temp)
-
         updated_work_type = []
 
         for work in match_df.loc[:, "workout_type"]:
@@ -252,15 +247,16 @@ def get_matches(user_data_list,requestsList):
             work_temp=[]
             for type in work:
                 type=type.strip()
-                if type == "1":
+                print(type)
+                if type == "'1'":
                     work_temp.append("Running")
-                elif type == "2":
+                elif type == "'2'":
                     work_temp.append("Lifting")
-                elif type == "3":
+                elif type == "'3'":
                     work_temp.append("Biking")
                 else:
                     work_temp.append("Swimming")
-            updated_work_type.append(work)
+            updated_work_type.append(work_temp)
 
         for index in range(0, len(match_df)):
             match_df.at[index, "workout_type"] = updated_work_type[index]

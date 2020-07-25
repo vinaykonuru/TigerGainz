@@ -7,6 +7,7 @@ import pandas
 import csv
 from .email import mail
 from .matching_algorithm import get_matches
+from .matching_algorithm import to_numbers
 # Create your views here.
 
 @login_required(login_url='/accounts/signup')
@@ -54,7 +55,7 @@ def partner_match(request,partner_id):
         partner_match.user=partner_request.user
         partner_match.partner=request.user
         partner_match.save()
-        
+
         #delete partner and user requests from database
         user_request.delete()
         partner_request.delete()
@@ -62,8 +63,8 @@ def partner_match(request,partner_id):
         print(partner_match.name)
 
         #email both user and matched person about the match
-        mail(partner_user.name,partner_user.netID,user=True)
-        mail(partner_match.name,partner_match.netID,user=False)
+        mail(partner_user.name,partner_user.netID,partner_match.netID,user=True)
+        mail(partner_match.name,partner_match.netID,partner_user.netID,user=False)
         return redirect('/partners')
 @login_required(login_url='/accounts/signup')
 def matches(request):
@@ -98,12 +99,13 @@ def matches(request):
         profile_picture=request.POST['profile_picture']
         user=request.user
         #list of data
-        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone]
+        days_int,workout_type_int=to_numbers(days,workout_type)
+        user_data_list=[netID,name,major,year,rescollege,profile_picture,days_int,duration,workout_type_int,time_zone]
 
         #list of requests in dataframe
         #put this after search for matches so user doesn't match with themselves
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
-        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
+        days=days_int,duration=duration,workout_type=workout_type_int,time_zone=time_zone,user=user)
         req_user.save()
         if len(requestsList) < 1:
             return render(request,'buddyrequest/matches.html')
