@@ -54,8 +54,8 @@ def partner_match(request,partner_id):
         partner_match.user=partner_request.user
         partner_match.partner=request.user
         partner_match.save()
+        
         #delete partner and user requests from database
-
         user_request.delete()
         partner_request.delete()
         print(partner_user.name)
