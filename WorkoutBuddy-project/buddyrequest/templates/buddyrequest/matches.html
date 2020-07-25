@@ -123,7 +123,7 @@
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <h3 class="mb-0">{{entry.1}}</h3>
-          <strong class="d-inline-block mb-2 text-primary">Name</strong>
+          <strong class="d-inline-block mb-2 text-primary">Residential College</strong>
           <div class="mb-1 text-muted">{{entry.4}}</div>
           <strong class="d-inline-block mb-2 text-primary">Time Zone</strong>
           <div class="mb-1 text-muted">{{entry.11}}</div>
@@ -133,7 +133,16 @@
           <div class="mb-1 text-muted">{{entry.10}}</div>
           <strong class="d-inline-block mb-2 text-primary">Duration</strong>
           <div class="mb-1 text-muted">{{entry.9}}</div>
-          <a href="{% url 'partner_match' entry.6 %}" class="btn btn-secondary my-2">Accept</a>
+          <a href="javascript:{document.getElementById('partner_match{{entry.6}}').submit()}">
+            <button class="button btn-primary btn-large btn-block">
+              Accept
+            </button>
+          </a>
+
+          <form id="partner_match{{entry.6}}" action="{% url 'partner_match' entry.6 %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"/>
+          </form>
 
         </div>
         <div class="col-auto d-none d-lg-block">
