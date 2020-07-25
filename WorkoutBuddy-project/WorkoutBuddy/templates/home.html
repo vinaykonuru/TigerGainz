@@ -153,7 +153,14 @@
             exercise experiences</b> that are not only <b>more consistent</b> (because buddies and groups keep each
         other
         accountable) but <b>more fun</b>, whether you are on- or off-campus.</p>
+    {% load base_tags %}
+    {% if user|check_partners %}
+      <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
+    {% elif user|check_requests %}
+    <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">See Waiting List</a>
+    {% else %}
     <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Get Started</a>
+    {% endif %}
     <hr class="my-4">
     <h1 class="display-5"><strong>How Does it Work?</strong></h1>
     <hr class="my-4">

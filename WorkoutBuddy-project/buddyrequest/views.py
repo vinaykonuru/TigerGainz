@@ -5,6 +5,7 @@ from buddyrequest.models import BuddyRequest
 from partners.models import Partners
 import pandas
 import csv
+from .email import mail
 from .matching_algorithm import get_matches
 # Create your views here.
 
@@ -56,18 +57,30 @@ def partner_match(request,partner_id):
         partner_match.partner=request.user
         partner_match.save()
         #delete partner and user requests from database
+
         user_request.delete()
         partner_request.delete()
+        print(partner_user.name)
+        print(partner_match.name)
+
+        #email both user and matched person about the match
+        mail(partner_user.name,partner_user.netID,user=True)
+        mail(partner_match.name,partner_match.netID,user=False)
         return redirect('/partners')
 @login_required(login_url='/accounts/signup')
 def matches(request):
     if request.method=='POST':
-        #if the user already has a request in the database, go back to home page
+        #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
+        partnerList=list(BuddyRequest.objects.all().values())
         for entry in requestsList:
             print(request.user)
             if request.user.id==(entry['user_id']):
                 return redirect('home')
+        for entry in partnerList:
+            if request.user.id==entry['user_id']:
+                return redirect('home')
+
         #get data about USER
         userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
         netID=request.user.username
