@@ -127,14 +127,35 @@
     </style>
 </head>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myModal").modal('show');
+    });
+</script>
+
+<!--added for the navbar-->
+
 <script>
     $(document).ready(function () {
         $('.navbar-dark > button').on('click', function () {
             $('.navbar-dark').toggleClass('color-changed');
         });
+<<<<<<< HEAD
     });
 </script>
 <!--added for the navbar-->
+=======
+    });</script>
+
+
+<script>
+    function myFunction() {
+        document.getElementById("navbar-light").style.backgroundColor = "white";
+    }
+</script>
+>>>>>>> c8510c31fa4d598cf398818bec34b6c3e2d2a968
 
 <body>
 
