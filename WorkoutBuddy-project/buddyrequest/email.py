@@ -3,13 +3,16 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-def mail(name_partner, netID_user,netID_partner user=False):
+def mail(name_partner, netID_user,netID_partner, user=False):
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "Your New Workout Buddy"
 
-    sent_email = netID_user + "@princeton.edu"
-    contact = netID_partner + "@princeton.edu"
+    # sent_email = netID_user + "@princeton.edu"
+    # contact = netID_partner + "@princeton.edu"
+    sent_email = 'el25' + "@princeton.edu"
+    contact = 'vkonuru' + "@princeton.edu"
+
     tiger_gainz_pass = "WorkoutTinder123"
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
 
@@ -18,7 +21,7 @@ def mail(name_partner, netID_user,netID_partner user=False):
         text = f'''\
         Hi!
 
-        We are so excited to present you with your new workout partner, {name_partner}! You can contact them via email: {sent_email}
+        We are so excited to present you with your new workout partner, {name_partner}! You can contact them via email: {contact}
 
         Happy exercising,
         TigerGainz'''
