@@ -132,7 +132,8 @@
         $('.navbar-dark > button').on('click', function () {
             $('.navbar-dark').toggleClass('color-changed');
         });
-    });</script>
+    });
+</script>
 <!--added for the navbar-->
 
 <body>
@@ -153,18 +154,6 @@
                     <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-                <!--
-                <li class="nav-item active dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Matches
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Match 1</a>
-                        <a class="dropdown-item" href="#">Match 2</a>
-                        <a class="dropdown-item" href="#">Match 3</a>
-                    </div>
-                </li> -->
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'about' %}">About & FAQ</a>
                 </li>

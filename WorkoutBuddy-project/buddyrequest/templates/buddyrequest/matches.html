@@ -126,14 +126,14 @@
           <strong class="d-inline-block mb-2 text-primary">Name</strong>
           <div class="mb-1 text-muted">{{entry.4}}</div>
           <strong class="d-inline-block mb-2 text-primary">Time Zone</strong>
-          <div class="mb-1 text-muted"></div>
+          <div class="mb-1 text-muted">{{entry.11}}</div>
           <strong class="d-inline-block mb-2 text-primary">Availability</strong>
           <div class="mb-1 text-muted">{{entry.8}}</div>
           <strong class="d-inline-block mb-2 text-primary">Workout Type</strong>
           <div class="mb-1 text-muted">{{entry.10}}</div>
           <strong class="d-inline-block mb-2 text-primary">Duration</strong>
           <div class="mb-1 text-muted">{{entry.9}}</div>
-          <a href="#" class="btn btn-secondary my-2">Accept</a>
+          <a href="{% url 'partner_match' entry.6 %}" class="btn btn-secondary my-2">Accept</a>
 
         </div>
         <div class="col-auto d-none d-lg-block">
