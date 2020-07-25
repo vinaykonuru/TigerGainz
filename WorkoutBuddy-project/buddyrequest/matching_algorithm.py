@@ -169,7 +169,7 @@ def get_matches(user_data_list,requestsList):
     matched_people=[]
     if len(match_df) == 0:
         print("terrible matches")
-
+        return matched_people
     else:  # this is assuming we have valid matches in the dataframe
         # After matching, this loop extracts the top three matches and gets all the parameters
 
