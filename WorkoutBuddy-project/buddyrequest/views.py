@@ -36,7 +36,6 @@ def partner_match(request,partner_id):
         partner_user.duration=user_request.duration
         partner_user.workout_type=user_request.workout_type
         partner_user.time_zone=user_request.time_zone
-        partner_user.group_size=user_request.group_size
         partner_user.user=request.user
         partner_user.partner=partner_request.user
         partner_user.save()
@@ -52,7 +51,6 @@ def partner_match(request,partner_id):
         partner_match.duration=partner_request.duration
         partner_match.workout_type=partner_request.workout_type
         partner_match.time_zone=partner_request.time_zone
-        partner_match.group_size=partner_request.group_size
         partner_match.user=partner_request.user
         partner_match.partner=request.user
         partner_match.save()
@@ -97,16 +95,15 @@ def matches(request):
         workout_type=[]
         workout_type.append(request.POST['workout_type'])
         time_zone=request.POST['time_zone']
-        group_size=request.POST['group_size']
         profile_picture=request.POST['profile_picture']
         user=request.user
         #list of data
-        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone,group_size]
+        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone]
 
         #list of requests in dataframe
         #put this after search for matches so user doesn't match with themselves
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
-        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,group_size=group_size,user=user)
+        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
         req_user.save()
         if len(requestsList) < 1:
             return render(request,'buddyrequest/matches.html')
