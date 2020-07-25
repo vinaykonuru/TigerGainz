@@ -3,96 +3,66 @@
 
 {% block content %}
 <style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
 
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
+.bg-logo {
+            background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735593444164239420/FAQ.jpg');
+            background-attachment: local;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: unset;
+            background-size: 70%;
+            height: unset;
+            height: max-content;
+
         }
-    }
 
-    .bg-light {
-        background-color: #ff8f00 !important;
-    }
+        .what-if {
+            font-size: larger;
+            padding: 10px;
+            margin: auto;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 20px;
+            background-position-y: 50%;
+        }
 
+        .links {
+            color: #000;
+            font-weight: bold;
+        }
 
-    .cover-container {
-        font-family: 'Noto Sans JP',
-            sans-serif;
-        margin-top: 60px;
-    }
+        .links-white {
+            color: #7c7c7c;
+        }
 
-    .cover-heading {
-        background-color: #000;
-        color: #fff;
-        padding: 20px;
-        border-color: #fff;
-    }
+        .links:hover {
+            color: #000;
+        }
 
-    .lead {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: rgb(0, 0, 0);
-        color: #fff;
-    }
+        .links-white:hover {
+            color: #7c7c7c;
+        }
 
-    .display-4 {
-        margin-bottom: 20px;
-        color: #000;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0);
-    }
+        .management-names {
+            color: #fff;
+            background-color: #000;
+            padding: 10px;
+        }
 
-    .lead2 {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: #000;
-        color: #fff;
-        font-size: initial;
-    }
+        .email {
+            color: #fff;
+        }
 
-    .lead3 {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: #ff8f00;
-        color: #fff;
-        font-size: initial;
-    }
+        .email:hover {
+            font-weight: bolder;
+            color: #fff;
+        }
 
-    .jumbotron {
-        padding-top: 10px;
-    }
-
-    .button-secondary {
-        background-color: unset;
-        background-color: #ff8f00;
-    }
-
-
-    .what-if {
-        font-size: larger;
-        padding: 10px;
-    }
-
-    .bg-logo {
-        background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735593444164239420/FAQ.jpg');
-        background-attachment: local;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: unset;
-        background-size: 70%;
-        height: unset;
-        height: max-content;
-
-    }
-
+        .much-love {
+            font-size: larger;
+            font-weight: bolder;
+        }
 </style>
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md- text-center bg-logo">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
@@ -114,61 +84,157 @@
     <hr class="my-4">
     <h2 class="lead2"><strong>Why Was TigerGainz Created?</strong></h2>
     <hr class="my-4">
-    <p>Amidst the COVID-19 pandemic and virtual classes, Ben Cai ’24 and Vinay Konuru ’24 had to find new ways to
-        stay active. In particular, they still wanted to train with their teammates and friends. Unfortunately, each
-        of their peers had different schedules, goals, exercise preferences, and so on;
-        quarantine only exacerbated these conflicts. As a result, Ben and Vinay had to exercise on their own, and
-        they struggled to keep themselves motivated. Fortunately, Ben and Vinay met each other and other
-        workout-eager classmates in the Class of 2024 Princeton
-        group chat.
-    </p>
-    <p><strong class="what-if"><i>But what if you could find other Princetonians who had the same workout
-                preferences as you?</i></strong>
-    </p>
-    <p>That’s why Ben and Vinay, with the help of Eugene Liu ’24 and Elizabeth Medina ’24, created TigerGainz to
-        share the joy of exercise with the rest of the Princeton community. They hope the website will not only help
-        Princetonians find the most fitting workout partners/groups who will keep them accountable.
+    <p>Amidst the COVID-19 pandemic and virtual classes, Vinay Konuru ’24 and I (Ben Cai ’24) had to find new ways
+        to stay active. Unfortunately, each of our peers had different schedules, goals, exercise preferences, and
+        so on; quarantine only exacerbated these conflicts. As a result, Vinay and I had to exercise on our own, and
+        we struggled to keep ourselves motivated. Fortunately, Vinay and I met each other and other workout-eager
+        classmates in the Class of 2024 Princeton group chat. After much planning, we were able to find suitable
+        workout buddies and schedules that allowed us to meet our exercise goals and get to bond with our (new)
+        peers.
     </p>
     <hr class="my-4">
-    <h2 class="lead3"><strong>Management</strong></h2>
+
+    <div class="media p-3">
+        <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276124518318160/Side_Icon_Left.png"
+            class="align-self-center mr-3" style="width:20%;">
+        <div class="media-body list align-self-center mr-3 what-if">
+            <strong><i>But what if this process of finding workout buddies
+                    or groups with the most
+                    fitting workout partners was not only faster but more accessible?
+                </i></strong>
+            </p>
+        </div>
+        <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276156071936062/Side_Icon_Right.png"
+            class="align-self-center mr-3" style="width:20%;">
+    </div>
     <hr class="my-4">
-    <p>TigerGainz is a workout buddy and group matchmaker created and currently managed by Vinay Konuru ’24, Eugene
-        Liu ’24, Elizabeth Medina ’24, and Ben Cai ’24. The source code is available on GitHub.
+    <p>That’s why Vinay and I, with the help of Eugene Liu ’24 and Elizabeth Medina ’24, co-founded TigerGainz to
+        share the joy of exercise with the rest of the Princeton community.
     </p>
+    <p>Knowing that working out with others helps increase accountability and performance—<a class="links"
+            href="https://www.newswise.com/articles/burning-more-calories-is-easier-when-working-out-with-someone-you-perceive-as-better">studies
+            have found that
+            having a buddy can increase your workout time and intensity by as much as 200 percent</a>—we hope
+        TigerGainz
+        will not only help Princetonians find the most fitting workout partners/groups, but it will help create a
+        closer community on- and off-campus.</p>
+    <p>Ultimately, TigerGainz is a way to empower and connect Princetonians, and we wish all of you the best of
+        luck.
+    </p>
+    <p>Happy Exercising!</p>
+    <hr class="my-4">
+    <div class="lead3">
+        <p>With much love,
+        </p>
+        <div class="much-love">
+            <p>The TigerGainz Gang: Ben, Vinay, Eugene, & Elizabeth</p>
+        </div>
+    </div>
     <hr class="my-4">
     <h1 class="display-4"> FAQs </h1>
     <hr class="my-4">
-    <h2 class="lead2"><strong>1. Who has access to my TigerGainz profile and sign-up responses? What is my data used
+    <p class="lead2"><strong>Below are answers to FAQs. If you still have questions or concerns, <a
+                class="links-white" href="#">please email
+                one of the co-founders or complete our feedback form.</a></strong></p>
+    <hr class="my-4">
+    <h2 class="lead3"><strong>1. Who has access to my TigerGainz responses/workout preferences? What is my data
+            used
             for? </strong></h2>
     <hr class="my-4">
-    <p>All your TigerGainz sign-up responses and profile are securely stored and only distributed to you and your
-        prospective workout partners. The data is solely used to create workout buddy matches and is not shared with
-        any other organizations.</p>
+    <p>All your TigerGainz responses/workout preferences and profile are securely stored and only available to
+        Princeton students that have signed up for TigerGainz. Your prospective matches will see your profile
+        and
+        any Princeton student that has signed up for TigerGainz can see your workout profile in our directory
+        even
+        if they aren’t a match. The data is solely used to create workout buddy matches and is not shared with
+        any
+        other organizations.
+    </p>
     <hr class="my-4">
-    <h2 class="lead3"><strong>2. My current Princeton workout buddy/group and I decided that we are not the best fit
-            for each other. Can we request new Princeton workout buddies/groups? If so, how?</strong></h2>
-    <hr class="my-4">
-    <p>Yes.</p>
-    <hr class="my-4">
-    <h2 class="lead2"><strong>3. Can I edit my preferences? If so, how? </strong></h2>
-    <hr class="my-4">
-    <p></p>
-    <hr class="my-4">
-    <h2 class="lead3"><strong>4. I haven’t heard back from TigerGainz in a while and I’m still looking for a match.
-            What
-            should I do?</strong></h2>
-    <hr class="my-4">
-    <p></p>
-    <hr class="my-4">
-    <h2 class="lead2"><strong>5. Why am I getting no matches? How long will I have to wait for a match?</strong>
-    </h2>
-    <hr class="my-4">
-    <p></p>
-    <hr class="my-4">
-    <h2 class="lead3"><strong>6. How can I maximize my chances of getting a match?
+    <h2 class="lead2"><strong>2. My current Princeton workout buddy/group and I decided that we are not the best
+            fit
+            for each other. Can we request new Princeton workout buddies/groups? If so, how?
         </strong></h2>
     <hr class="my-4">
-    <p></p>
+    <p>Yes, you can request new Princeton workout buddies/groups. Simply go onto the home page and click the
+        sign up
+        button to complete the form again (note: this will replace your old reponses). TigerGainz will find new
+        matches for you again, and then you can choose who to reach out to.
+    </p>
+    <hr class="my-4">
+    <h2 class="lead3"><strong>3. Can I edit my workout preferences? If so, how? </strong></h2>
+    <hr class="my-4">
+    <p>Yes, you can edit your workout preferences. Simply go onto the home page and click the sign up button to
+        complete the form again. Your new responses will replace your old ones. However, this also means you may
+        get
+        different matches.
+    </p>
+    <p>If you would like to keep the same matches but want to indicate different workout preferences, just reach
+        out to those matches and inform them of your new workout preferences. Hopefully, you can still work
+        something
+        out!
+    </p>
+    <hr class="my-4">
+    <h2 class="lead2"><strong>4. Why am I getting no matches? How long will I have to wait for a match?
+        </strong></h2>
+    <hr class="my-4">
+    <p>In the unlikely scenario that TigerGainz finds no suitable matches - most likely due to uncommon workout
+        preferences (e.g. specific days or workout lengths that not many other Princetonians are looking for) -
+        you
+        should consider adjusting your workout preferences. Being more flexible will likely result in more
+        matches;
+        plus, it’s a great way to meet different people.
+    </p>
+    <p>To do this, please go onto the home page and click the sign up button to complete the form again (note:
+        this
+        will replace your old responses). Hopefully, if there are still Princetonians looking for a workout
+        buddy or
+        group, you should instantly get matches.
+    </p>
+    <p>Regarding the wait time for matches: typically, at the beginning of each semester when everyone is
+        signing
+        up, it is less than a day if not instantaneous. As the semester progresses though, you may have to wait
+        several days since many people will have presumably found matches and taken themself off our database.
+    </p>
+    <hr class="my-4">
+    <h2 class="lead3"><strong>5. I haven’t heard back from TigerGainz in a while and I’m still looking for a
+            match.
+            What should I do?
+        </strong>
+    </h2>
+    <hr class="my-4">
+    <p>If you are still looking for a match and TigerGainz has not reached out to you, that probably means that
+        there are either no closely suitable Princetonians or no Princetonians looking for matches at all. The
+        latter reason is highly unlikely though.</p>
+    <p>In any case, you should consider adjusting your workout preferences. Being more flexible will likely
+        result
+        in more matches; plus, it’s a great way to meet different people.
+    </p>
+    <p>To do this, please go onto the home page and click the sign up button to complete the form again (note:
+        this
+        will replace your old responses). Hopefully, if there are still Princetonians looking for a workout
+        buddy or
+        group, you should instantly get matches.
+    </p>
+    <hr class="my-4">
+    <h2 class="lead2"><strong>6. How can I maximize my chances of getting a match?
+        </strong></h2>
+    <hr class="my-4">
+    <p>To maximize your chances of getting a match, you should select as many workout preferences you are
+        comfortable with and choose the “average” response when applicable. For example, in terms of
+        availability,
+        if you are free more days, you will have more options. On the other hand, for preferences like workout
+        length, you should select a more common option like “1 hour” as opposed to “2 hours.” In any case, being
+        flexible will grant you the most matches. </p>
+    <hr class="my-4">
+    <h2 class="lead3"><strong>7. Am I able to view other people’s profiles even if I haven’t matched with them?
+        </strong></h2>
+    <hr class="my-4">
+    <p>Yes, anyone who has logged in with a Princeton email can view your profile via the TigerGainz directory
+        even
+        if they aren’t a match or haven’t signed up for TigerGainz. As such, please be mindful of what you
+        write.
+    </p>
     <hr class="my-4">
 </div>
 
