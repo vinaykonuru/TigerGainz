@@ -104,18 +104,21 @@
             </div>
             <div class="modal-body">
                 <p class="lead">Welcome to TigerGainz</p>
+                <hr class="my-4">
                 <p>Princeton University’s Workout Buddy and Group Matchmaker</p>
                 <p>
                     Sign up now to find Your Princeton Workout Buddy or Group Today, On- Or Off-Campus! </p>
                 <hr class="my-4">
                 <p class="lead">COVID-19 REMINDER:</p>
+                <hr class="my-4">
                 <p>For your safety and the safety of others, please follow all applicable COVID-19 regulations on-
                     or
                     off-campus while working out in-person or virtually! This includes social distancing at least 6
                     feet, wearing masks, disinfecting equipment, etc. </p>
-                    <p>For a more comprehensive list of COVID-19
+                <p>For a more comprehensive list of COVID-19
                     regulations, please check all applicable sources such as the CDC and University Health Services.
                 </p>
+                <hr class="my-4">
             </div>
         </div>
     </div>
@@ -137,22 +140,45 @@
 
 <div class="jumbotron">
     <hr class="my-4">
-    <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
-    <p>TigerGainz is a workout buddy and group matchmaker for Princetonians that:
+        <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
+        <p>TigerGainz is a workout buddy and group matchmaker for Princetonians that:
+            <hr class="my-4">
+        <p class="lead">1. Analyzes your workout preferences </p>
+        <p class="lead">2. Finds Princetonians with the most FITTING responses to yours </p>
+        <p class="lead">3. Gives you their contact information so you can reach out to them when you match </p>
+        </p>
         <hr class="my-4">
-    <p class="lead">1. Analyzes your workout preferences </p>
-    <p class="lead">2. Finds Princetonians with the most FITTING responses to yours </p>
-    <p class="lead">3. Gives you their contact information so you can reach out to them when you match </p>
-    <hr class="my-4">
-    <p>With an <i>instantaneous and more accurate algorithm</i> , TigerGainz removes the usual stress, uncertainty,
-        and
-        awkwardness that comes with finding workout buddies and groups. </p>
+        <p>With an <i>instantaneous and more accurate algorithm</i> , TigerGainz removes the usual stress, uncertainty,
+            and
+            awkwardness that comes with finding workout buddies and groups. </p>
 
-    <p>By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians <i>stay
-            active</i> through <b>better
-            exercise experiences</b> that are not only <b>more consistent</b> (because buddies and groups keep each
-        other
-        accountable) but <b>more fun</b>, whether you are on- or off-campus.</p>
+        <p>As an added bonus, TigerGainz's directory permits you to see the profiles of all
+            workout-buddy-or-group-interested Princetonians (not just those
+            you matched with). Note, however, that any Princetonian logged in with their
+            Princeton gmail (including those who have not signed up for TigerGainz) can view your profile. Therefore,
+            please be mindful. </p>
+
+        <hr class="my-4">
+
+        <p>By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians <i>stay
+                active</i> through <b>better
+                exercise experiences</b> that are:</p>
+
+        <div class="media p-3">
+            <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276124518318160/Side_Icon_Left.png"
+                class="align-self-center mr-3" style="width:20%">
+            <div class="media-body list">
+                <p><b>- more consistent</b> because buddies and groups keep each other accountable</p>
+                <p><b>- of higher quality</b> since studies show that working out with others can <i>increase the
+                        duration
+                        and
+                        intensity by up to 200% (Kansas State University)</i></p>
+                <p><b>- more fun,</b> whether you are on- or off-campus</p>
+            </div>
+            <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276156071936062/Side_Icon_Right.png"
+                class="align-self-center mr-3" style="width:20%;">
+        </div>
+        <hr class="my-4">
     {% load base_tags %}
     {% if user|check_partners %}
       <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
