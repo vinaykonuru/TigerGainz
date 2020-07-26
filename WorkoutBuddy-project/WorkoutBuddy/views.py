@@ -13,7 +13,7 @@ def home(request):
 def about(request):
     return render(request,'about.html')
 
-def contact(request):
+def contacts(request):
     return render(request,'contact.html')
 
 @login_required(login_url='/accounts/signup')
