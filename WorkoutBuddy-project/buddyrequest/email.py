@@ -16,7 +16,7 @@ def mail(name_partner, netID_user,netID_partner, user=False):
     tiger_gainz_pass = "WorkoutTinder123"
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
 
-    if user == False:
+    if user == True:
 
         text = f'''\
         Hi!

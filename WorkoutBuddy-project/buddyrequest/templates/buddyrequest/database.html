@@ -160,11 +160,24 @@
     {% endif %}
       <div class="bg-light2 mr-md-5 col p-4 d-flex flex-column position-static">
           <div class="my-3 p-3">
-              <h2 class="display-5">Harry '24</h2>
+              <h2 class="display-5">{{entry.name}}</h2>
           </div>
-          <a href="#" class="btn btn-lg btn-secondary">View Profile</a>
           <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
-          </div>
+          </div> <br>
+          {% if entry.user_id == user.id %}
+            <div class="container">
+              <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
+            </div>
+            <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+              <button class="btn btn-lg btn-secondary">
+                Match
+              </button>
+            </a>
+            <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden"/>
+            </form>
+          {% endif %}
       </div>
     {% endfor %}
   </div>

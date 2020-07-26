@@ -8,6 +8,7 @@ import csv
 from .email import mail
 from .matching_algorithm import get_matches
 from .matching_algorithm import to_numbers
+from .matching_algorithm import to_words
 # Create your views here.
 
 @login_required(login_url='/accounts/signup')
@@ -16,8 +17,10 @@ def database(request):
     return render(request,'buddyrequest/database.html',{'buddyrequests':buddyrequests})
 
 @login_required(login_url='/accounts/signup')
-def profile(request):
-    return render(request,'buddyrequest/profile.html')
+def profile(request,request_id):
+    buddyrequest=BuddyRequest.objects.get(id=request_id)
+    days,workout_type=to_words(buddyrequest.days,buddyrequest.workout_type)
+    return render(request,'buddyrequest/profile.html',{'buddyrequest':buddyrequest,'days':days,'workout_type':workout_type})
 
 def partner_match(request,partner_id):
     print(partner_id)
@@ -30,6 +33,7 @@ def partner_match(request,partner_id):
         partner_user=Partners()
         partner_user.netID=user_request.netID
         partner_user.name=user_request.name
+        partner_user.year=user_request.year
         partner_user.major=user_request.major
         partner_user.rescollege=user_request.rescollege
         partner_user.profile_picture=user_request.profile_picture
@@ -45,6 +49,7 @@ def partner_match(request,partner_id):
         partner_match=Partners()
         partner_match.netID=partner_request.netID
         partner_match.name=partner_request.name
+        partner_match.year=partner_request.year
         partner_match.major=partner_request.major
         partner_match.rescollege=partner_request.rescollege
         partner_match.profile_picture=partner_request.profile_picture

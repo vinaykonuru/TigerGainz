@@ -1,5 +1,41 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
+<div class="container text-center">
+  <div class="jumbotron">
+    <div class="center">
+      <br><br><br><br>
+      <hr class="my-4">
+      <h1 class="display-5"><strong>Information</strong></h1>
+      <hr class="my-4">
+      <p class="lead2"><strong>Name:</strong></p>
+      <hr class="my-4">
+      <p>{{ buddyrequest.name }} </p>
+      <hr class="my-4">
+      <p class="lead3"><strong>Class:</strong></p>
+      <hr class="my-4">
+      <p>{{ buddyrequest.year }} </p>
+      <hr class="my-4">
+      <p class="lead2"><strong>Residential College:</strong></p>
+      <hr class="my-4">
+      <p>{{ buddyrequest.rescollege }} </p>
+      <hr class="my-4">
+      <p class="lead3"><strong>Timezone:</strong></p>
+      <hr class="my-4">
+      <p>{{ buddyrequest.time_zone }} </p>
+      <hr class="my-4">
+      <p class="lead2"><strong>Availability:</strong></p>
+      <hr class="my-4">
+      <p>{{ days }} </p>
+      <hr class="my-4">
+      <p class="lead3"><strong>Workout Type</strong></p>
+      <hr class="my-4">
+      <p>{{ workout_type }} </p>
+      <hr class="my-4">
+      <p class="lead2"><strong>Duration:</strong></p>
+      <hr class="my-4">
+      <p>{{ buddyrequest.duration }} </p>
+      <hr class="my-4">
+    </div>
+  </div>
+</div>
 {% endblock %}

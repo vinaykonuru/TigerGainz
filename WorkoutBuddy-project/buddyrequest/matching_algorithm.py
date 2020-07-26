@@ -40,6 +40,43 @@ def to_numbers(inputDays,inputWorkoutType):  # Process information and stores st
     #id 0 temporary for comparision with dataframe that has id based on addition to database
     return d,w  # this is the object we get from the function
 
+def to_words(inputDays,inputWorkoutType):  # Process information and stores strings as numbers
+    inputDays = inputDays.strip('][').split(', ')
+    inputWorkoutType = inputWorkoutType.strip('][').split(', ')
+
+    for i in range(0, len(inputDays)):  # this loop basically turns the days of the week into a numerical value
+        # Output should be a list of numbers that correspond with the day of the week
+        if inputDays[i] == "'1'":
+            inputDays[i] = 'Monday'
+        elif inputDays[i] == "'2'":
+            inputDays[i] = 'Tuesday'
+        elif inputDays[i] == "'3'":
+            inputDays[i] = 'Wednesday'
+        elif inputDays[i] == "'4'":
+            inputDays[i] = 'Thursday'
+        elif inputDays[i] == "'5'":
+            inputDays[i] = 'Friday'
+        elif inputDays[i] == "'6'":
+            inputDays[i] = 'Saturday'
+        else:
+            inputDays[i] = 'Sunday'
+    # inputDays.sort()  # Ensures that list will be in order
+    for j in range(0, len(inputWorkoutType)):  # Same logic as above
+
+        if inputWorkoutType[j] == "'1'":
+            inputWorkoutType[j] = 'Running'
+        elif inputWorkoutType[j] == "'2'":
+            inputWorkoutType[j] = 'Lifting'
+        elif inputWorkoutType[j] == "'3'":
+            inputWorkoutType[j] = 'Biking'
+        else:
+            inputWorkoutType[j] = 'Swimming' #Swimming
+    # inputWorkoutType.sort()  # Ensures that list will be in order
+
+    # This is the basic framework of user database (row)
+    #id 0 temporary for comparision with dataframe that has id based on addition to database
+    return inputDays,inputWorkoutType  # this is the object we get from the function
+
 
 def Keys_from_values(dict,value):
     for item in dict.values():
@@ -60,7 +97,7 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
 
 def matcher(Dfrq, Dfuser):
     # MATCHING OCCURS HERE
-    left_on = right_on = ["days", "duration", "workout_type", "time_zone", "group_size"]
+    left_on = right_on = ["days", "duration", "workout_type", "time_zone"]
 
     matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
                                          right_id_col="days")
@@ -70,7 +107,7 @@ def matcher(Dfrq, Dfuser):
     # dropping irrelevant columns and displaying relevant info of the matched person
     matched_results = matched_results.drop(
         columns=["__id_left", "__id_right", "days_left", "duration_left",
-                 'workout_type_left', "time_zone_left", "group_size_left"])
+                 'workout_type_left', "time_zone_left"])
 
 
 
@@ -153,8 +190,6 @@ def get_matches(user_data_list,requestsList):
         match_result1, Dfrq = matcher(Dfrq, Dfuser)
         if len(Dfrq) >= 1:
             match_result2, Dfrq = matcher(Dfrq, Dfuser)
-            print(match_result1)
-            print(match_result2)
             match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
         else:
             match_df = pd.concat([match_result, match_result1], ignore_index=True)
@@ -256,7 +291,6 @@ def get_matches(user_data_list,requestsList):
             work_temp=[]
             for type in work:
                 type=type.strip()
-                print(type)
                 if type == "'1'":
                     work_temp.append("Running")
                 elif type == "'2'":

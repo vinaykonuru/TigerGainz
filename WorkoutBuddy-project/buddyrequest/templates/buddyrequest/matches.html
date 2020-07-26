@@ -103,15 +103,13 @@
 <!--Compare Your Match Jumbotron-->
 
 <main role="main">
-
+{% if matched_people %}
   <section class="jumbotron text-center">
     <div class="container">
       <hr class="my-4">
       <h1 class="display-4">Compare Your Match</h1>
       <p class="lead">See if you and your match are compatible, then choose below!</p>
       <p>
-        <a href="#" class="btn btn-secondary my-2">Back to Matches</a>
-        <a href="#" class="btn btn-secondary my-2">Decline</a>
       </p>
       <hr class="my-4">
     </div>
@@ -151,8 +149,11 @@
       </div>
       {% endfor %}
     </div>
-  </div>
-  </div>
+  {% else %}
+  <!-- Hey Elizabeth, can you make this part look nice please. It should kindly tell the user that there are no matches, but that we will notify them once someone macthes
+  with them -->
+    No requests found
+  {% endif %}
 
 
   <!-- Optional JavaScript -->
