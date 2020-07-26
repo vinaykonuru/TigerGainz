@@ -3,66 +3,65 @@
 
 {% block content %}
 <style>
+    .bg-logo {
+        background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735593444164239420/FAQ.jpg');
+        background-attachment: local;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: unset;
+        background-size: 70%;
+        height: unset;
+        height: max-content;
 
-.bg-logo {
-            background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735593444164239420/FAQ.jpg');
-            background-attachment: local;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: unset;
-            background-size: 70%;
-            height: unset;
-            height: max-content;
+    }
 
-        }
+    .what-if {
+        font-size: larger;
+        padding: 10px;
+        margin: auto;
+        max-width: 600px;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        border-radius: 20px;
+        background-position-y: 50%;
+    }
 
-        .what-if {
-            font-size: larger;
-            padding: 10px;
-            margin: auto;
-            max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 10px;
-            border-radius: 20px;
-            background-position-y: 50%;
-        }
+    .links {
+        color: #000;
+        font-weight: bold;
+    }
 
-        .links {
-            color: #000;
-            font-weight: bold;
-        }
+    .links-white {
+        color: #7c7c7c;
+    }
 
-        .links-white {
-            color: #7c7c7c;
-        }
+    .links:hover {
+        color: #000;
+    }
 
-        .links:hover {
-            color: #000;
-        }
+    .links-white:hover {
+        color: #7c7c7c;
+    }
 
-        .links-white:hover {
-            color: #7c7c7c;
-        }
+    .management-names {
+        color: #fff;
+        background-color: #000;
+        padding: 10px;
+    }
 
-        .management-names {
-            color: #fff;
-            background-color: #000;
-            padding: 10px;
-        }
+    .email {
+        color: #fff;
+    }
 
-        .email {
-            color: #fff;
-        }
+    .email:hover {
+        font-weight: bolder;
+        color: #fff;
+    }
 
-        .email:hover {
-            font-weight: bolder;
-            color: #fff;
-        }
-
-        .much-love {
-            font-size: larger;
-            font-weight: bolder;
-        }
+    .much-love {
+        font-size: larger;
+        font-weight: bolder;
+    }
 </style>
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md- text-center bg-logo">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
@@ -133,92 +132,100 @@
     <hr class="my-4">
     <h1 class="display-4"> FAQs </h1>
     <hr class="my-4">
-    <p class="lead2"><strong>Below are answers to FAQs. If you still have questions or concerns, <a
-                class="links-white" href="#">please email
+    <p class="lead2"><strong>Below are answers to FAQs. If you still have questions or concerns, <a class="links-white"
+                href="#">please email
                 one of the co-founders or complete our feedback form.</a></strong></p>
     <hr class="my-4">
-    <h2 class="lead3"><strong>1. Who has access to my TigerGainz responses/workout preferences? What is my data
+    <p class="lead3"><strong>1. Who has access to my TigerGainz responses/workout preferences? What is my data
             used
-            for? </strong></h2>
+            for? </strong></p>
     <hr class="my-4">
-    <p>All your TigerGainz responses/workout preferences and profile are securely stored and only available to
-        Princeton students that have signed up for TigerGainz. Your prospective matches will see your profile
-        and
-        any Princeton student that has signed up for TigerGainz can see your workout profile in our directory
-        even
-        if they aren’t a match. The data is solely used to create workout buddy matches and is not shared with
-        any
-        other organizations.
+    <p>All your TigerGainz responses/workout preferences and profile are securely stored and only available to Princeton
+        students that have logged in with their Princeton gmail. Your prospective matches will see your profile and any
+        Princeton student can see your workout profile in our directory even if they aren’t a match. The data is solely
+        used to create workout buddy matches and is not shared with any other organizations.
     </p>
     <hr class="my-4">
-    <h2 class="lead2"><strong>2. My current Princeton workout buddy/group and I decided that we are not the best
-            fit
-            for each other. Can we request new Princeton workout buddies/groups? If so, how?
-        </strong></h2>
+    <p class="lead2"><strong>2. My current Princeton workout buddy/group and I decided that we are not the best fit for
+            each other/Someone chose me as their workout buddy but they are not one of my matches and/or I am not sure
+            if I want to be their workout buddy. Can we request new Princeton workout buddies/groups? If so, how?
+        </strong></p>
     <hr class="my-4">
-    <p>Yes, you can request new Princeton workout buddies/groups. Simply go onto the home page and click the
-        sign up
-        button to complete the form again (note: this will replace your old reponses). TigerGainz will find new
-        matches for you again, and then you can choose who to reach out to.
+    <p>Although it can be awkward, sometimes the TigerGainz matches don’t work out but that’s okay! If you would still
+        like to search for workout buddies (or groups), politely tell the person who chose you as their partner you
+        situation (they should be understanding!).
+    </p>
+    <p>
+        Then, <b>both</b> of you should request new Princeton workout buddies/groups. Simply go onto the home page and
+        click
+        the sign up button to <b>complete the form again</b> (note: this will replace your old reponses). TigerGainz
+        will find
+        new matches for you again, and then you can choose who to reach out to.
+    </p>
+    <p>
+        Currently, the algorithm takes both people off the database when only one person “Accepts” a match; this will be
+        resolved in the future. Additionally an option to decline a match offer from another Princetonian will be
+        implemented.
     </p>
     <hr class="my-4">
-    <h2 class="lead3"><strong>3. Can I edit my workout preferences? If so, how? </strong></h2>
+    <p class="lead3"><strong>3. Can I edit my workout preferences? If so, how? </strong></p>
     <hr class="my-4">
-    <p>Yes, you can edit your workout preferences. Simply go onto the home page and click the sign up button to
-        complete the form again. Your new responses will replace your old ones. However, this also means you may
-        get
-        different matches.
+    <p>Yes, you can edit your workout preferences. To do this, please go to the Database section and click the ““Take me
+        off the database please” button. Then, click the sign up button to complete the form again (note: this will
+        replace your old responses). However, this also means you may get different matches.
     </p>
-    <p>If you would like to keep the same matches but want to indicate different workout preferences, just reach
-        out to those matches and inform them of your new workout preferences. Hopefully, you can still work
-        something
-        out!
-    </p>
-    <hr class="my-4">
-    <h2 class="lead2"><strong>4. Why am I getting no matches? How long will I have to wait for a match?
-        </strong></h2>
-    <hr class="my-4">
-    <p>In the unlikely scenario that TigerGainz finds no suitable matches - most likely due to uncommon workout
-        preferences (e.g. specific days or workout lengths that not many other Princetonians are looking for) -
-        you
-        should consider adjusting your workout preferences. Being more flexible will likely result in more
-        matches;
-        plus, it’s a great way to meet different people.
-    </p>
-    <p>To do this, please go onto the home page and click the sign up button to complete the form again (note:
-        this
-        will replace your old responses). Hopefully, if there are still Princetonians looking for a workout
-        buddy or
-        group, you should instantly get matches.
-    </p>
-    <p>Regarding the wait time for matches: typically, at the beginning of each semester when everyone is
-        signing
-        up, it is less than a day if not instantaneous. As the semester progresses though, you may have to wait
-        several days since many people will have presumably found matches and taken themself off our database.
+    <p>If you would like to keep the same matches but want to indicate different workout preferences, please PERSONALLY
+        reach out to those matches (via your own email; not TigerGainz) and inform them of your new workout preference;
+        you can find their contact info under their profile. Please do NOT “Accept” a match via TigerGainz as this will
+        remove the other person from the database even though they have not been paired with someone who has the same
+        workout preferences. Hopefully, you can still work something out!
     </p>
     <hr class="my-4">
-    <h2 class="lead3"><strong>5. I haven’t heard back from TigerGainz in a while and I’m still looking for a
+    <p class="lead2"><strong>4. Why am I getting no matches on my initial search? What should I do? How long will I have
+            to wait for a match?
+        </strong></p>
+    <hr class="my-4">
+    <p>In the unlikely scenario that TigerGainz finds no suitable matches upon form submission - most likely due to
+        uncommon workout preferences (e.g. specific days or workout lengths that not many other Princetonians are
+        looking for) - you should consider adjusting your workout preferences and resubmitting the form. Being more
+        flexible will likely result in more matches; plus, it’s a great way to meet different people.
+    </p>
+    <p>To resubmit your form, please go to the Database section and click the “Take me off the database please” button.
+        Then, click the sign up button to complete the form again (note: this will replace your old responses).
+        Hopefully, if there are still Princetonians looking for a workout buddy or group, you should instantly get
+        matches.
+    </p>
+    <p>On the other hand, if you have already submitted the form and are still not getting matches, that means someone
+        hasn’t chosen you to be their workout buddy or group yet.
+    </p>
+    <p>
+        This is especially common as the semester progresses where you might have to wait several days since many people
+        will have presumably found matches and taken themself off our database. At the beginning of each semester when
+        everyone is signing up, the match time is less than a day if not instantaneous.
+    </p>
+    <p>
+        In any case, if you don’t want to wait for someone to choose you, please resubmit your form (see above) or check
+        out the TigerGainz directory.
+    </p>
+    <hr class="my-4">
+    <p class="lead3"><strong>5. I haven’t heard back from TigerGainz in a while and I’m still looking for a
             match.
             What should I do?
         </strong>
-    </h2>
-    <hr class="my-4">
-    <p>If you are still looking for a match and TigerGainz has not reached out to you, that probably means that
-        there are either no closely suitable Princetonians or no Princetonians looking for matches at all. The
-        latter reason is highly unlikely though.</p>
-    <p>In any case, you should consider adjusting your workout preferences. Being more flexible will likely
-        result
-        in more matches; plus, it’s a great way to meet different people.
-    </p>
-    <p>To do this, please go onto the home page and click the sign up button to complete the form again (note:
-        this
-        will replace your old responses). Hopefully, if there are still Princetonians looking for a workout
-        buddy or
-        group, you should instantly get matches.
     </p>
     <hr class="my-4">
-    <h2 class="lead2"><strong>6. How can I maximize my chances of getting a match?
-        </strong></h2>
+    <p>If you are still looking for a match and TigerGainz has not reached out to you, that probably means that someone
+        hasn’t chosen you as their workout partner.</p>
+    <p>As such, you should consider resubmitting the workout form. To do this, please go to the Database section and
+        click the ““Take me off the database please” button. Then, click the sign up button to complete the form again
+        (note: this will replace your old responses).
+    </p>
+    <p>Hopefully, if there are still Princetonians looking for a workout buddy or group, you should instantly get
+        matches. Alternatively, you can check out the TigerGainz directory.
+    </p>
+    <hr class="my-4">
+    <p class="lead2"><strong>6. How can I maximize my chances of getting a match?
+        </strong></p>
     <hr class="my-4">
     <p>To maximize your chances of getting a match, you should select as many workout preferences you are
         comfortable with and choose the “average” response when applicable. For example, in terms of
@@ -227,8 +234,8 @@
         length, you should select a more common option like “1 hour” as opposed to “2 hours.” In any case, being
         flexible will grant you the most matches. </p>
     <hr class="my-4">
-    <h2 class="lead3"><strong>7. Am I able to view other people’s profiles even if I haven’t matched with them?
-        </strong></h2>
+    <p class="lead3"><strong>7. Am I able to view other people’s profiles even if I haven’t matched with them?
+        </strong></p>
     <hr class="my-4">
     <p>Yes, anyone who has logged in with a Princeton email can view your profile via the TigerGainz directory
         even
