@@ -15,7 +15,9 @@ from .matching_algorithm import to_words
 def database(request):
     buddyrequests=BuddyRequest.objects
     return render(request,'buddyrequest/database.html',{'buddyrequests':buddyrequests})
-
+def remove(request):
+    BuddyRequest.objects.get(user=request.user).delete()
+    return redirect('home')
 @login_required(login_url='/accounts/signup')
 def profile(request,request_id):
     buddyrequest=BuddyRequest.objects.get(id=request_id)

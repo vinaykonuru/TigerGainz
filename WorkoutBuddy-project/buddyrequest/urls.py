@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.database,name='database'),
     path('profile/<int:request_id>',views.profile,name='profile'),
     path('matches',views.matches,name='matches'),
-    path('<int:partner_id>',views.partner_match,name='partner_match')
+    path('<int:partner_id>',views.partner_match,name='partner_match'),
+    path('remove',views.remove,name='remove')
 ]
