@@ -86,14 +86,13 @@
     }
 
     .list {
-            margin: auto;
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 10px;
-            border-radius: 20px;
-            max-width: 600px;
-            background-position-y: 50%;
-        }
-
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        border-radius: 20px;
+        max-width: 600px;
+        background-position-y: 50%;
+    }
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -150,46 +149,52 @@
 
 <div class="jumbotron">
     <hr class="my-4">
-        <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
-        <p>TigerGainz is a workout buddy and group matchmaker for Princetonians that:
-            <hr class="my-4">
-        <p class="lead">1. Analyzes your workout preferences </p>
-        <p class="lead">2. Finds Princetonians with the most FITTING responses to yours </p>
-        <p class="lead">3. Gives you their contact information so you can reach out to them when you match </p>
-        </p>
+    <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
+    <p>TigerGainz is a workout buddy and group*** matchmaker for Princetonians that:
         <hr class="my-4">
-        <p>With an <i>instantaneous and more accurate algorithm</i> , TigerGainz removes the usual stress, uncertainty,
-            and
-            awkwardness that comes with finding workout buddies and groups. </p>
+    <p class="lead">1. Analyzes your workout preferences and stores them in our TigerGainz directory </p>
+    <p class="lead">2. Finds Princetonians with the most FITTING workout preferences to yours </p>
+    <p class="lead">3. Gives you their profiles so you can decide who to reach out to </p>
+    <p class="lead">4. Pairs you with your new workout buddy (or group) IF you “Accept” a match and sends confirmation
+        emails to you and your buddy. *This also means that you might receive a “random” email from a new workout buddy
+        who has decided to choose you. </p>
+    <p class="lead">5. Gets you started on your exercising adventure!</p>
+    </p>
+    <hr class="my-4">
+    <p>With an <i>instantaneous and accurate algorithm</i> , TigerGainz removes the usual stress, uncertainty,
+        and
+        awkwardness that comes with finding workout buddies and groups. </p>
 
-        <p>As an added bonus, TigerGainz's directory permits you to see the profiles of all
-            workout-buddy-or-group-interested Princetonians (not just those
-            you matched with).</p>
+    <p>As an added bonus, TigerGainz's directory permits you to see the profiles of all
+        workout-buddy-or-group-interested Princetonians (not just those
+        you matched with).</p>
 
-        <hr class="my-4">
+    <hr class="my-4">
 
-        <p>By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians <i>stay
-                active</i> through <b>better
-                exercise experiences</b> that are:</p>
+    <p>By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians <i>stay
+            active</i> through <b>better
+            exercise experiences</b> that are:</p>
 
-        <div class="media p-3">
-            <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276124518318160/Side_Icon_Left.png"
-                class="align-self-center mr-3" style="width:20%">
-            <div class="media-body list">
-                <p><b>- more consistent</b> because buddies and groups keep each other accountable</p>
-                <p><b>- of higher quality</b> since studies show that working out with others can <i>increase the
-                        duration
-                        and
-                        intensity by up to 200% (Kansas State University)</i></p>
-                <p><b>- more fun,</b> whether you are on- or off-campus</p>
-            </div>
-            <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276156071936062/Side_Icon_Right.png"
-                class="align-self-center mr-3" style="width:20%;">
+    <div class="media p-3">
+        <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276124518318160/Side_Icon_Left.png"
+            class="align-self-center mr-3" style="width:20%">
+        <div class="media-body list">
+            <p><b>- more consistent</b> because buddies and groups keep each other accountable</p>
+            <p><b>- of higher quality</b> since studies show that working out with others can <i>increase the
+                    duration
+                    and
+                    intensity by up to 200% (Kansas State University)</i></p>
+            <p><b>- more fun,</b> whether you are on- or off-campus</p>
         </div>
-        <hr class="my-4">
+        <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276156071936062/Side_Icon_Right.png"
+            class="align-self-center mr-3" style="width:20%;">
+    </div>
+    <p><strong>Happy Exercising!</strong></p>
+    <p>***Group matchmaking is a future feature that will be added later.</p>
+    <hr class="my-4">
     {% load base_tags %}
     {% if user|check_partners %}
-      <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
+    <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
     {% elif user|check_requests %}
     <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">See Waiting List</a>
     {% else %}
@@ -198,26 +203,56 @@
     <hr class="my-4">
     <h1 class="display-5"><strong>How Does it Work?</strong></h1>
     <hr class="my-4">
-    <p class="lead2">Upon filling out the secure sign up form (see "Get Starated" button above), TigerGainz will use
+    <p class="lead2">Upon filling out the secure sign up form (see "Get Started" button above), TigerGainz will use
         an algorithm
         that <b>aligns
             preferences--including workout days, exercise type, time zone, and frequency--</b>to find the most
         fitting
-        workout partners (or groups!) from our database of participating Princetonians.
+        workout partners (or groups***) from our database of participating Princetonians.
     </p>
     <p>Once matches have been made, you’ll get to see the profiles, preferences, and, most importantly, contact
-        information of your best potential workout buddies or groups.
+        information of your best potential workout buddies or groups***.
     </p>
-    <p><strong>Then, it’s up to you to reach out to your new workout buddy or group!</strong>
+    <p><strong>Then, it’s up to you to reach out to your new workout buddy or group! If you like one of your prospective
+            matches and want to be their workout partner, please click the “Accept” button under their profile. This
+            will remove you from the request database. </strong>
     </p>
     <p>
-        If you are satisfied with your matches and are no longer interested in finding Princeton workout buddies or
-        groups, we will remove you from our database.
+        This will send an email to your new workout buddy or group telling them that you are their new workout partner
+        and it will give them your email. On their end, they can view your profile if they log into the TigerGainz
+        website. Note: your new workout partner OR you, if you are the person who receives the match, will ALSO be
+        removed from the request database.
     </p>
-    <p>Conversely, if you are unsatisfied with or have no matches, TigerGainz will place you in its database and
-        waiting list. Once a potential match is made, TigerGainz will notify you via email and give you the
-        profiles, preferences, and contact information of your prospective workout buddies and groups. You can then
-        decide whom to reach out to and whether or not you would like to remain in the TigerGainz database. </p>
+    <p>Be on the lookout for these emails from no.reply.tigergainz@gmail.com </p>
+    <!--still need to insert pics of emails here-->
+    <p>
+        (The top sample email is an example of an email the person in the directory would receive. The bottom sample
+        emails is a confirmation email for the person actively seeking a match with the algorithm)
+    </p>
+    <p>
+        Alternatively, if you’re still interested in other options, you can check out the TigerGainz directory for all
+        workout-buddy-or-group-interested Princetonians.
+    </p>
+    <p>
+        If you are no longer interested in finding Princeton workout buddies or groups, we will remove you from our
+        database. If you wish to be removed from the database, please go to the Database section of our website and
+        click “Take me off the database please” button.
+    </p>
+    <p>
+        Conversely, if you are unsatisfied with your matches or have no matches, TigerGainz will place you in our
+        waiting list database where you’ll wait for someone to choose you as their workout buddy. If someone “Accepts”
+        you as a match, TigerGainz will notify you via email of your new workout buddy and give you their contact
+        information. Additionally, you can view the workout preferences and profile of your new workout buddy on the
+        TigerGainz website in the “Matches” section. Please note that if someone chooses you, you will automatically be
+        removed from the waiting list.
+    </p>
+    <p>
+        On the other hand, if you don’t want to wait for someone to choose you, you can remove yourself from the
+        database and then resubmit the form to see if you have any matches. To do this, please go to the Database
+        section of our website and click “Take me off the database please” button. Then go to the sign up form and
+        complete it again to (hopefully) find new matches.
+    </p>
+    <p>***Group matchmaking is a future feature that will be added later.</p>
     <p class="lead3">If you wish to be removed from the database, please click the "Take me off the database
         please!" button on the "database" page.
     </p>
