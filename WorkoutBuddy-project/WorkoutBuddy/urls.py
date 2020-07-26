@@ -24,8 +24,9 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('find',views.find,name='find'),
     path('about',views.about,name='about'),
-    path('excercise_guide',views.excercise_guide,name='excercise_guide'),    
+    path('excercise_guide',views.excercise_guide,name='excercise_guide'),
     path('accounts/',include('accounts.urls')),
     path('database/',include('buddyrequest.urls')),
-    path('partners/',include('partners.urls'))
+    path('partners/',include('partners.urls')),
+    path('contacts/',views.contacts,name='contacts')
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
