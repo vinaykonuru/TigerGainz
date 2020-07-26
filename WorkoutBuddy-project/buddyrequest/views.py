@@ -90,13 +90,11 @@ def matches(request):
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
             userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
+            userdata=userdatadf.loc[netID]
         except:
             return redirect('home')
+            
         netID=request.user.username
-        try:
-            userdata=userdatadf.loc[netID]
-        except KeyError:
-            print('netID wasn\'t found in csv')
         name=userdata['name']
         major=userdata['major']
         year=userdata['year']
