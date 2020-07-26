@@ -87,8 +87,11 @@ def matches(request):
             if request.user.id==entry['user_id']:
                 return redirect('home')
 
-        #get data about USER
-        userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
+        #get data about USER, if user isn't in studentdata.csv, send them back to home page
+        try:
+            userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
+        except:
+            return redirect('home')
         netID=request.user.username
         try:
             userdata=userdatadf.loc[netID]
