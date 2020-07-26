@@ -132,7 +132,7 @@
           <strong class="d-inline-block mb-2 text-primary">Duration</strong>
           <div class="mb-1 text-muted">{{entry.9}}</div>
           <a href="javascript:{document.getElementById('partner_match{{entry.6}}').submit()}">
-            <button class="button btn-primary btn-large btn-block">
+            <button class="button btn-secondary btn-large btn-block">
               Accept
             </button>
           </a>
@@ -152,7 +152,16 @@
   {% else %}
   <!-- Hey Elizabeth, can you make this part look nice please. It should kindly tell the user that there are no matches, but that we will notify them once someone macthes
   with them -->
-   <p class="lead3"><strong>No requests found</strong></p>
+     <section class="jumbotron text-center">
+      <div class="container">
+        <hr class="my-4">
+        <h1 class="display-4">No Requests Found</h1>
+        <p class="lead">Unfortunately, there are currently no matching requests in the database, but we will notify you when we find a match.</p>
+        <p>
+        </p>
+        <hr class="my-4">
+      </div>
+    </section>
   {% endif %}
 
 
