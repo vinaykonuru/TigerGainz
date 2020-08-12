@@ -1,0 +1,6 @@
+use windows of time(morning, afternoon, and night) instead of timezone to help matching for on campus
+
+NEVER REPEAT INFORMATION IN A DATABASE... just add a partner id to request database, and turn from null to a partner id when matched
+
+
+use a different word from match, since that's what 
