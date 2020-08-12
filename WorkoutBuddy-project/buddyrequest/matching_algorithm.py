@@ -1,82 +1,6 @@
-import pandas
 import pandas as pd
-import fuzzymatcher as fm
-from buddyrequest.models import BuddyRequest
-
-def to_numbers(inputDays,inputWorkoutType):  # Process information and stores strings as numbers
-
-    for i in range(0, len(inputDays)):  # this loop basically turns the days of the week into a numerical value
-        # Output should be a list of numbers that correspond with the day of the week
-        if inputDays[i] == "Monday":
-            inputDays[i] = '1'
-        elif inputDays[i] == "Tuesday":
-            inputDays[i] = '2'
-        elif inputDays[i] == "Wednesday":
-            inputDays[i] = '3'
-        elif inputDays[i] == "Thursday":
-            inputDays[i] = '4'
-        elif inputDays[i] == "Friday":
-            inputDays[i] = '5'
-        elif inputDays[i] == "Saturday":
-            inputDays[i] = '6'
-        else:
-            inputDays[i] = '7'
-    # inputDays.sort()  # Ensures that list will be in order
-    d = str(inputDays)
-    for j in range(0, len(inputWorkoutType)):  # Same logic as above
-
-        if inputWorkoutType[j] == "Running":
-            inputWorkoutType[j] = '1'
-        elif inputWorkoutType[j] == "Lifting":
-            inputWorkoutType[j] = '2'
-        elif inputWorkoutType[j] == "Biking":
-            inputWorkoutType[j] = '3'
-        else:
-            inputWorkoutType[j] = '4' #Swimming
-    # inputWorkoutType.sort()  # Ensures that list will be in order
-    w = str(inputWorkoutType)
-
-    # This is the basic framework of user database (row)
-    #id 0 temporary for comparision with dataframe that has id based on addition to database
-    return d,w  # this is the object we get from the function
-
-def to_words(inputDays,inputWorkoutType):  # Process information and stores strings as numbers
-    inputDays = inputDays.strip('][').split(', ')
-    inputWorkoutType = inputWorkoutType.strip('][').split(', ')
-
-    for i in range(0, len(inputDays)):  # this loop basically turns the days of the week into a numerical value
-        # Output should be a list of numbers that correspond with the day of the week
-        if inputDays[i] == "'1'":
-            inputDays[i] = 'Monday'
-        elif inputDays[i] == "'2'":
-            inputDays[i] = 'Tuesday'
-        elif inputDays[i] == "'3'":
-            inputDays[i] = 'Wednesday'
-        elif inputDays[i] == "'4'":
-            inputDays[i] = 'Thursday'
-        elif inputDays[i] == "'5'":
-            inputDays[i] = 'Friday'
-        elif inputDays[i] == "'6'":
-            inputDays[i] = 'Saturday'
-        else:
-            inputDays[i] = 'Sunday'
-    # inputDays.sort()  # Ensures that list will be in order
-    for j in range(0, len(inputWorkoutType)):  # Same logic as above
-
-        if inputWorkoutType[j] == "'1'":
-            inputWorkoutType[j] = 'Running'
-        elif inputWorkoutType[j] == "'2'":
-            inputWorkoutType[j] = 'Lifting'
-        elif inputWorkoutType[j] == "'3'":
-            inputWorkoutType[j] = 'Biking'
-        else:
-            inputWorkoutType[j] = 'Swimming' #Swimming
-    # inputWorkoutType.sort()  # Ensures that list will be in order
-
-    # This is the basic framework of user database (row)
-    #id 0 temporary for comparision with dataframe that has id based on addition to database
-    return inputDays,inputWorkoutType  # this is the object we get from the function
-
+from fuzzywuzzy import fuzz
+from statistics import mean
 
 def Keys_from_values(dict,value):
     for item in dict.values():
@@ -95,218 +19,123 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
         dictionary[item] = value[key.index(item)]
     return dictionary
 
-def matcher(Dfrq, Dfuser):
-    # MATCHING OCCURS HERE
-    left_on = right_on = ["days", "duration", "workout_type", "time_zone"]
+def get_matches(user_data_list, requests_list):
+    requestsdf=pd.DataFrame(requests_list)
 
-    matched_results = fm.fuzzy_left_join(Dfuser, Dfrq, left_on, right_on, left_id_col="days",
-                                         right_id_col="days")
+    names = requestsdf.loc[:,'name'].tolist()
+    net_id = requestsdf.loc[:, "netID"].tolist()
+    id_list = requestsdf.loc[:, "id"].tolist()
 
-
-
-    # dropping irrelevant columns and displaying relevant info of the matched person
-    matched_results = matched_results.drop(
-        columns=["__id_left", "__id_right", "days_left", "duration_left",
-                 'workout_type_left', "time_zone_left"])
+    name_netID = []
 
 
+    for entry in range(len(names)):
+        h = (names[entry], net_id[entry])
+        name_netID.append(h)
 
-    # COLUMNS OF ALL DATA
-    list_col = matched_results.columns.tolist()
-    list_col = list_col[1:]
-    # code that renames matched_results with better colummn labels\
-    label_dict = dict_creator(list_col, left_on)
-
-
-
-    # our first matched result
-    matched_results1 = matched_results.rename(columns=label_dict)
-
-    list_Dfrq = Dfrq.values.tolist()
-    rel_params = matched_results1.iloc[0,:].tolist()
-    del rel_params[0]
+    id_name_dict = dict_creator(id_list, name_netID)
+    user_data_list = requestsdf.iloc[0, :].tolist()
 
 
-    for person in list_Dfrq:
-        if person == rel_params:
-            del list_Dfrq[list_Dfrq.index(person)]
-            break
-
-
-    Dfrq = pd.DataFrame(list_Dfrq, columns=left_on)
-    return  matched_results1, Dfrq
-
-def get_matches(user_data_list,requestsList):
     #dataframe of requests
-    Dfrq=pandas.DataFrame(requestsList)
-
-    #COMPARISION BETWEEN USER DATA AND REQUESTS ENTERED HERE
-    inputDays = user_data_list[6]
-    inputDuration = user_data_list[7]
-    inputWorkoutType = user_data_list[8]
-    inputTimeZone = user_data_list[9]
-    Dfuser = pd.DataFrame({'days':inputDays,'duration':[inputDuration],'workout_type':inputWorkoutType,'time_zone':[inputTimeZone]})
-
-    #will return Dfuser_return but use Dfuser_comparision to compare to Dfrq
-                          # takes all user data and creates a dataframe of one row for that user.
-    # reading in csv file and converting it into a dataframe. The code doesn't need to read in a csv file specifically, but as long as the final product after line
-    # 91 is a dataframe, the algo will work.
-    # Script that takes inputs as variables and appends value to dataframe.
-
-    # list of all the names in Dfrq -- This will be very useful later on
-    people_ID_list = Dfrq.pop("id").tolist()
-    # names_rq = Dfrq.pop('name').tolist()
-    # netID_rq = Dfrq.pop('netID').tolist()
-    # pictures_rq= Dfrq.pop('profile_picture').tolist()
-    excess_values_list=[]
-    for entry in Dfrq.values.tolist():
-        excess_entries=[entry[0],entry[1],entry[2],entry[3],entry[4],entry[5],entry[10]]
-        excess_values_list.append(excess_entries)
-    Dfrq=Dfrq.drop(columns=['netID','name','rescollege','major','year','profile_picture','user_id'])
+    pd.set_option("display.max_rows", None, "display.max_columns", None)
 
 
-    # Our dataframes, when using the matching algorithm, should not use the names as a parameter for matching.
-    # We can store these names in a temp file: lists.
-    # creatinga dictionary, "reference", that contains the names as keys and other parameters as values.
-    # We can use these values later to reference names.
+    inputdays = "[Tuesday, Wednesday, Thursday]"
+    inputworkouttype = "[Lifting]"
 
-    parameter_list = []
-
-    for x in range(0, len(Dfrq)):
-        entry = []
-        for i in range(0, len(Dfrq.columns)):
-            list_of_vals = Dfrq.iloc[:, i].tolist()
-            v = list_of_vals[x]
-            entry.append(v)
-        parameter_list.append(entry)
-
-    reference_parameters = dict_creator(people_ID_list, parameter_list)
-    reference_excess = dict_creator(people_ID_list, excess_values_list)
+    Dfuser = pd.DataFrame({"days": [inputdays], "duration": user_data_list[6], "workout_type": [inputworkouttype], "time_zone": user_data_list[8]})
+    Dfrq = requestsdf
 
 
-    #getting our 3 match results:
-    match_result, Dfrq = matcher(Dfrq, Dfuser)
-    if len(Dfrq) >= 1:
-        match_result1, Dfrq = matcher(Dfrq, Dfuser)
-        if len(Dfrq) >= 1:
-            match_result2, Dfrq = matcher(Dfrq, Dfuser)
-            match_df = pd.concat([match_result, match_result1, match_result2], ignore_index=True)
-        else:
-            match_df = pd.concat([match_result, match_result1], ignore_index=True)
+    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id'])
+
+
+    #Mock priorities dictionary
+    priorities = {"days": 2, "duration": 1, "time_zone": 3}
+
+
+
+    #The following code loopes through the request database and makes sure that all potential candidates for matches at least
+    #have the same workout
+    reference_ranker = {1: 100, 2:60, 3:50}
+
+    workout = Dfuser.iloc[0]["workout_type"]
+
+    matching_df_request = pd.DataFrame({})
+    Dfrq_row_list = []
+
+    for index_row in range(len(Dfrq1)):
+        if fuzz.ratio(workout, Dfrq1.iloc[index_row]["workout_type"]) == 100:
+            row = Dfrq1.iloc[index_row]
+            matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
+                                                                    #actualy matches
+            Dfrq_row_list.append(index_row)
+
+    matching_df_request["Dfrq_index"] = Dfrq_row_list
+
+
+    if len(matching_df_request) > 0:
+        matching_df = matching_df_request.drop("workout_type", axis=1) #we no longer need to have workouts as a parameter since we already made sure
+                                                                         #users had the same workout.
     else:
-        match_df = pd.concat([match_result], ignore_index=True)
-    print(match_df)
-    #determining threshold
-    max=0.06989700043360188
-    threshold=max/4
-    x=0
-    while x < len(match_df):
-        if match_df.iloc[x][
-            "best_match_score"] < -50:  # the threshold for the best match score can be changed later after we test
-            match_df = match_df.drop(match_df.index[x])
-        else:
-            x+=1
+        blankarray=[]
+        return blankarray
+        print("return to home screen")
 
-    # If no one meets the threshold, then we append the user data back into the dataframe
-    matched_people=[]
-    if len(match_df) == 0:
-        return matched_people
-    else:  # this is assuming we have valid matches in the dataframe
-        # After matching, this loop extracts the top three matches and gets all the parameters
+    matching_df_user = Dfuser.drop("workout_type", axis=1)
+    matching_df_request = matching_df_request.drop("workout_type", axis=1)
+    column_labels = matching_df_request.columns.tolist()
 
-        list_params = []
+    ListOfMatches = []
+    for row in range(len(matching_df_request)):
+        list_best_match_vals = []
+        for column in range(len(column_labels)-1):
+            if column_labels[column] == "days":
+                rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
+                ranker = priorities.get(column_labels[column])
+                cut_off = reference_ranker.get(ranker)
 
-            # loop ensures we have the top 3 ENTRIES
-        for x in range(0, len(match_df)):
-                entry = []
-                for i in range(1, len(match_df.columns)):
-                    list_of_vals = match_df.iloc[:, i].tolist()
-                    v = list_of_vals[x]
-                    entry.append(v)
-                list_params.append(entry)
-
-        list_people_id=[]
-        list_netID = []
-        list_names = []
-        list_major=[]
-        list_year=[]
-        list_rescollege=[]
-        list_profile_picture=[]
-        list_user_id=[]
-        #for each matched row, find the correct netID and name by matching with id and add it to matched row
-        #for each matched row, find the correct netID and name by matching with id and add it to matched row
-        for parameters in list_params:
-            id = Keys_from_values(reference_parameters, parameters)
-            list_people_id.append(id)
-
-        for id in list_people_id:
-            excess_list = reference_excess[id]
-            list_netID.append(excess_list[0])
-            list_names.append(excess_list[1])
-            list_major.append(excess_list[2])
-            list_year.append(excess_list[3])
-            list_rescollege.append(excess_list[4])
-            list_profile_picture.append(excess_list[5])
-            list_user_id.append(excess_list[6])
-
-        match_df.insert(0, "netID", list_netID)  # line of code adds the name into the matched results df
-        match_df.insert(1, "names", list_names)  # line of code adds the name into the matched_results df
-        match_df.insert(2, "major", list_major)  # line of code adds the name into the matched_results df
-        match_df.insert(3, "year", list_year)  # line of code adds the name into the matched results df
-        match_df.insert(4, "rescollege", list_rescollege)  # line of code adds the name into the matched_results df
-        match_df.insert(5, "profile_picture", list_profile_picture)  # line of code adds the name into the matched_results df
-        match_df.insert(6, 'user_id', list_user_id)
-        match_df["days"] = match_df["days"].astype(object)  # columns that will eventually store lists must have a different datatype --> "objects"
-        match_df['workout_type'] = match_df["workout_type"].astype(object)
-
-        # unstringing days and type of workouts
-
-        updated_days = []
-
-        for days in match_df.loc[:, "days"]:
-            #days is in string format of list
-            days=days.strip('[]').split(',')
-            day_temp=[]
-            for day in days:
-                day=day.strip()
-                if day == "'1'":
-                    day_temp.append('Monday')
-                elif day == "'2'":
-                    day_temp.append('Tuesday')
-                elif day == "'3'":
-                    day_temp.append('Wednesday')
-                elif day == "'4'":
-                    day_temp.append('Thursday')
-                elif day == "'5'":
-                    day_temp.append('Friday')
-                elif day == "'6'":
-                    day_temp.append('Saturday')
+                if rel_val >= cut_off:
+                    list_best_match_vals.append(rel_val)
                 else:
-                    day_temp.append('Sunday')
-            updated_days.append(day_temp)
-        updated_work_type = []
+                    break
+            else:
+                rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
+                ranker = priorities.get(column_labels[column])
+                cut_off = reference_ranker.get(ranker)
 
-        for work in match_df.loc[:, "workout_type"]:
-            work = work.strip('][').split(', ')
-            work_temp=[]
-            for type in work:
-                type=type.strip()
-                if type == "'1'":
-                    work_temp.append("Running")
-                elif type == "'2'":
-                    work_temp.append("Lifting")
-                elif type == "'3'":
-                    work_temp.append("Biking")
+                if rel_val >= cut_off:
+                    list_best_match_vals.append(rel_val)
                 else:
-                    work_temp.append("Swimming")
-            updated_work_type.append(work_temp)
+                    break
 
-        for index in range(0, len(match_df)):
-            match_df.at[index, "workout_type"] = updated_work_type[index]
-            match_df.at[index, "days"] = updated_days[index]
-        # matched results is the final dataframe that includes the person the user matches with
-        matched_people=match_df.values.tolist()
-        # change match scores to percentages
-        for entry in matched_people:
-            entry[7]=entry[7]/max*100
-    return matched_people
+        if len(list_best_match_vals) == len(column_labels) - 1:
+            average = mean(list_best_match_vals)
+            list_best_match_vals.append(average)
+            Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
+            list_best_match_vals.append(Dfrq_index)
+            ListOfMatches.append(list_best_match_vals)
+
+    #ListOfMatches is a nested list containing
+
+
+    n = 0
+    while n < len(ListOfMatches): #will stop the loop when we have looped through n-1 times
+        n += 1 #counter that ensures we are below n
+        for i in list(range(len(ListOfMatches) - 1)): #for every index value in list of index values
+          if ListOfMatches[i][-2] < ListOfMatches[i+1][-2]: #Conditional statement that compares if i and its adjacent value
+            ListOfMatches[i], ListOfMatches[i+1] = ListOfMatches[i+1], ListOfMatches[i] #swaps if adjacent value is smaller
+
+
+    row_index = []
+    for entry in ListOfMatches:
+        val = entry[-1]
+        row_index.append(val)
+
+    presentation_list = []
+    for index in row_index:
+        row = Dfrq.iloc[index].tolist()
+        presentation_list.append(row)
+
+    return presentation_list

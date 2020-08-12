@@ -7,8 +7,6 @@ import pandas
 import csv
 from .email import mail
 from .matching_algorithm import get_matches
-from .matching_algorithm import to_numbers
-from .matching_algorithm import to_words
 # Create your views here.
 
 @login_required(login_url='/accounts/signup')
@@ -21,8 +19,7 @@ def remove(request):
 @login_required(login_url='/accounts/signup')
 def profile(request,request_id):
     buddyrequest=BuddyRequest.objects.get(id=request_id)
-    days,workout_type=to_words(buddyrequest.days,buddyrequest.workout_type)
-    return render(request,'buddyrequest/profile.html',{'buddyrequest':buddyrequest,'days':days,'workout_type':workout_type})
+    return render(request,'buddyrequest/profile.html',{'buddyrequest':buddyrequest})
 
 def partner_match(request,partner_id):
     print(partner_id)
@@ -107,13 +104,15 @@ def matches(request):
         profile_picture=request.POST['profile_picture']
         user=request.user
         #list of data
-        days_int,workout_type_int=to_numbers(days,workout_type)
-        user_data_list=[netID,name,major,year,rescollege,profile_picture,days_int,duration,workout_type_int,time_zone]
+        user_data_list=[netID,name,major,year,rescollege,profile_picture,days,duration,workout_type,time_zone]
 
         #list of requests in dataframe
-        #put this after search for matches so user doesn't match with themselves
-        req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
-        days=days_int,duration=duration,workout_type=workout_type_int,time_zone=time_zone,user=user)
+        if profile_picture=='':
+            req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
+            days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
+        else:
+            req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
+            days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
         req_user.save()
         if len(requestsList) < 1:
             return render(request,'buddyrequest/matches.html')
