@@ -117,36 +117,39 @@
 
   <div class="row mb-2">
     {% for entry in matched_people %}
-    <div class="col-md">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <h3 class="mb-0">{{entry.1}}</h3>
-          <strong class="d-inline-block mb-2 text-primary">Residential College</strong>
-          <div class="mb-1 text-muted">{{entry.4}}</div>
-          <strong class="d-inline-block mb-2 text-primary">Time Zone</strong>
-          <div class="mb-1 text-muted">{{entry.11}}</div>
-          <strong class="d-inline-block mb-2 text-primary">Availability</strong>
-          <div class="mb-1 text-muted">{{entry.8}}</div>
-          <strong class="d-inline-block mb-2 text-primary">Workout Type</strong>
-          <div class="mb-1 text-muted">{{entry.10}}</div>
-          <strong class="d-inline-block mb-2 text-primary">Duration</strong>
-          <div class="mb-1 text-muted">{{entry.9}}</div>
-          <a href="javascript:{document.getElementById('partner_match{{entry.6}}').submit()}">
-            <button class="button btn-secondary btn-large btn-block">
-              Accept
-            </button>
-          </a>
+      {% if forloop.counter0 > 3 %}
+      {% else %}
+        <div class="col-md">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <h3 class="mb-0">{{entry.1}}</h3>
+              <strong class="d-inline-block mb-2 text-primary">Residential College</strong>
+              <div class="mb-1 text-muted">{{entry.5}}</div>
+              <strong class="d-inline-block mb-2 text-primary">Time Zone</strong>
+              <div class="mb-1 text-muted">{{entry.10}}</div>
+              <strong class="d-inline-block mb-2 text-primary">Availability</strong>
+              <div class="mb-1 text-muted">{{entry.7}}</div>
+              <strong class="d-inline-block mb-2 text-primary">Workout Type</strong>
+              <div class="mb-1 text-muted">{{entry.9}}</div>
+              <strong class="d-inline-block mb-2 text-primary">Duration</strong>
+              <div class="mb-1 text-muted">{{entry.8}}</div>
+              <a href="javascript:{document.getElementById('partner_match{{entry.11}}').submit()}">
+                <button class="button btn-secondary btn-large btn-block">
+                  Accept
+                </button>
+              </a>
 
-          <form id="partner_match{{entry.6}}" action="{% url 'partner_match' entry.6 %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden"/>
-          </form>
+              <form id="partner_match{{entry.11}}" action="{% url 'partner_match' entry.11 %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden"/>
+              </form>
 
-        </div>
-        <div class="col-auto d-none d-lg-block">
-        </div>
-      </div>
-      </div>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+            </div>
+          </div>
+          </div>
+        {% endif %}  
       {% endfor %}
     </div>
   {% else %}

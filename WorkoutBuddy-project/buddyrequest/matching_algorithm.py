@@ -19,6 +19,13 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
         dictionary[item] = value[key.index(item)]
     return dictionary
 
+
+#   todo: have the weights adjust by the quality of the match reviewed by the user using ML
+#   T = priorities given to each factor
+#   P = ability for the ML to have very ideal weights for the matchign algorithm
+#   E = score given by user from 1 to 10
+
+#   todo: change algorithm to have weighted averages
 def get_matches(user_data_list, requests_list):
     requestsdf=pd.DataFrame(requests_list)
 
@@ -34,22 +41,22 @@ def get_matches(user_data_list, requests_list):
         name_netID.append(h)
 
     id_name_dict = dict_creator(id_list, name_netID)
-    user_data_list = requestsdf.iloc[0, :].tolist()
-
-
+    # user_data_list = requestsdf.iloc[0, :].tolist()
+    print(user_data_list)
     #dataframe of requests
     pd.set_option("display.max_rows", None, "display.max_columns", None)
 
-
-    inputdays = "[Tuesday, Wednesday, Thursday]"
-    inputworkouttype = "[Lifting]"
-
-    Dfuser = pd.DataFrame({"days": [inputdays], "duration": user_data_list[6], "workout_type": [inputworkouttype], "time_zone": user_data_list[8]})
+    print(user_data_list)
+    for element in user_data_list:
+        print(type(element))
+    Dfuser = pd.DataFrame({"days": [user_data_list[6]], "duration": [user_data_list[7]], "workout_type": [user_data_list[8]], "time_zone": [user_data_list[9]]})
+    print(Dfuser)
     Dfrq = requestsdf
 
 
-    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id'])
-
+    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','profile_picture','user_id'])
+    # print("Dfrq1: ")
+    # print(Dfrq1)
 
     #Mock priorities dictionary
     priorities = {"days": 2, "duration": 1, "time_zone": 3}
@@ -64,17 +71,16 @@ def get_matches(user_data_list, requests_list):
 
     matching_df_request = pd.DataFrame({})
     Dfrq_row_list = []
-
+    #guarantees match has same type of workout
     for index_row in range(len(Dfrq1)):
         if fuzz.ratio(workout, Dfrq1.iloc[index_row]["workout_type"]) == 100:
             row = Dfrq1.iloc[index_row]
             matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
                                                                     #actualy matches
             Dfrq_row_list.append(index_row)
-
+    print("Dfuser")
+    print(Dfuser)
     matching_df_request["Dfrq_index"] = Dfrq_row_list
-
-
     if len(matching_df_request) > 0:
         matching_df = matching_df_request.drop("workout_type", axis=1) #we no longer need to have workouts as a parameter since we already made sure
                                                                          #users had the same workout.
@@ -102,6 +108,9 @@ def get_matches(user_data_list, requests_list):
                     break
             else:
                 rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
+                print(column_labels)
+                print("column:")
+                print(column)
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
 
@@ -137,5 +146,6 @@ def get_matches(user_data_list, requests_list):
     for index in row_index:
         row = Dfrq.iloc[index].tolist()
         presentation_list.append(row)
-
+    print("Presentation List: ")
+    print(presentation_list)
     return presentation_list

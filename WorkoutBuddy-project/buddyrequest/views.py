@@ -21,6 +21,7 @@ def profile(request,request_id):
     buddyrequest=BuddyRequest.objects.get(id=request_id)
     return render(request,'buddyrequest/profile.html',{'buddyrequest':buddyrequest})
 
+
 def partner_match(request,partner_id):
     print(partner_id)
     if request.method=="POST":
@@ -123,6 +124,7 @@ def matches(request):
                 return render(request,'buddyrequest/matches.html')
 
         print('WE REACHED THE END')
+        # matched_people=matched_people[0:3]
         matched=True
         if len(matched_people) == 0:
             matched=False
