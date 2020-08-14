@@ -10,7 +10,7 @@ def mail(name_partner, netID_user,netID_partner, user=False):
 
     # sent_email = netID_user + "@princeton.edu"
     # contact = netID_partner + "@princeton.edu"
-    sent_email = 'el25' + "@princeton.edu"
+    sent_email = 'vkonuru' + "@princeton.edu"
     contact = 'vkonuru' + "@princeton.edu"
 
     tiger_gainz_pass = "WorkoutTinder123"

@@ -193,7 +193,7 @@
     <p>***Group matchmaking is a future feature that will be added later.</p>
     <hr class="my-4">
     {% load base_tags %}
-    {% if user|check_partners %}
+    {% if user|check_partner %}
     <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
     {% elif user|check_requests %}
     <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">See Waiting List</a>

@@ -42,19 +42,18 @@ def get_matches(user_data_list, requests_list):
 
     id_name_dict = dict_creator(id_list, name_netID)
     # user_data_list = requestsdf.iloc[0, :].tolist()
-    print(user_data_list)
     #dataframe of requests
     pd.set_option("display.max_rows", None, "display.max_columns", None)
 
     print(user_data_list)
     for element in user_data_list:
         print(type(element))
-    Dfuser = pd.DataFrame({"days": [user_data_list[6]], "duration": [user_data_list[7]], "workout_type": [user_data_list[8]], "time_zone": [user_data_list[9]]})
+    Dfuser = pd.DataFrame({"days": [user_data_list[0]], "duration": [user_data_list[1]], "workout_type": [user_data_list[2]], "time_zone": [user_data_list[3]]})
     print(Dfuser)
     Dfrq = requestsdf
 
 
-    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','profile_picture','user_id'])
+    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','profile_picture','user_id','partner_id'])
     # print("Dfrq1: ")
     # print(Dfrq1)
 

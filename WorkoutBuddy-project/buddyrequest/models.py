@@ -3,17 +3,18 @@ from django.contrib.auth.models import User
 import json
 # Create your models here.
 class BuddyRequest(models.Model):
-    netID=models.CharField(max_length=50)
-    name=models.CharField(max_length=50)
-    major=models.CharField(max_length=50)
-    year=models.CharField(max_length=50)
-    rescollege=models.CharField(max_length=50)
-    profile_picture=models.ImageField(upload_to='images/',default='default_profile_picture.png')
-    days=models.CharField(max_length=300)
-    duration=models.CharField(max_length=50)
-    workout_type=models.CharField(max_length=50)
-    time_zone=models.CharField(max_length=50)
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    netID=models.CharField(max_length=50,null=True)
+    name=models.CharField(max_length=50, null=True)
+    major=models.CharField(max_length=50, null=True)
+    year=models.CharField(max_length=50, null=True)
+    rescollege=models.CharField(max_length=50,null=True)
+    profile_picture=models.ImageField(upload_to='images/',null=True,default='default_profile_picture.png')
+    days=models.CharField(max_length=300,null=True)
+    duration=models.CharField(max_length=50,null=True)
+    workout_type=models.CharField(max_length=50,null=True)
+    time_zone=models.CharField(max_length=50,null=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE, related_name='user',null=True)
+    partner=models.ForeignKey(User,on_delete=models.CASCADE,related_name='partner',null=True)
 
     def set_days(self,x):
         self.days=json.dumps(x)

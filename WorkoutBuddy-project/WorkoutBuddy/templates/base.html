@@ -181,7 +181,7 @@
                 <li class="nav-item active">
                     {% if user.is_authenticated %}
                     {% load base_tags %}
-                    {% if user|check_partners %}
+                    {% if user|check_partner %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'partner' %}">Partner</a>
                 </li>
