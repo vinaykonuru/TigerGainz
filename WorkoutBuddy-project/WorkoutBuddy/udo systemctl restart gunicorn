@@ -1,0 +1,21 @@
+[0;1;32m●[0m gunicorn.service - gunicorn daemon
+   Loaded: loaded (/etc/systemd/system/gunicorn.service; enabled; vendor preset: enabled)
+   Active: [0;1;32mactive (running)[0m since Sun 2020-08-16 18:16:24 UTC; 5min ago
+ Main PID: 32529 (gunicorn)
+    Tasks: 4 (limit: 1152)
+   CGroup: /system.slice/gunicorn.service
+           ├─32529 /home/vinay/tigergainz-project/venv/bin/python /home/vinay/tigergainz-project/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/vinay/tigergainz-project/WorkoutBuddy/WorkoutBuddy-project/WorkoutBuddy.sock WorkoutBuddy.wsgi:application
+           ├─32553 /home/vinay/tigergainz-project/venv/bin/python /home/vinay/tigergainz-project/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/vinay/tigergainz-project/WorkoutBuddy/WorkoutBuddy-project/WorkoutBuddy.sock WorkoutBuddy.wsgi:application
+           ├─32555 /home/vinay/tigergainz-project/venv/bin/python /home/vinay/tigergainz-project/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/vinay/tigergainz-project/WorkoutBuddy/WorkoutBuddy-project/WorkoutBuddy.sock WorkoutBuddy.wsgi:application
+           └─32556 /home/vinay/tigergainz-project/venv/bin/python /home/vinay/tigergainz-project/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/vinay/tigergainz-project/WorkoutBuddy/WorkoutBuddy-project/WorkoutBuddy.sock WorkoutBuddy.wsgi:application
+
+Aug 16 18:16:24 TigerGainz gunicorn[32529]: [2020-08-16 18:16:24 +0000] [32529] [INFO] Using worker: sync
+Aug 16 18:16:24 TigerGainz gunicorn[32529]: [2020-08-16 18:16:24 +0000] [32553] [INFO] Booting worker with pid: 32553
+Aug 16 18:16:24 TigerGainz gunicorn[32529]: [2020-08-16 18:16:24 +0000] [32555] [INFO] Booting worker with pid: 32555
+Aug 16 18:16:24 TigerGainz gunicorn[32529]: [2020-08-16 18:16:24 +0000] [32556] [INFO] Booting worker with pid: 32556
+Aug 16 18:16:26 TigerGainz gunicorn[32529]: Invalid HTTP_HOST header: '167.172.150.4'. You may need to add '167.172.150.4' to ALLOWED_HOSTS.
+Aug 16 18:16:26 TigerGainz gunicorn[32529]: Bad Request: /
+Aug 16 18:16:26 TigerGainz gunicorn[32529]:  - - [16/Aug/2020:18:16:26 +0000] "GET / HTTP/1.0" 400 58442 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36"
+Aug 16 18:20:56 TigerGainz gunicorn[32529]: Invalid HTTP_HOST header: '167.172.150.4'. You may need to add '167.172.150.4' to ALLOWED_HOSTS.
+Aug 16 18:20:56 TigerGainz gunicorn[32529]: Bad Request: /
+Aug 16 18:20:56 TigerGainz gunicorn[32529]:  - - [16/Aug/2020:18:20:56 +0000] "GET / HTTP/1.0" 400 58442 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36"

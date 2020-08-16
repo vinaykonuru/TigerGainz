@@ -25,7 +25,7 @@ SECRET_KEY = 'l#lfb-a-+=&_j#dh&v_&du6m(_ct)r1h0=(9$12e#suu7k#_s1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['167.172.150.4']
 
 
 # Application definition
@@ -109,8 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -123,12 +122,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-# STATICFILES_DIRS=[
-#     os.path.join(BASE_DIR, 'WorkoutBuddy/static/')
-# ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -137,7 +130,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
