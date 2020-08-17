@@ -45,9 +45,9 @@ def get_matches(user_data_list, requests_list):
     #dataframe of requests
     pd.set_option("display.max_rows", None, "display.max_columns", None)
 
-    print(user_data_list)
-    for element in user_data_list:
-        print(type(element))
+#     print(user_data_list)
+#     for element in user_data_list:
+#         print(type(element))
     Dfuser = pd.DataFrame({"days": [user_data_list[0]], "duration": [user_data_list[1]], "workout_type": [user_data_list[2]], "time_zone": [user_data_list[3]]})
     print(Dfuser)
     Dfrq = requestsdf
@@ -93,58 +93,60 @@ def get_matches(user_data_list, requests_list):
     column_labels = matching_df_request.columns.tolist()
 
     ListOfMatches = []
-    for row in range(len(matching_df_request)):
-        list_best_match_vals = []
-        for column in range(len(column_labels)-1):
-            if column_labels[column] == "days":
-                rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
-                ranker = priorities.get(column_labels[column])
-                cut_off = reference_ranker.get(ranker)
+for row in range(len(matching_df_request)):
+    list_best_match_vals = []
+    for column in range(len(column_labels)-1):
+        if column_labels[column] == "days":
+            rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
+            ranker = priorities.get(column_labels[column])
+            cut_off = reference_ranker.get(ranker)
 
-                if rel_val >= cut_off:
-                    list_best_match_vals.append(rel_val)
-                else:
-                    break
+            weighted_average = (cut_off/100) * rel_val
+
+            if rel_val >= cut_off:
+                list_best_match_vals.append(weighted_average)
             else:
-                rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
-                print(column_labels)
-                print("column:")
-                print(column)
-                ranker = priorities.get(column_labels[column])
-                cut_off = reference_ranker.get(ranker)
+                break
+        else:
+            rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
+            ranker = priorities.get(column_labels[column])
+            cut_off = reference_ranker.get(ranker)
 
-                if rel_val >= cut_off:
-                    list_best_match_vals.append(rel_val)
-                else:
-                    break
+            weighted_average = (cut_off / 100) * rel_val
 
-        if len(list_best_match_vals) == len(column_labels) - 1:
-            average = mean(list_best_match_vals)
-            list_best_match_vals.append(average)
-            Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
-            list_best_match_vals.append(Dfrq_index)
-            ListOfMatches.append(list_best_match_vals)
+            if rel_val >= cut_off:
+                list_best_match_vals.append(weighted_average)
+            else:
+                break
 
-    #ListOfMatches is a nested list containing
-
-
-    n = 0
-    while n < len(ListOfMatches): #will stop the loop when we have looped through n-1 times
-        n += 1 #counter that ensures we are below n
-        for i in list(range(len(ListOfMatches) - 1)): #for every index value in list of index values
-          if ListOfMatches[i][-2] < ListOfMatches[i+1][-2]: #Conditional statement that compares if i and its adjacent value
-            ListOfMatches[i], ListOfMatches[i+1] = ListOfMatches[i+1], ListOfMatches[i] #swaps if adjacent value is smaller
+    if len(list_best_match_vals) == len(column_labels) - 1: #if every single column managed to pass the cut_off val
+        average = mean(list_best_match_vals)
+        list_best_match_vals.append(average)
+        Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
+        list_best_match_vals.append(Dfrq_index)
+        ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
 
 
-    row_index = []
-    for entry in ListOfMatches:
-        val = entry[-1]
-        row_index.append(val)
+#ListOfMatches is a nested list containing
 
-    presentation_list = []
-    for index in row_index:
-        row = Dfrq.iloc[index].tolist()
-        presentation_list.append(row)
-    print("Presentation List: ")
-    print(presentation_list)
-    return presentation_list
+n = 0
+while n < len(ListOfMatches): #will stop the loop when we have looped through n-1 times
+    n += 1 #counter that ensures we are below n
+    for i in list(range(len(ListOfMatches) - 1)): #for every index value in list of index values
+      if ListOfMatches[i][-2] < ListOfMatches[i+1][-2]: #Conditional statement that compares if i and its adjacent value
+                                                        #-2 ensures that the sorting is based on the final weighted average
+                                                        #for each row
+        ListOfMatches[i], ListOfMatches[i+1] = ListOfMatches[i+1], ListOfMatches[i] #swaps if adjacent value is smaller
+
+
+row_index = []
+for entry in ListOfMatches:
+    val = entry[-1]
+    row_index.append(val)
+
+presentation_list = []
+for index in row_index:
+    row = Dfrq.iloc[index].tolist()
+    presentation_list.append(row)
+
+return presentation_list
