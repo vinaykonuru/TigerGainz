@@ -45,13 +45,9 @@ def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
-        partnerList=list(BuddyRequest.objects.all().values())
         for entry in requestsList:
             print(request.user)
             if request.user.id==(entry['user_id']):
-                return redirect('home')
-        for entry in partnerList:
-            if request.user.id==entry['user_id']:
                 return redirect('home')
 
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
@@ -61,7 +57,9 @@ def matches(request):
             userdata=userdatadf.loc[netID]
         except KeyError:
             return redirect('home')
-
+        # preferences=request.POST['preferences']
+        preferences=[0,1,2]
+        print(preferences)
         name=userdata['name']
         major=userdata['major']
         year=userdata['year']
@@ -75,7 +73,7 @@ def matches(request):
         user=request.user
 
         #data used for match
-        user_data_list=[days,duration,workout_type,time_zone]
+        user_data_list=[preferences,days,duration,workout_type,time_zone]
 
         #if there is no profile picture, use the default one from the constructor
         if profile_picture=='':
