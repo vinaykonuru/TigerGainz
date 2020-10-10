@@ -59,7 +59,6 @@ sqlparse==0.3.1
 toml==0.10.1
 twilio==6.42.0
 typed-ast==1.4.1
-surllib3==1.25.9
 virtualenv==20.0.23
 wrapt==1.12.1
 yapf==0.30.0
