@@ -2,49 +2,72 @@
 
 {% block content %}
 
-<style>
-  .signup-page-font {
-      font-family: 'Noto Sans JP',
-          sans-serif;
-      margin-top: 60px;
-  }
-</style>
+<head>
+  {% load static %}
+</head>
 
-<div class="container signup-page-font text-center">
-  <div class="jumbotron">
-      <br />
-      <br />
-      {% if error %}
-      {{error}}
-      {% endif %}
-      <br />
-      <br />
-      <hr class="my-4">
-      <h1><strong>Sign Up</strong></h1>
-      <hr class="my-4">
-      <form method="post" action="{% url 'signup' %}">
-          {% csrf_token %}
+<body>
 
-          <p class="lead2"><strong>NetID:</strong></p>
-          <hr class="my-4">
-          <input type="text" name="username" />
-          <hr class="my-4">
-
-          <p class="lead3"><strong>Password:</strong></p>
-          <hr class="my-4">
-          <input type="password" name="password1" />
-          <hr class="my-4">
-
-          <p class="lead2"><strong>Confirm Password:</strong></p>
-          <hr class="my-4">
-          <input type="password" name="password2" />
-          <hr class="my-4">
-
-          <input class="btn btn-secondary" type="submit" value="Sign Up">
-          <hr class="my-4">
-      </form>
+  <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/765603531939250186/Sign_Up_Page.jpg" class="img.responsive" style="width:55%">
   </div>
-</div>
+
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  </body>
+
+  {% if error %}
+  {{error}}
+  {% endif %}
+  <br />
+  <br />
+  <div class="border-black">
+    <h1 class="display-5"><strong>Sign Up</strong></h1>
+  </div>
+  <br />
+  <br />
+  <form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <div class="jumbotron">
+      <div class="border-white">
+        <p class="lead">NetId:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+            <input type="text" name="username" />
+          </div>
+        </div>
+        <hr class="my-4">
+
+        <br />
+        <br />
+
+        <p class="lead">Password:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+            <input type="password" name="password1" />
+          </div>
+        </div>
+        <hr class="my-4">
+
+        <br />
+        <br />
+
+        <p class="lead">Confirm Password:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+            <input type="password" name="password2" />
+          </div>
+        </div>
+        <hr class="my-4">
+
+        <input class="btn btn-lg btn-secondary" type="submit" value="Sign Up">
+  </form>
+  </div>
+  </div>
+
+</body>
 
 
 {% endblock %}
