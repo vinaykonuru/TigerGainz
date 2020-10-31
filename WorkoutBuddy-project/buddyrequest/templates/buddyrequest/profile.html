@@ -1,41 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container text-center">
+
+<head>
+  {% load static %}
+  <title>TigerGainz - Partner Page</title>
+
+  <!--Page Stylesheets-->
+  <link href="PartnerStyle.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/737054723936485426/Matches_2.jpg" class="img.responsive" style="width:55%">
+  </div>
+
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  </body>
+
+  <div class="border-black">
+    <h1 class="display-5"><strong>Partner Info</strong></h1>
+  </div>
+
   <div class="jumbotron">
-    <div class="center">
-      <br><br><br><br>
-      <hr class="my-4">
-      <h1 class="display-5"><strong>Partner Information</strong></h1>
-      <hr class="my-4">
-      <p class="lead2"><strong>Name:</strong></p>
-      <hr class="my-4">
-      <p>{{ profile_details.name }} </p>
-      <hr class="my-4">
-      <p class="lead3"><strong>Class:</strong></p>
-      <hr class="my-4">
-      <p>{{ profile_details.year }} </p>
-      <hr class="my-4">
-      <p class="lead2"><strong>Residential College:</strong></p>
-      <hr class="my-4">
-      <p>{{ profile_details.rescollege }} </p>
-      <hr class="my-4">
-      <p class="lead3"><strong>Timezone:</strong></p>
-      <hr class="my-4">
-      <p>{{ profile_details.time_zone }} </p>
-      <hr class="my-4">
-      <p class="lead2"><strong>Availability:</strong></p>
-      <hr class="my-4">
-      <p>{{ days }} </p>
-      <hr class="my-4">
-      <p class="lead3"><strong>Workout Type</strong></p>
-      <hr class="my-4">
-      <p>{{ workout_type }} </p>
-      <hr class="my-4">
-      <p class="lead2"><strong>Duration:</strong></p>
-      <hr class="my-4">
-      <p>{{ profile_details.duration }} </p>
-      <hr class="my-4">
+    <div class="border-white">
+      <div class="border-orange">
+        <div class="jumbotron white-background">
+
+          <div class="column">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary">Name</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ profile_details.name }} </p>
+              </div>
+              <strong class="d-inline-block mb-2 text-primary">Class</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ profile_details.year }} </p>
+              </div>
+              <strong class="d-inline-block mb-2 text-primary">Residential College</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ profile_details.rescollege }} </p>
+              </div>
+              <strong class="d-inline-block mb-2 text-primary">Timezone</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ profile_details.time_zone }} </p>
+              </div>
+              <strong class="d-inline-block mb-2 text-primary">Availability</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ days }} </p>
+              </div>
+              <strong class="d-inline-block mb-2 text-primary">Workout Type</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ workout_type }} </p>
+              </div>
+              <strong class="d-inline-block mb-2 text-primary">Duration</strong>
+              <div class="mb-1 text-muted">
+                <p>{{ profile_details.duration }} </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+</body>
 {% endblock %}
