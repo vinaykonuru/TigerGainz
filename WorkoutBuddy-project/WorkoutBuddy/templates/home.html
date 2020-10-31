@@ -2,108 +2,26 @@
 {% block content %}
 {% load static %}
 
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
+<head>
 
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
+  <title>TigerGainz - Home</title>
 
-    .cover-container {
-        font-family: 'Noto Sans JP',
-            sans-serif;
-        margin-top: 60px;
-    }
+  <!--Page Stylesheets-->
+  <link href="HomepageStyle.css" rel="stylesheet">
 
-    .cover-heading {
-        background-color: #000;
-        color: #fff;
-        padding: 20px;
-        border-color: #fff;
-    }
-
-    .lead {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: rgb(0, 0, 0);
-        color: #fff;
-    }
-
-
-    .display-5 {
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0);
-    }
-
-
-    .bg-logo {
-        background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735594203811151942/Logo.jpg');
-        background-attachment: local;
-        background-position: center;
-        background-size: unset;
-        background-size: 70%;
-        height: unset;
-        height: max-content;
-
-    }
-
-    .btn-secondary:hover,
-    .btn-secondary:focus {
-        background-color: #000;
-    }
-
-    .btn-secondary {
-        color: #fff;
-        text-shadow: none;
-        /* Prevent inheritance from `body` */
-        background-color: #ff8f00;
-        ;
-        border: .05rem solid #ff8f00;
-        ;
-    }
-
-    .lead2 {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: #000;
-        color: #fff;
-    }
-
-    .lead3 {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: #ff8f00;
-        color: #fff;
-    }
-
-    .list {
-        margin: auto;
-        background-color: rgba(255, 255, 255, 0.5);
-        padding: 10px;
-        border-radius: 20px;
-        max-width: 600px;
-        background-position-y: 50%;
-    }
-</style>
+</head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $("#myModal").modal('show');
-    });
+  $(document).ready(function() {
+    $("#myModal").modal('show');
+  });
 </script>
 
+<body>
 <!--Popup-->
+
 <div id="myModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -128,130 +46,254 @@
   </div>
 </div>
 
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md- text-center bg-logo">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal"><br /><br /><br /></h1>
-    </div>
-    <div class="product-device shadow-sm d-none d-md-block"></div>
-    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+<div class="get-started">
+  {% load base_tags %}
+  {% if user|check_partner %}
+  <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
+  {% elif user|check_requests %}
+  <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">See Waiting List</a>
+  {% else %}
+  <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Get Started</a>
+  {% endif %}
+</div>
+
+<div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/735594203811151942/Logo.jpg" class="img.responsive" style="width:55%">
 </div>
 
 <!--What is TigerGainz?-->
 
 <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 </body>
 
-<div class="jumbotron">
-    <hr class="my-4">
-    <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
-    <p>TigerGainz is a workout buddy and group*** matchmaker for Princetonians that:
-        <hr class="my-4">
-    <p class="lead">1. Analyzes your workout preferences and stores them in our TigerGainz directory </p>
-    <p class="lead">2. Finds Princetonians with the most FITTING workout preferences to yours </p>
-    <p class="lead">3. Gives you their profiles so you can decide who to reach out to </p>
-    <p class="lead">4. Pairs you with your new workout buddy (or group) IF you “Accept” a match and sends confirmation
-        emails to you and your buddy. *This also means that you might receive a “random” email from a new workout buddy
-        who has decided to choose you. </p>
-    <p class="lead">5. Gets you started on your exercising adventure!</p>
-    </p>
-    <hr class="my-4">
-    <p>With an <i>instantaneous and accurate algorithm</i> , TigerGainz removes the usual stress, uncertainty,
-        and
-        awkwardness that comes with finding workout buddies and groups. </p>
 
-    <p>As an added bonus, TigerGainz's directory permits you to see the profiles of all
-        workout-buddy-or-group-interested Princetonians (not just those
-        you matched with).</p>
-
-    <hr class="my-4">
-
-    <p>By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians <i>stay
-            active</i> through <b>better
-            exercise experiences</b> that are:</p>
-
-    <div class="media p-3">
-        <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276124518318160/Side_Icon_Left.png"
-            class="align-self-center mr-3" style="width:20%">
-        <div class="media-body list">
-            <p><b>- more consistent</b> because buddies and groups keep each other accountable</p>
-            <p><b>- of higher quality</b> since studies show that working out with others can <i>increase the
-                    duration
-                    and
-                    intensity by up to 200% (Kansas State University)</i></p>
-            <p><b>- more fun,</b> whether you are on- or off-campus</p>
-        </div>
-        <img src="https://cdn.discordapp.com/attachments/735319507341672642/736276156071936062/Side_Icon_Right.png"
-            class="align-self-center mr-3" style="width:20%;">
-    </div>
-    <p><strong>Happy Exercising!</strong></p>
-    <p>***Group matchmaking is a future feature that will be added later.</p>
-    <hr class="my-4">
-    {% load base_tags %}
-    {% if user|check_partner %}
-    <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
-    {% elif user|check_requests %}
-    <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">See Waiting List</a>
-    {% else %}
-    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Get Started</a>
-    {% endif %}
-    <hr class="my-4">
-    <h1 class="display-5"><strong>How Does it Work?</strong></h1>
-    <hr class="my-4">
-    <p class="lead2">Upon filling out the secure sign up form (see "Get Started" button above), TigerGainz will use
-        an algorithm
-        that <b>aligns
-            preferences--including workout days, exercise type, time zone, and frequency--</b>to find the most
-        fitting
-        workout partners (or groups***) from our database of participating Princetonians.
-    </p>
-    <p>Once matches have been made, you’ll get to see the profiles, preferences, and, most importantly, contact
-        information of your best potential workout buddies or groups***.
-    </p>
-    <p><strong>Then, it’s up to you to reach out to your new workout buddy or group! If you like one of your prospective
-            matches and want to be their workout partner, please click the “Accept” button under their profile. This
-            will remove you from the request database. </strong>
-    </p>
-    <p>
-        This will send an email to your new workout buddy or group telling them that you are their new workout partner
-        and it will give them your email. On their end, they can view your profile if they log into the TigerGainz
-        website. Note: your new workout partner OR you, if you are the person who receives the match, will ALSO be
-        removed from the request database.
-    </p>
-    <p>Be on the lookout for these emails from no.reply.tigergainz@gmail.com </p>
-    <!--still need to insert pics of emails here-->
-    <p>
-        (The top sample email is an example of an email the person in the directory would receive. The bottom sample
-        emails is a confirmation email for the person actively seeking a match with the algorithm)
-    </p>
-    <p>
-        Alternatively, if you’re still interested in other options, you can check out the TigerGainz directory for all
-        workout-buddy-or-group-interested Princetonians.
-    </p>
-    <p>
-        If you are no longer interested in finding Princeton workout buddies or groups, we will remove you from our
-        database. If you wish to be removed from the database, please go to the Database section of our website and
-        click “Take me off the database please” button.
-    </p>
-    <p>
-        Conversely, if you are unsatisfied with your matches or have no matches, TigerGainz will place you in our
-        waiting list database where you’ll wait for someone to choose you as their workout buddy. If someone “Accepts”
-        you as a match, TigerGainz will notify you via email of your new workout buddy and give you their contact
-        information. Additionally, you can view the workout preferences and profile of your new workout buddy on the
-        TigerGainz website in the “Matches” section. Please note that if someone chooses you, you will automatically be
-        removed from the waiting list.
-    </p>
-    <p>
-        On the other hand, if you don’t want to wait for someone to choose you, you can remove yourself from the
-        database and then resubmit the form to see if you have any matches. To do this, please go to the Database
-        section of our website and click “Take me off the database please” button. Then go to the sign up form and
-        complete it again to (hopefully) find new matches.
-    </p>
-    <p>***Group matchmaking is a future feature that will be added later.</p>
-    <p class="lead3">If you wish to be removed from the database, please click the "Take me off the database
-        please!" button on the "database" page.
-    </p>
-    <hr class="my-4">
+<div class="border-black">
+  <h1 class="display-5"><strong>What is TigerGainz?</strong></h1>
 </div>
+<br />
+<br />
+
+
+
+<div class="jumbotron">
+  <div class="border-white">
+    <p class="lead">TigerGainz is a workout buddy and group matchmaker for Princetonians that:</p>
+    <hr class="my-4">
+    <div class="border-orange">
+      <div class="jumbotron white-background">
+        <div class="row">
+          <div class="col-lg-4">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <rect width="4" height="5" x="1" y="10" rx="1" />
+              <rect width="4" height="9" x="6" y="6" rx="1" />
+              <rect width="4" height="14" x="11" y="1" rx="1" />
+            </svg>
+            <p><strong>Analyzes your workout preferences</strong></p>
+          </div>
+          <div class="col-lg-4">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+              <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+            </svg>
+            <p><strong>Finds Princetonians with the most FITTING workout preferences</strong></p>
+          </div>
+          <div class="col-lg-4">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z" />
+            </svg>
+            <p><strong>Connects you with whoever you choose as your new workout buddy or group</strong>
+            </p>
+          </div>
+        </div>
+        <div>
+          <br />
+          <p><strong>TigerGainz does the hard work for you, removing the usual stress, uncertainty, and
+              awkwardness
+              of finding workout buddies and groups! </strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <p class="lead">By finding the <b>best</b> workout buddies and groups, <b>TigerGainz</b> helps Princetonians
+      <i>stay
+        active</i> through <b>better
+        exercise experiences</b> that are:
+    </p>
+    <hr class="my-4">
+    <div class="border-orange">
+      <div class="jumbotron white-background">
+        <div class="card flex-md-row mb-4 h-md-250">
+          <div>
+            <img style="display:inline-flex" width="300" height="300" src="https://cdn.discordapp.com/attachments/735319507341672642/736276124518318160/Side_Icon_Left.png">
+            </img>
+          </div>
+          <div class="list">
+            <p><b>- more consistent</b> because buddies and groups keep each other accountable</p>
+            <p><b>- of higher quality</b> since studies show that working out with others can
+              <i>increase the
+                duration
+                and
+                intensity by up to 200% (Kansas State University)</i>
+            </p>
+            <p><b>- more fun,</b> whether you are on- or off-campus</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<br />
+<div class="border-black">
+  <h1 class="display-5"><strong>How Does it Work?</strong></h1>
+</div>
+<br />
+<br />
+<div class="jumbotron">
+  <div class="border-white">
+    <p class="lead">Upon choosing and prioritizing your workout preferences,
+      TigerGainz’s algorithm will find the most fitting workout partners or groups from our database of
+      participating Princetonians.
+    </p>
+    <hr class="my-4">
+    <div class="border-orange">
+      <div class="jumbotron white-background">
+        <div>
+          <div class="card flex-md-row mb-4 h-md-250">
+            <div>
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi-small bi-ui-checks" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1z" />
+                <path fill-rule="evenodd"
+                  d="M2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H2zm.854-3.646l2-2a.5.5 0 1 0-.708-.708L2.5 4.293l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0zm0 8l2-2a.5.5 0 0 0-.708-.708L2.5 12.293l-.646-.647a.5.5 0 0 0-.708.708l1 1a.5.5 0 0 0 .708 0z" />
+                <path d="M7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1z" />
+                <path fill-rule="evenodd" d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+              </svg>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <p> By default, TigerGainz will ensure your matches have the
+                same exercise type preference; the
+                rest of your
+                preferences will be weighted according to the rank you assigned them in the form.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card flex-md-row mb-4 h-md-250">
+            <div>
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi-small bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+              </svg>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <p>Once matches have been made, you’ll see the profiles of your best potential workout
+                buddies
+                or groups.
+                All of this can also be viewed in the “Matches” section. Then you can choose one of your
+                matches.
+                This will send a request to them which they may
+                accept or
+                decline.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card flex-md-row mb-4 h-md-250">
+            <div>
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi-small bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+              </svg>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <p>If they accept, then both of you will receive a confirmation email and you guys can get
+                started. This
+                will
+                also remove both of you from the database.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card flex-md-row mb-4 h-md-250">
+            <div>
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi-small bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
+              </svg>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <p>If they decline, you will receive a notification, and you will have the options of choosing
+                another one
+                of
+                your matches, resubmitting the form (you must remove yourself from the database before doing
+                this),
+                searching the directory, waiting for someone to request you, or removing yourself from the
+                database.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card flex-md-row mb-4 h-md-250">
+            <div>
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi-small bi-collection-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7z" />
+                <path fill-rule="evenodd" d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z" />
+              </svg>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <p>Similarly, if you don’t get any matches, you can resubmit the form, search the directory,
+                wait for
+                someone to
+                request you, or remove yourself from the database. To remove yourself from the database, please go to the Database section and click the “Take
+                me off the
+                database please” button.</p>
+            </div>
+          </div>
+        </div>
+        <p>Be on the lookout for <a class="links" data-toggle="modal" href="#myModal1">these emails</a> from
+          no.reply.tigergainz@gmail.com</p>
+        <div class="container">
+          <!-- Modal -->
+          <div class="modal fade" id="myModal1" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <img width="100%" height="100%" src="https://cdn.discordapp.com/attachments/735319507341672642/737041162224795678/Email.JPG">
+                </img>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="container">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <button type="button" class="btn btn-lg btn-secondary" data-toggle="collapse" data-target="#collapse1">Click to see Process</button>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse">
+            <div>
+              <br />
+              <img width="100%" height="100%" class="border-orange" src="https://cdn.discordapp.com/attachments/734927684525752411/743189093692866680/Screen_Shot_2020-08-10_at_8.01.16_PM.png">
+              </img>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 
 {% endblock %}
