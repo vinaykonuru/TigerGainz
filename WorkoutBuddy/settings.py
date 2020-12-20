@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'WorkoutBuddy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'workoutbuddydb',
+        'NAME': 'tigergainzdb',
         'USER': 'root',
         'PASSWORD': 'mysql',
         'HOST': '127.0.0.1',
