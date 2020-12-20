@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'WorkoutBuddy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tigergainzdb',
-        'USER': 'root',
-        'PASSWORD': 'mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd8rj9dbs2f36pf',
+        'USER': 'kktzqvefmbqhej',
+        'PASSWORD': '91b150bee8be1a65a35d803a45bad9649f2d3e6adbc80f7ebc3eec88c157c9c9',
         'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'PORT': '5432'
     }
 }
 
