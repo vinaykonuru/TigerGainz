@@ -29,4 +29,4 @@ urlpatterns = [
     path('database/',include('buddyrequest.urls')),
     path('partners/',include('buddyrequest.urls')),
     path('contacts/',views.contacts,name='contacts')
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
