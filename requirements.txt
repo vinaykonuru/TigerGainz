@@ -8,8 +8,10 @@ chardet==3.0.4
 colorama==0.4.3
 cycler==0.10.0
 distlib==0.3.0
+dj-database-url==0.5.0
 Django==3.0.7
-django_heroku==0.3.1
+django-heroku==0.3.1
+django-uniauth==1.2.5
 filelock==3.0.12
 flake8==3.8.3
 fuzzymatcher==0.0.5
@@ -22,6 +24,7 @@ isort==4.3.21
 jedi==0.17.0
 kiwisolver==1.2.0
 lazy-object-proxy==1.4.3
+lxml==4.6.2
 matplotlib==3.2.2
 mccabe==0.6.1
 Metaphone==0.6
@@ -35,6 +38,7 @@ parso==0.7.0
 Pillow==7.1.2
 pluggy==0.13.1
 protobuf==3.12.2
+psycopg2==2.8.6
 PyAutoGUI==0.9.50
 pycodestyle==2.6.0
 pydocstyle==5.0.2
@@ -48,9 +52,11 @@ pyperclip==1.8.0
 PyRect==0.1.4
 PyScreeze==0.1.26
 pytesseract==0.3.4
+python-cas==1.5.0
 python-dateutil==2.8.1
 python-jsonrpc-server==0.3.4
 python-language-server==0.33.1
+python-Levenshtein==0.12.0
 PyTweening==1.0.3
 pytz==2020.1
 requests==2.23.0
@@ -61,7 +67,9 @@ sqlparse==0.3.1
 toml==0.10.1
 twilio==6.42.0
 typed-ast==1.4.1
+urllib3==1.25.11
 virtualenv==20.0.23
+whitenoise==5.2.0
 wrapt==1.12.1
 yapf==0.30.0
 zipp==3.1.0
