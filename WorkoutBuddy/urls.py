@@ -25,7 +25,7 @@ urlpatterns = [
     path('find',views.find,name='find'),
     path('about',views.about,name='about'),
     path('excercise_guide',views.excercise_guide,name='excercise_guide'),
-    path('accounts/',include('accounts.urls')),
+    path('accounts/',include('uniauth.urls', namespace='uniauth')),
     path('database/',include('buddyrequest.urls')),
     path('partners/',include('buddyrequest.urls')),
     path('contacts/',views.contacts,name='contacts')
