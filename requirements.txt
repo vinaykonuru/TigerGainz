@@ -69,7 +69,6 @@ twilio==6.42.0
 typed-ast==1.4.1
 urllib3==1.25.11
 virtualenv==20.0.23
-whitenoise==5.2.0
 wrapt==1.12.1
 yapf==0.30.0
 zipp==3.1.0
