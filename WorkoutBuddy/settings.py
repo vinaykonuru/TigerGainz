@@ -53,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'uniauth.backends.LinkedEmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
     'uniauth.backends.CASBackend',
 ]
 
