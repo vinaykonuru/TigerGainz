@@ -89,15 +89,7 @@
         {% if user|check_requests %}
         <a class="nav-link" href="{% url 'database' %}">Database</a>
         {% endif %}
-        <!-- <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" onClick="">Log Out</a>
-        <form id="logout" action="{% url 'logout' %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden" />
-        </form>
-        {% else %}
-        <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
-        <a class="nav-item nav-link" href="{% url 'login' %}">Log In</a> -->
-        <!-- {% endif %} -->
+
         </li>
       </ul>
     </div>
