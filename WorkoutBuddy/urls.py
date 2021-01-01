@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from .heroku/python/lib/python3.7/site-packages/uniauth/urls import cas-only
+from uniauth.urls import cas-only
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +25,7 @@ urlpatterns = [
     path('find',views.find,name='find'),
     path('about',views.about,name='about'),
     path('excercise_guide',views.excercise_guide,name='excercise_guide'),
-    path('accounts/',include('uniauth.urls.cas_only', namespace='uniauth')),
+    path('accounts/',include('.uniauth.urls.cas_only', namespace='uniauth')),
     path('database/',include('buddyrequest.urls')),
     path('partners/',include('buddyrequest.urls')),
     path('contacts/',views.contacts,name='contacts')
