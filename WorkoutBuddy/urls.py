@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from /.heroku/python/lib/python3.7/site-packages/uniauth/urls import cas-only
+from .heroku/python/lib/python3.7/site-packages/uniauth/urls import cas-only
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
