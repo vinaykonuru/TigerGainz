@@ -18,7 +18,6 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from /.heroku/python/lib/python3.7/site-packages/uniauth/urls import cas-only
-C:\Users\Vinay Konuru\Documents\Projects\TigerGainz-project\venv\Lib\site-packages\uniauth\urls\cas_only.py
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
