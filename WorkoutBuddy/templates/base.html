@@ -79,8 +79,7 @@
           <a class="nav-link" href="{% url 'excercise_guide' %}">Excercise Guide</a>
         </li>
         <li class="nav-item active">
-          {% if user.is_authenticated %}
-          {{ user.name }}
+          {% if user.is_authenticated 
           {% load base_tags %}
           {% if user|check_partner %}
         <li class="nav-item active">
