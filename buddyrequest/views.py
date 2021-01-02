@@ -53,7 +53,7 @@ def matches(request):
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
             userdatadf=pandas.read_csv('WorkoutBuddy\studentdata.csv',index_col=('netID'))
-            netID=request.user.username
+            netID=request.user.uniauth_profile.get_display_id()
             userdata=userdatadf.loc[netID]
         except KeyError:
             return redirect('home')
