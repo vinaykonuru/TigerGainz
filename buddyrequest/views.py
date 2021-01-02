@@ -64,7 +64,7 @@ def matches(request):
         name=userdata['full_name']
         major=userdata['major_raw']
         year=userdata['class_year']
-        rescollege=userdata['res_college']q
+        rescollege=userdata['res_college']
         days=request.POST.getlist('day')
         duration=request.POST['duration']
         workout_type=[]
