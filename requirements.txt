@@ -7,7 +7,7 @@ certifi==2020.4.5.2
 chardet==3.0.4
 colorama==0.4.3
 cycler==0.10.0
-datetime-4.3
+DateTime==4.3
 distlib==0.3.0
 dj-database-url==0.5.0
 Django==3.0.7
@@ -70,7 +70,8 @@ twilio==6.42.0
 typed-ast==1.4.1
 urllib3==1.25.11
 virtualenv==20.0.23
+whitenoise==5.2.0
 wrapt==1.12.1
 yapf==0.30.0
 zipp==3.1.0
-zope.interface-5.2.0
+zope.interface==5.2.0
