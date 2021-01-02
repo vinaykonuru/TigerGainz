@@ -61,10 +61,10 @@ def matches(request):
         # preferences=request.POST['preferences']
         preferences=[0,1,2]
         print(preferences)
-        name=userdata['first_name']
-        major=userdata['major']
+        name=userdata['full_name']
+        major=userdata['major_raw']
         year=userdata['class_year']
-        rescollege=userdata['residentialcollege']
+        rescollege=userdata['res_college']q
         days=request.POST.getlist('day')
         duration=request.POST['duration']
         workout_type=[]
