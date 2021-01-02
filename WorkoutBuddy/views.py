@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 import csv
 
 def home(request):
-    user = request.user
-    print(user.uniauth_profile.get_display_id())
     return render(request,'home.html')
 
 def about(request):
