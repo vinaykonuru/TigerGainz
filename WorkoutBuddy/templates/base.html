@@ -89,6 +89,7 @@
         {% if user|check_requests %}
         <a class="nav-link" href="{% url 'database' %}">Database</a>
         {% endif %}
+        <a class="nav-item nav-link" href="{% url 'uniauth:logout' %}">Log Out</a>
         {% else %}
         <a class="nav-item nav-link" href="{% url 'uniauth:login' %}">Log In</a>
         {% endif %}
