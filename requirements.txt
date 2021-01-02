@@ -54,7 +54,6 @@ PyRect==0.1.4
 PyScreeze==0.1.26
 pytesseract==0.3.4
 python-cas==1.5.0
-python-datetime-tz==0.5.4
 python-dateutil==2.8.1
 python-jsonrpc-server==0.3.4
 python-language-server==0.33.1

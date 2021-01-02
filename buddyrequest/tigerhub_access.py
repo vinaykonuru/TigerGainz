@@ -1,7 +1,7 @@
 import hashlib
 import random
 from base64 import b64encode
-from datetime import datetime
+import datetime
 
 def getStudentInfo(id):
     url = 'https://tigerbook.herokuapp.com/api/v1/undergraduates/' + id
