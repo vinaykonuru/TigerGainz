@@ -61,9 +61,9 @@ def matches(request):
         # preferences=request.POST['preferences']
         preferences=[0,1,2]
         print(preferences)
-        name=userdata['name']
+        name=userdata['first_name']
         major=userdata['major']
-        year=userdata['year']
+        year=userdata['class_year']
         rescollege=userdata['residentialcollege']
         days=request.POST.getlist('day')
         duration=request.POST['duration']
