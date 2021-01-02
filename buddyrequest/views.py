@@ -6,6 +6,7 @@ import pandas
 import csv
 from .email import mail
 from .matching_algorithm import get_matches
+from .tigerhub_access import getStudentInfo
 # Create your views here.
 
 @login_required(login_url='/accounts/signup')
@@ -52,6 +53,7 @@ def matches(request):
 
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
+
             userdatadf=pandas.read_csv('buddyrequest/studentdata.csv',index_col=('netID'))
             netID=request.user.uniauth_profile.get_display_id()
             userdata=userdatadf.loc[netID]
