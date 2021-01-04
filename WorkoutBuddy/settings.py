@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -90,13 +91,11 @@ WSGI_APPLICATION = 'WorkoutBuddy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8rj9dbs2f36pf',
-        'USER': 'kktzqvefmbqhej',
-        'PASSWORD': '91b150bee8be1a65a35d803a45bad9649f2d3e6adbc80f7ebc3eec88c157c9c9',
-        'HOST': 'ec2-34-236-215-156.compute-1.amazonaws.com',
-        'PORT': '5432'
+        'NAME': 'database',
+
     }
 }
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
