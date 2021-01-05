@@ -98,3 +98,10 @@ def partner(request):
     days=partner.days.strip('][\'')
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
+def remove_partner(request):
+    user = request.user
+    user_request=BuddyRequest.objects.get(user = user)
+    partner_request=BuddyRequest.objects.get(partner = user)
+    user_request.partner = null
+    partner_request.partner = null
+    return redirect('home')

@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:partner_id>',views.partner_match,name='partner_match'),
     path('remove',views.remove,name='remove'),
     path('details', views.partner,name='partner'),
+    path('remove_partner', view.remove_partner,name = 'remove_partner')
 ]

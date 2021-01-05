@@ -58,6 +58,18 @@
               <div class="mb-1 text-muted">
                 <p>{{ profile_details.duration }} </p>
               </div>
+              <div class="mb-1 text-muted">
+                <a href="javascript:{document.getElementById('remove_partner').submit()}">
+                  <button class="button btn-secondary btn-large btn-block">
+                    Accept
+                  </button>
+                </a>
+
+                <form id="remove_partner" action="{% url 'remove_partner' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden"/>
+                </form>
+              </div>
             </div>
           </div>
 
