@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
+import os
 
 def mail(name_partner, netID_user,netID_partner, user=False):
 
@@ -13,7 +13,7 @@ def mail(name_partner, netID_user,netID_partner, user=False):
     sent_email = 'vkonuru' + "@princeton.edu"
     contact = 'vkonuru' + "@princeton.edu"
 
-    tiger_gainz_pass = "qckdhyddmxluhkgk"
+    tiger_gainz_pass = os.environ.get("EMAIL_PASSWORD")
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
 
     if user == True:
