@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-{% load base_tags %}
 <head>
 
   <title>TigerGainz - Databaase</title>
@@ -47,6 +46,7 @@
                   <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
                   {% if entry.user_id == user.id %}
+                  {% load base_tags %}
                   {% elif user|check_partner %}
                   {% else %}
                   <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
