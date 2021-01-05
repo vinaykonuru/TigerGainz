@@ -13,7 +13,7 @@ def mail(name_partner, netID_user,netID_partner, user=False):
     sent_email = 'vkonuru' + "@princeton.edu"
     contact = 'vkonuru' + "@princeton.edu"
 
-    tiger_gainz_pass = "leecsratoeutwhcm"
+    tiger_gainz_pass = "qckdhyddmxluhkgk"
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
 
     if user == True:
