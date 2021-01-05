@@ -58,10 +58,12 @@
               <div class="mb-1 text-muted">
                 <p>{{ profile_details.duration }} </p>
               </div>
+              {% load base_tags %}
+              {% if user|check_partner %}
               <div class="mb-1 text-muted">
                 <a href="javascript:{document.getElementById('remove_partner').submit()}">
                   <button class="button btn-secondary btn-large btn-block">
-                    Accept
+                    Remove Partner
                   </button>
                 </a>
 
@@ -70,6 +72,7 @@
                   <input type="hidden"/>
                 </form>
               </div>
+              {% endif %}
             </div>
           </div>
 
