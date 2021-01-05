@@ -1,186 +1,69 @@
 {% extends 'base.html' %}
-
 {% block content %}
 {% load static %}
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
 
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
+<head>
 
-    .bg-light {
-        background-color: #ff8f00 !important;
-    }
+  <title>TigerGainz - Databaase</title>
 
-    .navbar-brand {
-        font-family: 'Noto Sans JP',
-            sans-serif;
-        color: #fff !important;
-    }
+  <!--Page Stylesheet-->
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/DatabaseStyle.css' %}" />
 
-    .cover-container {
-        font-family: 'Noto Sans JP',
-            sans-serif;
-        margin-top: 60px;
-    }
+</head>
 
-    .cover-heading {
-        background-color: #000;
-        color: #fff;
-        padding: 20px;
-        border-color: #fff;
-    }
-
-    .lead {
-        margin-top: 10px;
-        padding: 20px;
-        background-color: #000;
-        color: #fff;
-    }
-
-    .nav-link {
-        font-family: 'Noto Sans JP',
-            sans-serif;
-        color: #fff !important;
-    }
-
-    .display-4 {
-        margin-bottom: 20px;
-        background-color: rgba(255, 255, 255, 0);
-        color: #000;
-        padding: 20px;
-    }
-
-
-    .bg-logo {
-        background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735596921087066172/Database.jpg');
-        background-attachment: local;
-        background-position: center;
-        background-size: unset;
-        background-size: 70%;
-        height: unset;
-        height: max-content;
-
-    }
-
-    .btn {
-        margin: 0px 37% 0px 37%;
-        padding: 10px;
-    }
-
-    .btn-secondary:hover,
-    .btn-secondary:focus {
-        background-color: #000;
-    }
-
-    .btn-secondary {
-        color: #fff;
-        text-shadow: none;
-        /* Prevent inheritance from `body` */
-        background-color: #ff8f00;
-        ;
-        border: .05rem solid #ff8f00;
-        ;
-        margin-bottom: 30px;
-    }
-
-    .display-5 {
-        color: #fff;
-        background-color: #000;
-        padding: 20px;
-        position: relative;
-    }
-
-    .bg-light2 {
-        background-color: #e9ecef !important;
-        width: unset;
-        min-width: 300px;
-        height: 600px;
-    }
-
-    .bg-white {
-        background-color: #000 !important;
-        background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735573886997102682/Tiger_Profile_Pic.jpg');
-        background-position:center;
-        background-size: 100%;
-        min-width: 200px;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-    }
-
-    .jumbotron {
-        padding-bottom: 10px;
-    }
-</style>
 <body>
-  <div class="position-relative overflow-hidden p-3 p-md-5 m-md- text-center bg-logo">
-      <div class="col-md-5 p-lg-5 mx-auto my-5">
-          <h1 class="display-4 font-weight-normal"><br /><br /><br /></h1>
-      </div>
-      <div class="product-device shadow-sm d-none d-md-block"></div>
-      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+
+  <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/761996625165680640/Database.jpg" class="img.responsive" style="width:55%">
   </div>
-
-  <!--TigerGainz Database Jumbotron-->
-
-  <div class="jumbotron">
-      <hr class="my-4">
-      <h1 class="display-4"><strong>TigerGainz Database</strong></h1>
-
-      <hr class="my-4">
-      <p class="lead"><strong>Found a match and want to be taken off the database? Click the button below!</strong>
-      </p>
-      <a href="{% url 'remove' %}" class="btn btn-lg btn-secondary">Take me off the database please!</a>
-      <hr class="my-4">
-      <p><strong>Didn't get a match? Feel free to search through the database below!</strong></p>
-      <hr class="my-4">
-  </div>
-
-  <!--Profiles-->
 
   <body class="text-center">
-      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   </body>
 
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-    {% for entry in buddyrequests.all %}
-    {% if forloop.counter0|divisibleby:2 %}
-      </div>
-      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-    {% endif %}
-      <div class="bg-light2 mr-md-5 col p-4 d-flex flex-column position-static">
-          <div class="my-3 p-3">
-              <h2 class="display-5">{{entry.name}}</h2>
-          </div>
-          <div class="bg-white shadow-sm mx-auto" style="width: 40%; height: 300px; border-radius: 21px 21px 21px 21px;">
-          </div> <br>
-          <div class="container">
-            <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
-          </div>
-          {% if entry.user_id == user.id %}
-          {% else %}
-            <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
-              <button class="btn btn-lg btn-secondary">
-                Match
-              </button>
-            </a>
-            <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden"/>
-            </form>
-          {% endif %}
-      </div>
-    {% endfor %}
+  <!--TigerGainz Database Jumbotron-->
+  <div class="border-black">
+    <h1 class="display-5"><strong>TigerGainz Database</strong></h1>
   </div>
+  <br />
+  <br />
+
+  <div class="jumbotron">
+    <div class="border-white">
+      <div class="border-orange">
+        <div class="jumbotron white-background">
+
+          <!--Profiles-->
+
+          <div class="row">
+            {% for entry in buddyrequests.all %}
+            {% if forloop.counter0|divisibleby:2 %}
+            {% endif %}
+            <div class="column">
+              <p class="lead">{{entry.name}}</p>
+              <div class="pic-container border-black">
+                <div class="jumbotron white-background">
+                  <img class="img-fluid" src="https://cdn.discordapp.com/attachments/735319507341672642/762013221007654942/Tiger_Profile_Pic.jpg">
+                  <br />
+                  <br />
+                  <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
+                  {% if entry.user_id == user.id %}
+                  {% else %}
+                  <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+                    <button class="btn btn-lg btn-secondary">
+                      Match
+                    </button>
+                  </a>
+                  <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" />
+                  </form>
+                  {% endif %}
+                </div>
+              </div>
+              <hr class="my-4">
+            </div>
+            {% endfor %}
+          </div>
+
 </body>
 {% endblock %}

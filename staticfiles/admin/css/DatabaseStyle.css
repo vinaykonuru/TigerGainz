@@ -1,0 +1,30 @@
+.bg-light2 {
+  background-color: #e9ecef !important;
+  width: unset;
+  min-width: 300px;
+  height: 600px;
+}
+
+.bg-white {
+  background-color: #000 !important;
+  background-image: url('https://cdn.discordapp.com/attachments/735319507341672642/735573886997102682/Tiger_Profile_Pic.jpg');
+  background-position: center;
+  background-size: 90%;
+  min-width: 200px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+.column {
+  width: 50%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  margin: auto;
+}
+
+@media screen and (max-width: 950px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
