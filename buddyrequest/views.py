@@ -102,6 +102,6 @@ def remove_partner(request):
     user = request.user
     user_request=BuddyRequest.objects.get(user = user)
     partner_request=BuddyRequest.objects.get(partner = user)
-    user_request.partner = null
-    partner_request.partner = null
+    user_request.partner = None
+    partner_request.partner = None
     return redirect('home')
