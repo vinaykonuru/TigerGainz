@@ -158,9 +158,24 @@
       <div class="container">
         <hr class="my-4">
         <h1 class="display-4">No Requests Found</h1>
-        <p class="lead">Unfortunately, there are currently no matching requests in the database, but we will notify you when we find a match.</p>
+        <p class="lead">Unfortunately, there are currently no partners that
+          match in the database, but we will notify you when we find a match.
+          Feel free to view the waiting list if you want to match manually.
+        </p>
         <p>
         </p>
+        <div class="mb-1 text-muted">
+          <a href="javascript:{document.getElementById('database').submit()}">
+            <button class="button btn-secondary btn-large btn-block">
+              Waiting List
+            </button>
+          </a>
+
+          <form id="database" action="{% url 'database' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"/>
+          </form>
+        </div>
         <hr class="my-4">
       </div>
     </section>
