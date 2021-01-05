@@ -8,7 +8,6 @@ class BuddyRequest(models.Model):
     major=models.CharField(max_length=50, null=True)
     year=models.CharField(max_length=50, null=True)
     rescollege=models.CharField(max_length=50,null=True)
-    profile_picture=models.ImageField(upload_to='images/',null=True,default='default_profile_picture.png')
     days=models.CharField(max_length=300,null=True)
     duration=models.CharField(max_length=50,null=True)
     workout_type=models.CharField(max_length=50,null=True)

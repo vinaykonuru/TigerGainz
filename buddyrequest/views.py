@@ -70,19 +70,15 @@ def matches(request):
         workout_type=[]
         workout_type.append(request.POST['workout_type'])
         time_zone=request.POST['time_zone']
-        profile_picture=request.POST['profile_picture']
         user=request.user
 
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
         #if there is no profile picture, use the default one from the constructor
-        if profile_picture=='':
-            req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
-            days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
-        else:
-            req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,profile_picture=profile_picture,
-            days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
+        req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
+        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
+
         req_user.save()
 
         #if there are no active requests, don't run matching algorithm

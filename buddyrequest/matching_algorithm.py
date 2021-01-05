@@ -50,7 +50,7 @@ def get_matches(user_data_list, requests_list):
     Dfrq = requestsdf
 
 
-    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','profile_picture','user_id','partner_id'])
+    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id'])
     # print("Dfrq1: ")
     # print(Dfrq1)
 
