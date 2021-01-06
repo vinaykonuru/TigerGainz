@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+
 from buddyrequest.models import BuddyRequest
 import pandas
 import csv
@@ -45,8 +47,9 @@ def partner_match(request,partner_id):
 def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
-        request=BuddyRequest.objects.get(user = request.user)
-        if(request == None):
+        try:
+            request=BuddyRequest.objects.get(user = request.user)
+        except(ObjectDoesNotExist noRequest)
             return redirect('home')
 
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
@@ -73,7 +76,7 @@ def matches(request):
         #check if all fields in form were filled, send back to form if not
         if(name == None | major == None | year == None | rescollege == None):
             error = "Must fill out all fields in form"
-            return render(request, 'buddyrequest/find.html',{'error': error})
+            return render(request, 'find.html',{'error': error})
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
