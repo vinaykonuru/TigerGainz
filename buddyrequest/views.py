@@ -70,6 +70,10 @@ def matches(request):
         time_zone=request.POST['time_zone']
         user=request.user
 
+        #check if all fields in form were filled, send back to form if not
+        if(name = None | major = None | year = None | rescollege = None):
+            error = "Must fill out all fields in form"
+            return render(request, 'buddyrequest/find.html',{'error': error})
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
