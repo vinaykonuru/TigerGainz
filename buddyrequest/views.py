@@ -11,11 +11,11 @@ from .tigerhub_access import getStudentInfo
 
 @login_required(login_url='/accounts/signup')
 def database(request):
-    buddyrequests=BuddyRequest.objects.all().values()
+    buddyrequests=BuddyRequest.objects.all()
     unmatched = []
-    for request in buddyrequests:
-        if(request.partner == None):
-            unmatched.append(request)
+    for entry in buddyrequests:
+        if(entry.partner == None):
+            unmatched.append(entry)
     return render(request,'buddyrequest/database.html',{'unmatched':unmatched})
 def remove(request):
     BuddyRequest.objects.get(user=request.user).delete()
