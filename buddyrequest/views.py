@@ -11,7 +11,7 @@ from .tigerhub_access import getStudentInfo
 
 @login_required(login_url='/accounts/signup')
 def database(request):
-    buddyrequests=BuddyRequest.objects.all()
+    buddyrequests=BuddyRequest.objects.all().values()
     unmatched = []
     for request in buddyrequests:
         if(request.partner == None):
