@@ -60,6 +60,7 @@ def matches(request):
         # preferences=request.POST['preferences']
         preferences=[0,1,2]
         print(preferences)
+        error = ""
         try:
             name=userdata['full_name']
             major=userdata['major_raw']
@@ -75,7 +76,7 @@ def matches(request):
                 raise Exception()
         except Exception as e:
             print(e)
-            if error == None: # will error if any of the fields are blank
+            if error == "": # will error if any of the fields are blank
                 error = "Must fill out all fields in form"
             return render(request, 'find.html',{'error': error})
 
