@@ -68,11 +68,10 @@ def matches(request):
             rescollege=userdata['res_college']
             days=request.POST.getlist('day')
             duration=request.POST['duration']
-            print(duration)
-            workout_type=[]
+            workout_type = []
             workout_type.append(request.POST['workout_type'])
             time_zone=request.POST['time_zone']
-            if duration == []:
+            if days == []:
                 error = "Need to select at least one preferred day"
                 raise Exception()
         except Exception as e:
