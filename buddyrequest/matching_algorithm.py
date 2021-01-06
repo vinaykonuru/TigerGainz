@@ -81,9 +81,7 @@ def get_matches(user_data_list, requests_list):
         matching_df = matching_df_request.drop("workout_type", axis=1) #we no longer need to have workouts as a parameter since we already made sure
                                                                          #users had the same workout.
     else:
-        blankarray=[]
-        return blankarray
-        print("return to home screen")
+        return []
 
     matching_df_user = Dfuser.drop("workout_type", axis=1)
     matching_df_request = matching_df_request.drop("workout_type", axis=1)
