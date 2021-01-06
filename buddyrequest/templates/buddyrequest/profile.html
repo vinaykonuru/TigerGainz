@@ -65,10 +65,10 @@
                 <p>{{ profile_details.duration }} </p>
               </div>
               {% load base_tags %}
-              {% if user|check_partner %}
               <div class="mb-1 text-muted">
+              {% if user|check_partner %}
                 <a href="javascript:{document.getElementById('remove_partner').submit()}">
-                  <button class="button btn-secondary btn-large btn-block">
+                  <button class="btn btn-lg btn-secondary">
                     Remove Partner
                   </button>
                 </a>
@@ -77,8 +77,18 @@
                   {% csrf_token %}
                   <input type="hidden"/>
                 </form>
-              </div>
+              {% else %}
+              <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+                <button class="btn btn-lg btn-secondary">
+                  Match
+                </button>
+              </a>
+              <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" />
+              </form>
               {% endif %}
+              </div>
             </div>
           </div>
 
