@@ -44,7 +44,7 @@
           <!--Profiles-->
 
           <div class="row">
-            {% for entry in unmatched %}
+            {% for entry in unmatched.all %}
             {% if forloop.counter0|divisibleby:2 %}
             {% endif %}
             <div class="column">
