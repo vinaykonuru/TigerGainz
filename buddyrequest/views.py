@@ -60,21 +60,23 @@ def matches(request):
         # preferences=request.POST['preferences']
         preferences=[0,1,2]
         print(preferences)
-        name=userdata['full_name']
-        major=userdata['major_raw']
-        year=userdata['class_year']
-        rescollege=userdata['res_college']
-        days=request.POST.getlist('day')
-        duration=request.POST['duration']
-        workout_type=[]
-        workout_type.append(request.POST['workout_type'])
-        time_zone=request.POST['time_zone']
-        user=request.user
-
         #check if all fields in form were filled, send back to form if not
-        if(name == None | major == None | year == None | rescollege == None):
+        try:
+            name=userdata['full_name']
+            major=userdata['major_raw']
+            year=userdata['class_year']
+            rescollege=userdata['res_college']
+            days=request.POST.getlist('day')
+            duration=request.POST['duration']
+            workout_type=[]
+            workout_type.append(request.POST['workout_type'])
+            time_zone=request.POST['time_zone']
+        except MultiValueKeyDictError:
             error = "Must fill out all fields in form"
             return render(request, 'find.html',{'error': error})
+
+        user=request.user
+
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
