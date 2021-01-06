@@ -1,8 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
-
 from buddyrequest.models import BuddyRequest
 import pandas
 import csv
@@ -49,7 +47,7 @@ def matches(request):
         #if the user already has a request or partner in the database, go back to home page
         try:
             request=BuddyRequest.objects.get(user = request.user)
-        except(ObjectDoesNotExist noRequest):
+        except(BuddyRequest.DoesNotExist e):
             return redirect('home')
 
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
