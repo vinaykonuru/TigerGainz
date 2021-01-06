@@ -16,7 +16,8 @@ def database(request):
     for entry in buddyrequests:
         if(entry.partner == None):
             unmatched.append(entry)
-    print("Length: "+ str(len(unmatched)))       
+    print("Length: "+ str(len(unmatched)))
+    print(unmatched)       
     return render(request,'buddyrequest/database.html',{'unmatched':unmatched})
 def remove(request):
     BuddyRequest.objects.get(user=request.user).delete()
