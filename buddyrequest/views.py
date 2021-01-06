@@ -85,6 +85,7 @@ def matches(request):
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
 
         req_user.save()
+        requestsList  = list(BuddyRequest.objects.all().values())
 
         #if there are no active requests, don't run matching algorithm
         if len(requestsList) < 1:
