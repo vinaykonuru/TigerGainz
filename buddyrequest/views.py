@@ -71,7 +71,7 @@ def matches(request):
         user=request.user
 
         #check if all fields in form were filled, send back to form if not
-        if(name = None | major = None | year = None | rescollege = None):
+        if(name == None | major == None | year == None | rescollege == None):
             error = "Must fill out all fields in form"
             return render(request, 'buddyrequest/find.html',{'error': error})
         #data used for match
