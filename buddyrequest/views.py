@@ -45,11 +45,11 @@ def partner_match(request,partner_id):
 def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
-        try:
-            request=BuddyRequest.objects.get(user = request.user)
-            return redirect('home')
-        except BuddyRequest.DoesNotExist:
-            pass
+        requestsList=list(BuddyRequest.objects.all().values())
+        for entry in requestsList:
+            print(request.user)
+            if request.user.id==(entry['user_id']):
+                return redirect('home')
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
             # userdatadf=pandas.read_csv('buddyrequest/studentdata.csv',index_col=('netID'))
@@ -60,7 +60,6 @@ def matches(request):
         # preferences=request.POST['preferences']
         preferences=[0,1,2]
         print(preferences)
-        #check if all fields in form were filled, send back to form if not
         try:
             name=userdata['full_name']
             major=userdata['major_raw']
@@ -71,12 +70,14 @@ def matches(request):
             workout_type=[]
             workout_type.append(request.POST['workout_type'])
             time_zone=request.POST['time_zone']
-        except Exception:
+        except MultiValueKeyDictError:
             error = "Must fill out all fields in form"
             return render(request, 'find.html',{'error': error})
 
         user=request.user
 
+        #check if all fields in form were filled, send back to form if not
+        if(name == None | major == None | year == None | rescollege == None):
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
@@ -85,7 +86,6 @@ def matches(request):
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
 
         req_user.save()
-        requestsList  = list(BuddyRequest.objects.all().values())
 
         #if there are no active requests, don't run matching algorithm
         if len(requestsList) < 1:
