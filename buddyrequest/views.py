@@ -71,7 +71,7 @@ def matches(request):
             workout_type=[]
             workout_type.append(request.POST['workout_type'])
             time_zone=request.POST['time_zone']
-        except MultiValueKeyDictError:
+        except request.MultiValueKeyDictError:
             error = "Must fill out all fields in form"
             return render(request, 'find.html',{'error': error})
 
