@@ -68,7 +68,7 @@ def matches(request):
             days=request.POST.getlist('day')
             duration=request.POST['duration']
             if duration = []:
-                raise Exception()
+                raise Exception("need to select at least one day")
             workout_type=[]
             workout_type.append(request.POST['workout_type'])
             time_zone=request.POST['time_zone']
