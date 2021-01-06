@@ -44,7 +44,7 @@
           <!--Profiles-->
 
           <div class="row">
-            {% for entry in buddyrequests.all %}
+            {% for entry in unmatched %}
             {% if forloop.counter0|divisibleby:2 %}
             {% endif %}
             <div class="column">
@@ -55,10 +55,7 @@
                   <br />
                   <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
-                  {% if entry.user_id == user.id %}
-                  {% load base_tags %}
-                  {% elif user|check_partner %}
-                  {% else %}
+                  {% if entry.user_id != user.id %}
                   <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
                     <button class="btn btn-lg btn-secondary">
                       Match
