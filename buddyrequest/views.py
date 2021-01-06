@@ -49,7 +49,7 @@ def matches(request):
         #if the user already has a request or partner in the database, go back to home page
         try:
             request=BuddyRequest.objects.get(user = request.user)
-        except(ObjectDoesNotExist noRequest)
+        except(ObjectDoesNotExist noRequest):
             return redirect('home')
 
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
