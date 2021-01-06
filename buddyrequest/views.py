@@ -48,7 +48,7 @@ def matches(request):
         try:
             request=BuddyRequest.objects.get(user = request.user)
             return redirect('home')
-        except BuddyRequest.DoesNotExist
+        except BuddyRequest.DoesNotExist:
             pass
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
