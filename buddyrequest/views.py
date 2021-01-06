@@ -48,7 +48,7 @@ def matches(request):
         requestsList=list(BuddyRequest.objects.all().values())
         for entry in requestsList:
             print(request.user)
-            if request.user.id==(entry['user_id']):
+            if request.user.id == entry['user_id']:
                 return redirect('home')
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
@@ -70,14 +70,15 @@ def matches(request):
             workout_type=[]
             workout_type.append(request.POST['workout_type'])
             time_zone=request.POST['time_zone']
-        except MultiValueKeyDictError:
+        except Exception e:
+            print(e)
             error = "Must fill out all fields in form"
             return render(request, 'find.html',{'error': error})
 
-        user=request.user
+        user = request.user
 
-        #check if all fields in form were filled, send back to form if not
-        if(name == None | major == None | year == None | rescollege == None):
+        #check if all fields in form were filled, otherwise send back to form
+
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
@@ -92,10 +93,10 @@ def matches(request):
             return render(request,'buddyrequest/matches.html')
         else:
             matched_people=get_matches(user_data_list, requestsList)
-            if matched_people==[]:
-                return render(request,'buddyrequest/matches.html')
+            if len(matched_people) > 3: # if more than 3 matches, give best 3
+                return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:2]})
 
-        return render(request,'buddyrequest/matches.html',{'matched_people':matched_people})
+            return render(request,'buddyrequest/matches.html',{'matched_people':matched_people})
 
 @login_required(login_url='/accounts/signup')
 def partner(request):
