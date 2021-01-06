@@ -67,14 +67,16 @@ def matches(request):
             rescollege=userdata['res_college']
             days=request.POST.getlist('day')
             duration=request.POST['duration']
-            if duration == []:
-                raise Exception("need to select at least one day")
             workout_type=[]
             workout_type.append(request.POST['workout_type'])
             time_zone=request.POST['time_zone']
+            if duration == []:
+                error = "Need to select at least one preferred day"
+                raise Exception()
         except Exception as e:
             print(e)
-            error = "Must fill out all fields in form"
+            if error == None: # will error if any of the fields are blank
+                error = "Must fill out all fields in form"
             return render(request, 'find.html',{'error': error})
 
         user = request.user
