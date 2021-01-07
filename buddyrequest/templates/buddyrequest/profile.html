@@ -61,7 +61,6 @@
               <div class="mb-1 text-muted">
               {% load request_tags %}
               {% if user|check_partner %}
-                {% if user|check_time %}
                   <a href="javascript:{document.getElementById('remove_partner').submit()}">
                     <button class="btn btn-lg btn-secondary">
                       Remove Partner
@@ -71,7 +70,8 @@
                     {% csrf_token %}
                     <input type="hidden"/>
                   </form>
-                {% else %}
+              {% if user|check_time %}
+                  it works
                {% endif %}
 
               {% else %}
