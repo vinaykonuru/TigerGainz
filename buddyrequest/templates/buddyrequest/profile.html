@@ -59,7 +59,7 @@
                 <p>{{ profile_details.duration }} </p>
               </div>
               <div class="mb-1 text-muted">
-              {% load base_tags %}
+              {% load request_tags %}
               {% if user|check_partner %}
                 {% if user|check_time %}
                   <a href="javascript:{document.getElementById('remove_partner').submit()}">
