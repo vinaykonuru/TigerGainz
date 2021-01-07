@@ -1,4 +1,5 @@
 from django import template
+from django.utils import timezone
 from buddyrequest.models import BuddyRequest
 from django.contrib.auth.models import User
 import datetime
@@ -25,7 +26,8 @@ def check_partner(user):
 @register.filter
 def check_time(user):
     request = BuddyRequest.objects.get(user = user)
-    timedelta = datetime.datetime.now() - request.updated
+    current_time = timezone.make_aware(datetime.datetime.now(), timezone.get_default_timezone())
+    timedelta = current_time - request.updated
     seconds = timedelta.total_seconds()
     print("Seconds" + seconds)
     seconds = 0
