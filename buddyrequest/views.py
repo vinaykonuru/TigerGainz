@@ -41,7 +41,7 @@ def partner_match(request,partner_id):
         user_request.partner=matched_user
         partner_request.partner=request.user
         user_request.updated = datetime.now()
-        partner_request = datetime.now()
+        partner_request.updated = datetime.now()
         user_request.save()
         partner_request.save()
 
