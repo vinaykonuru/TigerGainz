@@ -74,15 +74,17 @@
                {% endif %}
 
               {% else %}
-                <a href="javascript:{document.getElementById('partner_match{{profile_details.user_id}}').submit()}">
-                  <button class="btn btn-lg btn-secondary">
-                    Match
-                  </button>
-                </a>
-                <form id="partner_match{{profile_details.user_id}}" action="{% url 'partner_match' profile_details.user_id %}" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" />
-                </form>
+                {% if profile_details.user_id != user.id %}
+                  <a href="javascript:{document.getElementById('partner_match{{profile_details.user_id}}').submit()}">
+                    <button class="btn btn-lg btn-secondary">
+                      Match
+                    </button>
+                  </a>
+                  <form id="partner_match{{profile_details.user_id}}" action="{% url 'partner_match' profile_details.user_id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" />
+                  </form>
+                {% endif %}
               {% endif %}
               </div>
             </div>
