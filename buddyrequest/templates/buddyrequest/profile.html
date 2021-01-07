@@ -32,13 +32,7 @@
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">Name</strong>
               <div class="mb-1 text-muted">
-                {% load base_tags %}
-                <p>
-                {% if user|check_partner %}
-                {{ profile_details.name }}
-                {% else %}
-                Anonymous
-                {% endif %}
+                <p>profile_details.name </p>
               </div>
               <strong class="d-inline-block mb-2 text-primary">Class</strong>
               <div class="mb-1 text-muted">
