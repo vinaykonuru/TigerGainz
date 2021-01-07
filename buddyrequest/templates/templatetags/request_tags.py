@@ -27,7 +27,7 @@ def check_time(user):
     print('Time class')
     request = BuddyRequest.objects.get(user = user)
     timedelta = request.updated - request.created
-    seconds = timedelta.total_seconds())
+    seconds = timedelta.total_seconds()
     print(seconds)
     SECONDS_IN_DAY = 86400
     if(seconds > SECONDS_IN_DAY):
