@@ -77,7 +77,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'base_tags': 'WorkoutBuddy.templatetags.base_tags',
-                'request_tags': 'buddyrequest.templatetags.request_tags'
+                'request_tags': 'buddyrequest.templates.templatetags.request_tags'
             }
         },
     },
