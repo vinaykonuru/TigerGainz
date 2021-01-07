@@ -94,6 +94,7 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 ranker = priorities.get(column_labels[column])
+                print(ranker)
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off/100) * rel_val
