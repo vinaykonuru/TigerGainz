@@ -89,10 +89,10 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 ranker = priorities.get(column_labels[column])
-                print("Ranker: "+ str(ranker))
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off/100) * rel_val
+                print("Weighted Average Days: "+ str(weighted_average))
 
                 if rel_val >= cut_off:
                     list_best_match_vals.append(weighted_average)
@@ -106,17 +106,19 @@ def get_matches(user_data_list, requests_list):
                 print("Cut off: "+ str(cut_off))
 
                 weighted_average = (cut_off / 100) * rel_val
-
+                print("Weighted Average: "+ str(weighted_average))
                 if rel_val >= cut_off:
                     list_best_match_vals.append(weighted_average)
                 else:
                     break
 
         if len(list_best_match_vals) == len(column_labels) - 1: #if every single column managed to pass the cut_off val
+            print("Matched")
             average = mean(list_best_match_vals)
             list_best_match_vals.append(average)
             Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
             list_best_match_vals.append(Dfrq_index)
+            print("List of best match values" + str(list_best_match_vals))
             ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
 
 
@@ -131,7 +133,7 @@ def get_matches(user_data_list, requests_list):
                                                             #for each row
             ListOfMatches[i], ListOfMatches[i+1] = ListOfMatches[i+1], ListOfMatches[i] #swaps if adjacent value is smaller
 
-
+    print("List of Matches: " + str(ListOfMatches))
     row_index = []
     for entry in ListOfMatches:
         val = entry[-1]
