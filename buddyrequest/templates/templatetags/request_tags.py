@@ -1,7 +1,7 @@
 from django import template
 from buddyrequest.models import BuddyRequest
 from django.contrib.auth.models import User
-
+from datetime import datetime
 register = template.Library()
 
 #check if the user has made a request
@@ -26,7 +26,7 @@ def check_partner(user):
 def check_time(user):
     print('Time class')
     request = BuddyRequest.objects.get(user = user)
-    time = request.updated.date()
+    time = request.updated.time()
     print(time)
     if(time.hour * 3600 + time.minute * 60 + time.second > 86400):
         return True
