@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from buddyrequest.models import BuddyRequest
+from datetime import datetime
 import pandas
 import csv
 from .email import mail
@@ -29,7 +30,6 @@ def profile(request,request_id):
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
 
-
 def partner_match(request,partner_id):
     if request.method=="POST":
         #partner object for current user
@@ -40,6 +40,8 @@ def partner_match(request,partner_id):
         #match the two users in the database
         user_request.partner=matched_user
         partner_request.partner=request.user
+        user_request.updated = datetime.now()
+        partner_request = datetime.now()
         user_request.save()
         partner_request.save()
 
@@ -116,7 +118,7 @@ def partner(request):
     days=partner.days.strip('][\'')
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
-    
+
 def remove_partner(request):
     user = request.user
     user_request=BuddyRequest.objects.get(user = user)
