@@ -24,7 +24,7 @@ def check_partner(user):
 # returns true is more than 24 hours have passed since making connection
 @register.filter
 def check_time(user):
-    print('test')
+    print('Time class')
     request = BuddyRequest.objects.get(user = user)
     time = request.updated.date()
     print(time)
