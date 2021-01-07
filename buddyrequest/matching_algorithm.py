@@ -102,7 +102,7 @@ def get_matches(user_data_list, requests_list):
                 rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
-                print("Cut off: "+cut_off)
+                print("Cut off: "+ str(cut_off))
                 weighted_average = (cut_off / 100) * rel_val
 
                 if rel_val >= cut_off:
