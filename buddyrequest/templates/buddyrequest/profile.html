@@ -32,7 +32,7 @@
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">Name</strong>
               <div class="mb-1 text-muted">
-                <p>profile_details.name </p>
+                <p>{{ profile_details.name }}</p>
               </div>
               <strong class="d-inline-block mb-2 text-primary">Class</strong>
               <div class="mb-1 text-muted">
@@ -61,26 +61,27 @@
               {% load base_tags %}
               <div class="mb-1 text-muted">
               {% if user|check_partner %}
-                <a href="javascript:{document.getElementById('remove_partner').submit()}">
-                  <button class="btn btn-lg btn-secondary">
-                    Remove Partner
-                  </button>
-                </a>
-
+                {% if user|check_time %}
+                  <a href="javascript:{document.getElementById('remove_partner').submit()}">
+                    <button class="btn btn-lg btn-secondary">
+                      Remove Partner
+                    </button>
+                  </a>
+                {% endif %}
                 <form id="remove_partner" action="{% url 'remove_partner' %}" method="POST">
                   {% csrf_token %}
                   <input type="hidden"/>
                 </form>
               {% else %}
-              <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
-                <button class="btn btn-lg btn-secondary">
-                  Match
-                </button>
-              </a>
-              <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" />
-              </form>
+                <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+                  <button class="btn btn-lg btn-secondary">
+                    Match
+                  </button>
+                </a>
+                <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" />
+                </form>
               {% endif %}
               </div>
             </div>

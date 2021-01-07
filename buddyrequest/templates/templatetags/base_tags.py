@@ -21,3 +21,11 @@ def check_partner(user):
         if entry.partner==user:
             return True
     return False
+@register.filter
+def check_time(user):
+    request = BuddyRequest.objects.get(user = user)
+    time = request.updated.date()
+    print(time)
+    if(time.hour * 3600 + time.minute * 60 + time.second > 86400):
+        return True
+    return False
