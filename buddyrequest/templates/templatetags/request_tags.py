@@ -27,7 +27,7 @@ def check_time(user):
     print('Time class')
     request = BuddyRequest.objects.get(user = user)
     time = request.updated.time()
-    print(time)
-    if(time.hour * 3600 + time.minute * 60 + time.second > 86400):
+    #seconds
+    if(time.hour * 3600 + time.minute * 60 + time.second > 30):
         return True
     return False
