@@ -25,9 +25,10 @@ def check_partner(user):
 @register.filter
 def check_time(user):
     request = BuddyRequest.objects.get(user = user)
-    timedelta = datetime.now() - request.updated
+    timedelta = datetime.today() - request.updated
     seconds = timedelta.total_seconds()
     print("Seconds" + seconds)
+    seconds = 0
     SECONDS_IN_DAY = 86400
     if(seconds > SECONDS_IN_DAY):
         return True
