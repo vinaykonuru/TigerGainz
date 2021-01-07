@@ -17,7 +17,7 @@ def database(request):
         if(entry.partner == None):
             unmatched.append(entry)
     print("Length: "+ str(len(unmatched)))
-    print(unmatched)       
+    print(unmatched)
     return render(request,'buddyrequest/database.html',{'unmatched':unmatched})
 def remove(request):
     BuddyRequest.objects.get(user=request.user).delete()
@@ -116,6 +116,7 @@ def partner(request):
     days=partner.days.strip('][\'')
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
+    
 def remove_partner(request):
     user = request.user
     user_request=BuddyRequest.objects.get(user = user)
