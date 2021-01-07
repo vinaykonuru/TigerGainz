@@ -61,7 +61,7 @@ def matches(request):
             # userdatadf=pandas.read_csv('buddyrequest/studentdata.csv',index_col=('netID'))
             netID = request.user.uniauth_profile.get_display_id()
             userdata = getStudentInfo(netID)
-        except KeyError:
+        except Exception:
             return redirect('home')
         # preferences=request.POST['preferences']
         preferences=[0,1,2]

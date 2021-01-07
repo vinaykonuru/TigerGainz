@@ -64,7 +64,7 @@ def get_matches(user_data_list, requests_list):
     reference_ranker = {1: 100, 2:60, 3:50}
 
     workout = Dfuser.iloc[0]["workout_type"]
-
+    print(workout)
     matching_df_request = pd.DataFrame({})
     Dfrq_row_list = []
     #guarantees match has same type of workout

@@ -26,9 +26,8 @@ def check_partner(user):
 def check_time(user):
     print('Time class')
     request = BuddyRequest.objects.get(user = user)
-    time = request.updated.time()
-    #seconds
-    print(time)
-    if(time.hour * 3600 + time.minute * 60 + time.second > 30):
+    timedelta = request.updated - request.created
+    print(timedelta.total_seconds())
+    if(datetime.day > 1 | ):
         return True
     return False
