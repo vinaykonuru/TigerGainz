@@ -31,6 +31,6 @@ def check_time(user):
     seconds = timedelta.total_seconds()
     print("Seconds" + str(seconds))
     SECONDS_IN_DAY = 86400
-    if(seconds > SECONDS_IN_DAY):
+    if(seconds > 10):
         return True
     return False
