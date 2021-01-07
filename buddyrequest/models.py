@@ -14,6 +14,7 @@ class BuddyRequest(models.Model):
     time_zone=models.CharField(max_length=50,null=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE, related_name='user',null=True)
     partner=models.ForeignKey(User,on_delete=models.CASCADE,related_name='partner',null=True)
+    created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
 
     def set_days(self,x):
