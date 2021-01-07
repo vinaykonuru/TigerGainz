@@ -29,8 +29,7 @@ def check_time(user):
     current_time = timezone.make_aware(datetime.datetime.now(), timezone.get_default_timezone())
     timedelta = current_time - request.updated
     seconds = timedelta.total_seconds()
-    print("Seconds" + seconds)
-    seconds = 0
+    print("Seconds" + str(seconds))
     SECONDS_IN_DAY = 86400
     if(seconds > SECONDS_IN_DAY):
         return True
