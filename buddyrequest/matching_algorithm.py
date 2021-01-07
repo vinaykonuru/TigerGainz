@@ -46,13 +46,10 @@ def get_matches(user_data_list, requests_list):
     pd.set_option("display.max_rows", None, "display.max_columns", None)
     preferences=user_data_list[0]
     Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]], "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]]})
-    print(Dfuser)
     Dfrq = requestsdf
 
 
     Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
-    # print("Dfrq1: ")
-    # print(Dfrq1)
 
     #Mock priorities dictionary
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
@@ -64,7 +61,6 @@ def get_matches(user_data_list, requests_list):
     reference_ranker = {1: 100, 2:60, 3:50}
 
     workout = Dfuser.iloc[0]["workout_type"]
-    print(workout)
     matching_df_request = pd.DataFrame({})
     Dfrq_row_list = []
     #guarantees match has same type of workout
@@ -74,8 +70,7 @@ def get_matches(user_data_list, requests_list):
             matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
                                                                     #actualy matches
             Dfrq_row_list.append(index_row)
-    print("Dfuser")
-    print(Dfuser)
+
     matching_df_request["Dfrq_index"] = Dfrq_row_list
     if len(matching_df_request) > 0:
         matching_df = matching_df_request.drop("workout_type", axis=1) #we no longer need to have workouts as a parameter since we already made sure
@@ -94,7 +89,7 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 ranker = priorities.get(column_labels[column])
-                print(ranker)
+                print("Ranker: "+ str(ranker))
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off/100) * rel_val
