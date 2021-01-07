@@ -61,6 +61,7 @@
               <div class="mb-1 text-muted">
               {% load base_tags %}
               {% if user|check_partner %}
+                {% load base_tags %}
                 {% if user|check_time %}
                   <a href="javascript:{document.getElementById('remove_partner').submit()}">
                     <button class="btn btn-lg btn-secondary">
