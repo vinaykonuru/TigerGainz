@@ -15,7 +15,7 @@ def database(request):
     buddyrequests=BuddyRequest.objects.all()
     unmatched = []
     for entry in buddyrequests:
-        if(entry.partner == None && entry.user = != request.user):
+        if(entry.partner == None && entry.user != request.user):
             unmatched.append(entry)
     print("Length: "+ str(len(unmatched)))
     print(unmatched)
