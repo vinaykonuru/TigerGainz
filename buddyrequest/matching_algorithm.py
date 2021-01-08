@@ -67,8 +67,8 @@ def get_matches(user_data_list, requests_list):
     for index_row in range(len(Dfrq1)):
         if fuzz.ratio(workout, Dfrq1.iloc[index_row]["workout_type"]) == 100:
             row = Dfrq1.iloc[index_row]
-            matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
-                                                                    #actualy matches
+            matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparing with Dfuser to find the
+                                                                    #actually matches
             Dfrq_row_list.append(index_row)
 
     matching_df_request["Dfrq_index"] = Dfrq_row_list
@@ -83,9 +83,9 @@ def get_matches(user_data_list, requests_list):
     column_labels = matching_df_request.columns.tolist()
     print(column_labels)
     ListOfMatches = []
-    for row in range(len(matching_df_request)-1):
+    for row in range(len(matching_df_request)):
         list_best_match_vals = []
-        for column in range(len(column_labels)-1):
+        for column in range(len(column_labels)):
             if column_labels[column] == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 ranker = priorities.get(column_labels[column])
