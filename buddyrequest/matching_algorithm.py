@@ -83,7 +83,7 @@ def get_matches(user_data_list, requests_list):
     column_labels = matching_df_request.columns.tolist()
     print(column_labels)
     ListOfMatches = []
-    for row in range(len(matching_df_request)):
+    for row in range(len(matching_df_request)-1):
         list_best_match_vals = []
         for column in range(len(column_labels)):
             if column_labels[column] == "days":
