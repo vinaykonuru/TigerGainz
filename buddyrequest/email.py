@@ -8,10 +8,10 @@ def mail(name_partner, netID_user,netID_partner, user=False):
     message = MIMEMultipart("alternative")
     message["Subject"] = "Your New Workout Buddy"
 
-    # sent_email = netID_user + "@princeton.edu"
-    # contact = netID_partner + "@princeton.edu"
-    sent_email = 'vkonuru' + "@princeton.edu"
-    contact = 'vkonuru' + "@princeton.edu"
+    sent_email = netID_user + "@princeton.edu"
+    contact = netID_partner + "@princeton.edu"
+    # sent_email = 'vkonuru' + "@princeton.edu"
+    # contact = 'vkonuru' + "@princeton.edu"
 
     tiger_gainz_pass = os.environ.get("EMAIL_PASSWORD")
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
