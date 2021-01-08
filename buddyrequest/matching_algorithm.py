@@ -53,7 +53,6 @@ def get_matches(user_data_list, requests_list):
     Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
 
     #Mock priorities dictionary
-    priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
 
 
 
