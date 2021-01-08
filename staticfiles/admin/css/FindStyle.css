@@ -82,7 +82,7 @@ label:hover:before {
 /* end of checkbox style */
 
 /* select box */
-
 .form-control {
   height: unset;
+  -webkit-appearance: none;
 }

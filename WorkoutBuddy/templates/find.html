@@ -1,22 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<style>
-  body{padding:30px;}
-table {
-    border-spacing: collapse;
-    border-spacing: 0;
-}
-td {
-    width: 60px;
-    height: 25px;
-    text-align:center;
-}
-tr.border_bottom td {
-  border-bottom:1pt solid grey;
-    background:khaki;
-}
-</style>
 
 <head>
 
@@ -30,17 +14,59 @@ tr.border_bottom td {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- Script for preferences -->
+
+<script>
+  var subjectObject = {
+    "Duration": {
+      "Workout Days": ["Time Zone"],
+      "Time Zone": ["Workout Days"],
+    },
+    "Workout Days": {
+      "Duration": ["Time Zone"],
+      "Time Zone": ["Duration"]
+    },
+    "Time Zone": {
+      "Duration": ["Workout Days"],
+      "Workout Days": ["Duration"]
+    }
+  }
+  window.onload = function() {
+    var subjectSel = document.getElementById("subject");
+    var topicSel = document.getElementById("topic");
+    var chapterSel = document.getElementById("chapter");
+    for (var x in subjectObject) {
+      subjectSel.options[subjectSel.options.length] = new Option(x, x);
+    }
+    subjectSel.onchange = function() {
+      //empty Chapters- and Topics- dropdowns
+      chapterSel.length = 1;
+      topicSel.length = 1;
+      //display correct values
+      for (var y in subjectObject[this.value]) {
+        topicSel.options[topicSel.options.length] = new Option(y, y);
+      }
+    }
+    topicSel.onchange = function() {
+      //empty Chapters dropdown
+      chapterSel.length = 1;
+      //display correct values
+      var z = subjectObject[subjectSel.value][this.value];
+      for (var i = 0; i < z.length; i++) {
+        chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+      }
+    }
+  }
+</script>
+
 <body>
 
   <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/737054681322225825/Find_A_Buddy_2.jpg" class="img.responsive" style="width:55%">
   </div>
 
-  <!--What is TigerGainz?-->
-
   <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   </body>
-
 
   <div class="border-black">
     <h1 class="display-5"><strong>Find A Buddy Info Form</strong></h1>
@@ -53,7 +79,7 @@ tr.border_bottom td {
 
       <form action="{% url 'matches' %}" method='POST'>
         {% csrf_token %}
-        <p class="lead">Rank Factors Based on Importance:</p>
+        <<p class="lead">Preferences:</p>
         <hr class="my-4">
         <div class="border-orange">
           <div class="jumbotron white-background">
@@ -114,7 +140,7 @@ tr.border_bottom td {
           <div class="jumbotron white-background">
 
             <div class="form-group">
-              <select name="duration" multiple class="form-control">
+              <select name="duration" class="form-control">
                 <option class="text-center" value="30 Minutes">30 Minutes</option>
                 <option class="text-center" value="1 Hour">1 Hour</option>
                 <option class="text-center" value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
@@ -139,7 +165,7 @@ tr.border_bottom td {
 
 
             <div class="form-group">
-              <select name="workout_type" multiple class="form-control">
+              <select name="workout_type" class="form-control">
                 <option class="text-center" value="Lifting">Lifting</option>
                 <option class="text-center" value="Running">Running</option>
                 <option class="text-center" value="Biking">Biking</option>
@@ -160,7 +186,7 @@ tr.border_bottom td {
           <div class="jumbotron white-background">
 
             <div class="form-group">
-              <select name="time_zone" multiple class="form-control">
+              <select name="time_zone" class="form-control">
                 <option class="text-center" value="EST">EST</option>
                 <option class="text-center" value="CST">CST</option>
                 <option class="text-center" value="PST">PST</option>
