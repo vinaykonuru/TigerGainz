@@ -28,3 +28,7 @@
     display: block;
   }
 }
+
+.bi-small {
+  font-size: 500% !important;
+}

@@ -33,9 +33,36 @@
       <hr class="my-4">
       <div class="border-orange">
         <div class="jumbotron white-background">
-          <p>Didn't get a match? Feel free to search through the waiting list below!</p>
-          <p>Found a match and want to be taken off the waiting list?
-            Click the button below!</p>
+
+          <div>
+            <div class="card flex-md-row mb-4 h-md-250">
+              <div>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi-small bi bi-person-lines-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                </svg>
+              </div>
+              <div class="text-center card-body d-flex flex-column align-items-start">
+                <p>Didn't get a match? Feel free to search through the waiting list below!</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card flex-md-row mb-4 h-md-250">
+              <div>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi-small bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                  <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
+                </svg>
+              </div>
+              <div class="text-center card-body d-flex flex-column align-items-start">
+                <p>Found a match and want to be taken off the waiting list?
+                  Click the button below!</p>
+              </div>
+            </div>
+          </div>
+
           <hr class="my-4">
           <a href="{% url 'remove' %}" class="btn btn-lg btn-secondary">Take me off the waiting list please!</a>
         </div>
