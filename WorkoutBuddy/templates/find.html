@@ -29,20 +29,7 @@ tr.border_bottom td {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $("#myModal").modal('show');
-  });
-</script>
-<script>
-  $( "tbody" ).sortable({
-    stop: function( event, ui ){
-        $(this).find('tr').each(function(i){
-            $(this).find('td:last').text(i+1);
-        });
-    }
-});
-</script>
+
 <body>
 
   <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/737054681322225825/Find_A_Buddy_2.jpg" class="img.responsive" style="width:55%">
@@ -66,29 +53,17 @@ tr.border_bottom td {
 
       <form action="{% url 'matches' %}" method='POST'>
         {% csrf_token %}
-        <table>
-        <thead>
-            <tr>
-                <th>Factor</th>
-                <th>Rank</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="border_bottom">
-                <td>Time Zone</td>
-                <td>1</td>
-            </tr>
-            <tr class="border_bottom">
-                <td>Days</td>
-                <td>2</td>
-            </tr>
-            <tr class="border_bottom">
-                <td>Duration</td>
-                <td>3</td>
-            </tr>
-        </tbody>
-    </table>
-
+        <p class="lead">Rank Factors Based on Importance:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+        <label class="radio-inline"><input type="radio" name="preferences" value = "day">Workout Days</label>
+        <label class="radio-inline"><input type="radio" name="preferences" value = "duration">Duration</label>
+        <label class="radio-inline"><input type="radio" name="preferences" value = "timezone">Time Zone</label>
+        </div>
+      </div>
+      <br />
+      <br />
         <p class="lead">Workout Days:</p>
         <hr class="my-4">
         <div class="border-orange">
