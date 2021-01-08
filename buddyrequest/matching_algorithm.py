@@ -86,7 +86,7 @@ def get_matches(user_data_list, requests_list):
     print(matching_df_request.iloc[0][0])
     for row in range(len(matching_df_request)):
         list_best_match_vals = []
-        for column in range(len(column_labels)):
+        for column in range(len(column_labels)-1):
             if column_labels[column] == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 ranker = priorities.get(column_labels[column])
