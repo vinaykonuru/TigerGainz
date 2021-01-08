@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<style>
+  body{padding:30px;}
+table {
+    border-spacing: collapse;
+    border-spacing: 0;
+}
+td {
+    width: 60px;
+    height: 25px;
+    text-align:center;
+}
+tr.border_bottom td {
+  border-bottom:1pt solid grey;
+    background:khaki;
+}
+</style>
 
 <head>
 
@@ -18,7 +34,15 @@
     $("#myModal").modal('show');
   });
 </script>
-
+<script>
+  $( "tbody" ).sortable({
+    stop: function( event, ui ){
+        $(this).find('tr').each(function(i){
+            $(this).find('td:last').text(i+1);
+        });
+    }
+});
+</script>
 <body>
 
   <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/737054681322225825/Find_A_Buddy_2.jpg" class="img.responsive" style="width:55%">
@@ -42,6 +66,29 @@
 
       <form action="{% url 'matches' %}" method='POST'>
         {% csrf_token %}
+        <table>
+        <thead>
+            <tr>
+                <th>Factor</th>
+                <th>Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border_bottom">
+                <td>Time Zone</td>
+                <td>1</td>
+            </tr>
+            <tr class="border_bottom">
+                <td>Days</td>
+                <td>2</td>
+            </tr>
+            <tr class="border_bottom">
+                <td>Duration</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+
         <p class="lead">Workout Days:</p>
         <hr class="my-4">
         <div class="border-orange">
