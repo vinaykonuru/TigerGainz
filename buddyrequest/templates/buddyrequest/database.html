@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+
 <head>
 
   <title>TigerGainz - Waiting List</title>
@@ -15,24 +16,38 @@
   <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/761996625165680640/Database.jpg" class="img.responsive" style="width:55%">
   </div>
 
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  </body>
+
   <!--TigerGainz Database Jumbotron-->
   <div class="border-black">
     <h1 class="display-5"><strong>TigerGainz Waiting List</strong></h1>
   </div>
+  <br />
+  <br />
 
-  <div class = "jumbotron">
-      <p><strong>Didn't get a match? Feel free to search through the waiting list below!</strong></p>
-
-      <p class = "lead"><strong>Found a match and want to be taken off the waiting list?
-        Click the button below!</strong>
-      </p>
-      <br/>
-      <a href="{% url 'remove' %}" class="btn btn-lg btn-secondary">Take me off the waiting list please!</a>
+  <div class="jumbotron">
+    <div class="border-white">
+      <p class="lead">What Now?</p>
       <hr class="my-4">
+      <div class="border-orange">
+        <div class="jumbotron white-background">
+          <p>Didn't get a match? Feel free to search through the waiting list below!</p>
+
+          <p>Found a match and want to be taken off the waiting list?
+            Click the button below!</p>
+          <hr class="my-4">
+          <a href="{% url 'remove' %}" class="btn btn-lg btn-secondary">Take me off the waiting list please!</a>
+          <hr class="my-4">
+        </div>
+      </div>
+    </div>
   </div>
-  <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  </body>
+
+  <div class="border-black">
+    <h1 class="display-5"><strong>Profiles</strong></h1>
+  </div>
   <br />
   <br />
 
