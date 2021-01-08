@@ -78,10 +78,9 @@
 
   <div class="jumbotron">
     <div class="border-white">
-      <p class="lead">Take Me To:</p>
-      <hr class="my-4">
       <div class="border-orange">
         <div class="jumbotron white-background">
+          <h1>"→"
           {% load base_tags %}
           {% if user|check_partner %}
           <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">Partner Details</a>
@@ -90,6 +89,7 @@
           {% else %}
           <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Started</a>
           {% endif %}
+          "←"</h1>
         </div>
       </div>
     </div>
