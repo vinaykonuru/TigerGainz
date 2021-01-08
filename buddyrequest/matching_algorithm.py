@@ -81,10 +81,9 @@ def get_matches(user_data_list, requests_list):
     matching_df_user = Dfuser.drop("workout_type", axis=1)
     matching_df_request = matching_df_request.drop("workout_type", axis=1)
     column_labels = matching_df_request.columns.tolist()
-    print(column_labels)
     ListOfMatches = []
-    print(matching_df_request)
-    for row in range(len(matching_df_request)-1):
+    print(matching_df_request.iloc[0][0])
+    for row in range(len(matching_df_request)):
         list_best_match_vals = []
         for column in range(len(column_labels)):
             if column_labels[column] == "days":
