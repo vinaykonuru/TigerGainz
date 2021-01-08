@@ -89,9 +89,9 @@ def get_matches(user_data_list, requests_list):
         for column in range(len(column_labels)-1):
             if column_labels[column] == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
-                ranker = priorities.get(column_labels[column])
-                cut_off = reference_ranker.get(ranker)
-
+                # ranker = priorities.get(column_labels[column])
+                # cut_off = reference_ranker.get(ranker)
+                cut_off = priorities.index(column)
                 weighted_average = (cut_off/100) * rel_val
                 print("Weighted Average Days: "+ str(weighted_average))
 
@@ -101,9 +101,10 @@ def get_matches(user_data_list, requests_list):
                     break
             else:
                 rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
-                ranker = priorities.get(column_labels[column])
-                cut_off = reference_ranker.get(ranker)
-                print("Ranker: " + str(ranker))
+                # ranker = priorities.get(column_labels[column])
+                # cut_off = reference_ranker.get(ranker)
+                cut_off = priorities.index(column)
+                # print("Ranker: " + str(ranker))
                 print("Cut off: "+ str(cut_off))
 
                 weighted_average = (cut_off / 100) * rel_val
