@@ -57,7 +57,7 @@
     {% elif user|check_requests %}
     <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
     {% else %}
-    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Started</a>
+    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
     {% endif %}
   </div>
 
@@ -88,7 +88,7 @@
           {% elif user|check_requests %}
           <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
           {% else %}
-          <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Started</a>
+          <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
           {% endif %}
           ←</h1>
         </div>

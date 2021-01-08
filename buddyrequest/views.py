@@ -63,7 +63,7 @@ def matches(request):
             userdata = getStudentInfo(netID)
         except Exception:
             return redirect('home')
-        preferences=request.POST['preferences']
+        preferences=request.POST.getlist('preferences')
         print(preferences)
         preferences=[1,2,3]
         error = ""
