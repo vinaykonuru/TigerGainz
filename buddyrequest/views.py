@@ -64,8 +64,8 @@ def matches(request):
         except Exception:
             return redirect('home')
         preferences=request.POST['preferences']
-        preferences=[1,2,3]
         print(preferences)
+        preferences=[1,2,3]
         error = ""
         try:
             name=userdata['full_name']
