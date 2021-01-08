@@ -65,7 +65,6 @@ def matches(request):
             return redirect('home')
         preferences=request.POST.getlist('preferences')
         print(preferences)
-        preferences=[1,2,3]
         error = ""
         try:
             name=userdata['full_name']
