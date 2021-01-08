@@ -104,6 +104,7 @@ def matches(request):
             return render(request,'buddyrequest/matches.html')
         else:
             matched_people=get_matches(user_data_list, requestsList)
+            print(matched_people)
             if len(matched_people) > 3: # if more than 3 matches, give best 3
                 return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:2]})
 
