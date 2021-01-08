@@ -45,6 +45,7 @@ def get_matches(user_data_list, requests_list):
     #dataframe of requests
     pd.set_option("display.max_rows", None, "display.max_columns", None)
     preferences=user_data_list[0]
+    print(preferences)
     Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]], "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]]})
     Dfrq = requestsdf
 
