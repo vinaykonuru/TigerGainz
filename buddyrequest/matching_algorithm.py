@@ -103,7 +103,7 @@ def get_matches(user_data_list, requests_list):
                 rel_val = fuzz.ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
                 # ranker = priorities.get(column_labels[column])
                 # cut_off = reference_ranker.get(ranker)
-                cut_off = preferences.index(column)
+                cut_off = int(preferences.index(column))
                 # print("Ranker: " + str(ranker))
                 print("Cut off: "+ str(cut_off))
 
