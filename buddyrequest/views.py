@@ -64,6 +64,11 @@ def matches(request):
         except Exception:
             return redirect('home')
         preferences=request.POST.getlist('preferences')
+        # reformatting preferences to match headeres in request model
+        preferences[preferences.index('Workout Days')] = 'days'
+        preferences[preferences.index('Duration')] = 'duration'
+        preferences[preferences.index('Time Zone')] = 'time_zone'
+
         print(preferences)
         error = ""
         try:
