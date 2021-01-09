@@ -82,7 +82,7 @@ def get_matches(user_data_list, requests_list):
     matching_df_request = matching_df_request.drop("workout_type", axis=1)
     column_labels = matching_df_request.columns.tolist()
     ListOfMatches = []
-    print(matching_df_request.iloc[0][0])
+    # print(matching_df_request.iloc[0][0])
     for row in range(len(matching_df_request)):
         list_best_match_vals = []
         # for column in range(len(column_labels)-1):
@@ -101,11 +101,10 @@ def get_matches(user_data_list, requests_list):
                     break
             else:
                 rel_val = fuzz.ratio(matching_df_request.iloc[row][column_index-1], matching_df_user.iloc[0][column_index-1])
-                ranker = priorities.get(column_labels[column])
-                cut_off = reference_ranker.get(ranker)
-                #cut_off = int(preferences.index(column))
-                # print("Ranker: " + str(ranker))
-                print("Cut off: "+ str(cut_off))
+                # ranker = priorities.get(column_labels[column])
+                # cut_off = reference_ranker.get(ranker)
+                cut_off = int(preferences.index(column))
+                # print("Cut off: "+ str(cut_off))
 
                 weighted_average = (cut_off / 100) * rel_val
                 print("Weighted Average: "+ str(weighted_average))
