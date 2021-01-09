@@ -87,11 +87,13 @@ def get_matches(user_data_list, requests_list):
         list_best_match_vals = []
         # for column in range(len(column_labels)-1):
         for column_index, column in enumerate(column_labels):
+            rank = int(preferences.index(column))+1 # 0 index-->1st rank
+            cut_off = reference_ranker.get(rank)
             if column == "days":
                 rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column_index-1], matching_df_user.iloc[0][column_index-1])
                 # ranker = priorities.get(column_labels[column])
                 # cut_off = reference_ranker.get(ranker)
-                cut_off = int(preferences.index(column))
+
                 weighted_average = (cut_off/100) * rel_val
                 print("Weighted Average Days: "+ str(weighted_average))
 
@@ -103,7 +105,6 @@ def get_matches(user_data_list, requests_list):
                 rel_val = fuzz.ratio(matching_df_request.iloc[row][column_index-1], matching_df_user.iloc[0][column_index-1])
                 # ranker = priorities.get(column_labels[column])
                 # cut_off = reference_ranker.get(ranker)
-                cut_off = int(preferences.index(column))
                 # print("Cut off: "+ str(cut_off))
 
                 weighted_average = (cut_off / 100) * rel_val
