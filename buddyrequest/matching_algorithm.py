@@ -117,6 +117,7 @@ def get_matches(user_data_list, requests_list):
             print("Matched")
             average = mean(list_best_match_vals)
             list_best_match_vals.append(average)
+            print(matching_df_request)
             Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
             list_best_match_vals.append(Dfrq_index)
             print("List of best match values" + str(list_best_match_vals))
