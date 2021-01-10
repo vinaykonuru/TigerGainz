@@ -80,11 +80,22 @@
     <div class="border-white">
       <div class="border-orange">
         <div class="jumbotron white-background">
+          <!-- Filters !-->
+          <form action="{% url 'database' %}" method='POST'>
+            <select id="workout_type_filter" name="workout_type_filter">
+              <option value="Lifting">Lifting</option>
+              <option value="Running">Running</option>
+              <option value="Swimming">Swimming</option>
+              <option value="Biking">Biking</option>
+            </select>
 
+          <hr class="my-4">
+          <input class="btn btn-lg btn-secondary" type="submit" value="Filter Search">
+          </form>
           <!--Profiles-->
 
           <div class="row">
-            {% for entry in unmatched %}
+            {% for entry in profiles %}
             {% if forloop.counter0|divisibleby:2 %}
             {% endif %}
             <div class="column">

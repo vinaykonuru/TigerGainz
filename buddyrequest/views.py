@@ -13,13 +13,16 @@ from .tigerhub_access import getStudentInfo
 @login_required(login_url='/accounts/signup')
 def database(request):
     buddyrequests=BuddyRequest.objects.all()
-    unmatched = []
+    workout_type_filter = request.POST['workout_type_filter']
+
+    print("Workout Type Filter: " + workout_type_filter)
+    profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
-            unmatched.append(entry)
-    print("Length: "+ str(len(unmatched)))
-    print(unmatched)
-    return render(request,'buddyrequest/database.html',{'unmatched':unmatched})
+            if(entry.workout_type == workout_type_filter):
+                profiles.append(entry)
+
+    return render(request,'buddyrequest/database.html',{'profiles':profiles})
 def remove(request):
     BuddyRequest.objects.get(user=request.user).delete()
     return redirect('home')
