@@ -15,11 +15,12 @@ def database(request):
     buddyrequests=BuddyRequest.objects.all()
     workout_type_filter = request.POST.getlist('workout_type_filter')
 
-    print("Workout Type Filter: " + workout_type_filter)
+    print("Workout Type Filter: " + str(workout_type_filter))
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
-            if(entry.workout_type == workout_type_filter):
+            print("Workout Type: " + str(entry.workout_type))
+            if(entry.workout_type == workout_type_filter[0]):
                 profiles.append(entry)
 
     return render(request,'buddyrequest/database.html',{'profiles':profiles})
