@@ -13,7 +13,7 @@ from .tigerhub_access import getStudentInfo
 @login_required(login_url='/accounts/signup')
 def database(request):
     buddyrequests=BuddyRequest.objects.all()
-    workout_type_filter = request.POST.getlist()['workout_type_filter']
+    workout_type_filter = request.POST.getlist('workout_type_filter')
 
     print("Workout Type Filter: " + workout_type_filter)
     profiles = []
