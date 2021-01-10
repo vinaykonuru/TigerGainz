@@ -19,6 +19,7 @@ def database(request):
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
+            print(list(workout_type))
             workout_type = set(list(entry.workout_type))
             print("Workout Type: " + str(workout_type))
             print(workout_type_filter.issubset(workout_type))
