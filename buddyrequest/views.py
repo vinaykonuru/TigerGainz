@@ -20,7 +20,7 @@ def database(request):
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
             print("Workout Type: " + str(entry.workout_type))
-            if(entry.workout_type == workout_type_filter[0]):
+            if(entry.workout_type == workout_type_filter):
                 profiles.append(entry)
 
     return render(request,'buddyrequest/database.html',{'profiles':profiles})
