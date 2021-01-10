@@ -107,6 +107,25 @@
                   <img class="img-fluid" src="https://cdn.discordapp.com/attachments/735319507341672642/762013221007654942/Tiger_Profile_Pic.jpg">
                   <br />
                   <br />
+                  <strong class="d-inline-block mb-2 text-primary">Duration</strong>
+                  <div class="mb-1 text-muted">
+                    <p>{{ entry.duration }} </p>
+                  </div>
+                  <strong class="d-inline-block mb-2 text-primary">Time Zone</strong>
+                  <div class="mb-1 text-muted">
+                    <p>{{ entry.time_zone }} </p>
+                  </div>
+                  <strong class="d-inline-block mb-2 text-primary">Availability</strong>
+                  <div class="mb-1 text-muted">
+                    <p>{{ entry.days }} </p>
+                  </div>
+                  <strong class="d-inline-block mb-2 text-primary">Workout Type</strong>
+                  <div class="mb-1 text-muted">
+                    <p>{{ entry.workout_type }} </p>
+                  </div>
+
+                  <br />
+                  <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
                   {% if entry.user_id != user.id %}
                   <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
