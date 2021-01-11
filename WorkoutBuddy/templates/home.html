@@ -70,22 +70,24 @@
 
   <!-- Button at top of page -->
 
-      <div class="border-orange">
-        <div class="jumbotron white-background">
-          <h1>Take me to:</h1>
-          <h1>→
-            {% load base_tags %}
-            {% if user|check_partner %}
-            <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">Partner Details</a>
-            {% elif user|check_requests %}
-            <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
-            {% else %}
-            <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
-            {% endif %}
-            ←
-          </h1>
-        </div>
-      </div>
+  <div class="border-orange">
+    <div class="jumbotron white-background">
+      <h1>Take me to:</h1>
+      <h1>→
+        {% load base_tags %}
+        {% if user|check_partner %}
+        <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">Partner Details</a>
+        {% elif user|check_requests %}
+        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
+        {% else %}
+        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
+        {% endif %}
+        ←
+      </h1>
+    </div>
+  </div>
+  <br />
+  <br />
 
   <!--What is TigerGainz?-->
 
@@ -288,7 +290,7 @@
         <button type="button" class="btn btn-lg btn-secondary" data-toggle="collapse" data-target="#collapse1">Click to See Process</button>
       </div>
       <div id="collapse1" class="panel-collapse collapse">
-        <br/>
+        <br />
         <img width="100%" height="100%" class="pop-up-pics" src="https://cdn.discordapp.com/attachments/733383636157726721/796984713330819103/Screen_Shot_2021-01-08_at_1.11.33_AM.png">
         </img>
       </div>
