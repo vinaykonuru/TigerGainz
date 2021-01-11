@@ -22,9 +22,5 @@
 }
 
 .pop-up-pics {
-  object-fit: contain;
-}
-
-.popup-padding {
-  overflow-y: auto;
+  max-width: 100%
 }
