@@ -22,5 +22,5 @@
 }
 
 .how-works {
-  object-fit: cover;
+  object-fit: scale-down;
 }
