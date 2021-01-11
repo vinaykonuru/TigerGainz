@@ -53,11 +53,11 @@
   <div class="get-started">
     {% load base_tags %}
     {% if user|check_partner %}
-    <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">Partner Details</a>
+    <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
     {% elif user|check_requests %}
-    <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
+    <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
     {% else %}
-    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
+    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
     {% endif %}
   </div>
 
