@@ -22,7 +22,7 @@
 }
 
 .pop-up-pics {
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
