@@ -23,6 +23,9 @@
 
 .pop-up-pics {
   object-fit: contain;
-  margin-top: 1%;
-  margin-bottom: 1%;
+}
+
+.popup-padding {
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
