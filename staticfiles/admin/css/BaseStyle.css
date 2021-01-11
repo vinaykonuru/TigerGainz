@@ -17,9 +17,9 @@
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-.navbar-dark .navbar-toggler .toggler-icon {
-color: rgba(255,255,255,1);
-border-color: rgba(255,255,255,1);
+.navbar-dark .navbar-toggler {
+border-color: rgba(255,255,255,1) !important;
+border-width: 2.5px;
 }
 
 .navbar-brand {
