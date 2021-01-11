@@ -22,9 +22,10 @@
 }
 
 .pop-up-pics {
+  object-fit: cover;
   display: block;
 }
 
 .popup-padding {
-  float:right;
+  float: right;
 }
