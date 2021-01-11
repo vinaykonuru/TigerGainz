@@ -74,15 +74,15 @@
     <div class="jumbotron white-background">
         {% load base_tags %}
         {% if user|check_partner %}
-        <h1>Who Am I Paired With?:</h1>
+        <h1>Who Am I Paired With?</h1>
         <h1>→
         <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
         {% elif user|check_requests %}
-        <h1>Don't Have a Partner?:</h1>
+        <h1>Don't Have a Partner?</h1>
         <h1>→
-        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Take Me To The Waiting List</a>
+        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
         {% else %}
-        <h1>Get Started:</h1>
+        <h1>Get Started!</h1>
         <h1>→
         <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
         {% endif %}
