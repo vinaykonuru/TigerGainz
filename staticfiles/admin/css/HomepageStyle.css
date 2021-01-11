@@ -22,7 +22,7 @@
 }
 
 .pop-up-pics {
-  object-fit: scale-down;
+  object-fit: contain;
   margin-top: 1%;
   margin-bottom: 1%;
 }
