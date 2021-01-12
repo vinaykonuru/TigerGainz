@@ -159,12 +159,6 @@
                 <option class="text-center" value="Running">Running</option>
                 <option class="text-center" value="Biking">Biking</option>
                 <option class="text-center" value="Swimming">Swimming</option>
-
-                <!-- <input type="checkbox" name="exercise" value="Biking" id="test2.3"><label for="test2.3" class="checkbox-inline">Biking</label>
-                <input type="checkbox" name="exercise" value="Lifting" id="test2.1"><label for="test2.1" class="checkbox-inline">Lifting</label>
-                <input type="checkbox" name="exercise" value="Running" id="test2.2"><label for="test2.2" class="checkbox-inline">Running</label>
-                <input type="checkbox" name="exercise" value="Lifting" id="test2.4"><label for="test2.4" class="checkbox-inline">Swimming</label>
-                <input type="checkbox" name="exercise" value="Yoga/Pilates" id="test2.5"><label for="test2.5" class="checkbox-inline">Yoga/Pilates</label> -->
               </select>
             </div>
 
@@ -174,13 +168,70 @@
         <br />
         <br />
 
-        <!-- <hr class="my-4">
-        <p class="lead">Intensity:</p>
-        <hr class="my-4">
-        <div class="border-orange">
-          <div class="jumbotron white-background">
+        <!-- <input type="checkbox" name="exercise" value="Lifting" id="Biking"><label for="Biking" class="checkbox-inline">Biking</label>
+        <input type="checkbox" name="exercise" value="Lifting" id="Lifting"><label for="Lifting" class="checkbox-inline">Lifting</label>
+        <input type="checkbox" name="exercise" value="Running" id="Running"><label for="Running" class="checkbox-inline">Running</label>
+        <input type="checkbox" name="exercise" value="Lifting" id="Swimming"><label for="Swimming" class="checkbox-inline">Swimming</label>
+        <input type="checkbox" name="exercise" value="Yoga/Pilates" id="YogaPil"><label for="YogaPil" class="checkbox-inline">Yoga/Pilates</label> -->
 
-          </div>
+        <!-- Intesities -->
+
+        <!-- <div id="bikeIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Biking Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="liftIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Lifting Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="runIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Running Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="swimIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Swimming Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="yogaPilIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Yoga/Pilates Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        </div>
         </div>
 
         <br />
@@ -240,6 +291,60 @@
           $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
       </script>
+
+      <!-- Script for intensities -->
+
+      <!-- <script>
+        $(document).ready(function() {
+          $("#Biking").click(function() {
+            if ($("#Biking").is(':checked')) {
+              $("#bikeIntensity").show();
+            } else {
+              $("#bikeIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#Lifting").click(function() {
+            if ($("#Lifting").is(':checked')) {
+              $("#liftIntensity").show();
+            } else {
+              $("#liftIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#Running").click(function() {
+            if ($("#Running").is(':checked')) {
+              $("#runIntensity").show();
+            } else {
+              $("#runIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#Swimming").click(function() {
+            if ($("#Swimming").is(':checked')) {
+              $("#swimIntensity").show();
+            } else {
+              $("#swimIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#YogaPil").click(function() {
+            if ($("#YogaPil").is(':checked')) {
+              $("#yogaPilIntensity").show();
+            } else {
+              $("#yogaPilIntensity").hide();
+            }
+          });
+        });
+      </script> -->
 
 </body>
 

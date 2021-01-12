@@ -85,3 +85,8 @@ label:hover:before {
 .form-control {
   height: unset;
 }
+
+/* Intesity style */
+.init-hidden {
+  display: none;
+}
