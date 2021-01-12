@@ -1,2 +1,2 @@
 # TigerGainz
-![Tiger Gainz Banner](/TigerGainz/blob/master/tigergainzimage.jpg)
+![Tiger Gainz Banner](/tigergainzimage.jpg)
