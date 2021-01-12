@@ -59,6 +59,11 @@
   <!--Header -->
   <nav class="navbar fixed-top navbar-dark bg-light">
     <a class="navbar-brand" href="{% url 'home' %}"><img src="https://cdn.discordapp.com/attachments/735319507341672642/736046532834492456/IMG_0037.PNG" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">TigerGainz</a>
+{% if user|check_partner %}
+    <span class="navbar-text ml-auto">
+      Current Partner: {{ profile_details.name }}
+    </span>
+    {% endif%}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon custom-toggler"></span>
     </button>

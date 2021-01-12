@@ -32,6 +32,11 @@
   color: #fff !important;
 }
 
+.navbar-text {
+  color: white !important;
+  padding-right: 10px;
+}
+
 .cover-container {
   font-family: 'Noto Sans JP',
     sans-serif;
