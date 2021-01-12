@@ -1,2 +1,2 @@
 # TigerGainz
-![Tiger Gainz Banner] (tigergainzimage.jpg)
+![Tiger Gainz Banner](TigerGainz/tigergainzimage.jpg)
