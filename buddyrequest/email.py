@@ -16,7 +16,7 @@ def mail(name_partner, netID_user,netID_partner, user=False):
     tiger_gainz_pass = os.environ.get("EMAIL_PASSWORD")
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
 
-    if user == True:
+    if user == False:
 
         text = f'''\
         Hi!
