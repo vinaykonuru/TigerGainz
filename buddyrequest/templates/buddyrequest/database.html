@@ -20,7 +20,31 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   </body>
 
-  <!--TigerGainz Database Jumbotron-->
+  <!-- Confirmation Pop-up -->
+
+  <div id="overlay">
+    <div id="text">
+      <div class="border-white">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+            <p class="lead">Are You Sure You Want to Match?</p>
+            <br>
+            <p "proceeding"> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
+            <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+              <button onclick="on()" class="btn btn-lg btn-secondary">
+                Confirm
+              </button>
+            </a>
+            <button onclick="off()" class="btn btn-lg btn-secondary">
+              Deny
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--TigerGainz Waiting List Jumbotron-->
   <div class="border-black">
     <h1 class="display-5"><strong>TigerGainz Waiting List</strong></h1>
   </div>
@@ -135,11 +159,9 @@
                   <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
                   {% if entry.user_id != user.id %}
-                  <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
-                    <button class="btn btn-lg btn-secondary">
-                      Match
-                    </button>
-                  </a>
+                  <button onclick="on()" class="btn btn-lg btn-secondary">
+                    Match
+                  </button>
                   <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" />
@@ -151,6 +173,17 @@
             </div>
             {% endfor %}
           </div>
+
+          <!-- Script for Matching Pop-up -->
+          <script>
+            function on() {
+              document.getElementById("overlay").style.display = "block";
+            }
+
+            function off() {
+              document.getElementById("overlay").style.display = "none";
+            }
+          </script>
 
 </body>
 {% endblock %}
