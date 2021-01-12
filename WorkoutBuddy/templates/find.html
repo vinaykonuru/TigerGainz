@@ -80,118 +80,187 @@
       <form action="{% url 'matches' %}" method='POST'>
         {% csrf_token %}
         <p class="lead">Preferences:</p>
-          <hr class="my-4">
-          <div class="border-orange">
-            <div class="jumbotron white-background">
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
 
-              Top Preference:</br></br> <select name="preferences" id="subject" class="form-control">
-                <option value="" selected="selected">Select Preference</option>
+            Top Preference:<br><br> <select name="preferences" id="subject" class="form-control">
+              <option value="" selected="selected">Select Preference</option>
+            </select>
+            <br><br>
+            Secondary Preference: <br><br> <select name="preferences" id="topic" class="form-control">
+              <option value="" selected="selected">Please Select Top Preference First</option>
+            </select>
+            <br><br>
+            Tertiary Preference: <br><br> <select name="preferences" id="chapter" class="form-control">
+              <option value="" selected="selected">Please Select Secondary Preference First</option>
+            </select>
+            <br><br>
+
+          </div>
+        </div>
+
+        <br />
+        <br />
+
+        <hr class="my-4">
+
+        <p class="lead">Workout Days:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+
+            <input type="checkbox" name="day" value="Monday" id="test1"><label for="test1" class="checkbox-inline">Monday</label>
+            <input type="checkbox" name="day" value="Tuesday" id="test2"><label for="test2" class="checkbox-inline">Tuesday</label>
+            <input type="checkbox" name="day" value="Wednesday" id="test3"><label for="test3" class="checkbox-inline">Wednesday</label>
+            <input type="checkbox" name="day" value="Thursday" id="test4"><label for="test4" class="checkbox-inline">Thursday</label>
+            <input type="checkbox" name="day" value="Friday" id="test5"><label for="test5" class="checkbox-inline">Friday</label>
+            <input type="checkbox" name="day" value="Saturday" id="test6"><label for="test6" class="checkbox-inline">Saturday</label>
+            <input type="checkbox" name="day" value="Sunday" id="test7"><label for="test7" class="checkbox-inline">Sunday</label>
+            <!-- <input type="checkbox" name="day" value="No_pref" id="test8"><label for="test8" class="checkbox-inline">No Preference</label> -->
+          </div>
+        </div>
+
+        <br />
+        <br />
+
+        <hr class="my-4">
+        <p class="lead">Duration:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+
+            <div class="form-group">
+              <select name="duration" class="form-control">
+                <option class="text-center" value="30 Minutes">30 Minutes</option>
+                <option class="text-center" value="1 Hour">1 Hour</option>
+                <option class="text-center" value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
+                <option class="text-center" value="2 Hours">2 Hours</option>
+                <option class="text-center" value="2+ Hours">2+ Hours</option>
               </select>
-              <br><br>
-              Secondary Preference: </br></br> <select name="preferences" id="topic" class="form-control">
-                <option value="" selected="selected">Please Select Top Preference First</option>
+            </div>
+
+          </div>
+        </div>
+
+        <br />
+        <br />
+
+        <hr class="my-4">
+        <p class="lead">Type of Workout:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+
+
+            <div class="form-group">
+              <select name="workout_type" class="form-control">
+                <option class="text-center" value="Lifting">Lifting</option>
+                <option class="text-center" value="Running">Running</option>
+                <option class="text-center" value="Biking">Biking</option>
+                <option class="text-center" value="Swimming">Swimming</option>
               </select>
-              <br><br>
-              Tertiary Preference: </br></br> <select name="preferences" id="chapter" class="form-control">
-                <option value="" selected="selected">Please Select Secondary Preference First</option>
+            </div>
+
+          </div>
+        </div>
+
+        <br />
+        <br />
+
+        <!-- <input type="checkbox" name="exercise" value="Lifting" id="Biking"><label for="Biking" class="checkbox-inline">Biking</label>
+        <input type="checkbox" name="exercise" value="Lifting" id="Lifting"><label for="Lifting" class="checkbox-inline">Lifting</label>
+        <input type="checkbox" name="exercise" value="Running" id="Running"><label for="Running" class="checkbox-inline">Running</label>
+        <input type="checkbox" name="exercise" value="Lifting" id="Swimming"><label for="Swimming" class="checkbox-inline">Swimming</label>
+        <input type="checkbox" name="exercise" value="Yoga/Pilates" id="YogaPil"><label for="YogaPil" class="checkbox-inline">Yoga/Pilates</label> -->
+
+        <!-- Intesities -->
+
+        <!-- <div id="bikeIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Biking Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="liftIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Lifting Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="runIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Running Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="swimIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Swimming Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        <div id="yogaPilIntensity" class="form-group init-hidden">
+          <br />
+          <br />
+          <select class="form-control">
+            <option selected>Yoga/Pilates Intensity</option>
+            <option class="text-center" value="Low">Low</option>
+            <option class="text-center" value="Medium">Medium</option>
+            <option class="text-center" value="High">High</option>
+          </select>
+        </div>
+
+        </div>
+        </div>
+
+        <br />
+        <br /> -->
+
+        <hr class="my-4">
+        <p class="lead">Timezone:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+
+            <div class="form-group">
+              <select name="time_zone" class="form-control">
+                <option class="text-center" value="EST">EST</option>
+                <option class="text-center" value="CST">CST</option>
+                <option class="text-center" value="PST">PST</option>
+                <option class="text-center" value="GMT">GMT</option>
               </select>
-              <br><br>
+            </div>
 
-    </div>
-  </div>
+          </div>
+        </div>
 
-  <br />
-  <br />
+        <br />
+        <br />
 
-  <hr class="my-4">
+        <!-- Profile Picture -->
 
-  <p class="lead">Workout Days:</p>
-  <hr class="my-4">
-  <div class="border-orange">
-    <div class="jumbotron white-background">
-
-      <input type="checkbox" name="day" value="Monday" id="test1"><label for="test1" class="checkbox-inline">Monday</label>
-      <input type="checkbox" name="day" value="Tuesday" id="test2"><label for="test2" class="checkbox-inline">Tuesday</label>
-      <input type="checkbox" name="day" value="Wednesday" id="test3"><label for="test3" class="checkbox-inline">Wednesday</label>
-      <input type="checkbox" name="day" value="Thursday" id="test4"><label for="test4" class="checkbox-inline">Thursday</label>
-      <input type="checkbox" name="day" value="Friday" id="test5"><label for="test5" class="checkbox-inline">Friday</label>
-      <input type="checkbox" name="day" value="Saturday" id="test6"><label for="test6" class="checkbox-inline">Saturday</label>
-      <input type="checkbox" name="day" value="Sunday" id="test7"><label for="test7" class="checkbox-inline">Sunday</label>
-
-    </div>
-  </div>
-
-  <br />
-  <br />
-
-  <hr class="my-4">
-  <p class="lead">Duration:</p>
-  <hr class="my-4">
-  <div class="border-orange">
-    <div class="jumbotron white-background">
-
-      <div class="form-group">
-        <select name="duration" class="form-control">
-          <option class="text-center" value="30 Minutes">30 Minutes</option>
-          <option class="text-center" value="1 Hour">1 Hour</option>
-          <option class="text-center" value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
-          <option class="text-center" value="2 Hours">2 Hours</option>
-          <option class="text-center" value="2+ Hours">2+ Hours</option>
-        </select>
-      </div>
-
-    </div>
-  </div>
-
-  <br />
-  <br />
-
-  <hr class="my-4">
-  <p class="lead">Type of Workout:</p>
-  <hr class="my-4">
-  <div class="border-orange">
-    <div class="jumbotron white-background">
-
-
-      <div class="form-group">
-        <select name="workout_type" class="form-control">
-          <option class="text-center" value="Lifting">Lifting</option>
-          <option class="text-center" value="Running">Running</option>
-          <option class="text-center" value="Biking">Biking</option>
-          <option class="text-center" value="Swimming">Swimming</option>
-        </select>
-      </div>
-
-    </div>
-  </div>
-
-  <br />
-  <br />
-
-  <hr class="my-4">
-  <p class="lead">Timezone:</p>
-  <hr class="my-4">
-  <div class="border-orange">
-    <div class="jumbotron white-background">
-
-      <div class="form-group">
-        <select name="time_zone" class="form-control">
-          <option class="text-center" value="EST">EST</option>
-          <option class="text-center" value="CST">CST</option>
-          <option class="text-center" value="PST">PST</option>
-          <option class="text-center" value="GMT">GMT</option>
-        </select>
-      </div>
-
-    </div>
-  </div>
-
-  <br />
-  <br />
-
-  <!-- Profile Picture -->
-
-  <!-- <hr class="my-4">
+        <!-- <hr class="my-4">
         <p class="lead">Profile Picture:</p>
         <hr class="my-4">
         <div class="border-orange">
@@ -207,21 +276,75 @@
           </div>
         </div> -->
 
-  <hr class="my-4">
-  <input class="btn btn-lg btn-secondary" type="submit" value="Find my Match!">
-  <!--value changed from "Find" to "Find my Match!" ask Vinay if this will mess anything up-->
+        <hr class="my-4">
+        <input class="btn btn-lg btn-secondary" type="submit" value="Find my Match!">
+        <!--value changed from "Find" to "Find my Match!" ask Vinay if this will mess anything up-->
 
-  </form>
+      </form>
 
 
-  <!--Script for custom select file-->
+      <!--Script for custom select file-->
 
-  <script>
-    $(".custom-file-input").on("change", function() {
-      var fileName = $(this).val().split("\\").pop();
-      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-  </script>
+      <script>
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+      </script>
+
+      <!-- Script for intensities -->
+
+      <!-- <script>
+        $(document).ready(function() {
+          $("#Biking").click(function() {
+            if ($("#Biking").is(':checked')) {
+              $("#bikeIntensity").show();
+            } else {
+              $("#bikeIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#Lifting").click(function() {
+            if ($("#Lifting").is(':checked')) {
+              $("#liftIntensity").show();
+            } else {
+              $("#liftIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#Running").click(function() {
+            if ($("#Running").is(':checked')) {
+              $("#runIntensity").show();
+            } else {
+              $("#runIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#Swimming").click(function() {
+            if ($("#Swimming").is(':checked')) {
+              $("#swimIntensity").show();
+            } else {
+              $("#swimIntensity").hide();
+            }
+          });
+        });
+
+        $(document).ready(function() {
+          $("#YogaPil").click(function() {
+            if ($("#YogaPil").is(':checked')) {
+              $("#yogaPilIntensity").show();
+            } else {
+              $("#yogaPilIntensity").hide();
+            }
+          });
+        });
+      </script> -->
 
 </body>
 

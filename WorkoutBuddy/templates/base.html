@@ -59,21 +59,17 @@
   <!--Header -->
   <nav class="navbar fixed-top navbar-dark bg-light">
     <a class="navbar-brand" href="{% url 'home' %}"><img src="https://cdn.discordapp.com/attachments/735319507341672642/736046532834492456/IMG_0037.PNG" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">TigerGainz</a>
+    <!-- <span class="navbar-text ml-auto">
+      Your Current Partner is:
+    </span> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon custom-toggler"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'about' %}">About & FAQ</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'contacts' %}">Contact Us :)</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'excercise_guide' %}">Excercise Guide</a>
@@ -91,6 +87,12 @@
           {% else %}
             <a class="nav-item nav-link" href="{% url 'uniauth:login' %}">Log In</a>
           {% endif %}
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'about' %}">About & FAQ</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'contacts' %}">Contact Us :)</a>
         </li>
       </ul>
     </div>

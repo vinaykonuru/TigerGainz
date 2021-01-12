@@ -53,11 +53,11 @@
   <div class="get-started">
     {% load base_tags %}
     {% if user|check_partner %}
-    <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">Partner Details</a>
+    <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
     {% elif user|check_requests %}
-    <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
+    <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
     {% else %}
-    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
+    <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
     {% endif %}
   </div>
 
@@ -70,32 +70,28 @@
 
   <!-- Button at top of page -->
 
-  <div class="border-black">
-    <h1 class="display-5"><strong>Quick Navigation</strong></h1>
-  </div>
-  <br />
-  <br />
-
-  <div class="jumbotron">
-    <div class="border-white">
-      <div class="border-orange">
-        <div class="jumbotron white-background">
-          <h1>Take me to:</h1>
-          <h1>→
-            {% load base_tags %}
-            {% if user|check_partner %}
-            <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">Partner Details</a>
-            {% elif user|check_requests %}
-            <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Waiting List</a>
-            {% else %}
-            <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Find A Buddy Form</a>
-            {% endif %}
-            ←
-          </h1>
-        </div>
-      </div>
+  <div class="border-orange">
+    <div class="jumbotron white-background">
+        {% load base_tags %}
+        {% if user|check_partner %}
+        <h1>Who Am I Paired With?</h1>
+        <h1>→
+        <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
+        {% elif user|check_requests %}
+        <h1>Don't Have a Partner?</h1>
+        <h1>→
+        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
+        {% else %}
+        <h1>Get Started!</h1>
+        <h1>→
+        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
+        {% endif %}
+        ←
+      </h1>
     </div>
   </div>
+  <br />
+  <br />
 
   <!--What is TigerGainz?-->
 
@@ -285,7 +281,7 @@
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                   </div>
-                  <img width="100%" height="50%" src="https://cdn.discordapp.com/attachments/735319507341672642/737041162224795678/Email.JPG">
+                  <img width="100%" height="50%" class="pop-up-pics" src="https://cdn.discordapp.com/attachments/735319507341672642/737041162224795678/Email.JPG">
                   </img>
                 </div>
               </div>
@@ -294,23 +290,16 @@
         </div>
       </div>
       <hr class="my-4">
-      <div class="container">
-        <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <button type="button" class="btn btn-lg btn-secondary" data-toggle="collapse" data-target="#collapse1">Click to See Process</button>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse">
-              <div>
-                <br />
-                <img width="100%" height="100%" class="border-orange" src="https://cdn.discordapp.com/attachments/733383636157726721/796984713330819103/Screen_Shot_2021-01-08_at_1.11.33_AM.png">
-                </img>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="panel-heading">
+        <button type="button" class="btn btn-lg btn-secondary" data-toggle="collapse" data-target="#collapse1">Click to See Process</button>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <br />
+        <img width="100%" height="100%" class="pop-up-pics" src="https://cdn.discordapp.com/attachments/733383636157726721/796984713330819103/Screen_Shot_2021-01-08_at_1.11.33_AM.png">
+        </img>
       </div>
     </div>
+  </div>
 </body>
 
 {% endblock %}

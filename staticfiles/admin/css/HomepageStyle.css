@@ -13,10 +13,14 @@
   bottom: 0px;
   transition: 0.3s;
   padding: 10px;
-  width: 200px;
   text-decoration: none;
   font-size: 20px;
   color: white;
   border-radius: 5px 5px 0 0;
   z-index: +2;
+}
+
+.pop-up-pics {
+  width: 100%;
+  height: auto;
 }
