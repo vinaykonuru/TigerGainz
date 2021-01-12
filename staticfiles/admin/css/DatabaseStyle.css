@@ -32,6 +32,11 @@
 .bi-small {
   font-size: 500% !important;
 }
+
 .mb-2 {
   color: #000 !important;
+}
+
+.form-control {
+  height: unset;
 }

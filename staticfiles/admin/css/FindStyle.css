@@ -84,5 +84,4 @@ label:hover:before {
 /* select box */
 .form-control {
   height: unset;
-  -webkit-appearance: none;
 }

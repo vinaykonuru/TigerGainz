@@ -81,19 +81,23 @@
       <div class="border-orange">
         <div class="jumbotron white-background">
           <!-- Filters !-->
+          <h1>Filter Profiles Based On:</h1>
+          <br />
+          <hr class="my-4">
           <form action="{% url 'database' %}" method='POST'>
             {% csrf_token %}
 
-            <select id="workout_type_filter" name="workout_type_filter">
+            <select id="workout_type_filter" name="workout_type_filter" class="form-control">
               <option value="Lifting">Lifting</option>
               <option value="Running">Running</option>
               <option value="Swimming">Swimming</option>
               <option value="Biking">Biking</option>
             </select>
-
-          <hr class="my-4">
-          <input class="btn btn-lg btn-secondary" type="submit" value="Filter Search">
+            <br />
+            <br />
+            <input class="btn btn-lg btn-secondary" type="submit" value="Filter Search">
           </form>
+          <hr class="my-4">
           <!--Profiles-->
 
           <div class="row">
