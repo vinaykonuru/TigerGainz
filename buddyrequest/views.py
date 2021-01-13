@@ -10,7 +10,7 @@ from .matching_algorithm import get_matches
 from .tigerhub_access import getStudentInfo
 # Create your views here.
 
-@login_required(login_url='/accounts/signup')
+@login_required(login_url='/accounts/login')
 def database(request):
     buddyrequests=BuddyRequest.objects.all()
     workout_type_filter = request.POST.getlist('workout_type_filter')
@@ -28,24 +28,26 @@ def database(request):
             if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
             & time_zone_filter_set.issubset(timezone)):
                 profiles.append(entry)
-    str(workout_type_filter).strip('][')
-    str(duration_filter).strip('][')
+    str(workout_type_filter).strip('][\'')
+    str(duration_filter).strip('][\'')
     str(time_zone_filter).strip('][\'')
     return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
     time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter})
+@login_required(login_url='/accounts/login')
 def remove_request(request):
     BuddyRequest.objects.get(user=request.user).delete()
     return redirect('home')
+@login_required(login_url='/accounts/login')
 def update_request(request):
     BuddyRequest.objects.get(user=request.user).delete()
     return redirect('find')
-@login_required(login_url='/accounts/signup')
+@login_required(login_url='/accounts/login')
 def profile(request,request_id):
     partner=BuddyRequest.objects.get(id=request_id)
     days=partner.days.strip('][\'')
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
-
+@login_required(login_url='/accounts/login')
 def partner_match(request,partner_id):
     if request.method=="POST":
         #partner object for current user
@@ -63,13 +65,13 @@ def partner_match(request,partner_id):
         mail(partner_request.name,user_request.netID,partner_request.netID,user=True,remove=False)
         mail(user_request.name,partner_request.netID,user_request.netID,user=False,remove=False)
         return redirect('partner')
-@login_required(login_url='/accounts/signup')
+@login_required(login_url='/accounts/login')
 def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
         for entry in requestsList:
-            print(request.user)
+            print(entry['user_id'])
             if request.user.id == entry['user_id']:
                 return redirect('home')
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
@@ -130,7 +132,7 @@ def matches(request):
 
             return render(request,'buddyrequest/matches.html',{'matched_people':matched_people})
 
-@login_required(login_url='/accounts/signup')
+@login_required(login_url='/accounts/login')
 def partner(request):
     #Get the current user's partner by finding the user who's partner is the current user
     partner=BuddyRequest.objects.get(partner=request.user)
@@ -138,6 +140,7 @@ def partner(request):
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
 
+@login_required(login_url='/accounts/login')
 def remove_partner(request):
     user = request.user
     user_request=BuddyRequest.objects.get(user = user)
