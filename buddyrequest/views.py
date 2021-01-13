@@ -21,7 +21,7 @@ def database(request):
         if(entry.partner == None and entry.user != request.user):
             workout_type = set(entry.workout_type.strip('][\'').split(','))
             duration = set(entry.duration.strip('][\'').split(','))
-            timezone = set(entry.timezone.strip('][\'').split(','))
+            timezone = set(entry.time_zone.strip('][\'').split(','))
             if(workout_type_filter.issubset(workout_type) & duration_filter.issubset(duration)\
             & time_zone_filter.issubset(timezone)):
                 profiles.append(entry)
