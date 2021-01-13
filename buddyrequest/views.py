@@ -14,7 +14,7 @@ from .tigerhub_access import getStudentInfo
 def database(request):
     buddyrequests=BuddyRequest.objects.all()
     workout_type_filter = set(request.POST.getlist('workout_type_filter'))
-    duration_filter = request.POST('duration_filter')
+    duration_filter = request.POST['duration_filter']
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
