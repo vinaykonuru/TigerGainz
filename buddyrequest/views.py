@@ -76,7 +76,8 @@ def matches(request):
                 print("Problem here")
                 print(entry)
                 return redirect('home')
-        print(netID)        
+        print(netID)
+        print(getStudentInfo(netID))
         userdata = getStudentInfo(netID)
         preferences=request.POST.getlist('preferences')
         # reformatting preferences to match headeres in request model
