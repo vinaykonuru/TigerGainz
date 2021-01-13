@@ -71,7 +71,7 @@ def matches(request):
         #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
         for entry in requestsList:
-            print(entry['user_id'])
+            print(entry)
             if request.user.id == entry['user_id']:
                 return redirect('home')
         #get data about USER, if user isn't in studentdata.csv, send them back to home page
