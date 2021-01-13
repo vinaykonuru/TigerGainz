@@ -51,8 +51,8 @@ def partner_match(request,partner_id):
         partner_request.save()
 
         #email both user and matched partner about the match
-        mail(partner_request.name,user_request.netID,partner_request.netID,user=True)
-        mail(user_request.name,partner_request.netID,user_request.netID,user=False)
+        mail(partner_request.name,user_request.netID,partner_request.netID,user=True,remove=False)
+        mail(user_request.name,partner_request.netID,user_request.netID,user=False,remove=False)
         return redirect('partner')
 @login_required(login_url='/accounts/signup')
 def matches(request):
@@ -133,6 +133,8 @@ def remove_partner(request):
     user = request.user
     user_request=BuddyRequest.objects.get(user = user)
     partner_request=BuddyRequest.objects.get(partner = user)
+    mail(partner_request.name,user_request.netID,partner_request.netID,user=True,remove=True)
+    mail(user_request.name,partner_request.netID,user_request.netID,user=False,remove=True)
     user_request.partner = None
     partner_request.partner = None
     user_request.save()

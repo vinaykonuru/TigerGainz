@@ -3,7 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 
-def mail(name_partner, netID_user,netID_partner, user=False):
+def mail(name_partner, netID_user,netID_partner, user, remove ):
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "Your New Workout Buddy"
@@ -16,26 +16,36 @@ def mail(name_partner, netID_user,netID_partner, user=False):
     tiger_gainz_pass = os.environ.get("EMAIL_PASSWORD")
     tiger_gainz_email = "no.reply.tigergainz@gmail.com"
 
-    if user == False:
-
+    if remove = True:
         text = f'''\
         Hi!
 
-        We are so excited to present you with your new workout partner, {name_partner}! You can contact them via email: {contact}
+        We wanted to inform you that your partnership with {name_partner} was removed. If this was a mistake, feel free to
+        contact them at {contact}. You've been placed back onto the waiting list. Feel free to submit a new partner request form or search
+        through the waiting list for a new partner manually.
 
         Happy exercising,
         TigerGainz'''
-
-
     else:
+        if user == False:
+            if remove = False:
+                text = f'''\
+                Hi!
 
-        text = f'''\
-        Hi!
+                We are so excited to present you with your new workout partner, {name_partner}! You can contact them via email: {contact}
 
-        We are sending a confirmation email regarding your new workout partner, {name_partner}! You can contact them via email: {contact}
+                Happy exercising,
+                TigerGainz'''
 
-        Happy exercising,
-        TigerGainz'''
+        else:
+
+            text = f'''\
+            Hi!
+
+            We are sending a confirmation email regarding your new workout partner, {name_partner}! You can contact them via email: {contact}
+
+            Happy exercising,
+            TigerGainz'''
 
     message.attach(MIMEText(text, "plain"))
 
