@@ -113,13 +113,14 @@
           <br />
           <form action="{% url 'database' %}" method='POST'>
             {% csrf_token %}
-
+            
             <select id="workout_type_filter" name="workout_type_filter" class="form-control">
               <option value="Lifting">Lifting</option>
               <option value="Running">Running</option>
               <option value="Swimming">Swimming</option>
               <option value="Biking">Biking</option>
             </select>
+            <div class="form-group">
             <select name="duration_filter" class="form-control">
               <option class="text-center" value="30 Minutes">30 Minutes</option>
               <option class="text-center" value="1 Hour">1 Hour</option>
@@ -127,6 +128,7 @@
               <option class="text-center" value="2 Hours">2 Hours</option>
               <option class="text-center" value="2+ Hours">2+ Hours</option>
             </select>
+            </div>
             <br />
             <br />
             <input class="btn btn-lg btn-secondary" type="submit" value="Filter Search">
