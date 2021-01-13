@@ -23,7 +23,7 @@ def database(request):
             duration = set(entry.duration.strip('][\'').split(','))
             print(duration)
             print(duration_filter)
-            if(workout_type_filter.issubset(workout_type) & duration.issubset(duration_filter)):
+            if(workout_type_filter.issubset(workout_type) & duration_filter.issubset(duration)):
                 profiles.append(entry)
 
     return render(request,'buddyrequest/database.html',{'profiles':profiles})
