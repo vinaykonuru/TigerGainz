@@ -16,14 +16,17 @@ def database(request):
     workout_type_filter = set(request.POST.getlist('workout_type_filter'))
     duration_filter = set(request.POST.getlist('duration_filter'))
     time_zone_filter = set(request.POST.getlist('time_zone_filter'))
+    workout_type_filter_set = set(workout_type_filter)
+    duration_filter_set = set(duration_filter)
+    time_zone_filter_set = set(time_zone_filter)
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
             workout_type = set(entry.workout_type.strip('][\'').split(','))
             duration = set(entry.duration.strip('][\'').split(','))
             timezone = set(entry.time_zone.strip('][\'').split(','))
-            if(workout_type_filter.issubset(workout_type) & duration_filter.issubset(duration)\
-            & time_zone_filter.issubset(timezone)):
+            if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
+            & time_zone_filter_set.issubset(timezone)):
                 profiles.append(entry)
 
     return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
