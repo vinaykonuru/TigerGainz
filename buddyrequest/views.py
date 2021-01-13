@@ -28,9 +28,9 @@ def database(request):
             if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
             & time_zone_filter_set.issubset(timezone)):
                 profiles.append(entry)
-    str(workout_type_filter).strip('][\'')
-    str(duration_filter).strip('][\'')
-    str(time_zone_filter).strip('][\'')
+    workout_type_filter = str(workout_type_filter).strip('][\'')
+    duration_filter = str(duration_filter).strip('][\'')
+    time_zone_filter = str(time_zone_filter).strip('][\'')
     return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
     time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter})
 @login_required(login_url='/accounts/login')
