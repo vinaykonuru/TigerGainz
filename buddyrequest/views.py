@@ -31,9 +31,12 @@ def database(request):
 
     return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
     time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter})
-def remove(request):
+def remove_request(request):
     BuddyRequest.objects.get(user=request.user).delete()
     return redirect('home')
+def update_request(request):
+    BuddyRequest.objects.get(user=request.user).delete()
+    return redirect('find')
 @login_required(login_url='/accounts/signup')
 def profile(request,request_id):
     partner=BuddyRequest.objects.get(id=request_id)
