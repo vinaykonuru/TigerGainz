@@ -14,16 +14,16 @@ from .tigerhub_access import getStudentInfo
 def database(request):
     buddyrequests=BuddyRequest.objects.all()
     workout_type_filter = set(request.POST.getlist('workout_type_filter'))
-
-    print("Workout Type Filter: " + str(workout_type_filter))
+    duration_filter = request.POST('duration_filter')
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
             workout_type = set(entry.workout_type.strip('][\'').split(','))
-            print("Workout Type: " + str(workout_type))
-            print("Workout Type Filter: " + str(workout_type_filter))
-
-            if(workout_type_filter.issubset(workout_type)):
+            duration = entry.duration
+            print(duration)
+            print(duration_filter)
+            if(workout_type_filter.issubset(workout_type) &\
+             duration_filter == duration):
                 profiles.append(entry)
 
     return render(request,'buddyrequest/database.html',{'profiles':profiles})
