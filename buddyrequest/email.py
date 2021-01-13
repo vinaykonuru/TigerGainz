@@ -28,7 +28,7 @@ def mail(name_partner, netID_user,netID_partner, user, remove ):
         TigerGainz'''
     else:
         if user == False:
-            if remove = False:
+            if remove == False:
                 text = f'''\
                 Hi!
 
