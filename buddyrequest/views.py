@@ -73,7 +73,7 @@ def matches(request):
         netID = request.user.uniauth_profile.get_display_id()
         for entry in requestsList:
             print(entry)
-            if netID == entry['net_id']:
+            if netID == entry['netID']:
                 return redirect('home')
         try:
             userdata = getStudentInfo(netID)
