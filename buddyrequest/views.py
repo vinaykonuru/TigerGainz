@@ -72,8 +72,9 @@ def matches(request):
         requestsList=list(BuddyRequest.objects.all().values())
         netID = request.user.uniauth_profile.get_display_id()
         for entry in requestsList:
-            print(entry)
             if netID == entry['netID']:
+                print("Problem here")
+                print(entry)
                 return redirect('home')
         try:
             userdata = getStudentInfo(netID)
