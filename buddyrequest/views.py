@@ -76,12 +76,8 @@ def matches(request):
                 print("Problem here")
                 print(entry)
                 return redirect('home')
-        try:
-            userdata = getStudentInfo(netID)
-        except Exception as e:
-            print("Error here")
-            print(e)
-            return redirect('home')
+        print(netID)        
+        userdata = getStudentInfo(netID)
         preferences=request.POST.getlist('preferences')
         # reformatting preferences to match headeres in request model
         preferences[preferences.index('Workout Days')] = 'days'
