@@ -9,7 +9,7 @@ def getStudentInfo(id):
     created = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
     nonce = ''.join([random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/=') for i in range(32)])
     username = 'vkonuru'
-    password = 'e98c0aa0a289b517f8073984777d94e5'
+    password = '858e9b714dd2088b1d26f22077f09986'
 
     generated_digest = b64encode(hashlib.sha256((nonce + created + password).encode('utf-8')).digest()).decode('utf-8')
 
