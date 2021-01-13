@@ -26,7 +26,8 @@ def database(request):
             & time_zone_filter.issubset(timezone)):
                 profiles.append(entry)
 
-    return render(request,'buddyrequest/database.html',{'profiles':profiles})
+    return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
+    time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter})
 def remove(request):
     BuddyRequest.objects.get(user=request.user).delete()
     return redirect('home')
