@@ -13,9 +13,9 @@ from .tigerhub_access import getStudentInfo
 @login_required(login_url='/accounts/signup')
 def database(request):
     buddyrequests=BuddyRequest.objects.all()
-    workout_type_filter = set(request.POST.getlist('workout_type_filter'))
-    duration_filter = set(request.POST.getlist('duration_filter'))
-    time_zone_filter = set(request.POST.getlist('time_zone_filter'))
+    workout_type_filter = request.POST.getlist('workout_type_filter')
+    duration_filter = request.POST.getlist('duration_filter')
+    time_zone_filter = request.POST.getlist('time_zone_filter')
     workout_type_filter_set = set(workout_type_filter)
     duration_filter_set = set(duration_filter)
     time_zone_filter_set = set(time_zone_filter)
