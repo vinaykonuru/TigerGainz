@@ -70,14 +70,12 @@ def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
+        netID = request.user.uniauth_profile.get_display_id()
         for entry in requestsList:
             print(entry)
-            if request.user.id == entry['user_id']:
+            if netID == entry['net_id']:
                 return redirect('home')
-        #get data about USER, if user isn't in studentdata.csv, send them back to home page
         try:
-            # userdatadf=pandas.read_csv('buddyrequest/studentdata.csv',index_col=('netID'))
-            netID = request.user.uniauth_profile.get_display_id()
             userdata = getStudentInfo(netID)
         except Exception:
             return redirect('home')
