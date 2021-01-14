@@ -25,8 +25,10 @@ def database(request):
             workout_type = set(entry.workout_type.strip('][\'').split(','))
             duration = set(entry.duration.strip('][\'').split(','))
             timezone = set(entry.time_zone.strip('][\'').split(','))
-            print(workout_type_filter_set)
-            print(workout_type)
+            print(duration_filter_set)
+            print(duration)
+            print(time_zone_filter_set)
+            print(time_zone)
             if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
             & time_zone_filter_set.issubset(timezone)):
                 profiles.append(entry)
