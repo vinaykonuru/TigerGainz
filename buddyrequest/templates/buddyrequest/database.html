@@ -118,7 +118,7 @@
             {% csrf_token %}
 
             <select id="workout_type_filter" name="workout_type_filter" class="form-control">
-              <option class="text-center" value="">SELECTED -- {{ workout_type_filter }} -- </option>
+              <option class="text-center" value="">SELECTED -- {{ workout_type_filter }} </option>
               <option value="Lifting">Lifting</option>
               <option value="Running">Running</option>
               <option value="Swimming">Swimming</option>
@@ -126,7 +126,7 @@
             </select>
             <br>
             <select name="duration_filter" class="form-control">
-              <option class="text-center" value="">SELECTED -- {{duration_filter }} -- </option>
+              <option class="text-center" value="">SELECTED -- {{duration_filter }} </option>
               <option class="text-center" value="30 Minutes">30 Minutes</option>
               <option class="text-center" value="1 Hour">1 Hour</option>
               <option class="text-center" value="1 Hour 30 Minutes">1 Hour 30 Minutes</option>
@@ -135,7 +135,7 @@
             </select>
             <br>
             <select name="time_zone_filter" class="form-control">
-              <option class="text-center" value="">SELECTED -- {{ time_zone_filter }} -- </option>
+              <option class="text-center" value="">SELECTED -- {{ time_zone_filter }} </option>
               <option class="text-center" value="EST">EST</option>
               <option class="text-center" value="CST">CST</option>
               <option class="text-center" value="PST">PST</option>
@@ -153,7 +153,7 @@
             {% if forloop.counter0|divisibleby:2 %}
             {% endif %}
             <div class="column">
-              <p class="lead">{{ entry.name }}</p>
+              <p class="lead">{{ entry.name }} {{entry.year}}</p>
               <div class="pic-container border-black">
                 <div class="jumbotron white-background">
                   <img class="img-fluid" src="https://cdn.discordapp.com/attachments/735319507341672642/762013221007654942/Tiger_Profile_Pic.jpg">
