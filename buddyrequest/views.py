@@ -16,12 +16,12 @@ def database(request):
     workout_type_filter = request.POST.getlist('workout_type_filter')
     duration_filter = request.POST.getlist('duration_filter')
     time_zone_filter = request.POST.getlist('time_zone_filter')
-    if(workout_type_filter = ['']):
+    if(workout_type_filter == ['']):
         workout_type_filter = []
-    if(duration_filter = ['']):
+    if(duration_filter == ['']):
         duration_filter = []
-    if(time_zone_filter = ['']):
-        time_zone_filter=[]
+    if(time_zone_filter == ['']):
+        time_zone_filter = []
     workout_type_filter_set = set(workout_type_filter)
     duration_filter_set = set(duration_filter)
     time_zone_filter_set = set(time_zone_filter)
