@@ -30,7 +30,7 @@
             <p class="lead">Are You Sure You Want to Match?</p>
             <br>
             <p "proceeding"> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
-            <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+            <a href="javascript:{document.getElementById('partner_match').submit()}">
               <button onclick="on()" class="btn btn-lg btn-secondary">
                 Confirm
               </button>
@@ -187,7 +187,7 @@
                   <button onclick="on()" class="btn btn-lg btn-secondary">
                     Match
                   </button>
-                  <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
+                  <form id="partner_match" action="{% url 'partner_match' entry.user_id %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" />
                   </form>
