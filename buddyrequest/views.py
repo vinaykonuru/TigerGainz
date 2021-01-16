@@ -31,13 +31,6 @@ def database(request):
             workout_type = set(entry.workout_type.strip('][\'').split(','))
             duration = set(entry.duration.strip('][\'').split(','))
             timezone = set(entry.time_zone.strip('][\'').split(','))
-            print(duration_filter_set)
-            print(duration)
-            print(time_zone_filter_set)
-            print(timezone)
-            print(workout_type_filter_set.issubset(workout_type))
-            print(duration_filter_set.issubset(duration))
-            print(time_zone_filter_set.issubset(timezone))
             if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
             & time_zone_filter_set.issubset(timezone)):
                 profiles.append(entry)
@@ -56,7 +49,10 @@ def update_request(request):
     return redirect('find')
 @login_required(login_url='/accounts/login')
 def profile(request,request_id):
-    partner=BuddyRequest.objects.get(id=request_id)
+    if(request.user.id == request_id):
+        partner=BuddyRequest.objects.get(user = request.user)
+    else:
+        partner=BuddyRequest.objects.get(id = request_id)
     days=partner.days.strip('][\'')
     workout_type=partner.workout_type.strip('][\'')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
