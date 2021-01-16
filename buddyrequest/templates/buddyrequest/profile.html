@@ -23,29 +23,6 @@
     <h1 class="display-5"><strong>Partner Info</strong></h1>
   </div>
 
-  <!-- Confirmation Pop-up -->
-  <div id="overlay">
-    <div id="text">
-      <div class="border-white">
-        <div class="border-orange">
-          <div class="jumbotron white-background">
-            <p class="lead">Are You Sure You Want to Match?</p>
-            <br>
-            <p "proceeding"> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
-            <a href="javascript:{document.getElementById('partner_match').submit()}">
-              <button onclick="on()" class="btn btn-lg btn-secondary">
-                Confirm
-              </button>
-            </a>
-            <button onclick="off()" class="btn btn-lg btn-secondary">
-              Deny
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="jumbotron">
     <div class="border-white">
       <div class="border-orange">
@@ -82,6 +59,28 @@
                 <p>{{ profile_details.duration }} </p>
               </div>
               <div class="mb-1 text-muted">
+                <!-- Confirmation Pop-up -->
+                <div id="overlay">
+                  <div id="text">
+                    <div class="border-white">
+                      <div class="border-orange">
+                        <div class="jumbotron white-background">
+                          <p class="lead">Are You Sure You Want to Match?</p>
+                          <br>
+                          <p "proceeding"> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
+                          <a href="javascript:{document.getElementById('partner_match').submit()}">
+                            <button onclick="on()" class="btn btn-lg btn-secondary">
+                              Confirm
+                            </button>
+                          </a>
+                          <button onclick="off()" class="btn btn-lg btn-secondary">
+                            Deny
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               {% load request_tags %}
               {% if user|check_partner %}
                 {% if user|check_time %}
@@ -106,7 +105,7 @@
                   <form id="partner_match" action="{% url 'partner_match' profile_details.user_id %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" />
-                  </form>                
+                  </form>
                 {% endif %}
               {% endif %}
               </div>
