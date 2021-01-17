@@ -68,12 +68,40 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   </body>
 
+  {% if error %}
+
+  <div class="border-orange">
+    <div class="border-white">
+      <h1 class="display-5">{{ error }}</h1>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <!-- Error Pop-up -->
+
+  <div id="overlay">
+    <div id="text">
+      <div class="border-white">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+            <p class="lead">Please fill out all fields in form</p>
+            <br>
+            <button onclick="off()" class="btn btn-lg btn-secondary">
+              Okay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+
   <div class="border-black">
     <h1 class="display-5"><strong>Find A Buddy Info Form</strong></h1>
   </div>
-  {% if error %}
-  {{ error }}
-  {% endif %}
+
   <div class="jumbotron">
     <div class="border-white">
 
@@ -381,6 +409,17 @@
           });
         });
       </script> -->
+
+      <!-- Script for Error Pop-up -->
+      <script>
+        function on() {
+          document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+          document.getElementById("overlay").style.display = "none";
+        }
+      </script>
 
 </body>
 
