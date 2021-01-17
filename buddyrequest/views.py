@@ -111,17 +111,18 @@ def matches(request):
         print(preferences)
         error = ""
         try:
-            name=userdata['full_name']
-            major=userdata['major_raw']
-            year=userdata['class_year']
-            rescollege=userdata['res_college']
-            days=request.POST.getlist('day')
-            duration=request.POST['duration']
+            name = userdata['full_name']
+            major = userdata['major_raw']
+            year = userdata['class_year']
+            rescollege = userdata['res_college']
+            days = request.POST.getlist('day')
+            duration = request.POST['duration']
             workout_type = request.POST.getlist('workout_type')
-            time_zone=request.POST['time_zone']
+            time_zone = request.POST['time_zone']
             if days == []:
                 error = "Need to select at least one preferred day"
                 raise Exception()
+            print(workout_type)
             if workout_type == []:
                 error = "Need to select at least one preferred workout type"
         except Exception as e:
