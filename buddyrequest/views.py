@@ -99,6 +99,7 @@ def matches(request):
         print(getStudentInfo(netID))
         userdata = getStudentInfo(netID)
         preferences=request.POST.getlist('preferences')
+        print(preferences)
         if(preferences == []):
             error = "Must rank preferences"
             return render(request, 'find.html',{'error': error})
