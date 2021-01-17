@@ -155,12 +155,18 @@
 
 
             <div class="form-group">
-              <select name="workout_type" class="form-control">
+              <!-- <select name="workout_type" class="form-control">
                 <option class="text-center" value="Lifting">Lifting</option>
                 <option class="text-center" value="Running">Running</option>
                 <option class="text-center" value="Biking">Biking</option>
                 <option class="text-center" value="Swimming">Swimming</option>
-              </select>
+              </select> -->
+              <input type="checkbox" name="exercise" value="Lifting" id="Biking"><label for="Biking" class="checkbox-inline">Biking</label>
+              <input type="checkbox" name="exercise" value="Lifting" id="Lifting"><label for="Lifting" class="checkbox-inline">Lifting</label>
+              <input type="checkbox" name="exercise" value="Running" id="Running"><label for="Running" class="checkbox-inline">Running</label>
+              <input type="checkbox" name="exercise" value="Lifting" id="Swimming"><label for="Swimming" class="checkbox-inline">Swimming</label>
+              <input type="checkbox" name="exercise" value="Yoga/Pilates" id="YogaPil"><label for="YogaPil" class="checkbox-inline">Yoga/Pilates</label>
+
             </div>
 
           </div>
@@ -169,15 +175,10 @@
         <br />
         <br />
 
-        <!-- <input type="checkbox" name="exercise" value="Lifting" id="Biking"><label for="Biking" class="checkbox-inline">Biking</label>
-        <input type="checkbox" name="exercise" value="Lifting" id="Lifting"><label for="Lifting" class="checkbox-inline">Lifting</label>
-        <input type="checkbox" name="exercise" value="Running" id="Running"><label for="Running" class="checkbox-inline">Running</label>
-        <input type="checkbox" name="exercise" value="Lifting" id="Swimming"><label for="Swimming" class="checkbox-inline">Swimming</label>
-        <input type="checkbox" name="exercise" value="Yoga/Pilates" id="YogaPil"><label for="YogaPil" class="checkbox-inline">Yoga/Pilates</label> -->
 
         <!-- Intesities -->
 
-        <!-- <div id="bikeIntensity" class="form-group init-hidden">
+        <div id="bikeIntensity" class="form-group init-hidden">
           <br />
           <br />
           <select class="form-control">
@@ -236,7 +237,7 @@
         </div>
 
         <br />
-        <br /> -->
+        <br />
 
         <hr class="my-4">
         <p class="lead">Timezone:</p>
