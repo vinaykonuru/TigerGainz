@@ -99,7 +99,11 @@ def matches(request):
         print(getStudentInfo(netID))
         userdata = getStudentInfo(netID)
         preferences=request.POST.getlist('preferences')
-        # reformatting preferences to match headeres in request model
+        if(preferences == []):
+            error = "Must rank preferences"
+            return render(request, 'find.html',{'error': error})
+
+        # reformatting preferences to match headers in matching algorithm
         preferences[preferences.index('Workout Days')] = 'days'
         preferences[preferences.index('Duration')] = 'duration'
         preferences[preferences.index('Time Zone')] = 'time_zone'
@@ -113,12 +117,13 @@ def matches(request):
             rescollege=userdata['res_college']
             days=request.POST.getlist('day')
             duration=request.POST['duration']
-            workout_type = []
-            workout_type.append(request.POST['workout_type'])
+            workout_type = request.POST.getlist('workout_type')
             time_zone=request.POST['time_zone']
             if days == []:
                 error = "Need to select at least one preferred day"
                 raise Exception()
+            if workout_type = []:
+                error = "Need to select at least one preferred workout type"
         except Exception as e:
             print(e)
             if error == "": # will error if any of the fields are blank
