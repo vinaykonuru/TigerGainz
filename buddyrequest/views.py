@@ -31,7 +31,7 @@ def database(request):
             workout_type = entry.workout_type.strip('][\'')
             duration = entry.duration.strip('][\'')
             timezone = entry.time_zone.strip('][\'')
-            days = entry.days.strip('][\'')
+            days = entry.days.strip('][\'').replace('\'','')
             print(entry.days)
             print(days)
             workout_type_set = set(workout_type.split(','))
