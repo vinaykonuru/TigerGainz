@@ -122,9 +122,9 @@ def matches(request):
             if days == []:
                 error = "Need to select at least one preferred day"
                 raise Exception()
-            print(workout_type)
             if workout_type == []:
                 error = "Need to select at least one preferred workout type"
+                raise Exception()
         except Exception as e:
             print(e)
             if error == "": # will error if any of the fields are blank
