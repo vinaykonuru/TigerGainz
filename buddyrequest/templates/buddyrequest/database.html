@@ -118,7 +118,7 @@
           <br />
           <form action="{% url 'database' %}" method='POST'>
             {% csrf_token %}
-
+            Workout Type:
             <select id="workout_type_filter" name="workout_type_filter" class="form-control">
               <option class="text-center" value={{workout_type_filter}}>SELECTED -- {{ workout_type_filter }} </option>
               <option value="Lifting">Lifting</option>
@@ -126,7 +126,7 @@
               <option value="Swimming">Swimming</option>
               <option value="Biking">Biking</option>
               <option value="">No Filter</option>
-
+            Duration:
             </select>
             <br>
             <select name="duration_filter" class="form-control">
@@ -139,6 +139,7 @@
               <option value="">No Filter</option>
             </select>
             <br>
+            Timezone:
             <select name="time_zone_filter" class="form-control">
               <option class="text-center" value={{time_zone_filter}}>SELECTED -- {{ time_zone_filter }} </option>
               <option class="text-center" value="EST">EST</option>

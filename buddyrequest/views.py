@@ -57,6 +57,7 @@ def update_request(request):
     return redirect('find')
 @login_required(login_url='/accounts/login')
 def profile(request,request_id):
+    # passed in user id as request_id when viewing user's own profile
     if(request.user.id == request_id):
         partner=BuddyRequest.objects.get(user = request.user)
     else:
