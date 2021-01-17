@@ -17,7 +17,7 @@ class BuddyRequest(models.Model):
     bio=models.TextField(default='',null=True)
     profile_picture=models.ImageField('upload_to="images/"',null=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE, related_name='user',null=True)
-    partner=models.ForeignKey(User,on_delete=models.CASCADE,related_name='partner',null=True)
+    partner=models.ForeignKey(User,on_delete=models.CASCADE,related_name='partner',null=True,blank=True)
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
 
