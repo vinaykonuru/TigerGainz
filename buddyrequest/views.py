@@ -28,11 +28,17 @@ def database(request):
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
-            workout_type = set(entry.workout_type.strip('][\'').split(','))
-            duration = set(entry.duration.strip('][\'').split(','))
-            timezone = set(entry.time_zone.strip('][\'').split(','))
+            workout_type = entry.workout_type.strip('][\'').split(',')
+            duration = entry.duration.strip('][\'').split(',')
+            timezone = entry.time_zone.strip('][\'').split(',')
+            days = entry.days.strip('][\'').split(',')
+            workout_type_set = set(workout_type)
+            duration_set = set(duration)
+            timezone_set = set(timezone)
             if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
             & time_zone_filter_set.issubset(timezone)):
+                entry.workout_type = workout_type
+                entry.days = days
                 profiles.append(entry)
     workout_type_filter = str(workout_type_filter).strip('][\'')
     duration_filter = str(duration_filter).strip('][\'')
@@ -63,7 +69,9 @@ def partner_match(request,partner_id):
         user_request=BuddyRequest.objects.get(user=request.user)
         matched_user=User.objects.get(pk=partner_id)
         partner_request=BuddyRequest.objects.get(user=matched_user)
-
+        # check if the partner already has a partner
+        if(partner_request.partner != None):
+            redirect('database')
         #match the two users in the database
         user_request.partner=matched_user
         partner_request.partner=request.user
