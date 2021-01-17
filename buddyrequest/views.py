@@ -31,12 +31,12 @@ def database(request):
             workout_type = entry.workout_type.strip('][\'')
             duration = entry.duration.strip('][\'')
             timezone = entry.time_zone.strip('][\'')
-            days = entry.days.strip('][\'')
+            days = entry.days.strip('][\'\'\"')
             workout_type_set = set(workout_type.split(','))
             duration_set = set(duration.split(','))
             timezone_set = set(timezone.split(','))
-            if(workout_type_filter_set.issubset(workout_type) & duration_filter_set.issubset(duration)\
-            & time_zone_filter_set.issubset(timezone)):
+            if(workout_type_filter_set.issubset(workout_type_set) & duration_filter_set.issubset(duration_set)\
+            & time_zone_filter_set.issubset(timezone_set)):
                 entry.workout_type = workout_type
                 entry.days = days
                 profiles.append(entry)
