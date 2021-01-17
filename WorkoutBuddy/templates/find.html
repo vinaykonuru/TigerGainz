@@ -103,7 +103,23 @@
 
         <br />
         <br />
+        <hr class="my-4">
+        <p class="lead">Intensity:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+            <div class="form-group">
+              <select name="intensity" class="form-control">
+                <option class="text-center" value="EST">Beginner</option>
+                <option class="text-center" value="CST">Average Joe-Shmoe</option>
+                <option class="text-center" value="EST">Varsity Athlete</option>
+                <option class="text-center" value="EST">Olympian</option>
+              </select>
+            </div>
 
+          </div>
+        </div>
+        <br><br>
         <hr class="my-4">
 
         <p class="lead">Workout Days:</p>
@@ -118,7 +134,6 @@
             <input type="checkbox" name="day" value="Friday" id="test5"><label for="test5" class="checkbox-inline">Friday</label>
             <input type="checkbox" name="day" value="Saturday" id="test6"><label for="test6" class="checkbox-inline">Saturday</label>
             <input type="checkbox" name="day" value="Sunday" id="test7"><label for="test7" class="checkbox-inline">Sunday</label>
-            <!-- <input type="checkbox" name="day" value="No_pref" id="test8"><label for="test8" class="checkbox-inline">No Preference</label> -->
           </div>
         </div>
 
@@ -143,7 +158,21 @@
 
           </div>
         </div>
+        <hr class="my-4">
+        <p class="lead">On/Off Campus:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
 
+            <div class="form-group">
+              <select name="location" class="form-control">
+                <option class="text-center" value="EST">On-Campus</option>
+                <option class="text-center" value="CST">Off-Campus</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
         <br />
         <br />
 
@@ -155,16 +184,10 @@
 
 
             <div class="form-group">
-              <!-- <select name="workout_type" class="form-control">
-                <option class="text-center" value="Lifting">Lifting</option>
-                <option class="text-center" value="Running">Running</option>
-                <option class="text-center" value="Biking">Biking</option>
-                <option class="text-center" value="Swimming">Swimming</option>
-              </select> -->
-              <input type="checkbox" name="workout_type" value="Lifting" id="Biking"><label for="Biking" class="checkbox-inline">Biking</label>
+              <input type="checkbox" name="workout_type" value="Biking" id="Biking"><label for="Biking" class="checkbox-inline">Biking</label>
               <input type="checkbox" name="workout_type" value="Lifting" id="Lifting"><label for="Lifting" class="checkbox-inline">Lifting</label>
               <input type="checkbox" name="workout_type" value="Running" id="Running"><label for="Running" class="checkbox-inline">Running</label>
-              <input type="checkbox" name="workout_type" value="Lifting" id="Swimming"><label for="Swimming" class="checkbox-inline">Swimming</label>
+              <input type="checkbox" name="workout_type" value="Swimming" id="Swimming"><label for="Swimming" class="checkbox-inline">Swimming</label>
               <input type="checkbox" name="workout_type" value="Yoga/Pilates" id="YogaPil"><label for="YogaPil" class="checkbox-inline">Yoga/Pilates</label>
 
             </div>
@@ -255,13 +278,9 @@
 
           </div>
         </div>
-
         <br />
-        <br />
-
         <!-- Profile Picture -->
-
-        <!-- <hr class="my-4">
+        <hr class="my-4">
         <p class="lead">Profile Picture:</p>
         <hr class="my-4">
         <div class="border-orange">
@@ -275,7 +294,22 @@
             </div>
 
           </div>
-        </div> -->
+        </div>
+        <br>
+        <hr class="my-4">
+        <p class="lead">Bio:</p>
+        <hr class="my-4">
+        <div class="border-orange">
+          <div class="jumbotron white-background">
+
+            <div class="form-group">
+              <input type="text" name="bio">
+            </div>
+
+          </div>
+        </div>
+        <br>
+
 
         <hr class="my-4">
         <input class="btn btn-lg btn-secondary" type="submit" value="Find my Match!">

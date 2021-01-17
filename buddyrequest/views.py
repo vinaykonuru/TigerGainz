@@ -120,6 +120,11 @@ def matches(request):
             duration = request.POST['duration']
             workout_type = request.POST.getlist('workout_type')
             time_zone = request.POST['time_zone']
+            location = request.POST['location']
+            intensity = request.POST['intensity']
+            profile_picture = request.POST['profile_picture']
+            bio = request.POST['bio']
+
             if days == []:
                 error = "Need to select at least one preferred day"
                 raise Exception()
@@ -141,7 +146,8 @@ def matches(request):
 
         #if there is no profile picture, use the default one from the constructor
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
-        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,user=user)
+        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,location=location,
+        intensity=intensity,bio=bio,profile_picture=profile_picture,user=user)
 
         req_user.save()
 
