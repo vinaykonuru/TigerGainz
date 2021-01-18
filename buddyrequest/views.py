@@ -121,7 +121,6 @@ def matches(request):
             time_zone = request.POST['time_zone']
             location = request.POST['location']
             intensity = request.POST['intensity']
-            profile_picture = request.POST['profile_picture']
             bio = request.POST['bio']
 
             if days == []:
