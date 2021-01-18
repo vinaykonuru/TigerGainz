@@ -146,7 +146,7 @@ def matches(request):
         #if there is no profile picture, use the default one from the constructor
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,location=location,
-        intensity=intensity,bio=bio,profile_picture=profile_picture,user=user)
+        intensity=intensity,bio=bio,user=user)
 
         req_user.save()
 
