@@ -39,7 +39,6 @@ def database(request):
             & time_zone_filter_set.issubset(timezone_set)):
                 entry.workout_type = workout_type
                 entry.days = days
-                print(entry.profile_picture)
                 profiles.append(entry)
     workout_type_filter = str(workout_type_filter).strip('][\'')
     duration_filter = str(duration_filter).strip('][\'')
