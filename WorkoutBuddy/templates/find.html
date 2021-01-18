@@ -5,38 +5,24 @@
 <head>
 
   <title>TigerGainz - Find A Buddy</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
   <!--Page Stylesheet-->
   <link rel="stylesheet" type="text/css" href="{% static 'admin/css/FindStyle.css' %}" />
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <style>
-  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-  #sortable li span { position: absolute; margin-left: -1.3em; }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
-  } );
-  </script>
+  <script src="{% static 'js/external/Sortable.min.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Script for preferences -->
 
 <script>
   var subjectObject = {
     "Duration": {
-      "Workout Days": ["Time Zone", "Intensity"],
-      "Time Zone": ["Workout Days", "Intensity"],
-      "Intensity": ["Workout Days","Time Zone"]
+      "Workout Days": ["Time Zone"],
+      "Time Zone": ["Workout Days"],
     },
     "Workout Days": {
       "Duration": ["Time Zone"],
@@ -74,9 +60,12 @@
     }
   }
 </script>
-
+<script>
+  const groups = document.getElementById('groups');
+   let sortable = Sortable.create(groups, {
+});
+</script>
 <body>
-
   <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/737054681322225825/Find_A_Buddy_2.jpg" class="img.responsive" style="width:55%">
   </div>
 
@@ -144,15 +133,19 @@
 
           </div>
         </div>
-        <ul id="sortable">
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-        </ul>
+        <table>
+          <tbody id = "preferences">
+            <tr>
+              Workout Type
+            </tr>
+            <tr>
+              Time Zone
+            </tr>
+            <tr>
+              Fish
+            </tr>
+          </tbody>
+        </table>
         <br />
         <br />
         <hr class="my-4">
