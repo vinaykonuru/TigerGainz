@@ -82,55 +82,62 @@
                 <p>{{ profile_details.duration }} </p>
               </div>
               <br>
-              <div class="mb-1 text-muted">
-              {% load request_tags %}
-              {% if user|check_partner %}
-                {% if user|check_time %}
-                  <a href="javascript:{document.getElementById('remove_partner').submit()}">
-                    <button class="btn btn-lg btn-secondary">
-                      Remove Partner
-                    </button>
-                  </a>
-                  <form id="remove_partner" action="{% url 'remove_partner' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden"/>
-                  </form>
-               {% endif %}
+              <div>
 
-              {% else %}
-                {% if profile_details.user_id != user.id %}
-                    <button onclick = "on()" class="btn btn-lg btn-secondary">
-                      Match
-                    </button>
-                  <form id="partner_match" action="{% url 'partner_match' profile_details.user_id %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" />
-                  </form>
-               {% else %}
-               <a href="{% url 'remove_request' %}" class="btn btn-lg btn-secondary">Take me off the waiting list please!</a>
-               <br>
-               <a href="{% url 'update_request' %}" class="btn btn-lg btn-secondary">Update my request form</a>
-               {% endif %}
-
-              {% endif %}
               </div>
             </div>
           </div>
-          <!-- Script for Matching Pop-up -->
-          <script>
-            function on() {
-              document.getElementById("overlay").style.display = "block";
-            }
 
-            function off() {
-              document.getElementById("overlay").style.display = "none";
-            }
-          </script>
+          <hr class="my-4">
+
+          {% load request_tags %}
+          {% if user|check_partner %}
+            {% if user|check_time %}
+              <a href="javascript:{document.getElementById('remove_partner').submit()}">
+                <button class="btn btn-lg btn-secondary">
+                  Remove Partner
+                </button>
+              </a>
+              <form id="remove_partner" action="{% url 'remove_partner' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden"/>
+              </form>
+           {% endif %}
+
+          {% else %}
+            {% if profile_details.user_id != user.id %}
+                <button onclick = "on()" class="btn btn-lg btn-secondary">
+                  Match
+                </button>
+              <form id="partner_match" action="{% url 'partner_match' profile_details.user_id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" />
+              </form>
+           {% else %}
+           <a href="{% url 'remove_request' %}" class="btn btn-lg btn-secondary">Take me off the waiting list please!</a>
+           <br>
+           <br>
+           <a href="{% url 'update_request' %}" class="btn btn-lg btn-secondary">Update my request form</a>
+           {% endif %}
+
+          {% endif %}
 
         </div>
       </div>
     </div>
   </div>
 
+
 </body>
+
+<!-- Script for Matching Pop-up -->
+<script>
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
 {% endblock %}
