@@ -79,7 +79,7 @@ def get_matches(user_data_list, requests_list):
 
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
                                     # since we already matched based on workouts.
-                                    
+
         matching_df_user = Dfuser.drop("workout_type", axis=1)
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
         column_labels = matching_df_request.columns.tolist()
@@ -91,16 +91,16 @@ def get_matches(user_data_list, requests_list):
 
 
     '''
-    Following code matches of the rest of the parameters. Using a double for loop, it goes through every column (workout factor) of 
+    Following code matches of the rest of the parameters. Using a double for loop, it goes through every column (workout factor) of
     every row (user in the matching dataframe) and compares each factor to the entry in the user dataframe. Regardless of
     matching parameter here are a few variables to keep in mind:
-    
+
     rel_val = how good a match is for that specific parameter. e.g. a rel_val of 100 in "days" would indicate a perfect match
               for days.
-    
+
     ranker = the priority that user gives to that factor. e.g ranker = 1 for days would indicate the user trying to match
     gives weights days the most important.
-    
+
     For every rank there is a set cut_off for the minimum best match score for the
     respective workout factor. This cut_off is stored in a dictionary.
     '''
@@ -128,7 +128,7 @@ def get_matches(user_data_list, requests_list):
 
                 if matching_df_request.iloc[row][column] - window <= matching_df_user.iloc[0][column] <= matching_df_request.iloc[row][column] + window:
 
-                    rel_val = 100 #set match equal to 
+                    rel_val = 100 #set match equal to
 
                     ranker = priorities.get(column_labels[column])
                     cut_off = reference_ranker.get(ranker)
@@ -191,5 +191,4 @@ def get_matches(user_data_list, requests_list):
         row = Dfrq.iloc[index].tolist()
         presentation_list.append(row)
 
-return presentation_list
-
+    return presentation_list
