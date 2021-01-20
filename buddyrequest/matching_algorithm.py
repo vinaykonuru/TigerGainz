@@ -20,6 +20,22 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
         dictionary[item] = value[key.index(item)]
     return dictionary
 
+def set_comparision(user_set, request_set):
+    max_length = 0
+    similarities = 0
+    if request_set.issubset(user_set):
+        max_length = len(user_set)
+    if user_set.issubset(request_set):
+        max_length = len(request_set)
+    if(max_length == 0): # if there are no similarities
+        similarities = 0
+        return similarities
+    for user_row in user_set:
+        for req_row in request_set:
+            if(user_row == req_row):
+                similarities = similarities + 1
+    percent_match = double(similarities)/max_length * 100
+    return percent_match
 
 def get_matches(user_data_list, requests_list):
 
@@ -44,7 +60,6 @@ def get_matches(user_data_list, requests_list):
 
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
     Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]], "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]]})
-    print(Dfuser)
     Dfrq = requestsdf
 
 
@@ -71,7 +86,7 @@ def get_matches(user_data_list, requests_list):
     for index_row in range(len(Dfrq)):
         request_workout = Dfrq.iloc[index_row]["workout_type"]
         request_location = Dfrq.iloc[index_row]["location"]
-        # confirm that workout and intensity are exact matches
+        # confirm that workout and location are exact matches
         if fuzz.ratio(user_workout, request_workout) == 100 & \
         fuzz.ratio(user_location, request_location) == 100:
             row = Dfrq.iloc[index_row]
@@ -163,7 +178,11 @@ def get_matches(user_data_list, requests_list):
                     break
 
             else:
-                rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
+                # rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
+                #                                         matching_df_user.iloc[0][column])
+                print('Matching df request')
+                print(matching_df_request.iloc[row][column])
+                rel_val = set_comparision(set(matching_df_request.iloc[row][column]),
                                                         matching_df_user.iloc[0][column])
                 print("Relative value for other factors")
                 print(rel_val)
