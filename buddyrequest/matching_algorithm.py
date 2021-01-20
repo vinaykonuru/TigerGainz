@@ -145,7 +145,7 @@ def get_matches(user_data_list, requests_list):
                                                                 # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
 
                 user_time_zone = matching_df_user.iloc[0][column]
-                request_time_zone = atching_df_request.iloc[row][column]
+                request_time_zone = matching_df_request.iloc[row][column]
 
                 difference = abs(user_time_zone - request_time_zone)
 
@@ -159,10 +159,9 @@ def get_matches(user_data_list, requests_list):
                     break
 
             else:
-
+                print(matching_df_user)                
                 rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
-
                 weighted_average = 50
 
                 if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
