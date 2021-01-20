@@ -163,15 +163,12 @@ def get_matches(user_data_list, requests_list):
                                                         matching_df_user.iloc[0][column])
                 print("Relative value for other factors")
                 print(rel_val)
-                weighted_average = 50
+                cut_off = 50
 
                 if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
                     list_best_match_vals.append(weighted_average)
-
                 else:
                     break
-
-
 
         if len(list_best_match_vals) == len(column_labels) - 1: #if every single column managed to pass the cut_off val
             average = mean(list_best_match_vals)
