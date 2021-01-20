@@ -48,29 +48,33 @@ def get_matches(user_data_list, requests_list):
     Dfrq = requestsdf
 
 
-    Dfrq1 = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id'])
+    Dfrq = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
 
 
     #Mock priorities dictionary [PLACE HOLDER]
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
     reference_ranker = {1: 100, 2: 60, 3: 50}
 
-    '''At the end of step 1, two dataframes are created. Dfrq1: a dataframe for all existing users already in the database
+    '''At the end of step 1, two dataframes are created. Dfrq: a dataframe for all existing users already in the database
     and Dfuser: a dataframe with one row that contains all the matching preferences of the user trying to make a match.
     '''
 
     ################################################STEP 2: MATCHING###################################################
 
     # following code guarantees that all workout users will have the same workout type regardless of other preferences
-    workout = Dfuser.iloc[0]["workout_type"] # isolates the workout type -- should be a string
-
+    user_workout = Dfuser.iloc[0]["workout_type"] # isolates the workout type -- should be a string
+    user_location = Dfuser.iloc[0]["intensity"]
     matching_df_request = pd.DataFrame({}) # creating a new empty dataframe for people that have the same workout type
     Dfrq_row_list = [] # empty list for for all the index of the user in the request database
 
     # for loop guarantees match has same type of workout and adds users with the same workout to matching_df_request
-    for index_row in range(len(Dfrq1)):
-        if fuzz.ratio(workout, Dfrq1.iloc[index_row]["workout_type"]) == 100:
-            row = Dfrq1.iloc[index_row]
+    for index_row in range(len(Dfrq)):
+        request_workout = Dfrq.iloc[index_row]["workout_type"]
+        request_location = Dfrq.iloc[index_row]["location"]
+        # confirm that workout and intensity are exact matches
+        if fuzz.ratio(user_workout, request_workout) == 100 & \
+        fuzz.ratio(user_location, request_location) == 100:
+            row = Dfrq.iloc[index_row]
             matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
                                                                     #actualy matches
             Dfrq_row_list.append(index_row) # appends that user's row index to Dfrq_row_list

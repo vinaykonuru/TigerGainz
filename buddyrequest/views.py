@@ -147,7 +147,7 @@ def matches(request):
         # changes duration to number
         duration = duration_dict[duration]
 
-        user_data_list=[preferences,days,duration,workout_type,time_zone]
+        user_data_list=[preferences,days,duration,workout_type,time_zone,intensity]
 
         #if there is no profile picture, use the default one from the constructor
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
