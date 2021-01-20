@@ -96,8 +96,7 @@ def get_matches(user_data_list, requests_list):
         request_workout = Dfrq.iloc[index_row]["workout_type"]
         request_location = Dfrq.iloc[index_row]["location"]
         # confirm that workout and location are exact matches
-        if fuzz.ratio(user_workout, request_workout) == 100 & \
-        fuzz.ratio(user_location, request_location) == 100:
+        if user_workout == request_workout & user_location == request_location:
             row = Dfrq.iloc[index_row]
             matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
                                                                     #actualy matches
@@ -156,12 +155,11 @@ def get_matches(user_data_list, requests_list):
 
             elif column_labels[column] == "duration":
                 ranker = priorities.get(column_labels[column]) #gets the priority of duration
-                window = (ranker - 1)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
+                window = (ranker)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
                 rq_duration = matching_df_request.iloc[row][column]
                 delta =  abs(user_duration - rq_duration)
                 if delta <= window:
                     rel_val = (window - delta) / window * 100
-                    # rel_val = 100 # set match equal to
                     cut_off = reference_ranker.get(ranker)
 
                     weighted_average = (cut_off / 100) * rel_val
@@ -176,7 +174,11 @@ def get_matches(user_data_list, requests_list):
                 window = ranker
                 request_time_zone = matching_df_request.iloc[row][column]
 
-                delta = abs(int(user_time_zone) - int(request_time_zone))
+                #convert to integer utc time
+                user_utc_shift = int(convert_tz_abbrev_to_tz_offset('user_time_zone'))/100
+                request_utc_shift = int(convert_tz_abbrev_to_tz_offset('request_time_zone'))/100
+
+                delta = abs(user_utc_shift - request_utc_shift)
 
                 if delta <= window:
                     rel_val = (window - delta) / window * 100
