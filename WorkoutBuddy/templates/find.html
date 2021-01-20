@@ -202,21 +202,47 @@
 
           </div>
         </div>
+
         <hr class="my-4">
-        <p class="lead">On/Off Campus:</p>
+        <p class="lead">On or Off Campus:</p>
         <hr class="my-4">
         <div class="border-orange">
           <div class="jumbotron white-background">
 
             <div class="form-group">
-              <select name="location" class="form-control">
-                <option class="text-center" value="EST">On-Campus</option>
-                <option class="text-center" value="CST">Off-Campus</option>
+              <select class="form-control" id="on-off">
+                <option value="on">On-Campus</option>
+                <option value="off">Off-Campus</option>
               </select>
             </div>
 
           </div>
         </div>
+
+        <div id="timezone-div">
+          <br />
+          <br />
+          <hr class="my-4">
+          <div id="timezone-div">
+            <p class="lead">Timezone:</p>
+            <hr class="my-4">
+            <div class="border-orange">
+              <div class="jumbotron white-background">
+
+                <div class="form-group">
+                  <select class="form-control" id="timezone">
+                    <option class="text-center" value="EST">EST</option>
+                    <option class="text-center" value="CST">CST</option>
+                    <option class="text-center" value="PST">PST</option>
+                    <option class="text-center" value="GMT">GMT</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
         <br />
         <br />
 
@@ -449,6 +475,18 @@
         function off() {
           document.getElementById("overlay").style.display = "none";
         }
+      </script>
+
+      <!-- Script for on/off campus -->
+      <script>
+        $("#on-off").change(function() {
+          if ($(this).val() == "off") {
+            $('#timezone-div').show();
+          } else {
+            $('#timezone-div').hide();
+          }
+        });
+        $("#on-off").trigger("change");
       </script>
 
 </body>
