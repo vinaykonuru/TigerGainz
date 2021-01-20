@@ -9,7 +9,7 @@ class BuddyRequest(models.Model):
     year=models.CharField(max_length=50, null=True)
     rescollege=models.CharField(max_length=50,null=True)
     days=models.CharField(max_length=300,null=True)
-    duration=models.CharField(max_length=50,null=True)
+    duration=models.IntegerField(null=True)
     workout_type=models.CharField(max_length=50,null=True)
     time_zone=models.CharField(max_length=50,null=True)
     location=models.CharField(max_length=50,null=True)

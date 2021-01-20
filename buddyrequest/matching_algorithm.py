@@ -59,18 +59,25 @@ def get_matches(user_data_list, requests_list):
 
 
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
-    Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
-     "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
-     "intensity": user_data_list[5],"location":user_data_list[6]})
-    Dfrq = requestsdf
+
+    user_days = user_data_list[1]
+    user_duration = user_data_list[2]
+    user_workout = user_data_list[3]
+    user_time_zone = user_data_list[4]
+    user_intensity = user_data_list[5]
+    user_location = user_data_list[6]
+
+    # Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
+    #  "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
+    #  "intensity": user_data_list[5],"location":user_data_list[6]})
 
 
-    Dfrq = Dfrq.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
+    Dfrq = requestsdf.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
 
 
     #Mock priorities dictionary [PLACE HOLDER]
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
-    reference_ranker = {1: 100, 2: 60, 3: 50}
+    reference_ranker = {1: 100.0, 2: 60.0, 3: 50.0}
 
     '''At the end of step 1, two dataframes are created. Dfrq: a dataframe for all existing users already in the database
     and Dfuser: a dataframe with one row that contains all the matching preferences of the user trying to make a match.
@@ -79,11 +86,10 @@ def get_matches(user_data_list, requests_list):
     ################################################STEP 2: MATCHING###################################################
 
     # following code guarantees that all workout users will have the same workout type regardless of other preferences
-    user_workout = Dfuser.iloc[0]["workout_type"] # isolates the workout type -- should be a string
-    user_location = Dfuser.iloc[0]["intensity"]
-    user_days = Dfuser.iloc[0]["days"]
+
+
     matching_df_request = pd.DataFrame({}) # creating a new empty dataframe for people that have the same workout type
-    Dfrq_row_list = [] # empty list for for all the index of the user in the request database
+    Dfrq_row_list = [] # empty list for  all the index of the user in the request database
 
     # for loop guarantees match has same type of workout and adds users with the same workout to matching_df_request
     for index_row in range(len(Dfrq)):
@@ -135,12 +141,13 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
-                rel_val = set_comparision(set(user_days.strip('][\'')).split()),\
-                                          set(request_days.strip('][\'')).split()))
+                set_user_days = set(user_days.strip('][\'')).split())
+                set_rq_days = set(request_days.strip('][\'')).split())
+                rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
 
-                weighted_average = (cut_off/100) * rel_val
+                weighted_average = (cut_off / 100) * rel_val
 
                 if rel_val >= cut_off: # if minimum score is not met, we discard the prospective match completely
                     list_best_match_vals.append(weighted_average)
@@ -149,14 +156,12 @@ def get_matches(user_data_list, requests_list):
 
             elif column_labels[column] == "duration":
                 ranker = priorities.get(column_labels[column]) #gets the priority of duration
-                window = (ranker - 1)(30) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
-
-                if int(matching_df_request.iloc[row][column]) - window <= int(matching_df_user.iloc[0][column]) \
-                        <= int(matching_df_request.iloc[row][column]) + window:
-
-                    rel_val = 100 #set match equal to
-
-                    ranker = priorities.get(column_labels[column])
+                window = (ranker - 1)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
+                rq_duration = matching_df_request.iloc[row][column]
+                delta =  abs(user_duration - rq_duration)
+                if delta <= window:
+                    rel_val = (window - delta) / window * 100
+                    # rel_val = 100 # set match equal to
                     cut_off = reference_ranker.get(ranker)
 
                     weighted_average = (cut_off / 100) * rel_val
@@ -168,13 +173,13 @@ def get_matches(user_data_list, requests_list):
             elif column_labels[column] == "time_zone":
                 ranker = priorities.get(column_labels[column])  # gets the priority of time zone --> also determines the window of error allowed for time zone
                                                                 # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
-
-                user_time_zone = matching_df_user.iloc[0][column]
+                window = ranker
                 request_time_zone = matching_df_request.iloc[row][column]
 
-                difference = abs(user_time_zone - request_time_zone)
+                delta = abs(int(user_time_zone) - int(request_time_zone))
 
-                if difference <= ranker:
+                if delta <= window:
+                    rel_val = (window - delta) / window * 100
                     cut_off = reference_ranker.get(ranker)
 
                     weighted_average = (cut_off / 100) * rel_val

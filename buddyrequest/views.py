@@ -114,7 +114,7 @@ def matches(request):
             year = userdata['class_year']
             rescollege = userdata['res_college']
             days = request.POST.getlist('day')
-            duration = request.POST['duration']
+            duration = int(request.POST['duration'])
             workout_type = request.POST.getlist('workout_type')
             time_zone = request.POST['time_zone']
             location = request.POST['location']
@@ -138,15 +138,6 @@ def matches(request):
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,location=location,
         intensity=intensity,bio=bio,user=user)
-
-        duration_dict = {
-            '30 Minutes' : '30',
-            '1 Hour' : '60',
-            '1 Hour 30 Minutes' : '90',
-            '2 Hour' : '120'
-        }
-        # changes duration to number
-        duration = duration_dict[duration]
 
         #data used for match
         user_data_list=[preferences,days,duration,workout_type,time_zone,intensity,location]
