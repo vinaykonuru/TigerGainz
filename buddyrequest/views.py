@@ -139,6 +139,16 @@ def matches(request):
         #check if all fields in form were filled, otherwise send back to form
 
         #data used for match
+        duration_dict = {
+            '30 Minutes' : '30',
+            '1 Hour' : '60',
+            '1 Hour 30 Minutes' : '90',
+            '2 Hour' : '120'
+        }
+        # changes duration to number
+        for entry in duration:
+            entry = duration_dict[entry]
+
         user_data_list=[preferences,days,duration,workout_type,time_zone]
 
         #if there is no profile picture, use the default one from the constructor
