@@ -162,10 +162,8 @@ def get_matches(user_data_list, requests_list):
 
                 rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
-                ranker = priorities.get(column_labels[column])
-                cut_off = reference_ranker.get(ranker)
-
-                weighted_average = (cut_off / 100) * rel_val
+                
+                weighted_average = 50
 
                 if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
                     list_best_match_vals.append(weighted_average)
