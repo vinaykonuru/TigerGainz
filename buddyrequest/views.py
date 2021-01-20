@@ -135,9 +135,10 @@ def matches(request):
 
         user = request.user
 
-        #check if all fields in form were filled, otherwise send back to form
+        req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
+        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,location=location,
+        intensity=intensity,bio=bio,user=user)
 
-        #data used for match
         duration_dict = {
             '30 Minutes' : '30',
             '1 Hour' : '60',
@@ -147,12 +148,8 @@ def matches(request):
         # changes duration to number
         duration = duration_dict[duration]
 
-        user_data_list=[preferences,days,duration,workout_type,time_zone,intensity]
-
-        #if there is no profile picture, use the default one from the constructor
-        req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
-        days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,location=location,
-        intensity=intensity,bio=bio,user=user)
+        #data used for match
+        user_data_list=[preferences,days,duration,workout_type,time_zone,intensity,location]
 
         req_user.save()
 

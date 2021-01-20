@@ -59,7 +59,9 @@ def get_matches(user_data_list, requests_list):
 
 
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
-    Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]], "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]]})
+    Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
+     "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
+     "intensity": user_data_list[5],"location":user_data_list[6]})
     Dfrq = requestsdf
 
 
@@ -79,6 +81,7 @@ def get_matches(user_data_list, requests_list):
     # following code guarantees that all workout users will have the same workout type regardless of other preferences
     user_workout = Dfuser.iloc[0]["workout_type"] # isolates the workout type -- should be a string
     user_location = Dfuser.iloc[0]["intensity"]
+    user_days = Dfuser.iloc[0]["days"]
     matching_df_request = pd.DataFrame({}) # creating a new empty dataframe for people that have the same workout type
     Dfrq_row_list = [] # empty list for for all the index of the user in the request database
 
@@ -130,7 +133,10 @@ def get_matches(user_data_list, requests_list):
 
 
             if column_labels[column] == "days":
-                rel_val = fuzz.partial_token_sort_ratio(matching_df_request.iloc[row][column], matching_df_user.iloc[0][column])
+                request_days = matching_df_request.iloc[row][column]
+                # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
+                rel_val = set_comparision(set(user_days.strip('][\'')).split()),\
+                                          set(request_days.strip('][\'')).split()))
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
 
@@ -178,11 +184,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             else:
-                # rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
-                #                                         matching_df_user.iloc[0][column])
-                print('Matching df request')
-                print(matching_df_request.iloc[row][column])
-                rel_val = set_comparision(set(matching_df_request.iloc[row][column]),
+                rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
                 print("Relative value for other factors")
                 print(rel_val)
