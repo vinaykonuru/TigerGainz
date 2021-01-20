@@ -145,6 +145,7 @@ def matches(request):
             '1 Hour 30 Minutes' : '90',
             '2 Hour' : '120'
         }
+        print(duration)
         # changes duration to number
         for entry in duration:
             entry = duration_dict[entry]
