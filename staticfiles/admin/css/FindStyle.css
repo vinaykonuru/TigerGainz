@@ -90,3 +90,8 @@ label:hover:before {
 .init-hidden {
   display: none;
 }
+
+/* style for bio box */
+.enter-experience {
+  padding: 10px;
+}
