@@ -34,7 +34,7 @@ def set_comparision(user_set, request_set):
         for req_row in request_set:
             if(user_row == req_row):
                 similarities = similarities + 1
-    percent_match = double(similarities)/max_length * 100
+    percent_match = similarities / max_length * 100
     return percent_match
 
 def get_matches(user_data_list, requests_list):
