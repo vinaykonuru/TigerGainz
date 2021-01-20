@@ -9,7 +9,7 @@ def getStudentInfo(id):
     created = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
     nonce = ''.join([random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/=') for i in range(32)])
     username = 'vkonuru'
-    password = '0b9fc25f5937c3269576d6b4c6453d3b'
+    password = '790064e59adadcd37b66b0e53dba934c'
 
     generated_digest = b64encode(hashlib.sha256((nonce + created + password).encode('utf-8')).digest()).decode('utf-8')
 
@@ -17,4 +17,5 @@ def getStudentInfo(id):
         'Authorization': 'WSSE profile="UsernameToken"',
         'X-WSSE': 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (username, generated_digest, b64encode(nonce.encode()).decode('utf-8'), created)
     })
+    print(r)
     return r.json()
