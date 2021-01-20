@@ -87,7 +87,6 @@ def get_matches(user_data_list, requests_list):
     else: # break and return a blank array back to views
         blankarray=[]
         return blankarray
-        print("return to home screen")
 
 
     '''
@@ -104,6 +103,7 @@ def get_matches(user_data_list, requests_list):
     For every rank there is a set cut_off for the minimum best match score for the
     respective workout factor. This cut_off is stored in a dictionary.
     '''
+    print(matching_df_user)
     ListOfMatches = [] # array where all suitable matches will be appended to later
     for row in range(len(matching_df_request)):
         list_best_match_vals = [] # for every user we generate an array
@@ -159,7 +159,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             else:
-                print(matching_df_user)                
+                print(matching_df_user)
                 rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
                 weighted_average = 50

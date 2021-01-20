@@ -95,7 +95,6 @@ def matches(request):
                 print(entry)
                 return redirect('home')
         print(netID)
-        print(getStudentInfo(netID))
         userdata = getStudentInfo(netID)
         preferences=request.POST.getlist('preferences')
         if(preferences == ['', '', '']):
