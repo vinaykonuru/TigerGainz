@@ -126,7 +126,8 @@ def get_matches(user_data_list, requests_list):
                 ranker = priorities.get(column_labels[column]) #gets the priority of duration
                 window = (ranker - 1)(30) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
 
-                if matching_df_request.iloc[row][column] - window <= matching_df_user.iloc[0][column] <= matching_df_request.iloc[row][column] + window:
+                if int(matching_df_request.iloc[row][column]) - window <= int(matching_df_user.iloc[0][column]) \
+                        <= int(matching_df_request.iloc[row][column]) + window:
 
                     rel_val = 100 #set match equal to
 
@@ -157,7 +158,20 @@ def get_matches(user_data_list, requests_list):
                 else:
                     break
 
+             else:
 
+                rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
+                                                        matching_df_user.iloc[0][column])
+                ranker = priorities.get(column_labels[column])
+                cut_off = reference_ranker.get(ranker)
+
+                weighted_average = (cut_off / 100) * rel_val
+
+                if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
+                    list_best_match_vals.append(weighted_average)
+
+                else:
+                    break
 
 
 
