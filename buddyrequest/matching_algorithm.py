@@ -141,8 +141,8 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
-                set_user_days = set(user_days.strip('][\'')).split())
-                set_rq_days = set(request_days.strip('][\'')).split())
+                set_user_days = set(user_days.strip('][\'').split())
+                set_rq_days = set(request_days.strip('][\'').split())
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
@@ -191,8 +191,6 @@ def get_matches(user_data_list, requests_list):
             else:
                 rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
-                print("Relative value for other factors")
-                print(rel_val)
                 cut_off = 50
 
                 if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
