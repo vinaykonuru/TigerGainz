@@ -95,3 +95,7 @@ label:hover:before {
 .enter-experience {
   padding: 10px;
 }
+
+textarea {
+  width: 90%;
+}
