@@ -29,3 +29,27 @@
 .tiger-icons {
     width: 200px;
 }
+
+/*  Added for accordion */
+
+h2 {
+    font-family: Arial, Verdana;
+    font-weight: 800;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+.accordion-section .panel-default > .panel-heading {
+    border: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+.accordion-section .panel-default .panel-title a {
+    display: block;
+    font-style: italic;
+    font-size: 1.5rem;
+}
+
+.accordion-section .panel-default .panel-body {
+    font-size: 1.2rem;
+}
