@@ -11,7 +11,7 @@ class BuddyRequest(models.Model):
     days=models.CharField(max_length=300,null=True)
     duration=models.IntegerField(null=True)
     workout_type=models.CharField(max_length=50,null=True)
-    time_zone=models.CharField(max_length=50,null=True)
+    time_zone=models.CharField(max_length=50,null=True, default = "EST")
     location=models.CharField(max_length=50,null=True)
     intensity=models.CharField(max_length=50,null=True)
     bio=models.TextField(default='',null=True)
