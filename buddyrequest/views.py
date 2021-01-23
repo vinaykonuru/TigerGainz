@@ -142,7 +142,7 @@ def matches(request):
             return render(request, 'find.html',{'error': error})
 
         user = request.user
-        if(location = ''):
+        if(location == ''):
             location = 'EST'
         req_user=BuddyRequest(netID=netID,name=name,major=major,year=year,rescollege=rescollege,
         days=days,duration=duration,workout_type=workout_type,time_zone=time_zone,location=location,
