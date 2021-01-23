@@ -16,6 +16,7 @@ def database(request):
     workout_type_filter = request.POST.getlist('workout_type_filter')
     duration_filter = request.POST.getlist('duration_filter')
     time_zone_filter = request.POST.getlist('time_zone_filter')
+    location_filter = request.POST.getlist('location_filter')
     if(workout_type_filter == ['']):
         workout_type_filter = []
     if(duration_filter == ['']):
@@ -25,6 +26,7 @@ def database(request):
     workout_type_filter_set = set(workout_type_filter)
     duration_filter_set = set(duration_filter)
     time_zone_filter_set = set(time_zone_filter)
+    location_filter_set = set(location_filter)
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
@@ -32,19 +34,23 @@ def database(request):
             duration = entry.duration.strip('][\'')
             timezone = entry.time_zone.strip('][\'')
             days = entry.days.strip('][\'').replace('\'','')
+            location = entry.days.strip('][\'')
             workout_type_set = set(workout_type.split(','))
             duration_set = set(duration.split(','))
             timezone_set = set(timezone.split(','))
+            location_set = set(location.split(','))
             if(workout_type_filter_set.issubset(workout_type_set) & duration_filter_set.issubset(duration_set)\
-            & time_zone_filter_set.issubset(timezone_set)):
+            & time_zone_filter_set.issubset(timezone_set) & location_filter_set.issubset(location_set)):
                 entry.workout_type = workout_type
                 entry.days = days
                 profiles.append(entry)
     workout_type_filter = str(workout_type_filter).strip('][\'')
     duration_filter = str(duration_filter).strip('][\'')
     time_zone_filter = str(time_zone_filter).strip('][\'')
+    location_filter = stR(location_filter).strip('][\'')
     return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
-    time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter})
+    time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter,\
+    'location_filter':location_filter})
 @login_required(login_url='/accounts/login')
 def remove_request(request):
     BuddyRequest.objects.get(user=request.user).delete()
@@ -60,9 +66,9 @@ def profile(request,request_id):
         partner=BuddyRequest.objects.get(user = request.user)
     else:
         partner=BuddyRequest.objects.get(id = request_id)
-    days=partner.days.strip('][\'').replace('\'','')
-    workout_type=partner.workout_type.strip('][\'').replace('\'','')
-    return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
+    partner.days=partner.days.strip('][\'').replace('\'','')
+    partner.workout_type=partner.workout_type.strip('][\'').replace('\'','')
+    return render(request,'buddyrequest/profile.html',{'profile_details':partner})
 @login_required(login_url='/accounts/login')
 def partner_match(request,partner_id):
     if request.method=="POST":

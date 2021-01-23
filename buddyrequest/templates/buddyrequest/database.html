@@ -150,6 +150,14 @@
               <option value="">No Filter</option>
             </select>
             <br />
+            Timezone:
+            <select name="location_filter" class="form-control">
+              <option class="text-center" value={{location_filter}}>SELECTED -- {{ location_filter }} </option>
+              <option class="text-center" value="On Campus">On Campus</option>
+              <option class="text-center" value="Off Campus">Off Campus</option>
+              <option value="">No Filter</option>
+            </select>
+            <br />
             <br />
             <input class="btn btn-lg btn-secondary" type="submit" value="Filter Search">
           </form>
@@ -168,6 +176,10 @@
                   <!-- <img src="{{ entry.profile_picture }}" alt=""> -->
                   <br />
                   <br />
+                  <strong class="d-inline-block mb-2 text-primary">On/Off Campus</strong>
+                  <div class="mb-1 text-muted">
+                    <p>{{ entry.location }} </p>
+                  </div>
                   <strong class="d-inline-block mb-2 text-primary">Duration</strong>
                   <div class="mb-1 text-muted">
                     <p>{{ entry.duration }} </p>
