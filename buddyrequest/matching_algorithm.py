@@ -60,9 +60,9 @@ def get_matches(user_data_list, requests_list):
 
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
 
-    user_days = user_data_list[1]
+    user_days = user_data_list[1].strip('][\'').split(',')
     user_duration = user_data_list[2]
-    user_workout = user_data_list[3]
+    user_workout = user_data_list[3].strip('][\'').split(',')
     user_time_zone = user_data_list[4]
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
@@ -96,7 +96,7 @@ def get_matches(user_data_list, requests_list):
         request_workout = Dfrq.iloc[index_row]["workout_type"]
         request_location = Dfrq.iloc[index_row]["location"]
         # confirm that workout and location are exact matches
-        if user_workout == request_workout & user_location == request_location:
+        if user_workout == request_workout.strip('][\'').split(',') and user_location == request_location:
             row = Dfrq.iloc[index_row]
             matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
                                                                     #actualy matches
@@ -140,7 +140,7 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
-                set_user_days = set(user_days.strip('][\'').split(','))
+                set_user_days = set(user_days)
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
