@@ -131,7 +131,7 @@
 
           </div>
         </div>
-        <table>
+        <!-- <table>
           <tbody id = "preferences">
             <tr>
               <td>Workout Type</td>
@@ -143,7 +143,7 @@
             <td>Fish</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <br />
         <br />
         <hr class="my-4">
@@ -202,21 +202,63 @@
 
           </div>
         </div>
+
         <hr class="my-4">
-        <p class="lead">On/Off Campus:</p>
+        <p class="lead">On/Off-Campus:</p>
         <hr class="my-4">
         <div class="border-orange">
           <div class="jumbotron white-background">
 
             <div class="form-group">
-              <select name="location" class="form-control">
-                <option class="text-center" value="EST">On-Campus</option>
-                <option class="text-center" value="CST">Off-Campus</option>
+              <select class="form-control" id="on-off">
+                <option value="on">On-Campus</option>
+                <option value="off">Off-Campus</option>
               </select>
             </div>
 
           </div>
         </div>
+
+        <div id="timezone-div">
+          <br />
+          <br />
+          <hr class="my-4">
+          <p class="lead">Timezone (UTC)</p>
+          <hr class="my-4">
+          <div class="border-orange">
+            <div class="jumbotron white-background">
+
+              <div class="form-group">
+                <select name="time_zone" class="form-control">
+                  <option class="text-center" value="EST">EST</option>
+                  <option class="text-center" value="CST">CST</option>
+                  <option class="text-center" value="MST">MST</option>
+                  <option class="text-center" value="PST">PST</option>
+                  <option class="text-center" value="AEST">AEST</option>
+                  <option class="text-center" value="ACST">ACST</option>
+                  <option class="text-center" value="AFT">AFT</option>
+                  <option class="text-center" value="AKST">AKST</option>
+                  <option class="text-center" value="AST">AST</option>
+                  <option class="text-center" value="AWST">AWST</option>
+                  <option class="text-center" value="CAT">CAT</option>
+                  <option class="text-center" value="CET">CET</option>
+                  <option class="text-center" value="EAT">EAT</option>
+                  <option class="text-center" value="EET">EET</option>
+                  <option class="text-center" value="MSK">MSK</option>
+                  <option class="text-center" value="WAT">WAT</option>
+                  <option class="text-center" value="WET">WET</option>
+                  <option class="text-center" value="WAT">WAT</option>
+
+
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <br />
+          <br />
+        </div>
+
         <br />
         <br />
 
@@ -305,40 +347,6 @@
         <br />
         <br /> -->
 
-        <hr class="my-4">
-        <p class="lead">Timezone(UTC)</p>
-        <hr class="my-4">
-        <div class="border-orange">
-          <div class="jumbotron white-background">
-
-            <div class="form-group">
-              <select name="time_zone" class="form-control">
-                <option class="text-center" value="EST">EST</option>
-                <option class="text-center" value="CST">CST</option>
-                <option class="text-center" value="MST">MST</option>
-                <option class="text-center" value="PST">PST</option>
-                <option class="text-center" value="AEST">AEST</option>
-                <option class="text-center" value="ACST">ACST</option>
-                <option class="text-center" value="AFT">AFT</option>
-                <option class="text-center" value="AKST">AKST</option>
-                <option class="text-center" value="AST">AST</option>
-                <option class="text-center" value="AWST">AWST</option>
-                <option class="text-center" value="CAT">CAT</option>
-                <option class="text-center" value="CET">CET</option>
-                <option class="text-center" value="EAT">EAT</option>
-                <option class="text-center" value="EET">EET</option>
-                <option class="text-center" value="MSK">MSK</option>
-                <option class="text-center" value="WAT">WAT</option>
-                <option class="text-center" value="WET">WET</option>
-                <option class="text-center" value="WAT">WAT</option>
-
-
-              </select>
-            </div>
-
-          </div>
-        </div>
-        <br />
         <!-- Profile Picture -->
         <!-- <hr class="my-4">
         <p class="lead">Profile Picture:</p>
@@ -361,9 +369,8 @@
         <hr class="my-4">
         <div class="border-orange">
           <div class="jumbotron white-background">
-            Enter experience level, workout goals, preferred workout location, experience, etc.
             <div class="form-group">
-              <textarea rows="4" cols="50" name="bio"></textarea>
+              <textarea class="enter-experience" rows="4" cols="50" name="bio" placeholder="Enter experience level, workout goals, preferred workout location, experience, etc."></textarea>
             </div>
 
           </div>
@@ -449,6 +456,18 @@
         function off() {
           document.getElementById("overlay").style.display = "none";
         }
+      </script>
+
+      <!-- Script for on/off campus -->
+      <script>
+        $("#on-off").change(function() {
+          if ($(this).val() == "off") {
+            $('#timezone-div').show();
+          } else {
+            $('#timezone-div').hide();
+          }
+        });
+        $("#on-off").trigger("change");
       </script>
 
 </body>
