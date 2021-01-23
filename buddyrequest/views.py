@@ -30,7 +30,7 @@ def database(request):
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
-            workout_type = entry.workout_type.strip('][\'')
+            workout_type = entry.workout_type.strip('][\'').replace('\'','')
             duration = entry.duration.strip('][\'')
             timezone = entry.time_zone.strip('][\'')
             days = entry.days.strip('][\'').replace('\'','')
