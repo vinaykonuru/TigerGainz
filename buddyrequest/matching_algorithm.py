@@ -60,9 +60,10 @@ def get_matches(user_data_list, requests_list):
 
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
 
-    user_days = user_data_list[1].strip('][\'').split(',')
+    user_days = user_data_list[1]
+    print(user_days)
     user_duration = user_data_list[2]
-    user_workout = user_data_list[3].strip('][\'').split(',')
+    user_workout = user_data_list[3]
     user_time_zone = user_data_list[4]
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
@@ -70,6 +71,7 @@ def get_matches(user_data_list, requests_list):
     # Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
     #  "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
     #  "intensity": user_data_list[5],"location":user_data_list[6]})
+    # .strip('][\'').split(',')
 
 
     Dfrq = requestsdf.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])

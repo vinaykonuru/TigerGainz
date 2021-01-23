@@ -78,7 +78,7 @@
           {% if user.is_authenticated %}
             {% load base_tags %}
             {% if user|check_requests %}
-              <a class="nav-link" href="{% url 'profile' user.id %}">My Request Form</a>
+              <a class="nav-link" href="{% url 'profile' user.id %}">My Request Details</a>
               {% if user|check_partner %}
                 <a class="nav-link" href="{% url 'partner' %}">Partner</a>
               {% else %}

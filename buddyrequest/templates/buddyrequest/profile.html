@@ -28,21 +28,23 @@
             <p class="lead">Are You Sure You Want to Match?</p>
             <br>
             <p "proceeding"> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
+            <button onclick="off()" class="btn btn-lg btn-secondary">
+              Close
+            </button>
             <a href="javascript:{document.getElementById('partner_match').submit()}">
               <button onclick="on()" class="btn btn-lg btn-secondary">
                 Confirm
               </button>
             </a>
-            <button onclick="off()" class="btn btn-lg btn-secondary">
-              Close
-            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <div class="border-black">
+    {% if profile_details.user_id == user.id %}
+    <h1 class="display-5"><strong>My Info</strong></h1>
+    {% else %}
     <h1 class="display-5"><strong>Student Info</strong></h1>
   </div>
 
@@ -96,6 +98,7 @@
 
           {% load request_tags %}
           {% if user|check_partner %}
+          {% if profile_details.user_id != user.id %}
           {% if user|check_time %}
           <a href="javascript:{document.getElementById('remove_partner').submit()}">
             <button class="btn btn-lg btn-secondary">
@@ -106,6 +109,7 @@
             {% csrf_token %}
             <input type="hidden" />
           </form>
+          {% endif %}
           {% endif %}
 
           {% else %}
