@@ -47,7 +47,7 @@ def database(request):
     workout_type_filter = str(workout_type_filter).strip('][\'')
     duration_filter = str(duration_filter).strip('][\'')
     time_zone_filter = str(time_zone_filter).strip('][\'')
-    location_filter = stR(location_filter).strip('][\'')
+    location_filter = str(location_filter).strip('][\'')
     return render(request,'buddyrequest/database.html',{'profiles':profiles,'time_zone_filter':\
     time_zone_filter,'workout_type_filter':workout_type_filter,'duration_filter':duration_filter,\
     'location_filter':location_filter})
