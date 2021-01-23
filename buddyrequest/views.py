@@ -32,11 +32,11 @@ def database(request):
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
-            duration = entry.duration.strip('][\'').replace(' \'','\'').strip()
-            timezone = entry.time_zone.strip('][\' ').strip()
-            location = entry.location.strip('][\' ').strip()
-            days = entry.days.strip('][\' ').replace('\'','').strip()
-            workout_type = entry.workout_type.strip('][\' ').replace('\'','').strip()
+            duration = entry.duration.strip('][\'').replace(' \'','\'')
+            timezone = entry.time_zone.strip('][\' ')
+            location = entry.location.strip('][\' ')
+            days = entry.days.strip('][\' ').replace('\'','')
+            workout_type = entry.workout_type.strip('][\' ').replace('\'','')
             workout_type_set = set(workout_type.split(','))
             duration_set = set(duration.split(','))
             timezone_set = set(timezone.split(','))
