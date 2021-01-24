@@ -70,7 +70,7 @@ def profile(request,request_id):
         partner=BuddyRequest.objects.get(id = request_id)
     partner.days=partner.days.strip('][\'').replace('\'','')
     partner.workout_type=partner.workout_type.strip('][\'').replace('\'','')
-    return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
+    return render(request,'buddyrequest/profile.html',{'profile_details':partner})
 @login_required(login_url='/accounts/login')
 def partner_match(request,partner_id):
     if request.method=="POST":
@@ -170,7 +170,7 @@ def partner(request):
     partner=BuddyRequest.objects.get(partner=request.user)
     partner.days=partner.days.strip('][\'').replace('\'','')
     partner.workout_type=partner.workout_type.strip('][\'').replace('\'','')
-    return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
+    return render(request,'buddyrequest/profile.html',{'profile_details':partner})
 
 @login_required(login_url='/accounts/login')
 def remove_partner(request):
