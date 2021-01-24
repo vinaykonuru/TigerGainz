@@ -36,7 +36,7 @@ def database(request):
             timezone = entry.time_zone.strip('][\' ')
             location = entry.location.strip('][\' ')
             days = entry.days.strip('][\' ').replace('\'','')
-            workout_type = entry.workout_type.strip('][\' ').replace('\'','')
+            workout_type = entry.workout_type.replace(' ','').strip('][\'').replace('\'','')
             workout_type_set = set(workout_type.split(','))
             duration_set = set(duration.split(','))
             timezone_set = set(timezone.split(','))
@@ -133,7 +133,7 @@ def matches(request):
             rescollege = userdata['res_college']
             days = request.POST.getlist('day')
             duration = int(request.POST['duration'])
-            workout_type = str(request.POST.getlist('workout_type')).replace(' ','')
+            workout_type = str(request.POST.getlist('workout_type'))
             time_zone = request.POST['time_zone']
             location = request.POST['location']
             intensity = request.POST['intensity']
