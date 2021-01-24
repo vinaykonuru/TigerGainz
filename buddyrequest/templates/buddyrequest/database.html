@@ -192,7 +192,7 @@
                   <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
                   {% if entry.user_id != user.id %}
-                  
+
                   <!-- Confirmation Pop-up -->
                   <div id="overlay">
                     <div id="text">
@@ -205,7 +205,7 @@
                             <button onclick="off()" class="btn btn-lg btn-secondary">
                                 Close
                             </button>
-                            <a href="javascript:{document.getElementById('partner_match').submit()}">
+                            <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
                               <button onclick="on()" class="btn btn-lg btn-secondary">
                                 Confirm
                               </button>
@@ -219,7 +219,7 @@
                   <button onclick="on()" class="btn btn-lg btn-secondary">
                     Match
                   </button>
-                  <form id="partner_match" action="{% url 'partner_match' entry.user_id %}" method="POST">
+                  <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" />
                   </form>
