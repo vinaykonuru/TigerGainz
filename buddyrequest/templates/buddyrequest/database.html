@@ -20,29 +20,6 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   </body>
 
-  <!-- Confirmation Pop-up -->
-
-  <div id="overlay">
-    <div id="text">
-      <div class="border-white">
-        <div class="border-orange">
-          <div class="jumbotron white-background">
-            <p class="lead">Are You Sure You Want to Match?</p>
-            <br>
-            <p> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
-            <button onclick="off()" class="btn btn-lg btn-secondary">
-                Close
-            </button>
-            <a href="javascript:{document.getElementById('partner_match').submit()}">
-              <button onclick="on()" class="btn btn-lg btn-secondary">
-                Confirm
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!--TigerGainz Waiting List Jumbotron-->
   <div class="border-black">
@@ -215,6 +192,30 @@
                   <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
                   {% if entry.user_id != user.id %}
+                  
+                  <!-- Confirmation Pop-up -->
+                  <div id="overlay">
+                    <div id="text">
+                      <div class="border-white">
+                        <div class="border-orange">
+                          <div class="jumbotron white-background">
+                            <p class="lead">Are You Sure You Want to Match?</p>
+                            <br>
+                            <p> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
+                            <button onclick="off()" class="btn btn-lg btn-secondary">
+                                Close
+                            </button>
+                            <a href="javascript:{document.getElementById('partner_match').submit()}">
+                              <button onclick="on()" class="btn btn-lg btn-secondary">
+                                Confirm
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <button onclick="on()" class="btn btn-lg btn-secondary">
                     Match
                   </button>
