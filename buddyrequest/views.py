@@ -133,7 +133,7 @@ def matches(request):
             rescollege = userdata['res_college']
             days = request.POST.getlist('day')
             duration = int(request.POST['duration'])
-            workout_type = request.POST.getlist('workout_type')
+            workout_type = str(request.POST.getlist('workout_type')).replace(' ','')
             time_zone = request.POST['time_zone']
             location = request.POST['location']
             intensity = request.POST['intensity']
