@@ -18,34 +18,34 @@ def mail(name_partner, netID_user,netID_partner, user, remove ):
 
     if remove == True:
         text = f'''\
-        Hi!
+Hi!
 
-        We wanted to inform you that your partnership with {name_partner} was removed. If this was a mistake, feel free to
-        contact them at {contact}. You've been placed back onto the waiting list. Feel free to submit a new partner request form or search
-        through the waiting list for a new partner manually.
+We wanted to inform you that your partnership with {name_partner} was removed. If this was a mistake, feel free to
+contact them at {contact}. You've been placed back onto the waiting list. Feel free to submit a new partner request form or search
+through the waiting list for a new partner manually.
 
-        Happy exercising,
-        TigerGainz'''
+Happy exercising,
+TigerGainz'''
     else:
         if user == False:
             if remove == False:
                 text = f'''\
-                Hi!
+Hi!
 
-                We are so excited to present you with your new workout partner, {name_partner}! You can contact them via email: {contact}
+We are so excited to present you with your new workout partner, {name_partner}! You can contact them via email: {contact}
 
-                Happy exercising,
-                TigerGainz'''
+Happy exercising,
+TigerGainz'''
 
         else:
 
             text = f'''\
-            Hi!
+Hi!
 
-            We are sending a confirmation email regarding your new workout partner, {name_partner}! You can contact them via email: {contact}
+We are sending a confirmation email regarding your new workout partner, {name_partner}! You can contact them via email: {contact}
 
-            Happy exercising,
-            TigerGainz'''
+Happy exercising,
+TigerGainz'''
 
     message.attach(MIMEText(text, "plain"))
 
