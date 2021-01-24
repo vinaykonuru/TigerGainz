@@ -191,8 +191,9 @@
                   <br />
                   <br />
                   <a href="{% url 'profile' entry.id %}" class="btn btn-lg btn-secondary">View Profile</a>
-                  {% if entry.user_id != user.id %}
-
+                  {% load request_tags %}
+                  {% if user|check_partner %}
+                  {% else %}
                   <!-- Confirmation Pop-up -->
                   <div id="overlay">
                     <div id="text">
