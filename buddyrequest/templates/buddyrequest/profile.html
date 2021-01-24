@@ -115,6 +115,9 @@
 
           {% else %}
           {% if profile_details.user_id != user.id %}
+          <button onclick="{% url 'database' %}" class="btn btn-lg btn-secondary">
+            Return
+          </button>
           <button onclick="on()" class="btn btn-lg btn-secondary">
             Match
           </button>
