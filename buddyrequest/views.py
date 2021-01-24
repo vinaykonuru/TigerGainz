@@ -68,8 +68,8 @@ def profile(request,request_id):
         partner=BuddyRequest.objects.get(user = request.user)
     else:
         partner=BuddyRequest.objects.get(id = request_id)
-    days=partner.days.strip('][\'').replace('\'','')
-    workout_type=partner.workout_type.strip('][\'').replace('\'','')
+    partner.days=partner.days.strip('][\'').replace('\'','')
+    partner.workout_type=partner.workout_type.strip('][\'').replace('\'','')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
 @login_required(login_url='/accounts/login')
 def partner_match(request,partner_id):
@@ -168,8 +168,8 @@ def matches(request):
 def partner(request):
     #Get the current user's partner by finding the user who's partner is the current user
     partner=BuddyRequest.objects.get(partner=request.user)
-    days=partner.days.strip('][\'')
-    workout_type=partner.workout_type.strip('][\'')
+    partner.days=partner.days.strip('][\'').replace('\'','')
+    partner.workout_type=partner.workout_type.strip('][\'').replace('\'','')
     return render(request,'buddyrequest/profile.html',{'profile_details':partner,'days':days,'workout_type':workout_type})
 
 @login_required(login_url='/accounts/login')
