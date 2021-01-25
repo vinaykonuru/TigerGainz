@@ -172,7 +172,7 @@
                       <button onclick="off()" class="btn btn-lg btn-secondary">
                           Close
                       </button>
-                      <a href="javascript:{document.getElementById('partner_match').submit()}">
+                      <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
                         <button onclick="on()" class="btn btn-lg btn-secondary">
                           Confirm
                         </button>
@@ -216,7 +216,7 @@
                   {% load request_tags %}
                   {% if user|check_partner %}
                   {% else %}
-                  <button onclick="on({{entry.user_id}})" class="btn btn-lg btn-secondary">
+                  <button onclick="on()" class="btn btn-lg btn-secondary">
                     Match
                   </button>
                   <form id="partner_match{{entry.user_id}}" action="{% url 'partner_match' entry.user_id %}" method="POST">
@@ -228,19 +228,20 @@
               </div>
               <hr class="my-4">
             </div>
+            <!-- Script for Matching Pop-up -->
+            <script>
+              function on() {
+                overlay = document.getElementById("overlay{{entry.user_id}}")
+                overlay.getElementById('overlay').style.display = "block";
+              }
+
+              function off() {
+                document.getElementById("overlay{{entry.user_id}}").style.display = "none";
+              }
+            </script>
             {% endfor %}
           </div>
-          <!-- Script for Matching Pop-up -->
-          <script>
-            function on(id) {
-              overlay = document.getElementById("overlay"+id)
-              overlay.getElementById('overlay').style.display = "block";
-            }
 
-            function off() {
-              document.getElementById("overlay{{entry.user_id}}").style.display = "none";
-            }
-          </script>
 
 </body>
 {% endblock %}
