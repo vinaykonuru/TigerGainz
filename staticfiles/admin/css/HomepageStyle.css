@@ -25,13 +25,18 @@
   height: auto;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 381px) {
   .big-screen {
     display: none;
   }
+  .get-started a {
+    width: 92vw;
+    display: flex;
+    justify-content: center;
+  }
 }
 
-@media screen and (min-width: 380px) {
+@media screen and (min-width: 381.1px) {
   .small-screen {
     display: none;
   }
