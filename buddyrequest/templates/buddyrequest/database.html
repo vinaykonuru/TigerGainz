@@ -159,6 +159,28 @@
             {% for entry in profiles %}
             {% if forloop.counter0|divisibleby:2 %}
             {% endif %}
+            <!-- Confirmation Pop-up -->
+            <div id="overlay{{entry.user_id}}">
+              <div id="text">
+                <div class="border-white">
+                  <div class="border-orange">
+                    <div class="jumbotron white-background">
+                      <p class="lead">Are You Sure You Want to Match?</p>
+                      <br>
+                      <p> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
+                      <button onclick="off()" class="btn btn-lg btn-secondary">
+                          Close
+                      </button>
+                      <a href="javascript:{document.getElementById('partner_match').submit()}">
+                        <button onclick="on()" class="btn btn-lg btn-secondary">
+                          Confirm
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="column">
               <p class="lead">{{ entry.name }} ({{entry.year}})</p>
               <div class="pic-container border-black">
@@ -192,28 +214,6 @@
                   {% load request_tags %}
                   {% if user|check_partner %}
                   {% else %}
-                  <!-- Confirmation Pop-up -->
-                  <div id="overlay{{entry.user_id}}">
-                    <div id="text">
-                      <div class="border-white">
-                        <div class="border-orange">
-                          <div class="jumbotron white-background">
-                            <p class="lead">Are You Sure You Want to Match?</p>
-                            <br>
-                            <p> Proceeding will result in <strong>you and your buddy receiving emails</strong> with each other's contact info</p>
-                            <button onclick="off()" class="btn btn-lg btn-secondary">
-                                Close
-                            </button>
-                            <a href="javascript:{document.getElementById('partner_match').submit()}">
-                              <button onclick="on()" class="btn btn-lg btn-secondary">
-                                Confirm
-                              </button>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <button onclick="on()" class="btn btn-lg btn-secondary">
                     Match
                   </button>
