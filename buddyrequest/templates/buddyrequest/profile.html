@@ -78,7 +78,7 @@
           {% if user|check_time %}
           <a href="javascript:{document.getElementById('remove_partner').submit()}">
             <button class="btn btn-lg btn-secondary">
-              Remove Partner
+              Unmatch
             </button>
           </a>
           <form id="remove_partner" action="{% url 'remove_partner' %}" method="POST">
