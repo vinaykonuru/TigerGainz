@@ -73,6 +73,11 @@
   }
 
 }
+
 .suggestions {
   text-align: left;
+}
+
+.suggestion {
+  margin-top: 10px;
 }
