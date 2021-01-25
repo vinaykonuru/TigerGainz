@@ -27,7 +27,9 @@
   </div>
   <br />
   <br />
-
+  {% load request_tags %}
+  {% if user|check_partner %}
+  {% else %}
   <div class="jumbotron">
     <div class="border-white">
       <p class="lead">What Now?</p>
@@ -75,6 +77,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <div class="border-black">
     <h1 class="display-5"><strong>Profiles</strong></h1>
