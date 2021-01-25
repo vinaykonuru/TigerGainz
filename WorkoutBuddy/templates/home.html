@@ -77,24 +77,21 @@
       {% if user|check_partner %}
       <h1>Who Am I Paired With?</h1>
       <h1 class="big-screen">→
-        <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>←
-      </h1>
+        <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a> ←</h1>
       <h1 class="small-screen">
         <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
       </h1>
       {% elif user|check_requests %}
       <h1>Don't Have a Partner?</h1>
       <h1 class="big-screen">→
-        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>←
-      </h1>
+        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a> ←</h1>
       <h1 class="small-screen">
         <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
       </h1>
       {% else %}
       <h1>Get Started!</h1>
       <h1 class="big-screen">→
-        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>←
-      </h1>
+        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a> ←</h1>
       <h1 class="small-screen">
         <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
       </h1>
