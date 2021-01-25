@@ -18,13 +18,14 @@
   }
 
   .pic-container {
+    height: auto;
+    width: 100%;
     margin: auto;
   }
 
-  .pic-container {
-    height: 330px;
-    width: 300px;
-
+  .bio-pic {
+    height: auto;
+    width: 100%;
   }
 }
 
