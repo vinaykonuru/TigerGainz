@@ -99,3 +99,9 @@ label:hover:before {
 textarea {
   width: 90%;
 }
+
+/* for rank clarification */
+
+.clarification {
+  color: #9d9d9d;
+}
