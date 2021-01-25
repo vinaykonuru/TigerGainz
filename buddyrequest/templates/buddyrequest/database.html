@@ -195,7 +195,7 @@
                   {% if user|check_partner %}
                   {% else %}
                   <!-- Confirmation Pop-up -->
-                  <div id="overlay">
+                  <div id="overlay{{entry.user_id}}">
                     <div id="text">
                       <div class="border-white">
                         <div class="border-orange">
@@ -206,7 +206,7 @@
                             <button onclick="off()" class="btn btn-lg btn-secondary">
                                 Close
                             </button>
-                            <a href="javascript:{document.getElementById('partner_match{{entry.user_id}}').submit()}">
+                            <a href="javascript:{document.getElementById('partner_match').submit()}">
                               <button onclick="on()" class="btn btn-lg btn-secondary">
                                 Confirm
                               </button>
@@ -216,7 +216,6 @@
                       </div>
                     </div>
                   </div>
-
                   <button onclick="on()" class="btn btn-lg btn-secondary">
                     Match
                   </button>
@@ -229,19 +228,19 @@
               </div>
               <hr class="my-4">
             </div>
+            <script>
+              function on() {
+                document.getElementById("overlay{{entry.user_id}}").style.display = "block";
+              }
+
+              function off() {
+                document.getElementById("overlay{{entry.user_id}}").style.display = "none";
+              }
+            </script>
             {% endfor %}
           </div>
-
           <!-- Script for Matching Pop-up -->
-          <script>
-            function on() {
-              document.getElementById("overlay").style.display = "block";
-            }
 
-            function off() {
-              document.getElementById("overlay").style.display = "none";
-            }
-          </script>
 
 </body>
 {% endblock %}
