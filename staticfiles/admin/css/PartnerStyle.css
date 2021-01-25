@@ -1,6 +1,6 @@
 .mb-2 {
   color: #000 !important;
-  margin-top: 30px !important;
+  margin-top: 5px !important;
 }
 
 .column {
@@ -28,4 +28,8 @@
   left: 50%;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
+}
+
+.p-4 {
+  padding: 0 !important;
 }

@@ -56,44 +56,18 @@
 
           <div class="column">
             <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-primary">Name</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.name }}</p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">On/Off Campus</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.location }} </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Class</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.year }} </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Residential College</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.rescollege }} </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Timezone</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.time_zone }} </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Availability</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.days }} </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Workout Type</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.workout_type }} </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Duration</strong>
-              <div class="mb-1 text-muted">
-                <p>{{ profile_details.duration }} Minutes </p>
-              </div>
-              <strong class="d-inline-block mb-2 text-primary">Bio</strong>
-              <div class="mb-1 text-muted">
+              <p><strong class="d-inline-block mb-2 text-primary">Name:</strong> {{ profile_details.name }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">On/Off Campus:</strong> {{ profile_details.location }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">Class:</strong> {{ profile_details.year }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">Residential College:</strong> {{ profile_details.rescollege }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">Timezone:</strong> {{ profile_details.time_zone }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">Availability:</strong> {{ profile_details.days }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">Workout Type:</strong> {{ profile_details.workout_type }}</p>
+              <p><strong class="d-inline-block mb-2 text-primary">Duration:</strong> {{ profile_details.duration }} Minutes</p>
+              <strong class="d-inline-block mb-2 text-primary">Bio:</strong>
                 <p>{{ profile_details.bio }} </p>
               </div>
             </div>
-          </div>
 
           <hr class="my-4">
 
@@ -135,11 +109,11 @@
           {% endif %}
 
           {% endif %}
-
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
 
 
 </body>
