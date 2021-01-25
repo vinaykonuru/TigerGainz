@@ -161,7 +161,7 @@
             {% endif %}
             <!-- Confirmation Pop-up -->
             <div id="overlay{{entry.user_id}}">
-              <div id = "overlay">
+              <div id="overlay">
               <div id="text">
                 <div class="border-white">
                   <div class="border-orange">
@@ -231,7 +231,9 @@
             <!-- Script for Matching Pop-up -->
             <script>
               function on() {
+                print("test")
                 overlay = document.getElementById("overlay{{entry.user_id}}")
+                print("test")
                 overlay.getElementById('overlay').style.display = "block";
               }
 
