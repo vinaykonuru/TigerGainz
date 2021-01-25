@@ -16,7 +16,7 @@
 
 <!-- Script for preferences -->
 
-<script>
+<!-- <script>
   var subjectObject = {
     "Duration": {
       "Workout Days": ["Time Zone"],
@@ -60,9 +60,9 @@
 </script>
 <script>
   const groups = document.getElementById('preferences');
-   let sortable = Sortable.create(preferences, {
-});
-</script>
+  let sortable = Sortable.create(preferences, {});
+</script> -->
+
 <body>
   <div class="headerpic"><img src="https://cdn.discordapp.com/attachments/735319507341672642/737054681322225825/Find_A_Buddy_2.jpg" class="img.responsive" style="width:55%">
   </div>
@@ -114,9 +114,55 @@
         <hr class="my-4">
         <div class="border-orange">
           <div class="jumbotron white-background">
-            <p><strong>Please rank the priority of each category:</strong></p>
+            <p><strong> Rank Your Preferences </strong></p>
+            <p class="clarification"><strong>(Top is most important, bottom is least important)</strong></p>
             <hr class="my-4">
-            Top Preference:<br><br> <select name="preferences" id="subject" class="form-control">
+
+            <select name="prefi" id="pref1" class="ranker form-control">
+              <option value="-">Top Preference</option>
+              <option value='duration'>Duration</option>
+              <option value='intensity'>Intensity</option>
+              <option value='workout-days'>Workout Days</option>
+              <option value='time-zone'>Time Zone</option>
+            </select>
+
+            <br />
+
+            <div align="right">
+            </div>
+            <select name="pref2" id="pref2" class="ranker form-control">
+              <option value="-">Secondary Preference</option>
+              <option value='duration'>Duration</option>
+              <option value='intensity'>Intensity</option>
+              <option value='workout-days'>Workout Days</option>
+              <option value='time-zone'>Time Zone</option>
+            </select>
+
+            <br />
+
+            <div align="right">
+            </div>
+            <select name="pref3" id="pref3" class="ranker form-control">
+              <option value="-">Tertiary Preference</option>
+              <option value='duration'>Duration</option>
+              <option value='intensity'>Intensity</option>
+              <option value='workout-days'>Workout Days</option>
+              <option value='time-zone'>Time Zone</option>
+            </select>
+
+            <br />
+
+            <div align="right">
+            </div>
+            <select name="pref4" id="pref4" class="ranker form-control">
+              <option value="-">Quaternary Preference</option>
+              <option value='duration'>Duration</option>
+              <option value='intensity'>Intensity</option>
+              <option value='workout-days'>Workout Days</option>
+              <option value='time-zone'>Time Zone</option>
+            </select>
+
+            <!-- Top Preference:<br><br> <select name="preferences" id="subject" class="form-control">
               <option value="" selected="selected">Select Preference</option>
             </select>
             <br><br>
@@ -127,23 +173,11 @@
             Tertiary Preference: <br><br> <select name="preferences" id="chapter" class="form-control">
               <option value="" selected="selected">Please Select Secondary Preference First</option>
             </select>
-            <br><br>
+            <br><br> -->
 
           </div>
         </div>
-        <!-- <table>
-          <tbody id = "preferences">
-            <tr>
-              <td>Workout Type</td>
-            </tr>
-            <tr>
-              <td>Time Zone</td>
-            </tr>
-            <tr>
-            <td>Fish</td>
-            </tr>
-          </tbody>
-        </table> -->
+
         <br />
         <br />
         <hr class="my-4">
@@ -211,7 +245,7 @@
           <div class="jumbotron white-background">
 
             <div class="form-group">
-              <select name = 'location' class="form-control" id="on-off">
+              <select name='location' class="form-control" id="on-off">
                 <option value="On Campus">On-Campus(living in Princeton area)</option>
                 <option value="Off Campus">Off-Campus</option>
               </select>
@@ -467,6 +501,36 @@
           }
         });
         $("#on-off").trigger("change");
+      </script>
+
+      <!-- New script for ranking -->
+      <script>
+        $(".ranker").change(function() {
+          var SaveSpot = {};
+          // loop through same-named dropdowns
+          $.each($(".ranker"), function(keys, vals) {
+            // store value
+            var ThisVal = $(this).val();
+            // If there is selection, store value and name
+            if (ThisVal != '-')
+              SaveSpot[ThisVal] = $(this).prop("name");
+          });
+
+
+          $.each($(".ranker"), function(key, value) {
+            $.each($(this).children(), function(subkey, subvalue) {
+              if (SaveSpot[$(this).val()]) {
+                if ($(this).parent("select").prop("name") != SaveSpot[$(this).val()])
+                  $(this).prop("disabled", true);
+                else
+                  $(this).prop("selected", true);
+              } else
+                $(this).prop("disabled", false);
+            });
+          });
+
+          console.log(SaveSpot);
+        });
       </script>
 
 </body>
