@@ -161,6 +161,7 @@
             {% endif %}
             <!-- Confirmation Pop-up -->
             <div id="overlay{{entry.user_id}}">
+              <div id = "overlay">
               <div id="text">
                 <div class="border-white">
                   <div class="border-orange">
@@ -180,6 +181,7 @@
                   </div>
                 </div>
               </div>
+            </div>
             </div>
             <div class="column">
               <p class="lead">{{ entry.name }} ({{entry.year}})</p>
@@ -228,7 +230,8 @@
             </div>
             <script>
               function on() {
-                document.getElementById("overlay{{entry.user_id}}").style.display = "block";
+                overlay = document.getElementById("overlay{{entry.user_id}}")
+                overlay.getElementById('overlay').style.display = "block";
               }
 
               function off() {
