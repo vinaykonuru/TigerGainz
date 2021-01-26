@@ -67,7 +67,7 @@ def get_matches(user_data_list, requests_list):
     user_time_zone = user_data_list[4]
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
-
+    print('test 1')
     # Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
     #  "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
     #  "intensity": user_data_list[5],"location":user_data_list[6]})
@@ -108,7 +108,7 @@ def get_matches(user_data_list, requests_list):
 
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
                                     # since we already matched based on workouts.
-
+        print('test 2')
         matching_df_user = Dfuser.drop("workout_type", axis=1)
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
         column_labels = matching_df_request.columns.tolist()
@@ -117,7 +117,7 @@ def get_matches(user_data_list, requests_list):
         blankarray=[]
         return blankarray
 
-
+    print('test 3')
     '''
     Following code matches of the rest of the parameters. Using a double for loop, it goes through every column (workout factor) of
     every row (user in the matching dataframe) and compares each factor to the entry in the user dataframe. Regardless of
