@@ -120,8 +120,11 @@ def get_matches(user_data_list, requests_list):
 
         print('test 2')
         matching_df_user = Dfuser.drop("workout_type", axis=1)
+        matching_df_user = Dfuser.drop("location", axis=1)
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
+        matching_df_request = matching_df_request.drop("location", axis=1)
         column_labels = matching_df_request.columns.tolist()
+        
 
     else: # break and return a blank array back to views
         blankarray=[]
