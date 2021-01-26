@@ -41,16 +41,6 @@ def database(request):
             duration_set = set(duration.split(','))
             timezone_set = set(timezone.split(','))
             location_set = set(location.split(','))
-            print("sets")
-            print(workout_type_set)
-            print(duration_set)
-            print(timezone_set)
-            print(location_set)
-            print('filters')
-            print(workout_type_filter_set)
-            print(duration_filter_set)
-            print(time_zone_filter_set)
-            print(location_filter_set)
             if(workout_type_filter_set.issubset(workout_type_set) & duration_filter_set.issubset(duration_set)\
             & time_zone_filter_set.issubset(timezone_set) & location_filter_set.issubset(location_set)):
                 entry.workout_type = workout_type
