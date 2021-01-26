@@ -156,6 +156,8 @@ def get_matches(user_data_list, requests_list):
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
+                print("Ranker: ")
+                print(ranker)
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off / 100) * rel_val
