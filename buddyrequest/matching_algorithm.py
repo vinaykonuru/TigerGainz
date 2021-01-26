@@ -68,7 +68,7 @@ def get_matches(user_data_list, requests_list):
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
     print('test 1')
-    
+
     Dfuser = pd.DataFrame({"days": user_days, "duration": user_duration, "workout_type": user_workout,
                            "time_zone": user_time_zone,"intensity": user_intensity,"location": user_location })
 
@@ -206,7 +206,7 @@ def get_matches(user_data_list, requests_list):
                 rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
                 cut_off = 50
-
+                weighted_average = (cut_off / 100) * rel_val
                 if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
                     list_best_match_vals.append(weighted_average)
                 else:
