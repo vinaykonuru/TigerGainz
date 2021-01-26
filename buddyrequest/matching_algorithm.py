@@ -94,20 +94,31 @@ def get_matches(user_data_list, requests_list):
     Dfrq_row_list = [] # empty list for  all the index of the user in the request database
 
     # for loop guarantees match has same type of workout and adds users with the same workout to matching_df_request
+    workout_common_percentage = [] #a list of how well people match based solely on workout type
+
     for index_row in range(len(Dfrq)):
         request_workout = Dfrq.iloc[index_row]["workout_type"]
         request_location = Dfrq.iloc[index_row]["location"]
-        # confirm that workout and location are exact matches
-        if user_workout == request_workout.strip('][\'').split(',') and user_location == request_location:
-            row = Dfrq.iloc[index_row]
-            matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparting with Dfuser to find the
+
+        # confirm that location is the same:
+        if user_location == request_location:
+
+            # confirm if at least one workout is met
+            percentage = set_comparision(set(user_workout), set(request_workout))
+
+            if percentage > 0:
+
+                workout_common_percentage.append(percentage)
+                row = Dfrq.iloc[index_row]
+                matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparing with Dfuser to find the
                                                                     #actualy matches
-            Dfrq_row_list.append(index_row) # appends that user's row index to Dfrq_row_list
+                Dfrq_row_list.append(index_row) # appends that user's row index to Dfrq_row_list
 
     matching_df_request["Dfrq_index"] = Dfrq_row_list
 
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
                                     # since we already matched based on workouts.
+
         print('test 2')
         matching_df_user = Dfuser.drop("workout_type", axis=1)
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
