@@ -68,10 +68,9 @@ def get_matches(user_data_list, requests_list):
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
     print('test 1')
-    # Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
-    #  "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
-    #  "intensity": user_data_list[5],"location":user_data_list[6]})
-    # .strip('][\'').split(',')
+    
+    Dfuser = pd.DataFrame({"days": user_days, "duration": user_duration, "workout_type": user_workout,
+                           "time_zone": user_time_zone,"intensity": user_intensity,"location": user_location })
 
 
     Dfrq = requestsdf.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
