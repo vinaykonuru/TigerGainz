@@ -68,6 +68,7 @@ def get_matches(user_data_list, requests_list):
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
     print('test 1')
+    print('test 1.5')
     # Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
     #  "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
     #  "intensity": user_data_list[5],"location":user_data_list[6]})
