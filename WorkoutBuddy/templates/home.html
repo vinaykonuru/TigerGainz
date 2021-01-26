@@ -25,29 +25,29 @@
   <!--Popup-->
   {% if user.is_authenticated %}
   {% else %}
-    <div id="myModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">COVID-19 Reminder</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          </div>
-          <div class="modal-body">
-            <p class="lead">Welcome to TigerGainz</p>
-            <hr class="my-4">
-            <p>Princeton University’s Workout Buddy and Group Matchmaker</p>
-            <p>
-              Sign up now to find Your Princeton Workout Buddy or Group Today, On- Or Off-Campus! </p>
-            <hr class="my-4">
-            <p class="lead">COVID-19 REMINDER:</p>
-            <hr class="my-4">
-            <p>For the safety of others and your own, please follow all applicable COVID-19 safety regulations!
-            </p>
-            <hr class="my-4">
-          </div>
+  <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">COVID-19 Reminder</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="lead">Welcome to TigerGainz</p>
+          <hr class="my-4">
+          <p>Princeton University’s Workout Buddy and Group Matchmaker</p>
+          <p>
+            Sign up now to find Your Princeton Workout Buddy or Group Today, On- Or Off-Campus! </p>
+          <hr class="my-4">
+          <p class="lead">COVID-19 REMINDER:</p>
+          <hr class="my-4">
+          <p>For the safety of others and your own, please follow all applicable COVID-19 safety regulations!
+          </p>
+          <hr class="my-4">
         </div>
       </div>
     </div>
+  </div>
   {% endif %}
   <!-- Button at bottom right of page -->
 
@@ -73,22 +73,29 @@
 
   <div class="border-orange">
     <div class="jumbotron white-background">
-        {% load base_tags %}
-        {% if user|check_partner %}
-        <h1>Who Am I Paired With?</h1>
-        <h1>→
+      {% load base_tags %}
+      {% if user|check_partner %}
+      <h1>Who Am I Paired With?</h1>
+      <h1 class="big-screen">→
+        <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a> ←</h1>
+      <h1 class="small-screen">
         <a href="{% url 'partner' %}" class="btn btn-lg btn-secondary">See Partner Details</a>
-        {% elif user|check_requests %}
-        <h1>Don't Have a Partner?</h1>
-        <h1>→
-        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
-        {% else %}
-        <h1>Get Started!</h1>
-        <h1>→
-        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
-        {% endif %}
-        ←
       </h1>
+      {% elif user|check_requests %}
+      <h1>Don't Have a Partner?</h1>
+      <h1 class="big-screen">→
+        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a> ←</h1>
+      <h1 class="small-screen">
+        <a href="{% url 'database' %}" class="btn btn-lg btn-secondary">Check Out The Waiting List</a>
+      </h1>
+      {% else %}
+      <h1>Get Started!</h1>
+      <h1 class="big-screen">→
+        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a> ←</h1>
+      <h1 class="small-screen">
+        <a href="{% url 'find' %}" class="btn btn-lg btn-secondary">Fill Out A Find A Buddy Form</a>
+      </h1>
+      {% endif %}
     </div>
   </div>
   <br />
