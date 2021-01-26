@@ -67,7 +67,7 @@ def get_matches(user_data_list, requests_list):
     user_time_zone = user_data_list[4]
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
-
+    print('test 1')
     # Dfuser = pd.DataFrame({"days": [user_data_list[1]], "duration": [user_data_list[2]],
     #  "workout_type": [user_data_list[3]], "time_zone": [user_data_list[4]],
     #  "intensity": user_data_list[5],"location":user_data_list[6]})
@@ -105,10 +105,11 @@ def get_matches(user_data_list, requests_list):
             Dfrq_row_list.append(index_row) # appends that user's row index to Dfrq_row_list
 
     matching_df_request["Dfrq_index"] = Dfrq_row_list
+    print('test 2')
 
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
                                     # since we already matched based on workouts.
-
+        print('test 3')
         matching_df_user = Dfuser.drop("workout_type", axis=1)
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
         column_labels = matching_df_request.columns.tolist()
