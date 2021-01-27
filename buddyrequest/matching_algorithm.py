@@ -61,13 +61,11 @@ def get_matches(user_data_list, requests_list):
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
 
     user_days = user_data_list[1]
-    print(user_days)
     user_duration = user_data_list[2]
     user_workout = user_data_list[3]
     user_time_zone = user_data_list[4]
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
-    print('test 1')
 
     Dfuser = pd.DataFrame({"days": user_days, "duration": user_duration, "workout_type": user_workout,
                            "time_zone": user_time_zone,"intensity": user_intensity,"location": user_location })
@@ -77,8 +75,6 @@ def get_matches(user_data_list, requests_list):
 
 
     #Mock priorities dictionary [PLACE HOLDER]
-    print("Preferences: ")
-    print(preferences)
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
     reference_ranker = {1: 100.0, 2: 60.0, 3: 50.0}
 
@@ -219,13 +215,12 @@ def get_matches(user_data_list, requests_list):
                 else:
                     break
          if len(list_best_match_vals) == len(column_labels) - 1: #if every single column managed to pass the cut_off val
-            Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
-            workout_percentage = workout_common_percentage[Dfrq_index]
-            average = (mean(list_best_match_vals) + workout_percentage)/2
-
-            list_best_match_vals.append(average)
-            list_best_match_vals.append(Dfrq_index)
-            ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
+             Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
+             workout_percentage = workout_common_percentage[Dfrq_index]
+             average = (mean(list_best_match_vals) + workout_percentage)/2
+             list_best_match_vals.append(average)
+             list_best_match_vals.append(Dfrq_index)
+             ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
 
         #ListOfMatches is a nested list containing
 
