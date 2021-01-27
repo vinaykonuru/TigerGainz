@@ -220,7 +220,7 @@ def get_matches(user_data_list, requests_list):
             # print('here')
         index_column = column_labels.index("Dfrq_index")
         Dfrq_index = matching_df_request.iloc[row][index_column]
-        workout_percentage = workout_common_percentage[Dfrq_index]
+        workout_percentage = workout_common_percentage[int(Dfrq_index)]
         average = (mean(list_best_match_vals) + workout_percentage)/2
         list_best_match_vals.append(average)
         list_best_match_vals.append(Dfrq_index)
