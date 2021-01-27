@@ -23,13 +23,10 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
 def set_comparision(user_set, request_set):
     max_length = 0
     similarities = 0
-    if (user_set & request_set):
-        if len(user_set) >= len(request_set):
-            max_length = len(user_set)
-
-        else:
-            max_length = len(request_set)
-
+    if request_set.issubset(user_set):
+        max_length = len(user_set)
+    if user_set.issubset(request_set):
+        max_length = len(request_set)
     if(max_length == 0): # if there are no similarities
         similarities = 0
         return similarities
@@ -104,9 +101,9 @@ def get_matches(user_data_list, requests_list):
         if user_location == request_location:
 
             # confirm if at least one workout is met
-            user_workout = user_workout.strip('][\'').split(',')
-            request_workout = request_workout.strip('][\'').split(',')
-            percentage = set_comparision(set(user_workout), set(request_workout))
+            set_user_workout = user_workout.strip('][\'').split(',')
+            set_request_workout = request_workout.strip('][\'').split(',')
+            percentage = set_comparision(set_user_workout, set_request_workout)
 
             if percentage > 0:
 
