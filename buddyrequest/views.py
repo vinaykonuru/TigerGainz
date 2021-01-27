@@ -121,7 +121,6 @@ def matches(request):
                 print("Problem here")
                 print(entry)
                 return redirect('home')
-        print(netID)
         userdata = getStudentInfo(netID)
         preferences=request.POST.getlist('preferences')
         if(preferences == ['', '', '']):
@@ -139,7 +138,6 @@ def matches(request):
         preferences[1] = workoutDays_rank
         preferences[2] = duration_rank
 
-        print(preferences)
         error = ""
         try:
             name = userdata['full_name']
@@ -183,15 +181,12 @@ def matches(request):
             return render(request,'buddyrequest/matches.html')
         else:
             matched_people = get_matches(user_data_list, requestsList)
-            print(matched_people)
             for entry in matched_people: # remove all requests that already have partners and fix reformatting
                 entry[6] = entry[6].strip('][\'').replace('\'','')
                 entry[8] = entry[8].strip('][\'').replace('\'','')
-                entry[14] = int(entry[14])
-                print(entry[14])
-                print(type(entry[14]))
-                if type(entry[14]) != None:
-                    matched_people.remove(entry)
+                # entry[14] = int(entry[14])
+                # if type(entry[14]) != None:
+                #     matched_people.remove(entry)
             if len(matched_people) > 3: # if more than 3 matches, give best 3
                 return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:3]})
             return render(request,'buddyrequest/matches.html',{'matched_people':matched_people})
