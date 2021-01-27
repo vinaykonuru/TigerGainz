@@ -101,6 +101,8 @@ def get_matches(user_data_list, requests_list):
         if user_location == request_location:
 
             # confirm if at least one workout is met
+            user_workout = user_workout.strip('][\'').split(',')
+            request_workout = request_workout.strip('][\'').split(',')
             percentage = set_comparision(set(user_workout), set(request_workout))
 
             if percentage > 0:
@@ -153,7 +155,7 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
-                set_user_days = set(user_days)
+                set_user_days = set(user_days.strip('][\'').split(','))
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
