@@ -101,8 +101,8 @@ def get_matches(user_data_list, requests_list):
         if user_location == request_location:
 
             # confirm if at least one workout is met
-            set_user_workout = user_workout.strip('][\'').split(',')
-            set_request_workout = request_workout.strip('][\'').split(',')
+            set_user_workout = set(user_workout.strip('][\'').split(','))
+            set_request_workout = set(request_workout.strip('][\'').split(','))
             percentage = set_comparision(set_user_workout, set_request_workout)
 
             if percentage > 0:
