@@ -74,7 +74,8 @@ def get_matches(user_data_list, requests_list):
 
 
     Dfrq = requestsdf.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
-
+    print('REQUEST DATA FRAME')
+    print(Dfrq)
 
     #Mock priorities dictionary [PLACE HOLDER]
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
