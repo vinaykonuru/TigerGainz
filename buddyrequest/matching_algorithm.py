@@ -117,6 +117,8 @@ def get_matches(user_data_list, requests_list):
                 Dfrq_row_list.append(index_row) # appends that user's row index to Dfrq_row_list
             else:
                 workout_common_percentage.append(0)
+        else:
+            workout_common_percentage.append(0)
     # matching_df_request["Dfrq_index"] = Dfrq_row_list
 
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
