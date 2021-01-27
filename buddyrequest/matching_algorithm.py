@@ -199,8 +199,8 @@ def get_matches(user_data_list, requests_list):
                 request_time_zone = matching_df_request.iloc[row][column]
 
                 #convert to integer utc time
-                user_utc_shift = int(pc.convert_tz_abbrev_to_tz_offset('user_time_zone'))/100
-                request_utc_shift = int(pc.convert_tz_abbrev_to_tz_offset('request_time_zone'))/100
+                user_utc_shift = int(pc.convert_tz_abbrev_to_tz_offset(user_time_zone))/100
+                request_utc_shift = int(pc.convert_tz_abbrev_to_tz_offset(request_time_zone))/100
 
                 delta = abs(user_utc_shift - request_utc_shift)
                 print('duration outside window')
