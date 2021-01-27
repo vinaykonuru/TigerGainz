@@ -150,8 +150,7 @@ def get_matches(user_data_list, requests_list):
     ListOfMatches = [] # array where all suitable matches will be appended to later
     for row in range(len(matching_df_request)):
         list_best_match_vals = [] # for every user we generate an array
-        for column in range(len(column_labels)):
-            column = column - 1
+        for column in range(len(column_labels)-1):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
