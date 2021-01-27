@@ -182,7 +182,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "time_zone":
-                ranker = priorities.get(column_labels[column])  # gets the priority of time zone --> also determines the window of error allowed for time zone
+                ranker = priorities.get(column_labels[column])+1  # gets the priority of time zone --> also determines the window of error allowed for time zone
                                                                    # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
                 window = ranker
                 request_time_zone = matching_df_request.iloc[row][column]
