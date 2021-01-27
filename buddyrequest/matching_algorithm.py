@@ -96,7 +96,6 @@ def get_matches(user_data_list, requests_list):
 
     # for loop guarantees match has same type of workout and adds users with the same workout to matching_df_request
     workout_common_percentage = [] #a list of how well people match based solely on workout type
-
     for index_row in range(len(Dfrq)):
         request_workout = Dfrq.iloc[index_row]["workout_type"]
         request_location = Dfrq.iloc[index_row]["location"]
@@ -117,8 +116,9 @@ def get_matches(user_data_list, requests_list):
                 matching_df_request = matching_df_request.append(row) #this is the dataframe that we will be comparing with Dfuser to find the
                                                                     #actualy matches
                 Dfrq_row_list.append(index_row) # appends that user's row index to Dfrq_row_list
-
-    matching_df_request["Dfrq_index"] = Dfrq_row_list
+            else:
+                workout_common_percentage.append(0)
+    # matching_df_request["Dfrq_index"] = Dfrq_row_list
 
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
                                     # since we already matched based on workouts.
