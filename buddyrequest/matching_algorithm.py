@@ -63,7 +63,6 @@ def get_matches(user_data_list, requests_list):
 
 
     preferences = user_data_list[0] # is a list of how the user ranks each of the workout matching factors
-
     user_days = user_data_list[1]
     user_duration = user_data_list[2]
     user_workout = user_data_list[3]
@@ -164,7 +163,9 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
-                set_user_days = set(user_days.strip('][\'').split(','))
+                print(type(user_days))
+                print(type(request_days))
+                set_user_days = set(user_days)
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
