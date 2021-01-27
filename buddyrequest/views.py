@@ -176,8 +176,11 @@ def matches(request):
         else:
             matched_people = get_matches(user_data_list, requestsList)
             print(matched_people)
-            for entry in matched_people:
-                if entry[14] == None:
+            for entry in matched_people: # remove all requests that already have partners and fix reformatting
+                entry[6] = entry[6].strip('][\'')
+                entry[8] = entry[8].strip('][\'')
+
+                if entry[14] == 'nan':
                     matched_people.remove(entry)
             if len(matched_people) > 3: # if more than 3 matches, give best 3
                 return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:3]})
