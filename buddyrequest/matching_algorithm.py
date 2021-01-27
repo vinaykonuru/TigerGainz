@@ -218,7 +218,7 @@ def get_matches(user_data_list, requests_list):
         # if len(list_best_match_vals) == 3: #if every single column managed to pass the cut_off val
             # print('here')
         index_column = column_labels.index("Dfrq_index")
-        Dfrq_index = matching_df_request.iloc[row][-1]
+        Dfrq_index = matching_df_request.iloc[row][0]
         print(row)
         print(index_column)
         print(Dfrq_index)
