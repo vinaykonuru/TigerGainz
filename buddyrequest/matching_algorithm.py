@@ -159,7 +159,7 @@ def get_matches(user_data_list, requests_list):
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
                 set_user_days = set(user_days)
-                set_rq_days = set(request_days.strip('][\'').replace('\'').split(','))
+                set_rq_days = set(request_days.strip('][\'').replace('\'','').split(','))
                 print(set_rq_days)
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
