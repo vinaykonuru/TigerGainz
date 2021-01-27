@@ -110,6 +110,9 @@ def matches(request):
         print(requestsList)
         print(type(requestsList[0]))
         for entry in requestsList:
+            print(entry['partner_id'])
+            print(type(entry['partner_id']))
+
             if entry['partner_id'] != None:
                 print('in if statement')
                 requestsList.remove(entry)
