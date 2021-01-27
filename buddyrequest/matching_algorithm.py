@@ -151,7 +151,6 @@ def get_matches(user_data_list, requests_list):
     For every rank there is a set cut_off for the minimum best match score for the
     respective workout factor. This cut_off is stored in a dictionary.
     '''
-    print(matching_df_request)
     ListOfMatches = [] # array where all suitable matches will be appended to later
     for row in range(len(matching_df_request)):
         list_best_match_vals = [] # for every user we generate an array
@@ -223,21 +222,14 @@ def get_matches(user_data_list, requests_list):
             # print('here')
         index_column = column_labels.index("Dfrq_index")
         Dfrq_index = matching_df_request.iloc[row][0]
-        print(row)
-        print(index_column)
-        print(Dfrq_index)
         workout_percentage = workout_common_percentage[int(Dfrq_index)]
-        print(list_best_match_vals)
         if(workout_percentage != 0 and len(list_best_match_vals) != 0):
             average = (mean(list_best_match_vals) + workout_percentage)/2
             list_best_match_vals.append(average)
             list_best_match_vals.append(Dfrq_index)
-            print('LIST BEST MATCH VALUES')
-            print(list_best_match_vals)
             ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
 
         #ListOfMatches is a nested list containing
-    print(ListOfMatches)
     n = 0
     while n < len(ListOfMatches): #will stop the loop when we have looped through n-1 times
         n += 1 #counter that ensures we are below n
@@ -252,9 +244,7 @@ def get_matches(user_data_list, requests_list):
         row_index.append(entry[-1])
 
     presentation_list = []
-    print(row_index)
     for index in row_index:
         row = requestsdf.iloc[int(index)].tolist()
         presentation_list.append(row)
-    print(presentation_list)
     return presentation_list

@@ -112,7 +112,6 @@ def matches(request):
         for entry in requestsList:
             print(entry['partner_id'])
             print(type(entry['partner_id']))
-
             if entry['partner_id'] != None:
                 print('in if statement')
                 requestsList.remove(entry)
@@ -188,9 +187,10 @@ def matches(request):
             for entry in matched_people: # remove all requests that already have partners and fix reformatting
                 entry[6] = entry[6].strip('][\'').replace('\'','')
                 entry[8] = entry[8].strip('][\'').replace('\'','')
+                entry[14] = int(entry[14])
                 print(entry[14])
                 print(type(entry[14]))
-                if type(entry[14]) == "<class 'int'>":
+                if type(entry[14]) != None:
                     matched_people.remove(entry)
             if len(matched_people) > 3: # if more than 3 matches, give best 3
                 return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:3]})
