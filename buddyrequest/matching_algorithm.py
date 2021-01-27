@@ -23,10 +23,14 @@ def dict_creator(key, value):  # makes dictionary from two lists containing the 
 def set_comparision(user_set, request_set):
     max_length = 0
     similarities = 0
-    if request_set.issubset(user_set):
-        max_length = len(user_set)
-    if user_set.issubset(request_set):
-        max_length = len(request_set)
+    
+    if (user_set & request_set):
+        if len(user_set) >= len(request_set):
+            max_length = len(user_set)
+
+        else:
+            max_length = len(request_set)
+
     if(max_length == 0): # if there are no similarities
         similarities = 0
         return similarities
