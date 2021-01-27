@@ -167,8 +167,8 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "duration":
-                ranker = priorities.get(column_labels[column])+1 #gets the priority of duration
-                window = (ranker)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
+                ranker = priorities.get(column_labels[column]) #gets the priority of duration
+                window = (ranker+1)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
                 rq_duration = matching_df_request.iloc[row][column]
                 delta =  abs(user_duration - rq_duration)
                 if delta <= window:
