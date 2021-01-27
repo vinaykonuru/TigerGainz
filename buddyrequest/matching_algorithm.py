@@ -156,7 +156,7 @@ def get_matches(user_data_list, requests_list):
                 set_user_days = set(user_days)
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
-                ranker = priorities.get(column_labels[column])
+                ranker = priorities.get(column_labels[column])+1
                 print("Ranker: ")
                 print(ranker)
                 cut_off = reference_ranker.get(ranker)
@@ -171,7 +171,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "duration":
-                ranker = priorities.get(column_labels[column]) #gets the priority of duration
+                ranker = priorities.get(column_labels[column])+1 #gets the priority of duration
                 window = (ranker)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
                 rq_duration = matching_df_request.iloc[row][column]
                 delta =  abs(user_duration - rq_duration)
@@ -186,8 +186,8 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "time_zone":
-                ranker = priorities.get(column_labels[column])  # gets the priority of time zone --> also determines the window of error allowed for time zone
-                                                                # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
+                ranker = priorities.get(column_labels[column]) +1  # gets the priority of time zone --> also determines the window of error allowed for time zone
+                                                                   # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
                 window = ranker
                 request_time_zone = matching_df_request.iloc[row][column]
 
