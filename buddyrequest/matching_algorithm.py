@@ -76,7 +76,7 @@ def get_matches(user_data_list, requests_list):
 
     #Mock priorities dictionary [PLACE HOLDER]
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
-    reference_ranker = {0: 100.0, 1: 60.0, 2: 50.0}
+    reference_ranker = {0: 50.0, 1: 30.0, 2: 10.0}
 
     '''At the end of step 1, two dataframes are created. Dfrq: a dataframe for all existing users already in the database
     and Dfuser: a dataframe with one row that contains all the matching preferences of the user trying to make a match.
