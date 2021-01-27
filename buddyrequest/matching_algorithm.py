@@ -226,7 +226,7 @@ def get_matches(user_data_list, requests_list):
         print(row)
         print(index_column)
         print(Dfrq_index)
-        workout_percentage = workout_common_percentage[Dfrq_index]
+        workout_percentage = workout_common_percentage[int(Dfrq_index)]
         print(list_best_match_vals)
         if(workout_percentage != 0 and len(list_best_match_vals) != 0):
             average = (mean(list_best_match_vals) + workout_percentage)/2
@@ -254,7 +254,7 @@ def get_matches(user_data_list, requests_list):
     presentation_list = []
     print(row_index)
     for index in row_index:
-        row = requestsdf.iloc[index].tolist()
+        row = requestsdf.iloc[int(index)].tolist()
         presentation_list.append(row)
     print(presentation_list)
     return presentation_list
