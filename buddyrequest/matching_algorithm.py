@@ -240,7 +240,7 @@ def get_matches(user_data_list, requests_list):
                                                             #for each row
             ListOfMatches[i], ListOfMatches[i+1] = ListOfMatches[i+1], ListOfMatches[i] #swaps if adjacent value is smaller
 
-
+    print(ListOfMatches)
     row_index = []
     for entry in ListOfMatches:
         val = entry[-1]
