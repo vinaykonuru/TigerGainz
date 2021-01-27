@@ -32,7 +32,8 @@ def database(request):
     profiles = []
     for entry in buddyrequests:
         if(entry.partner == None and entry.user != request.user):
-            duration = entry.duration.strip('][\'').replace(' \'','\'')
+            print(entry.duration)
+            duration = str(entry.duration).strip('][\'').replace(' \'','\'')
             timezone = entry.time_zone.strip('][\' ')
             location = entry.location.strip('][\' ')
             days = entry.days.strip('][\' ').replace('\'','')
@@ -124,7 +125,7 @@ def matches(request):
         time_zone_rank = preferences.index('Time Zone')
         workoutDays_rank = preferences.index('Workout Days')
         duration_rank = preferences.index('Duration')
-        
+
         # assigning index to proper place in preferences list
         preferences[0] = time_zone_rank
         preferences[1] = workoutDays_rank
