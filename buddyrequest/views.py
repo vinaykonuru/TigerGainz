@@ -109,9 +109,9 @@ def matches(request):
         requestsList=list(BuddyRequest.objects.filter(partner=None).values())
         print(requestsList)
         print(type(requestsList[0]))
-        for entry in requestsList:
-            if entry['partner'] != None:
-                requestsList.remove(entry)
+        # for entry in requestsList:
+        #     if entry['partner'] != None:
+        #         requestsList.remove(entry)
         netID = request.user.uniauth_profile.get_display_id()
         for entry in requestsList:
             if netID == entry['netID']:
