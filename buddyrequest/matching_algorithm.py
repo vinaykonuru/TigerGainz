@@ -76,7 +76,7 @@ def get_matches(user_data_list, requests_list):
 
     #Mock priorities dictionary [PLACE HOLDER]
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
-    reference_ranker = {1: 100.0, 2: 60.0, 3: 50.0}
+    reference_ranker = {0: 100.0, 1: 60.0, 2: 50.0}
 
     '''At the end of step 1, two dataframes are created. Dfrq: a dataframe for all existing users already in the database
     and Dfuser: a dataframe with one row that contains all the matching preferences of the user trying to make a match.
@@ -156,7 +156,7 @@ def get_matches(user_data_list, requests_list):
                 set_user_days = set(user_days)
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
-                ranker = priorities.get(column_labels[column])+1
+                ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off / 100) * rel_val
@@ -167,7 +167,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "duration":
-                ranker = priorities.get(column_labels[column])+1 #gets the priority of duration
+                ranker = priorities.get(column_labels[column]) #gets the priority of duration
                 window = (ranker)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
                 rq_duration = matching_df_request.iloc[row][column]
                 delta =  abs(user_duration - rq_duration)
@@ -184,7 +184,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "time_zone":
-                ranker = priorities.get(column_labels[column])+1  # gets the priority of time zone --> also determines the window of error allowed for time zone
+                ranker = priorities.get(column_labels[column])  # gets the priority of time zone --> also determines the window of error allowed for time zone
                                                                    # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
                 window = ranker
                 request_time_zone = matching_df_request.iloc[row][column]
