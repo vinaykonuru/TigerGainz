@@ -106,12 +106,12 @@ def partner_match(request,partner_id):
 def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
-        requestsList=list(BuddyRequest.objects.filter(partner=None).values())
+        requestsList=list(BuddyRequest.objects.all().values())
         print(requestsList)
         print(type(requestsList[0]))
-        # for entry in requestsList:
-        #     if entry['partner'] != None:
-        #         requestsList.remove(entry)
+        for entry in requestsList:
+            if entry['partner_id'] != None:
+                requestsList.remove(entry)
         netID = request.user.uniauth_profile.get_display_id()
         for entry in requestsList:
             if netID == entry['netID']:
