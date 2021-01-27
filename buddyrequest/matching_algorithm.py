@@ -160,7 +160,9 @@ def get_matches(user_data_list, requests_list):
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off / 100) * rel_val
-
+                print("Cut off and relative value")
+                print(cut_off)
+                print(rel_val)
                 if rel_val >= cut_off: # if minimum score is not met, we discard the prospective match completely
                     list_best_match_vals.append(weighted_average)
                 else:
