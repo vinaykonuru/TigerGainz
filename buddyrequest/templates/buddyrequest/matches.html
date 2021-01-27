@@ -69,26 +69,22 @@
         </div>
         {% endif %}
         {% endfor %}
-        <br><br><br><br><br>
-        <div class="jumbotron">
-          <div class="border-white">
-            <p class="lead">Don't like these matches? Feel free to join the waiting list and manually look for
-            other students who more fit your preferences</p>
-            <hr class="my-4">
-            <div class="mb-1 text-muted">
-              <a href="javascript:{document.getElementById('database').submit()}">
-                <button class="btn btn-lg btn-secondary">
-                  Join Waiting List
-                </button>
-              </a>
+        </div>
+        <p class="lead">Don't like these matches? Feel free to join the waiting list and manually look for
+        other students who more fit your preferences</p>
+        <hr class="my-4">
+        <div class="mb-1 text-muted">
+          <a href="javascript:{document.getElementById('database').submit()}">
+            <button class="btn btn-lg btn-secondary">
+              Join Waiting List
+            </button>
+          </a>
 
-              <form id="database" action="{% url 'database' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" />
-              </form>
-            </div>
-          </div>
-      </div>
+          <form id="database" action="{% url 'database' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" />
+          </form>
+        </div>
       {% else %}
 
       <div class="border-black">
