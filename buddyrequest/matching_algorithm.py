@@ -225,7 +225,7 @@ def get_matches(user_data_list, requests_list):
         if(workout_percentage != 0 and len(list_best_match_vals) != 0):
             average = (mean(list_best_match_vals) + workout_percentage)/2
             list_best_match_vals.append(average)
-            list_best_match_vals.append(Dfrq_index)
+            
             print('LIST BEST MATCH VALUES')
             print(list_best_match_vals)
             ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
