@@ -69,7 +69,6 @@ def get_matches(user_data_list, requests_list):
     user_time_zone = user_data_list[4]
     user_intensity = user_data_list[5]
     user_location = user_data_list[6]
-
     Dfuser = pd.DataFrame({"days": user_days, "duration": user_duration, "workout_type": user_workout,
                            "time_zone": user_time_zone,"intensity": user_intensity,"location": user_location })
 
@@ -104,11 +103,7 @@ def get_matches(user_data_list, requests_list):
         if user_location == request_location:
 
             # confirm if at least one workout is met
-            print("Workout Types")
-            print(type(user_workout))
-            print(type(request_workout))
-            print(user_workout)
-            print(request_workout)
+
             set_user_workout = set(user_workout.strip('][\'').split(','))
             set_request_workout = set(request_workout.strip('][\'').split(','))
             percentage = set_comparision(set_user_workout, set_request_workout)
@@ -163,10 +158,9 @@ def get_matches(user_data_list, requests_list):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
-                print(type(user_days))
-                print(type(request_days))
                 set_user_days = set(user_days)
-                set_rq_days = set(request_days.strip('][\'').split(','))
+                set_rq_days = set(request_days.strip('][\'').split(',').replace(' ',''))
+                print(set_rq_days)
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
