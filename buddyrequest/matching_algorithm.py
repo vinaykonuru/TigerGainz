@@ -236,7 +236,7 @@ def get_matches(user_data_list, requests_list):
     while n < len(ListOfMatches): #will stop the loop when we have looped through n-1 times
         n += 1 #counter that ensures we are below n
         for i in list(range(len(ListOfMatches) - 1)): #for every index value in list of index values
-          if ListOfMatches[i][-2] < ListOfMatches[i+1][-2]: #Conditional statement that compares if i and its adjacent value
+          if ListOfMatches[i][-3] < ListOfMatches[i+1][-3]: #Conditional statement that compares if i and its adjacent value
                                                             #-2 ensures that the sorting is based on the final weighted average
                                                             #for each row
             ListOfMatches[i], ListOfMatches[i+1] = ListOfMatches[i+1], ListOfMatches[i] #swaps if adjacent value is smaller
