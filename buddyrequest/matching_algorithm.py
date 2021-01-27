@@ -121,7 +121,6 @@ def get_matches(user_data_list, requests_list):
     if len(matching_df_request) > 0: # if we have users in the new dataframe we can drop workouts as a matching parameter
                                     # since we already matched based on workouts.
 
-        print('test 2')
         matching_df_user = Dfuser.drop("workout_type", axis=1)
         matching_df_user = Dfuser.drop("location", axis=1)
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
@@ -133,7 +132,6 @@ def get_matches(user_data_list, requests_list):
         blankarray=[]
         return blankarray
 
-    print('test 3')
     '''
     Following code matches of the rest of the parameters. Using a double for loop, it goes through every column (workout factor) of
     every row (user in the matching dataframe) and compares each factor to the entry in the user dataframe. Regardless of
@@ -160,16 +158,11 @@ def get_matches(user_data_list, requests_list):
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
                 set_user_days = set(user_days)
                 set_rq_days = set(request_days.strip('][\'').replace(' ','').replace('\'','').split(','))
-                print(set_user_days)
-                print(set_rq_days)
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])
                 cut_off = reference_ranker.get(ranker)
 
                 weighted_average = (cut_off / 100) * rel_val
-                print("Cut off and relative value")
-                print(cut_off)
-                print(rel_val)
                 if rel_val >= cut_off: # if minimum score is not met, we discard the prospective match completely
                     list_best_match_vals.append(weighted_average)
                 else:
@@ -180,9 +173,7 @@ def get_matches(user_data_list, requests_list):
                 window = (ranker)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
                 rq_duration = matching_df_request.iloc[row][column]
                 delta =  abs(user_duration - rq_duration)
-                print('duration outside window')
                 if delta <= window:
-                    print('duration inside window')
                     rel_val = (window - delta) / window * 100
                     cut_off = reference_ranker.get(ranker)
 
@@ -203,9 +194,7 @@ def get_matches(user_data_list, requests_list):
                 request_utc_shift = int(pc.convert_tz_abbrev_to_tz_offset(request_time_zone))/100
 
                 delta = abs(user_utc_shift - request_utc_shift)
-                print('duration outside window')
                 if delta <= window:
-                    print('duration inside window')
                     rel_val = (window - delta) / window * 100
                     cut_off = reference_ranker.get(ranker)
 
