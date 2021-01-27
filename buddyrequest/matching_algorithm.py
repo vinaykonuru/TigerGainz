@@ -219,7 +219,10 @@ def get_matches(user_data_list, requests_list):
         # if len(list_best_match_vals) == 3: #if every single column managed to pass the cut_off val
             # print('here')
         index_column = column_labels.index("Dfrq_index")
-        Dfrq_index = matching_df_request.iloc[row][index_column]
+        Dfrq_index = matching_df_request.iloc[row][-1]
+        print(row)
+        print(index_column)
+        print(Dfrq_index)
         workout_percentage = workout_common_percentage[int(Dfrq_index)]
         print(list_best_match_vals)
         if(workout_percentage != 0 and len(list_best_match_vals) != 0):
