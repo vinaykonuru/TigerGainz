@@ -108,6 +108,7 @@ def matches(request):
         #if the user already has a request or partner in the database, go back to home page
         requestsList=list(BuddyRequest.objects.all().values())
         print(requestsList)
+        print(type(requestsList[0]))
         for entry in requestsList:
             if entry['partner'] != None:
                 requestsList.remove(entry)
