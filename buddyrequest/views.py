@@ -176,9 +176,11 @@ def matches(request):
         else:
             matched_people = get_matches(user_data_list, requestsList)
             print(matched_people)
+            for entry in matched_people:
+                if entry[14] == None:
+                    matched_people.remove(entry)
             if len(matched_people) > 3: # if more than 3 matches, give best 3
                 return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:3]})
-
             return render(request,'buddyrequest/matches.html',{'matched_people':matched_people})
 
 @login_required(login_url='/accounts/login')
