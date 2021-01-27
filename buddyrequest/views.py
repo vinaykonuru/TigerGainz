@@ -177,10 +177,11 @@ def matches(request):
             matched_people = get_matches(user_data_list, requestsList)
             print(matched_people)
             for entry in matched_people: # remove all requests that already have partners and fix reformatting
-                entry[6] = entry[6].strip('][\'')
-                entry[8] = entry[8].strip('][\'')
-
-                if entry[14] == 'nan':
+                entry[6] = entry[6].strip('][\'').replace('\'','')
+                entry[8] = entry[8].strip('][\'').replace('\'','')
+                print(entry[14])
+                print(type(entry[14]))
+                if type(entry[14]) == "<class 'int'>":
                     matched_people.remove(entry)
             if len(matched_people) > 3: # if more than 3 matches, give best 3
                 return render(request,'buddyrequest/matches.html', {'matched_people':matched_people[0:3]})
