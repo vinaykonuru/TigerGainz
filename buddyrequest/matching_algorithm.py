@@ -75,8 +75,8 @@ def get_matches(user_data_list, requests_list):
 
     Dfrq = requestsdf.drop(columns = ['name', 'id','netID','rescollege','major','year','user_id','partner_id','created','updated'])
     indexed_requests = list(range(len(Dfrq)))
-    for val in indexed_requests:
-        val = int(val)
+    indexed_requests = [int(i) for i in indexed_requests]
+
     Dfrq['Dfrq_index'] = indexed_requests
     print('REQUEST DATA FRAME')
     #Mock priorities dictionary [PLACE HOLDER]
