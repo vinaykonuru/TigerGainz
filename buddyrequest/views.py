@@ -106,7 +106,7 @@ def partner_match(request,partner_id):
 def matches(request):
     if request.method=='POST':
         #if the user already has a request or partner in the database, go back to home page
-        requestsList=list(BuddyRequest.objects.all().values())
+        requestsList=list(BuddyRequest.objects.filter(partner=None).values())
         print(requestsList)
         print(type(requestsList[0]))
         for entry in requestsList:
