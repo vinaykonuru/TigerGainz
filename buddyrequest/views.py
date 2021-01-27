@@ -110,8 +110,8 @@ def matches(request):
         print(requestsList)
         print(type(requestsList[0]))
         for entry in requestsList:
-            if entry['partner_id'] == None:
-                requestsList.remove(entry)
+            if entry['partner_id'] != None:
+                requestsList = requestsList.remove(entry)
         netID = request.user.uniauth_profile.get_display_id()
         for entry in requestsList:
             if netID == entry['netID']:
