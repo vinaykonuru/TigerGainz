@@ -217,7 +217,8 @@ def get_matches(user_data_list, requests_list):
             #         break
         print('here')
         if len(list_best_match_vals) == 3: #if every single column managed to pass the cut_off val
-            Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
+            index_column = column_labels.index("Dfrq_index")
+            Dfrq_index = matching_df_request.iloc[row][index_column]
             workout_percentage = workout_common_percentage[Dfrq_index]
             average = (mean(list_best_match_vals) + workout_percentage)/2
             list_best_match_vals.append(average)
