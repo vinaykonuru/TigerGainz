@@ -77,6 +77,8 @@ def get_matches(user_data_list, requests_list):
 
 
     #Mock priorities dictionary [PLACE HOLDER]
+    print("Preferences: ")
+    print(preferences)
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
     reference_ranker = {1: 100.0, 2: 60.0, 3: 50.0}
 
@@ -124,7 +126,7 @@ def get_matches(user_data_list, requests_list):
         matching_df_request = matching_df_request.drop("workout_type", axis=1)
         matching_df_request = matching_df_request.drop("location", axis=1)
         column_labels = matching_df_request.columns.tolist()
-        
+
 
     else: # break and return a blank array back to views
         blankarray=[]

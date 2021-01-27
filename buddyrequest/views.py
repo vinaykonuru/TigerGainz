@@ -120,9 +120,9 @@ def matches(request):
             return render(request, 'find.html',{'error': error})
 
         # reformatting preferences to match headers in matching algorithm
-        preferences[preferences.index('Workout Days')] = 'days'
-        preferences[preferences.index('Duration')] = 'duration'
-        preferences[preferences.index('Time Zone')] = 'time_zone'
+        preferences[0] = preferences.index('Time Zone')
+        preferences[1] = preferences.index('Workout Days')
+        preferences[2] = preferences.index('Duration')
 
         print(preferences)
         error = ""
