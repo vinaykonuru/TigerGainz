@@ -77,7 +77,6 @@ def get_matches(user_data_list, requests_list):
     indexed_requests = list(range(len(Dfrq)))
     Dfrq['Dfrq_index'] = indexed_requests
     print('REQUEST DATA FRAME')
-    print(Dfrq)
     #Mock priorities dictionary [PLACE HOLDER]
     priorities = {"days":preferences[1] ,"duration": preferences[2], "time_zone":preferences[0]}
     reference_ranker = {0: 50.0, 1: 30.0, 2: 10.0}
@@ -148,7 +147,7 @@ def get_matches(user_data_list, requests_list):
     For every rank there is a set cut_off for the minimum best match score for the
     respective workout factor. This cut_off is stored in a dictionary.
     '''
-    print(matching_df_user)
+    print(matching_df_request)
     ListOfMatches = [] # array where all suitable matches will be appended to later
     for row in range(len(matching_df_request)):
         list_best_match_vals = [] # for every user we generate an array
