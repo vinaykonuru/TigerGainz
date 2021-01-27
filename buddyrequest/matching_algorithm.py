@@ -157,11 +157,7 @@ def get_matches(user_data_list, requests_list):
                 set_rq_days = set(request_days.strip('][\'').split(','))
                 rel_val = set_comparision(set_user_days, set_rq_days)
                 ranker = priorities.get(column_labels[column])+1
-                print("Ranker: ")
-                print(ranker)
                 cut_off = reference_ranker.get(ranker)
-                print("Cut off")
-                print(cut_off)
 
                 weighted_average = (cut_off / 100) * rel_val
 
@@ -175,7 +171,9 @@ def get_matches(user_data_list, requests_list):
                 window = (ranker)*(30.0) #calculates a window of acceptable time e.g. 60 minutes can still be matched with 90 mins
                 rq_duration = matching_df_request.iloc[row][column]
                 delta =  abs(user_duration - rq_duration)
+                print('duration outside window')
                 if delta <= window:
+                    print('duration inside window')
                     rel_val = (window - delta) / window * 100
                     cut_off = reference_ranker.get(ranker)
 
@@ -186,7 +184,7 @@ def get_matches(user_data_list, requests_list):
                     break
 
             elif column_labels[column] == "time_zone":
-                ranker = priorities.get(column_labels[column]) +1  # gets the priority of time zone --> also determines the window of error allowed for time zone
+                ranker = priorities.get(column_labels[column])+1  # gets the priority of time zone --> also determines the window of error allowed for time zone
                                                                    # e.g. a person who ranks timezone as their #1 priority would match with ppl +/- 1 hour
                 window = ranker
                 request_time_zone = matching_df_request.iloc[row][column]
@@ -196,8 +194,9 @@ def get_matches(user_data_list, requests_list):
                 request_utc_shift = int(convert_tz_abbrev_to_tz_offset('request_time_zone'))/100
 
                 delta = abs(user_utc_shift - request_utc_shift)
-
+                print('duration outside window')
                 if delta <= window:
+                    print('duration inside window')
                     rel_val = (window - delta) / window * 100
                     cut_off = reference_ranker.get(ranker)
 
