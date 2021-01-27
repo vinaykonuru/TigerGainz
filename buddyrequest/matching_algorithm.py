@@ -150,7 +150,7 @@ def get_matches(user_data_list, requests_list):
     ListOfMatches = [] # array where all suitable matches will be appended to later
     for row in range(len(matching_df_request)):
         list_best_match_vals = [] # for every user we generate an array
-        for column in range(len(column_labels)-1):
+        for column in range(len(column_labels)):
             if column_labels[column] == "days":
                 request_days = matching_df_request.iloc[row][column]
                 # rel_val = fuzz.partial_token_sort_ratio(request_days, matching_df_user.iloc[0][column])
@@ -202,19 +202,19 @@ def get_matches(user_data_list, requests_list):
                 else:
                     break
 
-            else:
-                print(matching_df_user)
-                print(column)
-                print(row)
-                print(len(column_labels))
-                rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
-                                                        matching_df_user.iloc[0][column])
-                cut_off = 0
-                weighted_average = (cut_off / 100) * rel_val
-                if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
-                    list_best_match_vals.append(weighted_average)
-                else:
-                    break
+            # else:
+            #     print(matching_df_user)
+            #     print(column)
+            #     print(row)
+            #     print(len(column_labels))
+            #     rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
+            #                                             matching_df_user.iloc[0][column])
+            #     cut_off = 0
+            #     weighted_average = (cut_off / 100) * rel_val
+            #     if rel_val >= cut_off:  # if minimum score is not met, we discard the prospective match completely
+            #         list_best_match_vals.append(weighted_average)
+            #     else:
+            #         break
         if len(list_best_match_vals) == len(column_labels) - 1: #if every single column managed to pass the cut_off val
             Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
             workout_percentage = workout_common_percentage[Dfrq_index]
