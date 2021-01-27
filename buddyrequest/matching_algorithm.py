@@ -218,12 +218,11 @@ def get_matches(user_data_list, requests_list):
                     list_best_match_vals.append(weighted_average)
                 else:
                     break
-
          if len(list_best_match_vals) == len(column_labels) - 1: #if every single column managed to pass the cut_off val
             Dfrq_index = matching_df_request.iloc[row]["Dfrq_index"]
             workout_percentage = workout_common_percentage[Dfrq_index]
             average = (mean(list_best_match_vals) + workout_percentage)/2
-            
+
             list_best_match_vals.append(average)
             list_best_match_vals.append(Dfrq_index)
             ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
