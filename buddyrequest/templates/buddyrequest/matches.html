@@ -47,13 +47,17 @@
               <div class="mb-1 text-muted">{{entry.8}}</div>
               <strong class="d-inline-block mb-2 text-primary">Duration</strong>
               <div class="mb-1 text-muted">{{entry.7}}</div>
-              <a href="javascript:{document.getElementById('partner_match{{entry.10}}').submit()}">
+              <strong class="d-inline-block mb-2 text-primary">Location</strong>
+              <div class="mb-1 text-muted">{{entry.10}}</div>
+              <strong class="d-inline-block mb-2 text-primary">Intensity</strong>
+              <div class="mb-1 text-muted">{{entry.11}}</div>
+              <a href="javascript:{document.getElementById('partner_match{{entry.13}}').submit()}">
                 <button class="button btn-secondary btn-large btn-block">
                   Accept
                 </button>
               </a>
 
-              <form id="partner_match{{entry.10}}" action="{% url 'partner_match' entry.10 %}" method="POST">
+              <form id="partner_match{{entry.10}}" action="{% url 'partner_match' entry.13 %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" />
               </form>
