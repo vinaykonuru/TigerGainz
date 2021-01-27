@@ -229,7 +229,7 @@ def get_matches(user_data_list, requests_list):
             print('LIST BEST MATCH VALUES')
             print(list_best_match_vals)
             ListOfMatches.append(list_best_match_vals) #last element of each sublist is the index of that row in the database
-
+            ListOfMatches.append(Dfrq_index)
         #ListOfMatches is a nested list containing
 
     n = 0
