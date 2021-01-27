@@ -216,6 +216,10 @@ def get_matches(user_data_list, requests_list):
                     break
 
             else:
+                print(matching_df_user)
+                print(column)
+                print(row)
+                print(len(column_labels))
                 rel_val = fuzz.partial_ratio(matching_df_request.iloc[row][column],
                                                         matching_df_user.iloc[0][column])
                 cut_off = 0
