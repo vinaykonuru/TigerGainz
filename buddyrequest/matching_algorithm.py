@@ -160,6 +160,8 @@ def get_matches(user_data_list, requests_list):
                 print("Ranker: ")
                 print(ranker)
                 cut_off = reference_ranker.get(ranker)
+                print("Cut off")
+                print(cut_off)
 
                 weighted_average = (cut_off / 100) * rel_val
 
