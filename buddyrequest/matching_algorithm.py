@@ -248,6 +248,7 @@ def get_matches(user_data_list, requests_list):
         row_index.append(val)
 
     presentation_list = []
+    print(row_index)
     for index in row_index:
         row = requestsdf.iloc[index].tolist()
         presentation_list.append(row)
