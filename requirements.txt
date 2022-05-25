@@ -51,7 +51,7 @@ pycodestyle==2.6.0
 pydocstyle==5.0.2
 pyflakes==2.2.0
 PyGetWindow==0.0.8
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.5.3
 PyMsgBox==1.0.8
 pyparsing==2.4.7
