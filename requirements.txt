@@ -44,7 +44,7 @@ parso==0.7.0
 Pillow==7.1.2
 pluggy==0.13.1
 premailer==3.7.0
-protobuf==3.12.2
+protobuf==3.18.3
 psycopg2==2.8.6
 PyAutoGUI==0.9.50
 pycodestyle==2.6.0
